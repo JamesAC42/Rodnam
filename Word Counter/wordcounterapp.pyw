@@ -16,7 +16,7 @@ class App(object):
 
 		self.title_frame = tk.Frame(self.master,width=100)
 		self.title_frame.grid(row=0,column=0,columnspan=2)
-		self.title = tk.Label(self.title_frame,text="PyWord Counter",font=("Times",13))
+		self.title = tk.Label(self.title_frame,text="PyWord Counter",font=("Times",16))
 		self.title.grid(row=0,column=0)
 
 	def set_text_box_frame(self):
