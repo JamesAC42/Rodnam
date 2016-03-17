@@ -1,11 +1,9 @@
-
-#control+shift+x to run
+#!/usr/bin/python3
 
 import operator
 
-def Word_List():
-	print ("Enter passage.")
-	opassage = input(": ")
+def count_words_in_string(opassage):
+	
 	opassage += " "
 	opassage = opassage.lower()
 	passage = ""
@@ -39,43 +37,27 @@ def Word_List():
 		else:
 			y += 1
 			
-	return (words, amount)
+	# return (words, amount)
 	
-	
-def Count_Appearence(words,amount):
 	new = {}
 	for i in words:
 		new[i] = 0
 	for n in words:
 		new[n] += 1
-	print(" ")
-	print ("Words: ", amount)
-	print(" ")
-	return new
-	
-def Display(word_dict):
-	ordered_dict = sorted(word_dict.items(),key=operator.itemgetter(1))
+
+	ordered_dict = sorted(new.items(),key=operator.itemgetter(1))
+	return ordered_dict, amount
+
+
+def return_stats_string(ordered_dict):
+	stat = ""
 	for w, a in ordered_dict:
 		n = 30 - len(w)
 		f = ("-" * n)
 		b = ("0" * a)
-		print("{}: {} {} ({})".format(w,f,b,a))
-	
-#hello hello hello testing testing good	
+		stat = stat + "{}: {} {} ({})\n".format(w,f,b,a)
+	return stat
 
-def again():
-	wrd, amt = Word_List()
-	wrds = Count_Appearence(wrd,amt)
-	Display(wrds)
-	false_close = input("Run again: ")
-	while True:
-		if false_close == 'no':
-			break
-		else:
-			again()
-			
-again()
-i = input(" ")
 	
 	
 		
