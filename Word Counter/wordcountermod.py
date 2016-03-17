@@ -49,14 +49,22 @@ def count_words_in_string(opassage):
 	return ordered_dict, amount
 
 
-def return_stats_string(ordered_dict):
+def return_stats_string(ordered_dict,max_length,justify="left"):
 	stat = ""
-	for w, a in ordered_dict:
-		n = 30 - len(w)
-		f = ("-" * n)
-		b = ("0" * a)
-		stat = stat + "{}: {} {} ({})\n".format(w,f,b,a)
-	return stat
+	if justify == "left":
+		for w, a in ordered_dict:
+			n = max_length - len(w)
+			f = ("-" * n)
+			b = ("0" * a)
+			stat = stat + "{}: {} {} ({})\n".format(w,f,b,a)
+		return stat
+	elif justify == "right":
+		for w,a in ordered_dict:
+			n = max_length - (len(w) + a)
+			f = ("-" * n)
+			b = ("0" * a)
+			stat = stat + "{}: {} {} ({})\n".format(w,f,b,a)
+		return stat
 
 	
 	
