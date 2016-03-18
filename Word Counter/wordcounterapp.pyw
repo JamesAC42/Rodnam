@@ -20,8 +20,8 @@ class App(object):
 	def set_menu(self):
 		self.menubar = tk.Menu(self.master)
 		self.file_menu = tk.Menu(self.menubar,tearoff=0)
-		self.file_menu.add_command(label="Save")
-		self.file_menu.add_command(label="Open")
+		self.file_menu.add_command(label="Save",command=self.save_text)
+		self.file_menu.add_command(label="Open",command=self.open_text)
 		self.file_menu.add_separator()
 		self.file_menu.add_command(label="Exit",command=self.master.quit)
 
@@ -102,6 +102,12 @@ class App(object):
 		pass
 
 	def change_line_spacing(self):
+		pass
+
+	def save_text(self):
+		pass
+
+	def open_text(self):
 		pass
 
 root = tk.Tk()
