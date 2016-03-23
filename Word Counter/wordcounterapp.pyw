@@ -80,8 +80,14 @@ class App(object):
 		self.justify_option.grid(row=0,column=2)
 		self.submit_prefs.grid(row=0,column=3)
 
-	def count(self,event):
-		inputs = self.textbox.get("1.0","end-1c")
+	def count(self,selection):
+		if selection is "whole":
+			inputs = self.textbox.get("1.0","end-1c")
+		else:
+			try:
+				inputs = self.textbox.get(tk.SEL_FIRST,tk.SEL_LAST)
+			except:
+				return
 		ordered, amount = count_words_in_string(inputs)
 		stats_string = return_stats_string(ordered,40,justify="right")
 		self.words.config(text=str(amount))
@@ -93,7 +99,9 @@ class App(object):
 	def set_textbox(self):
 
 		self.textbox = tk.Text(self.text_frame,wrap = 'word',font=self.textbox_font)
-		self.textbox.bind("<Key>",self.count)
+		self.textbox.bind("<Key>",lambda event, selection = "whole":self.count(selection))
+		self.textbox.bind("<Button-1>",lambda event, selection = "whole":self.count(selection))
+		self.textbox.bind("<ButtonRelease-1>",lambda event, selection = "selected":self.count(selection))
 		vertscroll = tk.Scrollbar(self.text_frame)
 		vertscroll.config(command=self.textbox.yview)
 		self.textbox.config(yscrollcommand=vertscroll.set)
