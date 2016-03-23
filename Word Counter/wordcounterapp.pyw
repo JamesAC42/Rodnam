@@ -4,6 +4,7 @@ import tkinter as tk
 from tkinter import filedialog
 from wordcountermod import *
 from os.path import basename
+import pyperclip
 
 class App(object):
 	def __init__(self, master, **kwargs):
@@ -29,6 +30,7 @@ class App(object):
 
 		self.edit_menu = tk.Menu(self.menubar,tearoff=0)
 		self.edit_menu.add_command(label="Clear",command=self.clear_text)
+		self.edit_menu.add_separator()
 		self.edit_menu.add_command(label="Copy",command=self.copy_text)
 		self.edit_menu.add_command(label="Cut",command=self.cut_text)
 		self.edit_menu.add_command(label="Paste",command=self.paste_text)
@@ -166,13 +168,24 @@ class App(object):
 		self.textbox.delete("1.0","end-1c")
 
 	def copy_text(self):
-		pass
+		try:
+			pyperclip.copy(self.textbox.get(tk.SEL_FIRST,tk.SEL_LAST))
+		except:
+			pass
 
 	def cut_text(self):
-		pass
+		try:
+			self.copy_text()
+			self.textbox.delete(tk.SEL_FIRST,tk.SEL_LAST)
+		except:
+			pass
 
 	def paste_text(self):
-		pass
+		try:
+			self.textbox.delete(tk.SEL_FIRST,tk.SEL_LAST)
+		except:
+			pass
+		self.textbox.insert(tk.INSERT,pyperclip.paste())
 
 root = tk.Tk()
 root.wm_title("PyWord Counter")
