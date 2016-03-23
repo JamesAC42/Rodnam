@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#! python3
 
 import operator
 
@@ -8,12 +8,14 @@ def count_words_in_string(opassage):
 	opassage = opassage.lower()
 	passage = ""
 	for n in range(0,len(opassage)):
-	   if opassage[n] not in "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890 ":
-	       passage += ""
-	   else:
-	       passage += opassage[n]
-	       
-		   
+		if opassage[n] not in "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890 ":
+			if opassage[n] is "\n":
+				passage += " "
+			else:
+				passage += ""
+		else:
+			passage += opassage[n]
+
 	words = []
 	i = 0
 	string = ""

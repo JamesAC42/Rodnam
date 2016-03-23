@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#! python3
 
 import tkinter as tk
 from tkinter import filedialog
@@ -27,7 +27,14 @@ class App(object):
 		self.file_menu.add_separator()
 		self.file_menu.add_command(label="Exit",command=self.master.quit)
 
+		self.edit_menu = tk.Menu(self.menubar,tearoff=0)
+		self.edit_menu.add_command(label="Clear",command=self.clear_text)
+		self.edit_menu.add_command(label="Copy",command=self.copy_text)
+		self.edit_menu.add_command(label="Cut",command=self.cut_text)
+		self.edit_menu.add_command(label="Paste",command=self.paste_text)
+
 		self.menubar.add_cascade(label="File",menu=self.file_menu)
+		self.menubar.add_cascade(label="Edit",menu=self.edit_menu)
 
 		self.master.config(menu=self.menubar)
 
@@ -154,6 +161,18 @@ class App(object):
 		self.textbox.insert('1.0',file_string)
 
 		self.master.wm_title("PyWord Counter- " + filename)
+
+	def clear_text(self):
+		self.textbox.delete("1.0","end-1c")
+
+	def copy_text(self):
+		pass
+
+	def cut_text(self):
+		pass
+
+	def paste_text(self):
+		pass
 
 root = tk.Tk()
 root.wm_title("PyWord Counter")

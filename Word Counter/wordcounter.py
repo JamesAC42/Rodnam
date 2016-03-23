@@ -1,4 +1,4 @@
-#! python3
+# python3
 
 from operator import itemgetter
 from os.path import isdir
