@@ -1,6 +1,7 @@
 #! python3
 
-import operator
+import operator,requests,bs4,html
+from string import ascii_lowercase, ascii_uppercase
 
 def count_words_in_string(opassage):
 	
@@ -8,7 +9,7 @@ def count_words_in_string(opassage):
 	opassage = opassage.lower()
 	passage = ""
 	for n in range(0,len(opassage)):
-		if opassage[n] not in "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890 ":
+		if opassage[n] not in (ascii_uppercase + ascii_lowercase + "1234567890 "):
 			if opassage[n] is "\n":
 				passage += " "
 			else:
@@ -67,6 +68,68 @@ def return_stats_string(ordered_dict,max_length,justify="left"):
 			b = ("0" * a)
 			stat = stat + "{}: {} {} ({})\n".format(w,f,b,a)
 		return stat
+
+def dictionary_of_words(passage):
+
+	opassage = passage
+	opassage += " "
+	opassage = opassage.lower()
+	passage = ""
+	for n in range(0,len(opassage)):
+		if opassage[n] not in (ascii_uppercase + ascii_lowercase + " "):
+			if opassage[n] is "\n":
+				passage += " "
+			else:
+				passage += ""
+		else:
+			passage += opassage[n]
+
+	words = []
+	i = 0
+	string = ""
+	for n in range(0,len(passage)):
+		if passage[i] == " ":
+			i += 1
+			words.append(string)
+			string = ""
+			continue
+		else:
+			string += passage[i]
+			i += 1
+	
+	y = 0
+	while y < len(words):
+		if words[y] == "":
+			words.pop(y)
+		else:
+			y += 1
+	
+	dict_dict = {}
+
+	for word in words:
+		dictionary_page = requests.get('http://www.merriam-webster.com/dictionary/' + word)
+		dictionary_page.raise_for_status()
+		dictionary_soup = bs4.BeautifulSoup(dictionary_page.text, "html.parser")
+		main_form = dictionary_soup.select('.word-attributes .main-attr em')[0].getText()
+		main_definition = dictionary_soup.select('.definition-inner-item span')[0].getText()
+		dict_dict[word] = [html.unescape(main_form),html.unescape(main_definition)]
+
+	return dict_dict
+
+def dictionary_single_word(word):
+	dictionary_page = requests.get('http://www.merriam-webster.com/dictionary/' + word)
+	dictionary_page.raise_for_status()
+	dictionary_soup = bs4.BeautifulSoup(dictionary_page.text, "html.parser")
+
+	if "The word you've entered isn't in the dictionary." in dictionary_soup.select('.card-primary-content p')[0].getText():
+		dict_dict = {word:["This word does not exist","According to merriam-webster"]}
+		return dict_dict
+
+	main_form = dictionary_soup.select('.word-attributes .main-attr em')[0].getText()
+	main_definition = dictionary_soup.select('.definition-inner-item span')[0].getText()
+	dict_dict = {}
+	dict_dict[word] = [html.unescape(main_form),html.unescape(main_definition)]
+	return dict_dict
 
 	
 	

@@ -86,6 +86,10 @@ class App(object):
 		else:
 			try:
 				inputs = self.textbox.get(tk.SEL_FIRST,tk.SEL_LAST)
+				if " " not in inputs:
+					keepgoing = self.find_form_and_def(inputs)
+					if keepgoing == "stop":
+						return
 			except:
 				return
 		ordered, amount = count_words_in_string(inputs)
@@ -94,7 +98,22 @@ class App(object):
 		self.stats.config(state="normal")
 		self.stats.delete('1.0',"end-1c")
 		self.stats.insert('1.0',stats_string)
+		self.stats.tag_add("a","1.0","end-1c")
+		self.stats.tag_config("a",font=("Courier",10))
 		self.stats.config(state="disabled")
+
+	def find_form_and_def(self,inputs):
+		defs = dictionary_single_word(inputs)
+		form = defs[inputs][0]
+		definition = defs[inputs][1]
+		display = "{}:\n\n{}\n{}".format(inputs,form,definition)
+		self.stats.config(state="normal")
+		self.stats.delete('1.0',"end-1c")
+		self.stats.insert('1.0',display)
+		self.stats.tag_add("a","1.0","end-1c")
+		self.stats.tag_config("a",font=("Verdana",16),wrap='word')
+		self.stats.config(state="disabled")
+		return "stop"
 
 	def set_textbox(self):
 

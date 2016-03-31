@@ -1,0 +1,1 @@
+@py.exe "C:\Users\James\Documents\GitHub\Rodnam\automateboringstuff\web scrapers\lucky.py" %* 
