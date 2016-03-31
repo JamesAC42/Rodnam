@@ -116,13 +116,9 @@ def dictionary_of_words(passage):
 
 	return dict_dict
 
-def dictionary_single_word(iword):
-	word = ''
-	for char in iword:
-		if char not in (ascii_lowercase + ascii_uppercase + "'-"):
-			continue
-		else:
-			word += char
+def dictionary_single_word(word):
+	iword = "".join([n for n in word if n in ascii_lowercase + ascii_uppercase + "\'-"])
+	word = str(iword)
 	dictionary_page = requests.get('http://www.merriam-webster.com/dictionary/' + word)
 	dictionary_page.raise_for_status()
 	dictionary_soup = bs4.BeautifulSoup(dictionary_page.text, "html.parser")
