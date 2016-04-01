@@ -5,6 +5,7 @@ from tkinter import filedialog
 from wordcountermod import *
 from os.path import basename
 import pyperclip
+from string import ascii_lowercase, ascii_uppercase
 
 class App(object):
 	def __init__(self, master, **kwargs):
@@ -103,6 +104,7 @@ class App(object):
 		self.stats.config(state="disabled")
 
 	def find_form_and_def(self,inputs):
+		inputs = "".join([n for n in inputs if n in ascii_lowercase + ascii_uppercase + "\'-"])
 		defs = dictionary_single_word(inputs)
 		form = defs[inputs][0]
 		definition = defs[inputs][1]
