@@ -117,13 +117,40 @@ def dictionary_of_words(passage):
 	return dict_dict
 
 def dictionary_single_word(word):
+
+	word = "".join([n for n in word if n in ascii_lowercase + ascii_uppercase + "\'-"])
+	print(word)
+
 	dictionary_page = requests.get('http://www.merriam-webster.com/dictionary/' + word)
 	dictionary_page.raise_for_status()
+
 	dictionary_soup = bs4.BeautifulSoup(dictionary_page.text, "html.parser")
 
-	if "The word you've entered isn't in the dictionary." in dictionary_soup.select('.card-primary-content p')[0].getText():
+	mispelling_error = "The word you've entered isn't in the dictionary."
+	nonexistent_word_error = "The word you've entered was not found. Please try your search again."
+
+	try:
+		error_check = dictionary_soup.select('.card-primary-content p')[0].getText()
+		print(error_check)
+	except:
+		pass
+
+	if mispelling_error == error_check[11:59]:
+		word = dictionary_soup.select(".definition-inner-item span span a")[0].getText()
+		print(word)
+		new_dictionary_page = requests.get('http://www.merriam-webster.com/dictionary/' + word)
+		new_dictionary_page.raise_for_status()
+		new_dictionary_soup = bs4.BeautifulSoup(new_dictionary_page.text, "html.parser")
+		main_form = new_dictionary_soup.select('.word-attributes .main-attr em')[0].getText()
+		main_definition = new_dictionary_soup.select('.definition-inner-item span')[0].getText()
+		dict_dict = {}
+		dict_dict["Suggestion: " + word] = [html.unescape(main_form),html.unescape(main_definition)]
+		return dict_dict
+
+	elif nonexistent_word_error == error_check:
 		dict_dict = {word:["This word does not exist","According to merriam-webster"]}
 		return dict_dict
+	
 
 	main_form = dictionary_soup.select('.word-attributes .main-attr em')[0].getText()
 	main_definition = dictionary_soup.select('.definition-inner-item span')[0].getText()
