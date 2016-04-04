@@ -14,4 +14,4 @@ process = [add,commit,push]
 for step in process:
 	print(step)
 	os.system(step)
-	time.sleep(1)
+	time.sleep(.5)
