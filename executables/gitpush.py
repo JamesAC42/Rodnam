@@ -3,13 +3,16 @@
 import os,sys,time
 
 branch = sys.argv[1]
-commit = " ".join(sys.argv[2:])
+commitmessage = " ".join(sys.argv[2:])
 
-os.system("git status")
-time.sleep(1)
-os.system("git add .")
-time.sleep(.5)
-os.system("git commit -m \'{}\'".format(commit))
-time.sleep(.5)
-os.system("git push origin {}".format(branch))
+add = "git add ."
+commit = "git commit -m \'{}\'".format(commitmessage)
+push = "git push origin {}".format(branch)
+
+process = [add,commit,push]
+
+for step in process:
+	os.system(step)
+	print(step)
+	time.sleep(1)
 
