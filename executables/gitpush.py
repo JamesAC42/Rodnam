@@ -1,6 +1,6 @@
 #! python3
 
-import os,sys,time
+import os,sys
 
 branch = sys.argv[1]
 commitmessage = " ".join(sys.argv[2:])
@@ -14,4 +14,3 @@ process = [add,commit,push]
 for step in process:
 	print(step)
 	os.system(step)
-	time.sleep(.5)
