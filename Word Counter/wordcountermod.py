@@ -151,12 +151,12 @@ def dictionary_single_word(word):
 		dict_dict = {word:["This word does not exist","According to merriam-webster"]}
 		return dict_dict
 	
-
-	main_form = dictionary_soup.select('.word-attributes .main-attr em')[0].getText()
-	main_definition = dictionary_soup.select('.definition-inner-item span')[0].getText()
-	dict_dict = {}
-	dict_dict[word] = [html.unescape(main_form),html.unescape(main_definition)]
-	return dict_dict
+	else:
+		main_form = dictionary_soup.select('.word-attributes .main-attr em')[0].getText()
+		main_definition = dictionary_soup.select('.definition-inner-item span')[0].getText()
+		dict_dict = {}
+		dict_dict[word] = [html.unescape(main_form),html.unescape(main_definition)]
+		return dict_dict
 
 	
 	
