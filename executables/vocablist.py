@@ -24,6 +24,10 @@ while True:
 		else:
 			words.append(word)
 
+contain_word = input("Contain word? (T/F): ")
+contain_form = input("Contain form?: ")
+contain_def = input("Contain def?: ")
+
 file = open(filename,'w')
 file.write("Words + Form + Definitions\n\n")
 
@@ -32,10 +36,19 @@ for word in words:
 	dictionary_page.raise_for_status()
 	dictionary_soup = bs4.BeautifulSoup(dictionary_page.text, "html.parser")
 
-	word_main = html.unescape(dictionary_soup.select('.word-and-pronunciation h1')[0].getText())
-	main_form = html.unescape(dictionary_soup.select('.word-attributes .main-attr em')[0].getText())
-	main_definition = html.unescape(dictionary_soup.select('.definition-inner-item span')[0].getText())
-	file.write(word_main + ':\t\t' + main_form + ', ' + main_definition + '\n')
+	appendtext = ""
+	if contain_word.lower() == 'true':
+		word_main = html.unescape(dictionary_soup.select('.word-and-pronunciation h1')[0].getText())
+		appendtext += word_main + ':\t\t'
+	if contain_form.lower() == 'true':
+		main_form = html.unescape(dictionary_soup.select('.word-attributes .main-attr em')[0].getText())
+		appendtext += main_form + ', '
+	if contain_def.lower() == 'true':
+		main_definition = html.unescape(dictionary_soup.select('.definition-inner-item span')[0].getText())
+		appendtext += main_definition
+	appendtext += '\n'
+
+	file.write(appendtext)
 
 file.close()
 command = 'start notepad {}'.format(filename)
