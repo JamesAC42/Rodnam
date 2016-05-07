@@ -8,9 +8,9 @@ def generate_sequence(placeone, placetwo, length):
 		sequ.append(b)
 	return sequ
 
-def generate_golden_ratio(placeone, placetwo):
+def generate_golden_ratio(placeone, placetwo, length):
 	a, b = placeone, placetwo
-	for i in range(1,1000):
+	for i in range(0,length-2):
 		a, b = b, b + a
 	ratio = b/a
 	return ratio

@@ -1,6 +1,7 @@
 #! python3
 
 import tkinter as tk
+from time import sleep
 from fibonaccimod import *
 
 class App(object):
@@ -10,6 +11,8 @@ class App(object):
 		self.setTitle()
 		self.setInputs()
 		self.setResults()
+
+		self.currentLoop = False
 
 	def setFrames(self):
 		self.titleFrame = tk.Frame(self.master)
@@ -44,17 +47,18 @@ class App(object):
 		self.sLength = tk.Entry(self.inputFrame,borderwidth=5,width=20)
 		self.sLength.grid(row=1,column=2)
 
-		self.submit = tk.Button(self.inputFrame,borderwidth=3,text="SUBMIT", command = self.calculate)
+		
+		self.submit = tk.Button(self.inputFrame,borderwidth=3,text="SUBMIT", command = self.calculate, anchor="center")
 		self.submit.grid(row=1,column=3)
 
 	def setResults(self):
-		
+
 		self.ratioLabel = tk.Label(self.ratioFrame, text="Ratio: ", relief="flat",height=2,font=("sans-serif",15,"bold"))
 		self.ratioLabel.grid(row=0,column=0)
 		self.ratio  = tk.Label(self.ratioFrame,text="0",relief="flat",anchor="center",height=2,font=("sans-serif",15))
 		self.ratio.grid(row=0,column=2)
 
-		self.stats = tk.Text(self.resultFrame, relief="flat",borderwidth=0, state="disabled",width=50,wrap="word")
+		self.stats = tk.Text(self.resultFrame, relief="flat",borderwidth=0, state="disabled",width=55,wrap="word",bg="#d6d6c2")
 		result_scroll = tk.Scrollbar(self.resultFrame)
 		result_scroll.config(command=self.stats.yview)
 		self.stats.config(yscrollcommand=result_scroll.set)
@@ -68,7 +72,7 @@ class App(object):
 			length = int(self.sLength.get())
 			sequence = generate_sequence(start, second, length)
 			sequence = [str(i) for i in sequence]
-			ratio = generate_golden_ratio(start,second)
+			ratio = generate_golden_ratio(start,second,length)
 			self.ratio.config(text=str(ratio))
 			self.stats.config(state="normal")
 			self.stats.delete('1.0',"end-1c")
@@ -78,6 +82,9 @@ class App(object):
 			self.stats.config(state="disabled")
 		else:
 			return
+
+			
+
 
 
 
