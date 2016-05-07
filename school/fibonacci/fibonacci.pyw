@@ -13,16 +13,19 @@ class App(object):
 
 	def setFrames(self):
 		self.titleFrame = tk.Frame(self.master)
-		self.titleFrame.grid(row=0,column=0,columnspan=2)
+		self.titleFrame.grid(row=0,column=0)
 
 		self.inputFrame = tk.Frame(self.master)
 		self.inputFrame.grid(row=1,column=0)
 
 		self.resultFrame = tk.Frame(self.master)
-		self.resultFrame.grid(row=1,column=1)
+		self.resultFrame.grid(row=2,column=0)
+
+		self.ratioFrame = tk.Frame(self.master)
+		self.ratioFrame.grid(row=3,column=0)
 
 	def setTitle(self):
-		self.title = tk.Label(self.titleFrame,text="Golden Ratio",font=("Verdana",16),anchor="center",height=2)
+		self.title = tk.Label(self.titleFrame,text="Golden Ratio",font=("Verdana",18),height=3)
 		self.title.grid(row=0,column=0)
 
 	def setInputs(self):
@@ -32,30 +35,31 @@ class App(object):
 		self.startInput.grid(row=1,column=0)
 
 		self.secondlabel = tk.Label(self.inputFrame,text="Second Term", anchor="center")
-		self.secondlabel.grid(row=2,column=0)
+		self.secondlabel.grid(row=0,column=1)
 		self.secondInput = tk.Entry(self.inputFrame,borderwidth=5,width=20)
-		self.secondInput.grid(row=3,column=0)
+		self.secondInput.grid(row=1,column=1)
 
 		self.lengthLabel = tk.Label(self.inputFrame, text="Length",anchor="center")
-		self.lengthLabel.grid(row=4,column=0)
+		self.lengthLabel.grid(row=0,column=2)
 		self.sLength = tk.Entry(self.inputFrame,borderwidth=5,width=20)
-		self.sLength.grid(row=5,column=0)
+		self.sLength.grid(row=1,column=2)
 
 		self.submit = tk.Button(self.inputFrame,borderwidth=3,text="SUBMIT", command = self.calculate)
-		self.submit.grid(row=6,column=0)
+		self.submit.grid(row=1,column=3)
 
 	def setResults(self):
-		self.ratioLabel = tk.Label(self.resultFrame, text="Ratio: ", relief="flat",anchor="center",height=2,font=("sans-serif",15,"bold"))
-		self.ratioLabel.grid(row=0,column=0,columnspan=2)
-		self.ratio  = tk.Label(self.resultFrame,text="0",relief="flat",anchor="center",height=2,font=("sans-serif",15))
-		self.ratio.grid(row=0,column=2,columnspan=2)
+		
+		self.ratioLabel = tk.Label(self.ratioFrame, text="Ratio: ", relief="flat",height=2,font=("sans-serif",15,"bold"))
+		self.ratioLabel.grid(row=0,column=0)
+		self.ratio  = tk.Label(self.ratioFrame,text="0",relief="flat",anchor="center",height=2,font=("sans-serif",15))
+		self.ratio.grid(row=0,column=2)
 
-		self.stats = tk.Text(self.resultFrame, relief="flat",borderwidth=0, state="disabled",width=50)
+		self.stats = tk.Text(self.resultFrame, relief="flat",borderwidth=0, state="disabled",width=50,wrap="word")
 		result_scroll = tk.Scrollbar(self.resultFrame)
 		result_scroll.config(command=self.stats.yview)
 		self.stats.config(yscrollcommand=result_scroll.set)
-		self.stats.grid(row=1,column=0,columnspan=3)
-		result_scroll.grid(row=1,column=3,sticky="NS")
+		self.stats.grid(row=1,column=0)
+		result_scroll.grid(row=1,column=1,sticky="NS")
 
 	def calculate(self):
 		if self.startInput.get() and self.secondInput.get() and self.sLength.get():
