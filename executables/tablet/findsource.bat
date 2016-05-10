@@ -1,0 +1,1 @@
+@py.exe "C:\Users\JamesCrovo19\Documents\GitHub\Rodnam\executables\findResource.py" %* 
