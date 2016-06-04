@@ -1,0 +1,72 @@
+Data Types
+	byte (-128 to 127)
+	short (-32768 to 32767)
+	int	(32 bit (-2^31 to 2^31 - 1))
+	long (64 bit (2^63))
+	float (32 bit floating point)
+	double (64 bit floating point)
+	
+	boolean
+	char (16 bit Unicode)
+	String
+		String literals are enclosed in double quotes
+	
+	Reference Data Types
+		eg. Object names
+		
+	Escape Sequences
+		\n
+		\r
+		\f
+		\b
+		\s
+		\t
+		\"
+		\'
+		\\
+		\ddd
+		\uxxxx
+		
+Basic
+	Print
+		System.out.println();
+	Main method
+		public static void main(String[] args){}	
+
+Arrays	
+	ListArray<Data Type> creates array
+	.size returns length of array
+	.add(index, value)
+	.get(index)
+
+HashMaps
+	HashMap<DatatypeKey, DatatypeValue>	creates dictionary
+	.size returns length	
+	.put(key, value)
+	.get(key) return value
+	.keySet() returns list of keys
+	
+Loops
+	For loop
+		for(int i = 0; i < n; i++){}
+	For Each loop
+		for(DataType x : DataStructure){}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
