@@ -1,1 +1,1 @@
-@py.exe "C:\Users\James\Documents\GitHub\Rodnam\executables\findResource.py" %* 
+@py.exe "C:\Users\Owner\Documents\GitHub\Rodnam\executables\findResource.py" %* 
