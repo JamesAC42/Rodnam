@@ -1,3 +1,5 @@
+www.tutorialspoint.com
+
 Data Types
 	byte (-128 to 127)
 	short (-32768 to 32767)
@@ -26,6 +28,89 @@ Data Types
 		\\
 		\ddd
 		\uxxxx
+		
+Variables
+	Local
+		Declared within methods, constructors, or blocks
+		Created when method is entered and destroyed when exited
+		`
+		int x;
+		x = x + 3;
+		ERROR
+		`
+	Instance
+		Created within a class, outside of a method, constructor, or block
+		Have default values
+			int = 0
+			booleans = false
+			objects = null
+		`
+		private double number;
+		public String name;
+		`
+	Class/Static 
+		Declared with "static" keyword outside method, constructor, or block
+		Usually declared as constants
+		Created when program starts and destroyed when program ends
+		Have default values the same as instance variables
+		Can be accessed by calling "Class.Variable"
+		Public static final variable names are in all upper case
+		`
+		private static double x;
+		public static final String FOO = "foo";
+		`
+		
+Modifiers
+	Private
+		Visible to class only
+	Public
+		Visible to world
+	Protected
+		Visible to package and subclasses
+	
+Operations
+	Arithmetic
+		Addition +
+		Subtraction -
+		Multiplication *
+		Division /
+		Modulus %
+		Increment ++
+		Decrement --
+	Relational
+		Equal to ==
+		Not equal to !=
+		Greater than >
+		Less than <
+		Greater than or equal to >=
+		Less than or equal to  <=
+	Bitwise
+		Bitwise and &
+		Bitwise or |
+		Bitwise XOR ^
+		Bitwise compliment ~
+		Left Shift <<
+		Right shift >>
+		Zero Fill right shift >>>
+	Logical 
+		Logical and &&
+		Logical or ||
+		Logical not !
+	Assignment
+		=
+		+=
+		-=
+		*=
+		/=
+		%=
+		<<=
+		>>=
+		&=
+		^=
+		|=
+	Conditional
+		
+	
 		
 Basic
 	Print
