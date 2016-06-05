@@ -136,6 +136,7 @@ Loops
 		for(int i = 0; i < n; i++){}
 	For Each loop
 		for(DataType x : DataStructure){}
+
 	
 	
 	
