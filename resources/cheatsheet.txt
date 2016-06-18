@@ -109,9 +109,16 @@ Operations
 		^=
 		|=
 	Conditional
+		Variable x = (expression) ? value if true : value if false
+		String salary = (sales > 0) ? commision : 0;
+	instance of Opertator
+		(variable) instanceof (class/interface type)
+		String name = "James";
+		boolean result = name instanceof String;
+		System.out.println(result)
 		
-	
-		
+		RESULT: true
+			
 Basic
 	Print
 		System.out.println();
@@ -123,6 +130,10 @@ Arrays
 	.size returns length of array
 	.add(index, value)
 	.get(index)
+	
+	DataType [] listofdatatype = {x,y,z};
+	
+	int [] numbers = {1,2,3,4,5};
 
 HashMaps
 	HashMap<DatatypeKey, DatatypeValue>	creates dictionary
@@ -132,10 +143,58 @@ HashMaps
 	.keySet() returns list of keys
 	
 Loops
+	While loop
+		while(boolean){
+			expression
+		}
+	Do...While loop
+		do{
+			expression
+		}while(boolean);
 	For loop
-		for(int i = 0; i < n; i++){}
+		for(int i = 0; i < n; i++){
+			expression
+		}
 	For Each loop
-		for(DataType x : DataStructure){}
+		for(DataType x : DataStructure){
+			expression
+		}
+		
+Decision Making
+	If Statement
+		if(boolean){
+			expression
+		}
+	If Else Statement
+		if(boolean){
+			expression1
+		}else{
+			expression2
+		}
+	Else if
+		if(boolean){
+			expression
+		}else if(boolean){
+			expression
+		}else if(boolean){
+			expression
+		}else{
+			expression
+		}
+	Switch
+		switch(variable){
+			case value:
+				expression
+				break;
+			case value:
+				expression
+			case value:
+				expression
+			default:
+				expression
+		}
+		Control flow will fall through until a break statement is reached
+	
 
 	
 	
