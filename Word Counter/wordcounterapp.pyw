@@ -101,7 +101,7 @@ class App(object):
 		self.stats.tag_add("a","1.0","end-1c")
 		self.stats.tag_config("a",font=("Courier",10))
 		self.stats.config(state="disabled")
-
+		
 	def find_form_and_def(self,inputs):
 		defs = dictionary_single_word(inputs)
 		form = defs[inputs][0]

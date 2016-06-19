@@ -3,7 +3,7 @@
 from string import ascii_lowercase
 
 characters = list(ascii_lowercase + "".join([str(i) for i in range(1,10)]) + "0 ")
-values = list("-?.:3;()8$&@\\!9014/57,2#6*qwertyuiop ")
+values = list("-?.:3;()8$&@'!9014/57,2#6*qwertyuiop ")
 
 key_to = {}
 key_from = {}
