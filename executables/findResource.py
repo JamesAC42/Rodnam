@@ -4,7 +4,7 @@ import sys, webbrowser
 
 print("Opening...")
 
-searchTerm = "+'index of' '" + " ".join(sys.argv[2:]) + "'"
+searchTerm = '+\'index of\' \'' + ' '.join(sys.argv[2:]) + "'"
 year = sys.argv[1]
 if year == "?":
 	year = ""
