@@ -1,0 +1,217 @@
+www.tutorialspoint.com
+
+Data Types
+	byte (-128 to 127)
+	short (-32768 to 32767)
+	int	(32 bit (-2^31 to 2^31 - 1))
+	long (64 bit (2^63))
+	float (32 bit floating point)
+	double (64 bit floating point)
+	
+	boolean
+	char (16 bit Unicode)
+	String
+		String literals are enclosed in double quotes
+	
+	Reference Data Types
+		eg. Object names
+		
+	Escape Sequences
+		\n
+		\r
+		\f
+		\b
+		\s
+		\t
+		\"
+		\'
+		\\
+		\ddd
+		\uxxxx
+		
+Variables
+	Local
+		Declared within methods, constructors, or blocks
+		Created when method is entered and destroyed when exited
+		`
+		int x;
+		x = x + 3;
+		ERROR
+		`
+	Instance
+		Created within a class, outside of a method, constructor, or block
+		Have default values
+			int = 0
+			booleans = false
+			objects = null
+		`
+		private double number;
+		public String name;
+		`
+	Class/Static 
+		Declared with "static" keyword outside method, constructor, or block
+		Usually declared as constants
+		Created when program starts and destroyed when program ends
+		Have default values the same as instance variables
+		Can be accessed by calling "Class.Variable"
+		Public static final variable names are in all upper case
+		`
+		private static double x;
+		public static final String FOO = "foo";
+		`
+		
+Modifiers
+	Private
+		Visible to class only
+	Public
+		Visible to world
+	Protected
+		Visible to package and subclasses
+	
+Operations
+	Arithmetic
+		Addition +
+		Subtraction -
+		Multiplication *
+		Division /
+		Modulus %
+		Increment ++
+		Decrement --
+	Relational
+		Equal to ==
+		Not equal to !=
+		Greater than >
+		Less than <
+		Greater than or equal to >=
+		Less than or equal to  <=
+	Bitwise
+		Bitwise and &
+		Bitwise or |
+		Bitwise XOR ^
+		Bitwise compliment ~
+		Left Shift <<
+		Right shift >>
+		Zero Fill right shift >>>
+	Logical 
+		Logical and &&
+		Logical or ||
+		Logical not !
+	Assignment
+		=
+		+=
+		-=
+		*=
+		/=
+		%=
+		<<=
+		>>=
+		&=
+		^=
+		|=
+	Conditional
+		Variable x = (expression) ? value if true : value if false
+		String salary = (sales > 0) ? commision : 0;
+	instance of Opertator
+		(variable) instanceof (class/interface type)
+		String name = "James";
+		boolean result = name instanceof String;
+		System.out.println(result)
+		
+		RESULT: true
+			
+Basic
+	Print
+		System.out.println();
+	Main method
+		public static void main(String[] args){}	
+
+Arrays	
+	ListArray<Data Type> creates array
+	.size returns length of array
+	.add(index, value)
+	.get(index)
+	
+	DataType [] listofdatatype = {x,y,z};
+	
+	int [] numbers = {1,2,3,4,5};
+
+HashMaps
+	HashMap<DatatypeKey, DatatypeValue>	creates dictionary
+	.size returns length	
+	.put(key, value)
+	.get(key) return value
+	.keySet() returns list of keys
+	
+Loops
+	While loop
+		while(boolean){
+			expression
+		}
+	Do...While loop
+		do{
+			expression
+		}while(boolean);
+	For loop
+		for(int i = 0; i < n; i++){
+			expression
+		}
+	For Each loop
+		for(DataType x : DataStructure){
+			expression
+		}
+		
+Decision Making
+	If Statement
+		if(boolean){
+			expression
+		}
+	If Else Statement
+		if(boolean){
+			expression1
+		}else{
+			expression2
+		}
+	Else if
+		if(boolean){
+			expression
+		}else if(boolean){
+			expression
+		}else if(boolean){
+			expression
+		}else{
+			expression
+		}
+	Switch
+		switch(variable){
+			case value:
+				expression
+				break;
+			case value:
+				expression
+			case value:
+				expression
+			default:
+				expression
+		}
+		Control flow will fall through until a break statement is reached
+	
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
