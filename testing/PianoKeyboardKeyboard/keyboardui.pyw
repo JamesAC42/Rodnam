@@ -42,7 +42,7 @@ class App(object):
 			self.master.bind(trigger,lambda event, note=letter: self.playNote(note=note))
 		
 	def playNote(event,note):
-		winsound.Beep(note, 250)
+		winsound.Beep(note, 150)
 		
 	def makeFrame(self):
 		self.keysFrame = tk.Frame(self.master)
