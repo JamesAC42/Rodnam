@@ -7,5 +7,5 @@ function working(){
 	}
 	var v = Math.random();
 	state = (v < .5) ? 'YES' : 'NO';
-	$('#resultbox').slideUp().delay(400).text(state).slideDown();
+	$('#resultbox').slideUp().delay(600).text(state).slideDown();
 }
