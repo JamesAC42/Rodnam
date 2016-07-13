@@ -1,0 +1,63 @@
+body {
+	font-family: 'Comfortaa';
+}
+
+.jumbotron {
+	background-color: #FDED64;
+	color: #002db3;
+	padding:30px;
+	margin-left:-15px;
+	margin-right:-15px;
+	margin-bottom:50px;
+	border-radius:0px;
+	height:20hv;
+}
+
+.center {
+	margin: 0 auto;
+}
+#gradient {
+	height:70vh;
+	width:100%;
+	background: linear-gradient(#FFFFFF,#67e9ff);
+}
+
+#prompt-message {
+	font-size:33px;
+}
+
+#button-image {
+	margin-top:20px;
+	height:200px;
+}
+
+#front {
+	width: 8%;
+}
+
+#resultbox {
+	height: 80px;
+	width: 125px;
+	border-left: 3px solid #ffd11a;
+	border-bottom: 3px solid #e6b800;
+	border-left: 3px solid #ffd11a;
+	border-top: 2px solid ##ffe680;
+	background:  #FDED64;
+	font-family: 'Share';
+	font-size: 42px;
+	padding-top: 15px;
+	color: #6600ff;
+}
+
+#explanation {
+	margin-top:80px;
+	color: #802b00;
+}
+
+#ehead {
+	font-size:32px;
+}
+
+#ebod {
+	font-size:24px;
+}

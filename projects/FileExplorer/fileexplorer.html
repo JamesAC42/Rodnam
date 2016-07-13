@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<head>
+	<title>Rodnam</title>
+	<link type="text/css" rel="stylesheet" href="../../stylesheets/bootstrap.css"/>
+	<link href='https://fonts.googleapis.com/css?family=Comfortaa:700' rel='stylesheet' type='text/css'>
+	<link href='https://fonts.googleapis.com/css?family=Share:700' rel='stylesheet' type='text/css'>
+	<link type="text/css" rel="stylesheet" href="stylesheets/fe.css"/>
+	<script type="text/javascript" src="../../javascript/jquery-3.0.0.min.js"></script>
+	<script type="text/javascript" src="javascript/fe.js"></script>
+	<script type="text/javascript" src="javascript/moving.js"></script>
+</head>
+<body>
+	<div class="jumbotron container-fluid text-center" id="header">
+		<h1>Is File Explorer<br>Working?</h1>
+	</div>
+	<div id="gradient">
+		<div class="container" id="prompt">
+			<div id="prompt-message-div" class="text-center center">
+				<p id="prompt-message">Click here<br> to find out!</p>
+			</div>
+			<div id="button-image" class="text-center center">
+				<a><img onclick="working()" style="float:center" id="front" src="Images/fileexplorericon2.jpg"/></a>
+			</div>
+		</div>
+		<div class="container" id="result">
+			<div class="text-center center" id="resultbox">
+			YES
+			</div>
+		</div>
+		<div class="container" id="explanation">
+			<p id="ehead"><strong>How Does it Work?</strong></p><br>
+			<p id="ebod">This website uses a complex algorithm to randomly pick 'Yes' or 'No', mimicking lifelike results in real time.</p>
+		</div>
+	</div>
+	
+</body>
+</html>

@@ -1,0 +1,66 @@
+body{
+	font-family: 'Righteous';
+}
+
+.jumbotron {
+	border-radius: 0px;
+	background-color:#00cc99;
+}
+
+
+#links {
+	padding:20px;
+	
+	
+	width:85vw;
+	margin-left: 10vw;
+	margin-bottom: 25px;
+	margin-top:20px;
+	
+}
+
+.row {
+	border-left:8px solid blue;
+	border-bottom: 8px solid navy;
+	border-radius:15px;
+	padding-left: 50px;
+	padding-bottom:45px;
+	margin-bottom:40px;
+}
+
+
+.col-md-3 {
+	font-size:30px;
+	color:navy;
+	padding:10px;
+	padding-top:20px;
+	margin: 20px;
+	height: 200px;
+	border-top:2px solid grey;
+	border-right:2px solid black;
+	border-radius:20px;
+	width:22%;
+}
+
+.empty {
+	width: 40%;
+}
+
+#fileexplorerimg {
+	width:40%;
+}
+
+.center {
+	margin: 0 auto;
+}
+
+#rfooter {
+	margin-top:100px;
+}
+
+
+
+
+
+
+
