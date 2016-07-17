@@ -4,7 +4,7 @@
 		<title>Word Counter</title>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-	  	<link rel="stylesheet" href="../../stylesheets/bootstrap.min.css">
+	  	<link rel="stylesheet" href="../../stylesheets/bootstrap.css">
 	  	<script src="../../javascript/jquery-3.0.0.min.js"></script>
 	  	<script src="../../javascript/bootstrap.min.js"></script>
 	  	<link rel="shortcut icon" href="../../favicon.ico" type="image/x-icon">
@@ -43,7 +43,7 @@
 						<li><button class="btn btn-danger btn-lg toolbutton" onclick="cleartext()">Clear</button></li>
 						<li><button class="btn btn-success btn-lg toolbutton" onclick="save()">Save</button></li>
 						<li><button class="btn btn-info btn-lg toolbutton" onclick="load_save()">Load</button></li>
-						<li class="dropdown"><button class="dropdown-toggle btn btn-primary btn-lg toolbutton" data-toggle="dropdown">Options<span class="caret"></span></button>
+						<li><div class="dropdown"><button class="dropdown dropdown-toggle btn btn-primary btn-lg toolbutton" data-toggle="dropdown">Options<span class="caret"></span></button>
 							<ul class="dropdown-menu">
 								<li onclick="wipeSave()" class="optionListE">
 									<div class="optionButton btn" style="color:red">Wipe Save</div>
@@ -52,6 +52,7 @@
 									<div class="optionButton btn" style="color:blue" id="color_toggle">Colorful</div>
 								</li>
 							</ul>
+							</div>
 						</li>
 					</ul>
 				</div>
@@ -61,7 +62,7 @@
 		<div class="container-fluid">
 			<div class="row">
 				<div class="col-lg-7" id="textbox_div">
-					<textarea id="textbox" cols="75" rows="30" onkeydown="countAll()" onmouseup="countSelected()"></textarea>
+					<textarea id="textbox" cols="75" rows="30" onkeyup="countAll()" onmouseup="countSelected()"></textarea>
 				</div>
 				<div class="col-lg-5" id="resultbox">
 					<h2 id="results-head">Results</h2>
@@ -73,7 +74,7 @@
 		</div>
 		<br>
 		<footer class="container-fluid text-center" id="footerword">
-			<p class="footertext">&copy; JCNotes 2016</p><br>
+			<p class="footertext">&copy; JamesAC42 2016</p><br>
 		</footer>
 		
 	</body>

@@ -50,6 +50,10 @@ function countW(inputp){
 			n++;
 		}else{
 			string += passage[n];
+			if((n+1) == passage.length){
+				words.push(string);
+				amountW++;
+			}
 			n++;
 		};
 	};
@@ -115,7 +119,11 @@ function countAll(){
 }
 
 function countSelected(){
-	window.setTimeout(actualCountSelect,500);
+	if(window.getSelection() !== ""){
+		window.setTimeout(actualCountSelect,500);
+	}else{
+		return;
+	}
 }
 
 function actualCountSelect(){

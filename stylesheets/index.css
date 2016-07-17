@@ -13,7 +13,7 @@ body{
 	
 	
 	width:85vw;
-	margin-left: 10vw;
+	margin-left: 7vw;
 	margin-bottom: 25px;
 	margin-top:20px;
 	
@@ -23,7 +23,7 @@ body{
 	border-left:8px solid blue;
 	border-bottom: 8px solid navy;
 	border-radius:15px;
-	padding-left: 50px;
+	padding-left: 40px;
 	padding-bottom:45px;
 	margin-bottom:40px;
 }
@@ -39,7 +39,7 @@ body{
 	border-top:2px solid grey;
 	border-right:2px solid black;
 	border-radius:20px;
-	width:22%;
+	width:20%;
 }
 
 .empty {
@@ -47,6 +47,10 @@ body{
 }
 
 #fileexplorerimg {
+	width:40%;
+}
+
+#wordcounterimg {
 	width:40%;
 }
 
