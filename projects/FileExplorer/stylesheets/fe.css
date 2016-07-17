@@ -1,5 +1,14 @@
+
+html {
+    height: 100%;
+}
 body {
+    height: 100%;
+    margin: 0;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
 	font-family: 'Comfortaa';
+	background: -webkit-gradient(linear, left top, left bottom, from(#FFFFFF), to(#67e9ff)) fixed;
 }
 
 .jumbotron {
@@ -15,11 +24,6 @@ body {
 
 .center {
 	margin: 0 auto;
-}
-#gradient {
-	height:70vh;
-	width:100%;
-	background: linear-gradient(#FFFFFF,#67e9ff);
 }
 
 #prompt-message {

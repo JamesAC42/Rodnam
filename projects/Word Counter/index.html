@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Word Counter</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+	  	<link rel="stylesheet" href="../../stylesheets/bootstrap.min.css">
+	  	<script src="../../javascript/jquery-3.0.0.min.js"></script>
+	  	<script src="../../javascript/bootstrap.min.js"></script>
+	  	<link rel="shortcut icon" href="../../favicon.ico" type="image/x-icon">
+	  	<link rel="icon" href="../../favicon.ico" type="image/x-icon">
+
+	  	<link href='https://fonts.googleapis.com/css?family=Fredoka+One' rel='stylesheet' type='text/css'>
+		<link href='https://fonts.googleapis.com/css?family=Anonymous+Pro:700' rel='stylesheet' type='text/css'>
+		<link href='https://fonts.googleapis.com/css?family=Nova+Mono' rel='stylesheet' type='text/css'>
+		
+	  	<link rel="stylesheet" href="stylesheets/wordcounter.css">
+	  	<script src="javascript/wordcounter.js"></script>
+
+	  	<script>
+		  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+		  ga('create', 'UA-75497871-1', 'auto');
+		  ga('send', 'pageview');
+		</script>
+	</head>
+	<body>
+		<div class="jumbotron">
+			<h1 id="title">Word Counter</h1>
+		</div>
+
+		<nav class="navbar">
+			<div class="container-fluid" id="navcontainer">
+				<div class="collapse navbar-collapse" id="wcnavbar">
+					<ul class="nav navbar-nav">
+						<li><a href="../../../index.html" target="_self" class="menubuttons">Home</a></li>
+						<li><a href="https://github.com/JamesAC42/Rodnam/tree/gh-pages/projects/Word%20Counter"class="menubuttons">View on Github</a></li>
+					</ul>
+					<ul class="nav navbar-nav" id="toolbar">
+						<li><button class="btn btn-primary btn-lg toolbutton" onclick="countAll()">Count</button></li>
+						<li><button class="btn btn-danger btn-lg toolbutton" onclick="cleartext()">Clear</button></li>
+						<li><button class="btn btn-success btn-lg toolbutton" onclick="save()">Save</button></li>
+						<li><button class="btn btn-info btn-lg toolbutton" onclick="load_save()">Load</button></li>
+						<li class="dropdown"><button class="dropdown-toggle btn btn-primary btn-lg toolbutton" data-toggle="dropdown">Options<span class="caret"></span></button>
+							<ul class="dropdown-menu">
+								<li onclick="wipeSave()" class="optionListE">
+									<div class="optionButton btn" style="color:red">Wipe Save</div>
+								</li>
+								<li onclick="colorSchemeToggle()" class="optionListE">
+									<div class="optionButton btn" style="color:blue" id="color_toggle">Colorful</div>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-lg-7" id="textbox_div">
+					<textarea id="textbox" cols="75" rows="30" onkeydown="countAll()" onmouseup="countSelected()"></textarea>
+				</div>
+				<div class="col-lg-5" id="resultbox">
+					<h2 id="results-head">Results</h2>
+					<hr>
+					<h3 id="word_display">Words: <span id="amt_display">0</h3><hr>
+					<p id="stats"></p>
+				</div>
+			</div>
+		</div>
+		<br>
+		<footer class="container-fluid text-center" id="footerword">
+			<p class="footertext">&copy; JCNotes 2016</p><br>
+		</footer>
+		
+	</body>
+</html>
+
+
+
+
+
+
+
