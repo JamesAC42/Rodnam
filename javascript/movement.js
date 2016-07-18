@@ -1,12 +1,12 @@
 $(document).ready(function(){
-	$(".grow").mouseenter(function(){
-		$(this).animate({
-			width: "+=3%"
+	$(".changeenter").mouseenter(function(){
+		$(this).children('img').animate({
+			width: "+=5%"
 		});
     }).mouseleave(function(){
-		$(this).animate({
-			width: "-=3%"
-		})
+		$(this).children('img').animate({
+			width: "-=5%"
+		});
 	});
 });
 
