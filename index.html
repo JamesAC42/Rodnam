@@ -80,6 +80,19 @@
 		</div>
 	</div>
 	
+	<script>
+	var heights = [];
+	
+	$(document).ready(function(){
+		$(".col-md-3").each(function(){
+			var currentHeight = parseInt(Math.ceil(parseFloat($(this).height())));
+			heights.push(currentHeight);
+			console.log(currentHeight);
+		});
+		$(".col-md-3").height(Math.max.apply(null, heights));
+	});
+	</script>
+	
 	<footer id="rfooter" class="container-fluid text-center">
 		<p>Maintained by <a href="https://github.com/JamesAC42">JamesAC42</a><br>
 		&copy;2016</p>
