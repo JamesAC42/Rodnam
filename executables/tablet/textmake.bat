@@ -1,1 +1,1 @@
-@py.exe "C:\Users\JamesCrovo19\Documents\GitHub\Rodnam\executables\textmake.py" %* 
+@py.exe "C:\Users\james\executables\textmake.py" %* 

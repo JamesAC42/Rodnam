@@ -1,1 +1,1 @@
-@py.exe "C:\Users\JamesCrovo19\Documents\GitHub\Rodnam\executables\defineword.py" %* 
+@py.exe "C:\Users\james\executables\defineword.py" %* 

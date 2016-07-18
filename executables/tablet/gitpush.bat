@@ -1,1 +1,1 @@
-@py.exe "C:\Users\JamesCrovo19\Documents\GitHub\Rodnam\executables\gitpush.py" %* 
+@py.exe "C:\Users\james\executables\gitpush.py" %* 

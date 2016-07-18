@@ -1,1 +1,1 @@
-@py.exe "C:\Users\JamesCrovo19\Documents\GitHub\Rodnam\automateboringstuff\web scrapers\lucky.py" %* 
+@py.exe "C:\Users\james\executables\lucky.py" %* 

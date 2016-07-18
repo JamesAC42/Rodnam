@@ -1,1 +1,1 @@
-@py.exe "C:\Users\JamesCrovo19\Documents\GitHub\Rodnam\executables\vocablist.py" %* 
+@py.exe "C:\Users\james\executables\vocablist.py" %* 
