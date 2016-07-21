@@ -1,10 +1,119 @@
-#div1 {
-	width:40%;
-	height: 10%;
-	background-color: #29e;
-	color: #fff;
-	font-size: 1.2em;
-	border-radius: 4px;
-	padding: 2%;
-	margin: 5%;
+#notebar{
+	border:1px solid black;
+	height:98vh;
+	margin:-5px;
+	width:20%;
+	float:left;
 }
+
+#right{
+	border:1px solid red;
+	height:98vh;
+	margin:-5px;
+	width:80%;
+	float:right;
+	position:relative;
+}
+
+.fixed{
+	padding:10px;
+}
+
+.noterow{
+	width:97%;
+	height:23vh;
+	margin:0 auto;
+	margin-top:5px;
+}
+
+.note-item{
+	width:50%;
+	height:100%;
+	border:1px solid black;
+	text-align:center;
+	font-size:12px;
+	font-family:sans-serif;
+	color:black;
+	margin:-5px;
+	line-height:100%;
+	position:relative;
+}
+
+.note-item-1{
+	float:left;
+}
+
+.note-item-2{
+	float:right;
+}
+
+.noteitem:before{
+	content: ' ';
+	display:inline-block;
+	vertical-align:middle;
+	height:100%;
+}
+
+
+.menuimage{
+	border:1px solid black;
+	width:45%;
+	max-height:100%;
+	margin:0 auto;
+	display:inline-block;
+	vertical-align:middle;
+}
+
+/*
+
+#titlenav{
+	width:95%;
+	height:15%;
+	margin:10px;
+	padding:10px;
+	border:1px solid blue;
+}
+
+#title{
+	font-family:sans-serif;
+	text-align:center;
+	font-size:40px;
+	color:navy;
+	height:75%;
+	width:100%;
+	margin:0;
+	padding:0;
+	border:1px solid black;
+}
+
+#navbar{
+	width:100%;
+	height:25%;
+	border:1px solid green;
+	margin:0;
+	padding:0;
+}
+
+#sheet{
+	width:95%;
+	height:85%;
+	border:1px solid black;
+	margin:10px;
+	padding:10px;
+}
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

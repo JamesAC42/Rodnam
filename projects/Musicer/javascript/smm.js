@@ -1,3 +1,3 @@
 $(document).ready(function(){
-	$('#div1').draggable();
+	$('.note-item').draggable();
 });
