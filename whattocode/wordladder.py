@@ -11,13 +11,17 @@ def wordLadder(random_order = False):
 	original_one = word_one
 	word_two = input("Word 2: ").lower()
 	original_two = word_two
-
+	print("")
+	
 	if word_one == word_two:
 		print("Words are equal.")
 		return
 	
-	if len(word_one) is not len(word_two):
-		print("Words are not the same length.")
+	difference = abs(len(word_one) - len(word_two))
+	if len(word_one) > len(word_two):
+		word_two += " "*difference
+	else:
+		word_one += " "*difference
 		
 	word_one = list(word_one)
 	word_two = list(word_two)
@@ -34,7 +38,7 @@ def wordLadder(random_order = False):
 			word_one[letter] = word_two[letter]
 			step += "".join(word_one)
 			print(step)
-	print("{} converted to {} in {} steps.".format(original_one, original_two, steps))
+	print("\n\"{firstword}\" converted to \"{secondword}\" in {amount} steps.\n".format(firstword=original_one, secondword=original_two, amount=steps))
 	
 try:
 	if sys.argv[1].lower() == "random":
