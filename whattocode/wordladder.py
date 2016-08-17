@@ -4,18 +4,15 @@
 #Given two words, wordladder converts the first word into the second one letter at a time
 #Optional: pass the argument "random" to make the order that letter are changed random
 
-import sys,random
+import sys
+from random import shuffle
 
 def wordLadder(random_order = False):
-	word_one = input("Word 1: ").lower()
+	word_one = input("Phrase 1: ").lower()
 	original_one = word_one
-	word_two = input("Word 2: ").lower()
+	word_two = input("Phrase 2: ").lower()
 	original_two = word_two
 	print("")
-	
-	if word_one == word_two:
-		print("Words are equal.")
-		return
 	
 	difference = abs(len(word_one) - len(word_two))
 	if len(word_one) > len(word_two):
@@ -23,12 +20,16 @@ def wordLadder(random_order = False):
 	else:
 		word_one += " "*difference
 		
+	if word_one == word_two:
+		print("Words are equal.\n")
+		return
+		
 	word_one = list(word_one)
 	word_two = list(word_two)
 	steps = 0
 	order = list(range(0,len(word_one)))
 	if random_order is True:
-		random.shuffle(order)
+		shuffle(order)
 	for letter in order:
 		if word_one[letter] == word_two[letter]:
 			pass
