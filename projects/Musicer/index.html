@@ -15,10 +15,10 @@
 	<div id="notebar" ng-controller="notemenu">
 		<div class="fixed">
 			<div class="noterow" ng-repeat="row in ttoolsmenu">
-				<div class="note-item note-item-1">
+				<div class="note-item note-item-1 draggable">
 						<img ng-src="images/{{ttype}}/{{iisdot + row[0].name + ttype}}.jpg" class="menuimage menuimage1">
 				</div>
-				<div class="note-item note-item-2">
+				<div class="note-item note-item-2 draggable">
 						<img ng-src="images/{{ttype}}/{{iisdot + row[1].name + ttype}}.jpg" class="menuimage menuimage2">
 				</div>
 			</div>
