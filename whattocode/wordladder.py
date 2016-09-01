@@ -40,12 +40,17 @@ def wordLadder(random_order = False):
 			step += "".join(word_one)
 			print(step)
 	print("\n\"{firstword}\" converted to \"{secondword}\" in {amount} steps.\n".format(firstword=original_one, secondword=original_two, amount=steps))
-	
-try:
-	if sys.argv[1].lower() == "random":
-		wordLadder(random_order = True)
-	else:
+
+if __name__ == "__main__":
+	try:
+		if sys.argv[1].lower() == "random":
+			wordLadder(random_order = True)
+		else:
+			wordLadder()
+	except IndexError:
 		wordLadder()
-except IndexError:
-	wordLadder()
+	
+	
+	
+	
 	

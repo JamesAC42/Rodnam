@@ -1,1 +1,3 @@
-@py.exe "C:\Users\Owner\Documents\GitHub\Rodnam\executables\notestohtml.py" %* 
+@py.exe "C:\Users\james\Documents\GitHub\Rodnam\executables\notestohtml.py" %* 
+
+
