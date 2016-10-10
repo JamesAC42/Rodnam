@@ -1,1 +1,1 @@
-gsv zotlirgsn rh ivevihryov
+my cipher takes a message and encrypts it using the following process first take the index of the letter and multiply it by twenty six then take the modulo twenty seven of the number finally get the new letter by finding the letter at the index of the number found in the previous steps this essentially gets the mirror of every letter across the center of the alphabet the algorithm is reversible

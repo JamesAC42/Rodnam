@@ -15,7 +15,7 @@ for letter in passage:
 		if letter is " ":
 			new.append(letter)
 		else:
-			continue
+			new.append(letter)
 	else:
 		if letter is 'a':
 			new.append('z')
