@@ -3,10 +3,12 @@ __author__ = "james"
 import sys
 class Crovocrypt:
     def __init__(self,original_pw):
-        self.original_pw = original_pw
+        self.original = original_pw
+        self.updated = ""
         self.alphabet = 'abcdefghijklmnopqrstuvwxyz'
-    def hash(self):
-        pw = self.original_pw.lower()
+    def hash(self, word=True):
+        pw = self.original if word else self.updated
+        pw = pw.lower()
         spec = list('!@#$%^&*()')
         new = []
         pw = list(pw)
@@ -21,9 +23,11 @@ class Crovocrypt:
             wen = [x for x in new]
             wen.reverse()
             new += wen
-        return (("".join(new)))
-    def encrypt(self):
-        pw = self.original_pw.lower()
+        self.updated = "".join(new)
+        return self.updated
+    def encrypt(self,word=True):
+        pw = self.original if word else self.updated
+        pw = pw.lower()
         new = []
         numbers = list(range(10))
         for letter in pw:
@@ -33,9 +37,10 @@ class Crovocrypt:
                 letterspace = (((self.alphabet.index(letter) + 1) * 26) % 27) - 1
                 newletter = self.alphabet[letterspace]
                 new.append(newletter)
-        return ("".join(new))
-    def complicate(self):
-        pw = self.original_pw.lower()
+        self.updated = "".join(new)
+        return self.updated
+    def complicate(self,word=True):
+        pw = self.original if word else self.updated
         numbers = [str(x) for x in range(10)]
         new = []
         for character in pw:
@@ -44,6 +49,18 @@ class Crovocrypt:
                 new.append(character)
             else:
                 new.append(character)
-        return ("".join(new))
+        self.updated = "".join(new)
+        return self.updated
+    def encrypttri(self):
+        pw = self.original.lower()
+        hashed = self.hash()
+        encrypted = self.encrypt(word=False)
+        final = self.complicate(word=False)
+        return(final)
 
-my_password = Crovocrypt("hotmail")
+my_password = Crovocrypt("lschs")
+print(my_password.original)
+print(my_password.hash())
+print(my_password.encrypt(word=False))
+print(my_password.complicate(word=False))
+
