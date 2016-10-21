@@ -73,7 +73,8 @@ twitter_pw = pwGenerate('twitter').password
 exxon_pw = pwGenerate('exxon').password
 netflix_pw = pwGenerate('netflix').password
 
-print("{}\n{}\n{}\n{}".format(hotmail_pw,facebook_pw,twitter_pw,exxon_pw,netflix_pw))
+
+print("{}\n{}\n{}\n{}\n{}".format(hotmail_pw,facebook_pw,twitter_pw,exxon_pw,netflix_pw))
 
 
 
