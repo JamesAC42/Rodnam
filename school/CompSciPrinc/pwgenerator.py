@@ -67,14 +67,18 @@ class pwGenerate:
                 continue
         self.password = "".join(pw_new_two)
 
-hotmail_pw = pwGenerate('hotmail').password
-facebook_pw = pwGenerate('facebook').password
-twitter_pw = pwGenerate('twitter').password
-exxon_pw = pwGenerate('exxon').password
-netflix_pw = pwGenerate('netflix').password
 
+passwords = {
+    'hotmail' :pwGenerate('hotmail').password,
+    'facebook' :pwGenerate('facebook').password,
+    'twitter' :pwGenerate('twitter').password,
+    'exxon' :pwGenerate('exxon').password,
+    'netflix' :pwGenerate('netflix').password,
+    'gmail' :pwGenerate('gmail').password,
+    'lschs' :pwGenerate('lschs').password
+}
 
-print("{}\n{}\n{}\n{}\n{}".format(hotmail_pw,facebook_pw,twitter_pw,exxon_pw,netflix_pw))
-
+for name in passwords:
+    print('{}: {}\n'.format(name, passwords[name]))
 
 
