@@ -14,6 +14,10 @@ class pwGenerate:
     def __init__(self, pw):
         self.original = pw
         self.password = ""
+        self.birthmonth = 4
+        self.birthday = 30
+        self.firstname = "james"
+        self.lastname = "crovo"
         self.lowerCases = 'abcdefghijklmnopqrstuvwxyz'
         self.upperCases = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
         self.alphabet  = self.lowerCases + self.upperCases
@@ -30,13 +34,20 @@ class pwGenerate:
             d += 1
         if n > 1:
             primes.append(n)
-        return max(primes)
+        while True:
+            if max(primes) > 13:
+                primes.remove(max(primes))
+            else:
+                return max(primes)
     def encrypt(self):
         pw = self.original
-        pw = [char for char in pw if char in self.alphabet]
-        pw = "".join(pw).lower()
-        first_index = self.lowerCases.index(pw[0]) + 1
-        primeFactor = self.getFactor(first_index)
+        pw = [char.lower() for char in pw if char in self.alphabet]
+        pw = pw[0] + pw[-1]
+        if (((self.alphabet.index(pw[0])+1)+self.alphabet.index(pw[-1])+1)%2) == 0:
+            pw += self.lastname
+        else:
+            pw += self.firstname
+        primeFactor = self.getFactor(self.birthday + self.birthmonth)
         pw_hold = list(pw)
         pw_new = []
         for position in range(0,len(pw_hold)):
@@ -75,7 +86,7 @@ passwords = {
     'exxon' :pwGenerate('exxon').password,
     'netflix' :pwGenerate('netflix').password,
     'gmail' :pwGenerate('gmail').password,
-    'lschs' :pwGenerate('lschs').password
+    'lschs' :pwGenerate('lschs').password,
 }
 
 for name in passwords:
