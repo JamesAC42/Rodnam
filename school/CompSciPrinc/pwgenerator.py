@@ -1,13 +1,14 @@
 __author__ = "james"
 
 """
-1. Get name and remove any characters
-2. Get greatest prime factor of first letter
-3. Capitalize all letters divisible by the factor
-4. Insert (position * 13) + 100 after every letter
-5. Insert symbol of last digit of every new 3-digit number
-6. Insert letter at position before every single digit
-7. Mirror every letter (position * 26) % 27
+1. Get first and last letter of website name
+2. Get GCF <= 13 of sum of positions of the letters
+3. If sum is even, append last name to 2 letters, otherwise append first name
+4. Capitalize all letters divisible by the GCF
+5. Insert (position * 13) + 100 after every letter
+6. Insert symbol of last digit of every new 3-digit number
+7. Insert letter at position before every single digit
+8. Mirror every letter (position * 26) % 27
 """
 
 class pwGenerate:
@@ -89,7 +90,7 @@ passwords = {
     'lschs' :pwGenerate('lschs').password,
 }
 
-for name in passwords:
-    print('{}: {}\n'.format(name, passwords[name]))
+for website in passwords:
+    print('{}: {}\n'.format(website, passwords[website]))
 
 
