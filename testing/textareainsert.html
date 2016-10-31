@@ -1,0 +1,119 @@
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<title>textinsert</title>
+<meta charset="utf-8">
+<meta author="jamesac">
+<style>
+	body {
+		font-family:sans-serif;
+	}
+	.container{
+		width:80%;
+		margin:0 auto;
+		margin-top:30px;
+	}
+	ul {
+		list-style-type:none;
+		padding:0;
+		margin:0;
+	}
+	li{
+		float:left;
+		margin:15px;
+	}
+	li a, .dropbtn{
+		display:inline-block;
+		text-align:center;
+		padding:14px 16px;
+		text-decoration:none;
+		color:black;
+	}
+	li a:hover, .dropdown:hover .dropbtn{
+		background-color:gray;
+	}
+	li.dropdown{
+		display:inline-block;
+	}
+	
+	.dropdown-content{
+		display:none;
+		position:absolute;
+		background-color:#f1f1f1;
+		min-width:120px;
+		box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+	}
+	
+	.dropdown-content a{
+		color:black;
+		text-decoration:none;
+		padding:12px 16px;
+		display:block;
+		text-align:left
+	}
+	.dropdown-content a:hover{
+		background-color:#f1f178;
+	}
+	.dropdown:hover .dropdown-content{
+		display:block;
+	}
+	#text_area{
+		width:100%;
+		height:70%;
+		resize:none;
+	}
+</style>
+</head>
+<body>
+<div class="container">
+	<h1>Create</h1><hr>
+	<div id="navbar">
+		<ul id="format_bar">
+			<li class="dropdown">
+				<a href="#" class="dropbtn">Headers</a>
+				<div class="dropdown-content">
+				  <a id="header1" onclick="insertForm('\n\n# ')" href="#">H1</a>
+				  <a id="header2" onclick="insertForm('\n\n## ')" href="#">H2</a>
+				  <a id="header3" onclick="insertForm('\n\n### ')" href="#">H3</a>
+				  <a id="header4" onclick="insertForm('\n\n#### ')" href="#">H4</a>
+				  <a id="header5" onclick="insertForm('\n\n##### ')" href="#">H5</a>
+				  <a id="header6" onclick="insertForm('\n\n###### ')" href="#">H6</a>
+				</div></li>
+			<li><a id="bold" onclick="insertForm('*text*')">Bold</a></li>
+			<li><a id="quote" onclick="insertForm('\n\n> ')">Quote</a></li>
+			<li><a id="link" onclick="insertForm(' [text](https://example.com)') ">Link</a></li>
+			<li><a id="inline-code" onclick="insertForm('`code`')">Inline Code</a></li>
+			<li><a id="code-block" onclick="insertForm('\n\n\tcode')">Code Block</a></li>
+		</ul>
+	</div><br>
+	<textarea id="text_area"></textarea>
+</div>
+<script>
+	function insertForm(markdown){
+		var $txt = jQuery("#text_area");
+        var caretPos = $txt[0].selectionStart;
+        var textAreaTxt = $txt.val();
+        var txtToAdd = markdown;
+        $txt.val(textAreaTxt.substring(0, caretPos) + txtToAdd + textAreaTxt.substring(caretPos) );
+	}
+	$("#text_area").keydown(function(e) {
+		if(e.keyCode === 9) { // tab was pressed
+			// get caret position/selection
+			var start = this.selectionStart;
+				end = this.selectionEnd;
+
+			var $this = $(this);
+
+			// set textarea value to: text before caret + tab + text after caret
+			$this.val($this.val().substring(0, start)
+						+ "\t"
+						+ $this.val().substring(end));
+
+			// put caret at right position again
+			this.selectionStart = this.selectionEnd = start + 1;
+
+			// prevent the focus lose
+			return false;
+		}
+	});
+</script>
+</body>

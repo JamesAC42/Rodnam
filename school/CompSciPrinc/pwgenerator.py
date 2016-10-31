@@ -1,19 +1,24 @@
 __author__ = "james"
 
 """
-1. Get name and remove any characters
-2. Get greatest prime factor of first letter
-3. Capitalize all letters divisible by the factor
-4. Insert (position * 13) + 100 after every letter
-5. Insert symbol of last digit of every new 3-digit number
-6. Insert letter at position before every single digit
-7. Mirror every letter (position * 26) % 27
+1. Get first and last letter of website name
+2. Get GCF <= 13 of sum of positions of the letters
+3. If sum is even, append last name to 2 letters, otherwise append first name
+4. Capitalize all letters divisible by the GCF
+5. Insert (position * 13) + 100 after every letter
+6. Insert symbol of last digit of every new 3-digit number
+7. Insert letter at position before every single digit
+8. Mirror every letter (position * 26) % 27
 """
 
 class pwGenerate:
     def __init__(self, pw):
         self.original = pw
         self.password = ""
+        self.birthmonth = 4
+        self.birthday = 30
+        self.firstname = "james"
+        self.lastname = "crovo"
         self.lowerCases = 'abcdefghijklmnopqrstuvwxyz'
         self.upperCases = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
         self.alphabet  = self.lowerCases + self.upperCases
@@ -30,13 +35,20 @@ class pwGenerate:
             d += 1
         if n > 1:
             primes.append(n)
-        return max(primes)
+        while True:
+            if max(primes) > 13:
+                primes.remove(max(primes))
+            else:
+                return max(primes)
     def encrypt(self):
         pw = self.original
-        pw = [char for char in pw if char in self.alphabet]
-        pw = "".join(pw).lower()
-        first_index = self.lowerCases.index(pw[0]) + 1
-        primeFactor = self.getFactor(first_index)
+        pw = [char.lower() for char in pw if char in self.alphabet]
+        pw = pw[0] + pw[-1]
+        if (((self.alphabet.index(pw[0])+1)+self.alphabet.index(pw[-1])+1)%2) == 0:
+            pw += self.lastname
+        else:
+            pw += self.firstname
+        primeFactor = self.getFactor(self.birthday + self.birthmonth)
         pw_hold = list(pw)
         pw_new = []
         for position in range(0,len(pw_hold)):
@@ -67,14 +79,18 @@ class pwGenerate:
                 continue
         self.password = "".join(pw_new_two)
 
-hotmail_pw = pwGenerate('hotmail').password
-facebook_pw = pwGenerate('facebook').password
-twitter_pw = pwGenerate('twitter').password
-exxon_pw = pwGenerate('exxon').password
-netflix_pw = pwGenerate('netflix').password
 
+passwords = {
+    'hotmail' :pwGenerate('hotmail').password,
+    'facebook' :pwGenerate('facebook').password,
+    'twitter' :pwGenerate('twitter').password,
+    'exxon' :pwGenerate('exxon').password,
+    'netflix' :pwGenerate('netflix').password,
+    'gmail' :pwGenerate('gmail').password,
+    'lschs' :pwGenerate('lschs').password,
+}
 
-print("{}\n{}\n{}\n{}\n{}".format(hotmail_pw,facebook_pw,twitter_pw,exxon_pw,netflix_pw))
-
+for website in passwords:
+    print('{}: {}\n'.format(website, passwords[website]))
 
 

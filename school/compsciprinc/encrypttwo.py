@@ -55,10 +55,11 @@ def complicate(pw):
 			
 	
 if __name__ == "__main__":
-	weak_pw = sys.argv[1]
+	#weak_pw = sys.argv[1]
 	#final  = complicate(encrypt(hash(weak_pw)))
-	hashed_pw = hash(weak_pw)
-	encrypted_pw = encrypt(hashed_pw)
-	final_pw = complicate(encrypted_pw)
-	print(final_pw)
+	#hashed_pw = hash(weak_pw)
+	#encrypted_pw = encrypt(hashed_pw)
+	#final_pw = complicate(encrypted_pw)
+	print(encrypt("Hb2z0d4$Lb2e5f6^ca1c3i9(Rc3c3d4$ob2i9e5%Vc3h8f6^ob2i9e5% "))
+	#print(final_pw)
 	

@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 #!/usr/bin/python3
 import sys
 
@@ -36,7 +35,6 @@ print("".join(new))
 '''
 	My cipher takes a message and encrypts it using the following process. First, take the index of the letter and multiply it by 26. Then 
 '''
-=======
 #!/usr/bin/python3
 import sys
 
@@ -74,5 +72,4 @@ print("".join(new))
 '''
 	My cipher takes a message and encrypts it using the following process. First, take the index of the letter and multiply it by 26. Then 
 '''
->>>>>>> 436b9e3678d21d8d072ead95da922190b187c94b
 	
