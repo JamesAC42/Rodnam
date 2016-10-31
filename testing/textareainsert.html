@@ -7,6 +7,27 @@
 	body {
 		font-family:sans-serif;
 	}
+	#counter-wrapper{
+		position:absolute;
+		margin-left:-15px;
+		height:100vh;
+		margin-top:-30px;
+	}
+	#counter-window{
+		height:100%;
+		width:45vw;
+		background-color: #EEEEEE;
+		float:left;
+	}
+	.counter-tab {
+		height:100px;
+		width:50px;
+		background-color: #DDDDDD;
+		border-top: 1px solid gray;
+		border-right:1px solid gray;
+		margin-top:70%;
+		float:left;
+	}
 	.container{
 		width:80%;
 		margin:0 auto;
@@ -19,7 +40,7 @@
 	}
 	li{
 		float:left;
-		margin:15px;
+		border:1px solid black;
 	}
 	li a, .dropbtn{
 		display:inline-block;
@@ -27,6 +48,7 @@
 		padding:14px 16px;
 		text-decoration:none;
 		color:black;
+		background-color:#EEEEEE;
 	}
 	li a:hover, .dropdown:hover .dropbtn{
 		background-color:gray;
@@ -41,6 +63,15 @@
 		background-color:#f1f1f1;
 		min-width:120px;
 		box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+	}
+	
+	#header-content{
+		border:none;
+	}
+	
+	#headers-div{
+		height:50px;
+		margin-bottom:1px;
 	}
 	
 	.dropdown-content a{
@@ -58,27 +89,39 @@
 	}
 	#text_area{
 		width:100%;
-		height:70%;
+		height:75%;
 		resize:none;
+		margin-top:-5px;
 	}
 </style>
 </head>
 <body>
+<div id="counter-wrapper">
+	<div id="counter-window">
+		<span id="counter-header">Word Counter</span>
+	</div>
+	<div class="counter-tab"></div>	
+</div>
+
 <div class="container">
 	<h1>Create</h1><hr>
 	<div id="navbar">
 		<ul id="format_bar">
-			<li class="dropdown">
-				<a href="#" class="dropbtn">Headers</a>
-				<div class="dropdown-content">
-				  <a id="header1" onclick="insertForm('\n\n# ')" href="#">H1</a>
-				  <a id="header2" onclick="insertForm('\n\n## ')" href="#">H2</a>
-				  <a id="header3" onclick="insertForm('\n\n### ')" href="#">H3</a>
-				  <a id="header4" onclick="insertForm('\n\n#### ')" href="#">H4</a>
-				  <a id="header5" onclick="insertForm('\n\n##### ')" href="#">H5</a>
-				  <a id="header6" onclick="insertForm('\n\n###### ')" href="#">H6</a>
-				</div></li>
+			<li id="headers-toggle" class="dropdown">
+				<a href="#" class="dropbtn">Headers</a></li>
+			<li id="header-content">
+				<div class="headers-div" id="headers-div"><ul>
+					<li class="header-insert"><a id="header1" onclick="insertForm('\n\n# ')" href="#">H1</a></li>
+					<li class="header-insert"><a id="header2" onclick="insertForm('\n\n## ')" href="#">H2</a></li>
+					<li class="header-insert"><a id="header3" onclick="insertForm('\n\n### ')" href="#">H3</a></li>
+					<li class="header-insert"><a id="header4" onclick="insertForm('\n\n#### ')" href="#">H4</a></li>
+					<li class="header-insert"><a id="header5" onclick="insertForm('\n\n##### ')" href="#">H5</a></li>
+					<li class="header-insert"><a id="header6" onclick="insertForm('\n\n###### ')" href="#">H6</a></li>
+				</ul></div>
+			</li>
 			<li><a id="bold" onclick="insertForm('*text*')">Bold</a></li>
+			<li><a id="bullet" onclick="insertForm('\n\n- ')">Bullet</a></li>
+			<li><a id="list" onclick="insertForm('\n\n1. ')">List</a></li>
 			<li><a id="quote" onclick="insertForm('\n\n> ')">Quote</a></li>
 			<li><a id="link" onclick="insertForm(' [text](https://example.com)') ">Link</a></li>
 			<li><a id="inline-code" onclick="insertForm('`code`')">Inline Code</a></li>
@@ -115,5 +158,40 @@
 			return false;
 		}
 	});
+	$(document).ready(function(){
+		
+		
+		$(".header-insert").hide();
+		/*
+						$("#headers-toggle").mouseover(function(){
+							$("#headers-div").animate({width:'toggle'},350);
+						}).mouseleave(function(){
+							$("#headers-div").animate({width:'toggle'},350);
+						});
+						$("#headers-div").mouseover(function(){
+							$("#headers-div").show();
+						}).mouseleave(function(){
+							$("#headers-div").animate({width:'toggle'},350);
+						});
+		*/
+		$("#headers-toggle, .header-insert").mouseenter(function(){
+			$( ".header-insert" ).first().show(150, function showNext() {
+				$( this ).next( ".header-insert" ).show(150, showNext );
+			});
+		})
+		
+		$("#headers-toggle, .header-insert").mouseleave( function() {
+			if ($('.header-insert:hover').length == 0) {
+				$( ".header-insert" ).first().hide(150, function showNext() {
+					$( this ).next( ".header-insert" ).hide(150, showNext );
+				});
+			}
+		});
+		
+		$("#counter-window").animate({width:'toggle'},350);
+		$(".counter-tab").click(function(){
+			$("#counter-window").animate({width:'toggle'},350);
+		});
+	})
 </script>
 </body>
