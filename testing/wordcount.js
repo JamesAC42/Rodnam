@@ -49,10 +49,19 @@ function countW(inputp){
 	};
 	
 	var new_words = [];
-	
+	var numbers ='1234567890';
 	for(n = 0;n < words.length;n++){
 		if(words[n] !== ""){
-			new_words.push(words[n]);
+			for(var i =0; i<10;i++){
+				if(words[n].includes(numbers[i])){
+					amountW -= 1;
+					console.log(words[n]);
+					break;
+				}else{
+					new_words.push(words[n]);
+					break;
+				}
+			}
 		}else{
 			amountW -= 1;
 		};
@@ -87,14 +96,15 @@ function countW(inputp){
 	var stat = "";
 	
 	for(var word in final){
-		var n = 30 - (word.length + final[word]);
-		var f = repeatString("-",n);
+		var amt_length = final[word].toString().length;
+		var n = 35 - (word.length + amt_length);
+		var f = repeatString(" ",n);
 		var b = repeatString("0",final[word]);
 		var string_amt = final[word].toString();
-		stat += word + ": " + f + " " + b + " (" + string_amt + ")" + "<br><br>";
+		stat += word + ": " + f +  " (" + string_amt + ")" + "\n\n";
 	};
 	$("#counter-tab").text(amountW);
-	
+	$("#stat").text(stat);
 	
 };
 
