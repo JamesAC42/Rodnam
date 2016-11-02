@@ -74,6 +74,7 @@
 	#stat {
 		font-family: 'Ubuntu Mono', sans-serif;
 		font-size:15px;
+		white-space:pre;
 	}
 	ul {
 		list-style-type:none;
@@ -94,7 +95,7 @@
 		user-select: none;
 	}
 	li a:hover, .dropdown:hover .dropbtn{
-		background-color:gray;
+		background-color:#cccccc;
 	}
 	li.dropdown{
 		display:inline-block;
@@ -137,6 +138,7 @@
 		height:75%;
 		resize:none;
 		margin-top:-5px;
+		padding:15px;
 	}
 </style>
 </head>
@@ -144,7 +146,7 @@
 <div class="sidebar-wrapper" id="counter-wrapper">
 	<div class="sidebar-window" id="counter-window">
 		<div class="window-container">
-			<span class="sidebar-head" id="counter-head">Word Count</span><br>
+			<span class="sidebar-head" id="counter-head">Word Count</span>
 			<div id="stat-div">
 				<span id="stat"></span>
 			</div>
@@ -176,13 +178,13 @@
 					<li class="header-insert"><a id="header6" onclick="insertForm('\n\n###### ')" href="#">H6</a></li>
 				</ul></div>
 			</li>
-			<li><a id="bold" onclick="insertForm('*text*')">Bold</a></li>
+			<li><a id="bold" onclick="insertForm('*bold*')">Bold</a></li>
 			<li><a id="bullet" onclick="insertForm('\n\n- ')">Bullet</a></li>
 			<li><a id="list" onclick="insertForm('\n\n1. ')">List</a></li>
 			<li><a id="quote" onclick="insertForm('\n\n> ')">Quote</a></li>
-			<li><a id="link" onclick="insertForm(' [text](https://example.com)') ">Link</a></li>
+			<li><a id="link" onclick="insertLink()">Link</a></li>
 			<li><a id="inline-code" onclick="insertForm('`code`')">Inline Code</a></li>
-			<li><a id="code-block" onclick="insertForm('\n\n\tcode')">Code Block</a></li>
+			<li><a id="code-block" onclick="insertForm('\n\n\    codeblocks are indented by 4 spaces')">Code Block</a></li>
 		</ul>
 	</div><br>
 	<textarea id="text_area"></textarea>
@@ -194,6 +196,11 @@
         var textAreaTxt = $txt.val();
         var txtToAdd = markdown;
         $txt.val(textAreaTxt.substring(0, caretPos) + txtToAdd + textAreaTxt.substring(caretPos) );
+	}
+	function insertLink(){
+		var url = prompt("URL (https://...)");
+		var hypertext = prompt("Hyperlink");
+		insertForm(" [" + hypertext + "](" + url + ") ");
 	}
 	$("#text_area").keydown(function(e) {
 		if(e.keyCode === 9) { // tab was pressed
