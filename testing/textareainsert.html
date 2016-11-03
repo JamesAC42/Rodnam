@@ -21,7 +21,7 @@
 	}
 	.sidebar-window{
 		height:100%;
-		width:50vw;
+		width:40vw;
 		background-color: #FFFFFF;
 		float:left;
 	}
@@ -30,14 +30,26 @@
 	}
 	.sidebar-tab {
 		height:50px;
-		width:100px;
+		width:150px;
 		text-align:center;
 		background-color: #DDDDDD;
-		border-top: 1px solid gray;
-		border-right:1px solid gray;
 		float:left;
 		line-height:50px;
 		user-select:none;
+	}
+	.pointer-end-tab{
+		width:0;
+		height:0;
+		border-top: 25px solid transparent;
+		border-bottom: 25px solid transparent;
+		float:left;
+		border-left: 20px solid #DDDDDD;
+	}
+	#counter-pointer{
+		margin-top:35vh;
+	}
+	#info-pointer{
+		margin-top:50vh;
 	}
 	#counter-tab{
 		margin-top:35vh;
@@ -55,8 +67,12 @@
 		height:90%;
 		width:90%;
 		margin:0 auto;
-		padding:10px;
+		padding:15px;
 		padding-top:30px;
+	}
+	.header-div{
+		width:100%;
+		text-align:center;
 	}
 	.sidebar-head{
 		font-size:23px;
@@ -76,6 +92,48 @@
 		font-size:15px;
 		white-space:pre;
 	}
+	#form-submit-div{
+		width:90%;
+		margin:0 auto;
+		margin-top:30px;
+		padding: 15px;
+		border-bottom:1px solid gray;
+	}
+	.form-row{
+		width:100%;
+		height:70px;
+	}
+	.form-col{
+		margin:-1px;
+		width:50%;
+		float:left;
+	}
+	.form-col input, label,select{
+		display:block;
+		font-size:18px;
+		font-family:'Ubuntu',sans-serif;
+		margin:0 auto;
+	}
+	.form-col label{
+		padding-left:10px;
+	}
+	.form-col input, select{
+		width:95%;
+		line-height:30px;
+		height:30px;
+	}
+	.btn{
+		height:40px;
+		width:80px;
+		font-size:20px;
+		border:none;
+		font-family:'Ubuntu',sans-serif;
+		background-color: #e7e7e7;
+	}
+	#submit-button{
+		display:block;
+		margin:0 auto;
+	}
 	ul {
 		list-style-type:none;
 		padding:0;
@@ -84,6 +142,7 @@
 	li{
 		float:left;
 		border:1px solid black;
+		display:inline-block;
 	}
 	li a, .dropbtn{
 		display:inline-block;
@@ -100,7 +159,6 @@
 	li.dropdown{
 		display:inline-block;
 	}
-	
 	.dropdown-content{
 		display:none;
 		position:absolute;
@@ -111,11 +169,13 @@
 	
 	#header-content{
 		border:none;
+		padding-bottom:-5px;
 	}
 	
 	#headers-div{
 		height:50px;
 		margin-bottom:1px;
+		white-space:nowrap;
 	}
 	
 	.dropdown-content a{
@@ -138,7 +198,7 @@
 		height:75%;
 		resize:none;
 		margin-top:-5px;
-		padding:15px;
+		padding:20px;
 	}
 </style>
 </head>
@@ -146,38 +206,75 @@
 <div class="sidebar-wrapper" id="counter-wrapper">
 	<div class="sidebar-window" id="counter-window">
 		<div class="window-container">
-			<span class="sidebar-head" id="counter-head">Word Count</span>
+			<div class="header-div">
+				<span class="sidebar-head" id="counter-head">Word Count</span>
+			</div>
 			<div id="stat-div">
 				<span id="stat"></span>
 			</div>
 		</div>
 	</div>
-	<div class="sidebar-tab" id="counter-tab">0</div>	
+	<div class="sidebar-tab" id="counter-tab">0</div><div id="counter-pointer" class="pointer-end-tab"></div>	
 </div>
 <div class="sidebar-wrapper" id="info-wrapper"><!--none-->
 	<div class="sidebar-window" id="info-window"><!--default-->
 		<div class="window-container">
-			<span class="sidebar-head" id="info-head">Info</span>
+			<div class="header-div">
+				<span class="sidebar-head" id="info-head">Note Info</span>
+			</div>
+			<div id="form-submit-div">
+				<form id="submit-note">
+					<div class="form-row">
+						<div class="form-col">
+							<label for="title-input">Title</label>
+							<input id="title-input" type="text"></input>
+						</div>
+						<div class="form-col">
+							<label for="section-input">Chapter/ Section</label>
+							<input id="section-input" type="text">
+						</div>
+					</div>
+					<div class="form-row">
+						<div class="form-col">
+							<label for="class-input">Class</label>
+							<select id="class-input">
+								<option value="class">Class</option>
+							</select>
+						</div>
+						<div class="form-col">
+							<label for="teacher-input">Teacher</label>
+							<select id="teacher-input">
+								<option value="teacher">Teacher</option>
+							</select>
+						</div>
+					</div>
+					<div class="form-row">
+						<button type="submit" id="submit-button" class="btn" value="note-submit">Create</button>
+					</div>
+				</form>
+			</div>
 		</div>
 	</div>
-	<div class="sidebar-tab" id="info-tab">Submit</div><!--default-->
+	<div class="sidebar-tab" id="info-tab">Submit</div><div id="info-pointer" class="pointer-end-tab"></div><!--default-->
 </div>
 <div class="container">
 	<h1>Create</h1><hr>
 	<div id="navbar">
 		<ul id="format_bar">
-			<li id="headers-toggle" class="dropdown">
-				<a href="#" class="dropbtn">Headers</a></li>
-			<li id="header-content">
-				<div class="headers-div" id="headers-div"><ul>
-					<li class="header-insert"><a id="header1" onclick="insertForm('\n\n# ')" href="#">H1</a></li>
-					<li class="header-insert"><a id="header2" onclick="insertForm('\n\n## ')" href="#">H2</a></li>
-					<li class="header-insert"><a id="header3" onclick="insertForm('\n\n### ')" href="#">H3</a></li>
-					<li class="header-insert"><a id="header4" onclick="insertForm('\n\n#### ')" href="#">H4</a></li>
-					<li class="header-insert"><a id="header5" onclick="insertForm('\n\n##### ')" href="#">H5</a></li>
-					<li class="header-insert"><a id="header6" onclick="insertForm('\n\n###### ')" href="#">H6</a></li>
-				</ul></div>
-			</li>
+			<div id="header-outer-ctrl">
+				<li id="headers-toggle" class="dropdown">
+					<a href="#" class="dropbtn">Headers</a></li>
+				<li id="header-content">
+					<div class="headers-div" id="headers-div"><ul>
+						<li class="header-insert"><a id="header1" onclick="insertForm('\n\n# ')" href="#">H1</a></li>
+						<li class="header-insert"><a id="header2" onclick="insertForm('\n\n## ')" href="#">H2</a></li>
+						<li class="header-insert"><a id="header3" onclick="insertForm('\n\n### ')" href="#">H3</a></li>
+						<li class="header-insert"><a id="header4" onclick="insertForm('\n\n#### ')" href="#">H4</a></li>
+						<li class="header-insert"><a id="header5" onclick="insertForm('\n\n##### ')" href="#">H5</a></li>
+						<li class="header-insert"><a id="header6" onclick="insertForm('\n\n###### ')" href="#">H6</a></li>
+					</ul></div>
+				</li>
+			</div>
 			<li><a id="bold" onclick="insertForm('*bold*')">Bold</a></li>
 			<li><a id="bullet" onclick="insertForm('\n\n- ')">Bullet</a></li>
 			<li><a id="list" onclick="insertForm('\n\n1. ')">List</a></li>
@@ -186,8 +283,8 @@
 			<li><a id="inline-code" onclick="insertForm('`code`')">Inline Code</a></li>
 			<li><a id="code-block" onclick="insertForm('\n\n\    codeblocks are indented by 4 spaces')">Code Block</a></li>
 		</ul>
-	</div><br>
-	<textarea id="text_area"></textarea>
+	</div>
+	<textarea id="text_area" form="submit-note"></textarea>
 </div>
 <script>
 	function insertForm(markdown){
@@ -223,20 +320,8 @@
 		}
 	});
 	$(document).ready(function(){
-		
-		$(".header-insert").hide();
 		/*
-						$("#headers-toggle").mouseover(function(){
-							$("#headers-div").animate({width:'toggle'},350);
-						}).mouseleave(function(){
-							$("#headers-div").animate({width:'toggle'},350);
-						});
-						$("#headers-div").mouseover(function(){
-							$("#headers-div").show();
-						}).mouseleave(function(){
-							$("#headers-div").animate({width:'toggle'},350);
-						});
-		*/
+		$(".header-insert").hide();
 		$("#headers-toggle, .header-insert").mouseenter(function(){
 			$( ".header-insert" ).first().show(150, function showNext() {
 				$( this ).next( ".header-insert" ).show(150, showNext );
@@ -250,7 +335,7 @@
 				});
 			}
 		});
-		
+		*/
 		var sidebar_out = false;
 		function toggleSidebar(){
 			if(!sidebar_out){
@@ -258,27 +343,46 @@
 				$("#text_area").css({"background-color":"#e8e8e8"});
 				$("li a").css({"background-color":"#d1d1d1"});
 				$(".sidebar-tab").css({"background-color":"#ffffff"});
+				$(".pointer-end-tab").css({"border-left":"20px solid #ffffff"});
 				sidebar_out = true;
 			}else{
 				$("body").css({"background-color":"#ffffff"});
 				$("#text_area").css({"background-color":"#ffffff"});
 				$("li a").css({"background-color":"#eeeeee"});
 				$(".sidebar-tab").css({"background-color":"#dddddd"});
+				$(".pointer-end-tab").css({"border-left":"20px solid #dddddd"});
 				sidebar_out = false;
 			}
-			console.log('test');
 		}
 		
+		$(".header-insert").animate({width:'toggle'},50);
+		$("#header-outer-ctrl").mouseenter(function(){
+			$( ".header-insert" ).first().animate({width:'toggle'},150,function showNext() {
+				$( this ).next( ".header-insert" ).animate({width:'toggle'},150, showNext );
+			});
+		})
+		$("#header-outer-ctrl").mouseleave(function(){
+			$( ".header-insert" ).first().animate({width:'toggle'},150,function showNext() {
+				$( this ).next( ".header-insert" ).animate({width:'toggle'},150, showNext );
+			});
+		})
+		/*
+		$("#headers-div").mouseleave( function() {
+			if ($("#headers-toggle").length != 0) {
+				$("#headers-div").animate({width:'toggle'},300);
+			}
+		});*/
 		$(".sidebar-window").each(function() {
 			$(this).animate({width:'toggle'},50);
 		});
+		
 		$("#counter-tab").click(function(){
-			$(this).parent().find(".sidebar-window").animate({width:'toggle'},200);
+			$(this).parent().find(".sidebar-window").animate({width:'toggle'},200).animate({width:'+=60px'},60).animate({width:'-=60px'},60).animate({width:'+=40px'},40).animate({width:'-=40px'},40);
 			$("#info-tab").animate({opacity: 'toggle'},60);
 			toggleSidebar();
 		});
 		$("#info-tab").click(function(){
-			$(this).parent().find(".sidebar-window").animate({width:'toggle'},200);
+			$(this).parent().find(".sidebar-window").animate({width:'toggle'},200).animate({width:'+=60px'},60).animate({width:'-=60px'},60).animate({width:'+=40px'},40).animate({width:'-=40px'},40);
 			toggleSidebar();
 		});
 		
