@@ -24,6 +24,10 @@
 		width:40vw;
 		background-color: #FFFFFF;
 		float:left;
+		overyflow-y:scroll;
+	}
+	.sidebar-window::-webkit-scrollbar { 
+		display: none; 
 	}
 	#info-window{
 		pointer-events:all;
@@ -69,6 +73,10 @@
 		margin:0 auto;
 		padding:15px;
 		padding-top:30px;
+		overflow-y:scroll;
+	}
+	.window-container::-webkit-scrollbar { 
+		display: none; 
 	}
 	.header-div{
 		width:100%;
@@ -262,6 +270,7 @@
 			<div class="header-div">
 				<span class="sidebar-head" id="settings-head">Settings</span>
 			</div>
+			<div style="height:800px;border:1px solid black;"></div>
 		</div>
 	</div>
 	<div class="sidebar-tab" id="info-tab">General</div><div id="info-pointer" class="pointer-end-tab"></div><!--default-->
