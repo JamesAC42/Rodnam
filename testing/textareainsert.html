@@ -30,7 +30,7 @@
 	}
 	.sidebar-tab {
 		height:50px;
-		width:150px;
+		width:100px;
 		text-align:center;
 		background-color: #DDDDDD;
 		float:left;
@@ -79,11 +79,12 @@
 	}
 	#stat-div{
 		width:90%;
-		height:85%;
+		height:90%;
 		margin:0 auto;
 		margin-top:30px;
 		padding:15px;
 		overflow-y:scroll;
+		overflow-x:scroll;
 		border:1px solid black;
 		background-color:#fbfbfb;
 	}
@@ -96,36 +97,41 @@
 		width:90%;
 		margin:0 auto;
 		margin-top:30px;
+		margin-bottom:40px;
 		padding: 15px;
 		border-bottom:1px solid gray;
 	}
-	.form-row{
+	.row{
 		width:100%;
 		height:70px;
 	}
-	.form-col{
+	.col{
 		margin:-1px;
 		width:50%;
 		float:left;
 	}
-	.form-col input, label,select{
+	.col input, label,select{
 		display:block;
 		font-size:18px;
 		font-family:'Ubuntu',sans-serif;
 		margin:0 auto;
 	}
-	.form-col label{
+	.col label{
 		padding-left:10px;
 	}
-	.form-col input, select{
+	.col input, select{
 		width:95%;
-		line-height:30px;
-		height:30px;
+		line-height:40px;
+		height:40px;
+	}
+	input{
+		padding:10px 10px;
 	}
 	.btn{
 		height:40px;
 		width:80px;
 		font-size:20px;
+		margin-top:10px;
 		border:none;
 		font-family:'Ubuntu',sans-serif;
 		background-color: #e7e7e7;
@@ -224,24 +230,24 @@
 			</div>
 			<div id="form-submit-div">
 				<form id="submit-note">
-					<div class="form-row">
-						<div class="form-col">
+					<div class="row">
+						<div class="col">
 							<label for="title-input">Title</label>
 							<input id="title-input" type="text"></input>
 						</div>
-						<div class="form-col">
+						<div class="col">
 							<label for="section-input">Chapter/ Section</label>
 							<input id="section-input" type="text">
 						</div>
 					</div>
-					<div class="form-row">
-						<div class="form-col">
+					<div class="row">
+						<div class="col">
 							<label for="class-input">Class</label>
 							<select id="class-input">
 								<option value="class">Class</option>
 							</select>
 						</div>
-						<div class="form-col">
+						<div class="col">
 							<label for="teacher-input">Teacher</label>
 							<select id="teacher-input">
 								<option value="teacher">Teacher</option>
@@ -253,9 +259,12 @@
 					</div>
 				</form>
 			</div>
+			<div class="header-div">
+				<span class="sidebar-head" id="settings-head">Settings</span>
+			</div>
 		</div>
 	</div>
-	<div class="sidebar-tab" id="info-tab">Submit</div><div id="info-pointer" class="pointer-end-tab"></div><!--default-->
+	<div class="sidebar-tab" id="info-tab">General</div><div id="info-pointer" class="pointer-end-tab"></div><!--default-->
 </div>
 <div class="container">
 	<h1>Create</h1><hr>

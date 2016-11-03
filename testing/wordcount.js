@@ -97,11 +97,11 @@ function countW(inputp){
 	
 	for(var word in final){
 		var amt_length = final[word].toString().length;
-		var n = 35 - (word.length + amt_length);
+		var n = 30 - (word.length + amt_length);
 		var f = repeatString(" ",n);
-		var b = repeatString("0",final[word]);
+		var b = repeatString("[]",final[word]);
 		var string_amt = final[word].toString();
-		stat += word + ": " + f +  " (" + string_amt + ")" + "\n\n";
+		stat += word + ": " + f +  " (" + string_amt + ") | " + b + "\n\n";
 	};
 	$("#counter-tab").text(amountW);
 	$("#stat").text(stat);
