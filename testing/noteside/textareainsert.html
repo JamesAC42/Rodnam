@@ -1,7 +1,8 @@
 <head>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-<link href="https://fonts.googleapis.com/css?family=Ubuntu|Ubuntu+Mono" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Dosis|Eczar|Share+Tech+Mono|Ubuntu|Ubuntu+Mono" rel="stylesheet">
 <script src="wordcount.js"></script>
+<script src="ckeditor/ckeditor.js"></script>
 <title>textinsert</title>
 <meta charset="utf-8">
 <meta author="jamesac">
@@ -89,7 +90,7 @@
 	}
 	#stat-div{
 		width:90%;
-		height:90%;
+		height:85%;
 		margin:0 auto;
 		margin-top:30px;
 		padding:15px;
@@ -103,13 +104,21 @@
 		font-size:15px;
 		white-space:pre;
 	}
-	#form-submit-div{
+	.window-inner-div{
 		width:90%;
 		margin:0 auto;
-		margin-top:30px;
-		margin-bottom:40px;
 		padding: 15px;
+		margin-top:30px;
+	}
+	#form-submit-div{
+		margin-bottom:40px;
 		border-bottom:1px solid gray;
+	}
+	#settings-div{
+		height:900px;
+	}
+	.settings-label{
+		float:left;
 	}
 	.row{
 		width:100%;
@@ -146,9 +155,40 @@
 		font-family:'Ubuntu',sans-serif;
 		background-color: #e7e7e7;
 	}
+	.btn:hover{
+		background-color: #cccccc;
+	}
 	#submit-button{
-		display:block;
-		margin:0 auto;
+		float:right;
+		margin-right:10px;
+	}
+	#save-button{
+		float:left;
+		margin-left:10px;
+	}
+	#fontfamily-setting-div{
+		width:80%;
+	}
+	#fontsize-setting-div{
+		width:20%;
+	}
+	#ubuntu-mono-option{
+		font-family: "Ubuntu Mono";
+	}
+	#dosis-option{
+		font-family: "Dosis";
+	}
+	#eczar-option{
+		font-family:"Eczar";
+	}
+	#sharetech-option{
+		font-family:"Share Tech Mono";
+	}
+	.font-setting-select{
+		height:40px;
+	}
+	#fontfamily-select option{
+		height:40px;
 	}
 	ul {
 		list-style-type:none;
@@ -226,7 +266,7 @@
 				<span class="sidebar-head" id="counter-head">Word Count</span>
 			</div>
 			<div id="stat-div">
-				<span id="stat"></span>
+				<span id="stat">Type Something!</span>
 			</div>
 		</div>
 	</div>
@@ -238,7 +278,7 @@
 			<div class="header-div">
 				<span class="sidebar-head" id="info-head">Note Info</span>
 			</div>
-			<div id="form-submit-div">
+			<div class="window-inner-div" id="form-submit-div">
 				<form id="submit-note">
 					<div class="row">
 						<div class="col">
@@ -264,15 +304,55 @@
 							</select>
 						</div>
 					</div>
-					<div class="form-row">
-						<button type="submit" id="submit-button" class="btn" value="note-submit">Create</button>
+					<div class="row">
+						<div class="col">
+							<button type="submit" id="submit-button" class="btn" value="note-submit">Create</button>
+						</div>
+						<div class="col">
+							<button id="save-button" class="btn">Save</button>
+						</div>
 					</div>
 				</form>
 			</div>
 			<div class="header-div">
 				<span class="sidebar-head" id="settings-head">Settings</span>
+				<div class="window-inner-div" id="settings-div">
+					<div class="row">
+						<div id="fontfamily-setting-div" class="col">
+							<select id="fontfamily-select" class="font-setting-select" name="fontfamily">
+								<option id="ubuntu-mono-option" value="Ubuntu Mono">Ubuntu Mono</option>
+								<option id="ubuntu-option" value="Ubuntu">Ubuntu</option>
+								<option id="dosis-option" value="Dosis">Dosis</option>
+								<option id="eczar-option" value="Eczar">Eczar</option>
+								<option id="sharetech-option" value="Share Tech Mono">Share Tech Mono</option>
+							</select>
+						</div>
+						<div id="fontsize-setting-div" class="col">
+							<select id="fontsize-select" class="font-setting-select" name="fontsize">
+								<option value="8">8</option>
+								<option value="10">10</option>
+								<option value="12">12</option>
+								<option value="14">14</option>
+								<option value="16" select="selected">16</option>
+								<option value="18">18</option>
+								<option value="20">20</option>
+								<option value="22">22</option>
+								<option value="24">24</option>
+								<option value="26">26</option>
+							</select>	
+						</div>
+					</div>
+					<div class="row">
+						<div class="col">
+							
+						</div>
+						<div class="col">
+							
+						</div>
+					</div>
+				</div>
 			</div>
-			<div style="height:800px;border:1px solid black;"></div>
+			<div></div>
 		</div>
 	</div>
 	<div class="sidebar-tab" id="info-tab">General</div><div id="info-pointer" class="pointer-end-tab"></div><!--default-->
@@ -304,7 +384,8 @@
 			<li><a id="code-block" onclick="insertForm('\n\n\    codeblocks are indented by 4 spaces')">Code Block</a></li>
 		</ul>
 	</div>
-	<textarea id="text_area" form="submit-note"></textarea>
+	<textarea name="note-editor" id="text_area" form="submit-note"></textarea>
+	
 </div>
 <script>
 	function insertForm(markdown){
@@ -404,6 +485,14 @@
 		$("#info-tab").click(function(){
 			$(this).parent().find(".sidebar-window").animate({width:'toggle'},200).animate({width:'-=40px'},80).animate({width:'+=40px'},60).animate({width:'-=20px'},40).animate({width:'+=20px'},10);
 			toggleSidebar();
+		});
+		
+		$("#fontfamily-select").change(function(){
+			$("#text_area").css({"font-family":$(this).val()});
+		});
+		
+		$("#fontsize-select").change(function(){
+			$("#text_area").css({"font-size":$(this).val()});
 		});
 		
 		$("#text_area").keyup(function(){

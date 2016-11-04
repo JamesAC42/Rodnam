@@ -104,7 +104,12 @@ function countW(inputp){
 		stat += word + ": " + f +  " (" + string_amt + ") | " + b + "\n\n";
 	};
 	$("#counter-tab").text(amountW);
-	$("#stat").text(stat);
+	if(amountW == 0){
+		$("#stat").text("Type Something!");
+	}else{
+		$("#stat").text(stat);
+	}
+	
 	
 };
 
