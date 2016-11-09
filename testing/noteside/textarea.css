@@ -18,8 +18,6 @@ body {
 	background-color: #F0F2F9;
 	float:left;
 	overyflow-y:scroll;
-	
-	box-shadow: 10px 10px 5px #8e8e8e;
 }
 .sidebar-window::-webkit-scrollbar { 
 	display: none; 
@@ -144,6 +142,7 @@ body {
 	margin:-1px;
 	width:50%;
 	float:left;
+	height:100%;
 }
 .col input, label,select{
 	display:block;
@@ -158,6 +157,17 @@ body {
 	width:95%;
 	line-height:40px;
 	height:40px;
+}
+.setting-desc{
+	font-size:23px;
+	font-family:'Ubuntu',sans-serif;
+	line-height: 60px;
+	text-align:left;
+	padding-left:10px;
+	padding-right:-10px;
+}
+#auto-save-btn{
+	float:right;
 }
 input{
 	padding:10px 10px;
