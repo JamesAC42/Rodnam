@@ -1,0 +1,250 @@
+body {
+	font-family:'Ubuntu',sans-serif;
+	background-color: #FCF3E4;
+}
+.sidebar-wrapper{
+	position:absolute;
+	margin-left:-15px;
+	height:100vh;
+	margin-top:-30px;
+	background-color: rgba(255,255,255,0.0);
+}
+#info-wrapper{
+	pointer-events:none;
+}
+.sidebar-window{
+	height:100%;
+	width:40vw;
+	background-color: #FFFFFF;
+	float:left;
+	overyflow-y:scroll;
+	
+	box-shadow: 10px 10px 5px #8e8e8e;
+}
+.sidebar-window::-webkit-scrollbar { 
+	display: none; 
+}
+#info-window{
+	pointer-events:all;
+}
+.sidebar-tab {
+	height:50px;
+	width:100px;
+	text-align:center;
+	background-color: #6DC4E8;
+	float:left;
+	line-height:50px;
+	user-select:none;
+}
+.pointer-end-tab{
+	width:0;
+	height:0;
+	border-top: 25px solid transparent;
+	border-bottom: 25px solid transparent;
+	float:left;
+	border-left: 20px solid #6DC4E8;
+}
+#counter-pointer{
+	margin-top:35vh;
+}
+#info-pointer{
+	margin-top:50vh;
+}
+#counter-tab{
+	margin-top:35vh;
+}
+#info-tab{
+	margin-top:50vh;
+	pointer-events:all;
+}
+.container{
+	width:80%;
+	margin:0 auto;
+	margin-top:30px;
+}
+.window-container{
+	height:90%;
+	width:90%;
+	margin:0 auto;
+	padding:15px;
+	padding-top:30px;
+	overflow-y:scroll;
+}
+.window-container::-webkit-scrollbar { 
+	display: none; 
+}
+.header-div{
+	width:100%;
+	text-align:center;
+}
+.sidebar-head{
+	font-size:23px;
+}
+#stat-div{
+	width:90%;
+	height:85%;
+	margin:0 auto;
+	margin-top:30px;
+	padding:15px;
+	overflow-y:scroll;
+	overflow-x:scroll;
+	border:1px solid black;
+	background-color:#fbfbfb;
+}
+#stat {
+	font-family: 'Ubuntu Mono', sans-serif;
+	font-size:15px;
+	white-space:pre;
+}
+.window-inner-div{
+	width:90%;
+	margin:0 auto;
+	padding: 15px;
+	margin-top:30px;
+}
+#form-submit-div{
+	margin-bottom:40px;
+	border-bottom:1px solid gray;
+}
+#settings-div{
+	height:900px;
+}
+.settings-label{
+	float:left;
+}
+.row{
+	width:100%;
+	height:70px;
+}
+.col{
+	margin:-1px;
+	width:50%;
+	float:left;
+}
+.col input, label,select{
+	display:block;
+	font-size:18px;
+	font-family:'Ubuntu',sans-serif;
+	margin:0 auto;
+}
+.col label{
+	padding-left:10px;
+}
+.col input, select{
+	width:95%;
+	line-height:40px;
+	height:40px;
+}
+input{
+	padding:10px 10px;
+}
+.btn{
+	height:40px;
+	width:80px;
+	font-size:20px;
+	margin-top:10px;
+	border:none;
+	font-family:'Ubuntu',sans-serif;
+	background-color: #e7e7e7;
+}
+.btn:hover{
+	background-color: #cccccc;
+}
+#submit-button{
+	float:right;
+	margin-right:10px;
+}
+#save-button{
+	float:left;
+	margin-left:10px;
+}
+#fontfamily-setting-div{
+	width:80%;
+}
+#fontsize-setting-div{
+	width:20%;
+}
+#ubuntu-mono-option{
+	font-family: "Ubuntu Mono";
+}
+#dosis-option{
+	font-family: "Dosis";
+}
+#eczar-option{
+	font-family:"Eczar";
+}
+#sharetech-option{
+	font-family:"Share Tech Mono";
+}
+.font-setting-select{
+	height:40px;
+}
+#fontfamily-select option{
+	height:40px;
+}
+ul {
+	list-style-type:none;
+	padding:0;
+	margin:0;
+}
+li{
+	float:left;
+	border:1px solid black;
+	display:inline-block;
+}
+li a, .dropbtn{
+	display:inline-block;
+	text-align:center;
+	padding:14px 16px;
+	text-decoration:none;
+	color:black;
+	background-color:#69C4DB;
+	user-select: none;
+}
+li a:hover, .dropdown:hover .dropbtn{
+	background-color:#3D7786;
+}
+li.dropdown{
+	display:inline-block;
+}
+.dropdown-content{
+	display:none;
+	position:absolute;
+	background-color:#f1f1f1;
+	min-width:120px;
+	box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+
+#header-content{
+	border:none;
+	padding-bottom:-5px;
+}
+
+#headers-div{
+	height:50px;
+	margin-bottom:1px;
+	white-space:nowrap;
+}
+
+.dropdown-content a{
+	color:black;
+	text-decoration:none;
+	padding:12px 16px;
+	display:block;
+	text-align:left
+}
+.dropdown-content a:hover{
+	background-color:#f1f178;
+}
+.dropdown:hover .dropdown-content{
+	display:block;
+}
+#text_area{
+	font-family:'Ubuntu Mono',monospace;
+	font-size:16px;
+	width:100%;
+	height:75%;
+	resize:none;
+	margin-top:-5px;
+	padding:20px;
+}
