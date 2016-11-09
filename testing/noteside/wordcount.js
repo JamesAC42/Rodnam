@@ -93,8 +93,8 @@ function countW(inputp){
 		final[sortplace[n][0]] = sortplace[n][1];
 	};
 
+	/*
 	var stat = "";
-	
 	for(var word in final){
 		var amt_length = final[word].toString().length;
 		var n = 30 - (word.length + amt_length);
@@ -102,15 +102,20 @@ function countW(inputp){
 		var b = repeatString("[]",final[word]);
 		var string_amt = final[word].toString();
 		stat += word + ": " + f +  " (" + string_amt + ") | " + b + "\n\n";
-	};
+	};*/
+
 	$("#counter-tab").text(amountW);
+	$('#stat-div').empty();
 	if(amountW == 0){
-		$("#stat").text("Type Something!");
+		$('#stat-div').append('<div class="stat-entry"><span class="no-text">Type Something! That\'s the idea!</span></div>');
 	}else{
-		$("#stat").text(stat);
+		var entries_string = "";
+		for(var word in final){
+			var amt_string = final[word].toString();
+			entries_string += '\n<div class="stat-entry"><span class="stat-entry-word">' + word + '</span><span class="stat-entry-amt">' + final[word] + '</span></div>';
+		}
+		$('#stat-div').append(entries_string);
 	}
-	
-	
 };
 
 

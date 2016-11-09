@@ -108,4 +108,18 @@ $(document).ready(function(){
 	$("#text_area").keyup(function(){
 		countAll();
 	});
+	$(".sidebar-tab").mouseenter(function(){
+		if(!sidebar_out){
+			$(this).animate({"width":"+=10px"});
+		}
+	}).mouseleave(function(){
+		if(!sidebar_out){
+			$(this).animate({"width":"-=10px"});
+		}
+	})
+	$("li a").mouseenter(function(){
+		$(this).css({"background-color":"#06BEE1"});
+	}).mouseleave(function(){
+		$(this).css({"background-color":"#69C4DB"});
+	})
 })
