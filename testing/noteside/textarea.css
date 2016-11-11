@@ -124,12 +124,13 @@ body {
 	padding: 15px;
 	margin-top:30px;
 }
+
 #form-submit-div{
 	margin-bottom:40px;
 	border-bottom:1px solid gray;
 }
 #settings-div{
-	height:900px;
+	padding-bottom:500px;
 }
 .settings-label{
 	float:left;
@@ -157,17 +158,18 @@ body {
 	width:95%;
 	line-height:40px;
 	height:40px;
+	border:1px solid #49A1B2;
 }
 .setting-desc{
 	font-size:23px;
 	font-family:'Ubuntu',sans-serif;
 	line-height: 60px;
-	text-align:left;
-	padding-left:10px;
-	padding-right:-10px;
+	text-align:right;
+	margin-right:10px;
 }
 #auto-save-btn{
-	float:right;
+	float:left;
+	margin-left:10px;
 }
 input{
 	padding:10px 10px;

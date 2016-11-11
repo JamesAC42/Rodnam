@@ -104,6 +104,11 @@ $(document).ready(function(){
 	$("#fontsize-select").change(function(){
 		$("#text_area").css({"font-size":$(this).val()});
 	});
+	$(".btn").mousedown(function(){
+		$(this).animate({"margin-top":"+=5px"});
+	}).mouseup(function(){
+		$(this).animate({"margin-top":"-=5px"});
+	})
 	
 	$("#text_area").keyup(function(){
 		countAll();
