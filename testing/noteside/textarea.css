@@ -165,11 +165,10 @@ body {
 	font-family:'Ubuntu',sans-serif;
 	line-height: 60px;
 	text-align:right;
-	margin-right:10px;
 }
-#auto-save-btn{
+.setting-btn{
 	float:left;
-	margin-left:10px;
+	margin-left:20px;
 }
 input{
 	padding:10px 10px;
@@ -184,7 +183,16 @@ input{
 	background-color: #49AABC;
 }
 .btn:hover{
-	background-color: #057F96;
+	/*background-color: #057F96;*/
+	filter: brightness(85%);
+}
+#hide-note-btn, #protect-note-btn{
+	background-color:#ED9C0E;
+	color:white;
+}
+#clear-editor-btn{
+	background-color:#D60842;
+	color:white;
 }
 #submit-button{
 	float:right;
@@ -218,6 +226,12 @@ input{
 #fontfamily-select option{
 	height:40px;
 }
+#spacing-select{
+	width:80px;
+	height:40px;
+	margin-top:10px;
+	margin-left:20px;
+}
 ul {
 	list-style-type:none;
 	padding:0;
@@ -236,9 +250,6 @@ li a, .dropbtn{
 	color:black;
 	background-color:#69C4DB;
 	user-select: none;
-}
-li a:hover, .dropdown:hover .dropbtn{
-	background-color:#06BEE1;
 }
 li.dropdown{
 	display:inline-block;
@@ -283,4 +294,5 @@ li.dropdown{
 	resize:none;
 	margin-top:-5px;
 	padding:20px;
+	line-height: 1em;
 }

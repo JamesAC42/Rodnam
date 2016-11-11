@@ -60,7 +60,7 @@
 							<button type="submit" id="submit-button" class="btn" value="note-submit">Create</button>
 						</div>
 						<div class="col">
-							<button id="save-button" class="btn">Save</button>
+							<button id="save-button" type="button" onclick="save('manual')" class="btn">Save</button>
 						</div>
 					</div>
 				</form>
@@ -95,10 +95,47 @@
 					</div>
 					<div class="row">
 						<div class="col setting-desc">
+							Spacing
+						</div>
+						<div class="col">
+							<select id="spacing-select" class="font-setting-select" name="linespacing">
+								<option value="1">1</option>
+								<option value="1.5">1.5</option>
+								<option value="1.75">1.75</option>
+								<option value="2">2</option>
+							</select>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col setting-desc">
 							Auto Save
 						</div>
 						<div class="col">
-							<button class="btn" id="auto-save-btn">On</button>
+							<button value="on" class="btn setting-btn" type="button" onclick="toggleAutoSave()" id="auto-save-btn">On</button>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col setting-desc">
+							Private
+						</div>
+						<div class="col">
+							<button value="public" class="btn setting-btn" type="button" onclick="hideNoteToggle()" form="submit-note" id="hide-note-btn">Off</button>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col setting-desc">
+							Protect Note
+						</div>
+						<div class="col">
+							<button value="unprotected" class="btn setting-btn" type="button" onclick="protectNoteToggle()" form="submit-note" id="protect-note-btn">Off</button>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col setting-desc">
+							Clear Editor
+						</div>
+						<div class="col">
+							<button class="btn setting-btn" type="button" onclick="wipeEditor()" id="clear-editor-btn">X</button>
 						</div>
 					</div>
 				</div>
@@ -117,22 +154,22 @@
 					<a href="#" class="dropbtn">Headers</a></li>
 				<li id="header-content">
 					<div class="headers-div" id="headers-div"><ul>
-						<li class="header-insert"><a id="header1" onclick="insertForm('\n\n# ')" href="#">H1</a></li>
-						<li class="header-insert"><a id="header2" onclick="insertForm('\n\n## ')" href="#">H2</a></li>
-						<li class="header-insert"><a id="header3" onclick="insertForm('\n\n### ')" href="#">H3</a></li>
-						<li class="header-insert"><a id="header4" onclick="insertForm('\n\n#### ')" href="#">H4</a></li>
-						<li class="header-insert"><a id="header5" onclick="insertForm('\n\n##### ')" href="#">H5</a></li>
-						<li class="header-insert"><a id="header6" onclick="insertForm('\n\n###### ')" href="#">H6</a></li>
+						<li class="header-insert"><a id="header1"  class="format-insert" onclick="insertForm('\n\n# ')" href="#">H1</a></li>
+						<li class="header-insert"><a id="header2"  class="format-insert" onclick="insertForm('\n\n## ')" href="#">H2</a></li>
+						<li class="header-insert"><a id="header3"  class="format-insert" onclick="insertForm('\n\n### ')" href="#">H3</a></li>
+						<li class="header-insert"><a id="header4"  class="format-insert" onclick="insertForm('\n\n#### ')" href="#">H4</a></li>
+						<li class="header-insert"><a id="header5"  class="format-insert" onclick="insertForm('\n\n##### ')" href="#">H5</a></li>
+						<li class="header-insert"><a id="header6"  class="format-insert" onclick="insertForm('\n\n###### ')" href="#">H6</a></li>
 					</ul></div>
 				</li>
 			</div>
-			<li><a id="bold" onclick="insertForm('*bold*')">Bold</a></li>
-			<li><a id="bullet" onclick="insertForm('\n\n- ')">Bullet</a></li>
-			<li><a id="list" onclick="insertForm('\n\n1. ')">List</a></li>
-			<li><a id="quote" onclick="insertForm('\n\n> ')">Quote</a></li>
-			<li><a id="link" onclick="insertLink()">Link</a></li>
-			<li><a id="inline-code" onclick="insertForm('`code`')">Inline Code</a></li>
-			<li><a id="code-block" onclick="insertForm('\n\n\    codeblocks are indented by 4 spaces')">Code Block</a></li>
+			<li><a id="bold"   class="format-insert" onclick="insertForm('*bold*')">Bold</a></li>
+			<li><a id="bullet" class="format-insert" onclick="insertForm('\n\n- ')">Bullet</a></li>
+			<li><a id="list" class="format-insert" onclick="insertForm('\n\n1. ')">List</a></li>
+			<li><a id="quote" class="format-insert" onclick="insertForm('\n\n> ')">Quote</a></li>
+			<li><a id="link" class="format-insert" onclick="insertLink()">Link</a></li>
+			<li><a id="inline-code" class="format-insert" onclick="insertForm('`code`')">Inline Code</a></li>
+			<li><a id="code-block" class="format-insert" onclick="insertForm('\n\n\    codeblocks are indented by 4 spaces')">Code Block</a></li>
 		</ul>
 	</div>
 	<textarea name="note-editor" id="text_area" form="submit-note"></textarea>

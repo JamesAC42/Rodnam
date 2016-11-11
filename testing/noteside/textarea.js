@@ -1,3 +1,4 @@
+var autoSave = true;
 function insertForm(markdown){
 	var $txt = jQuery("#text_area");
     var caretPos = $txt[0].selectionStart;
@@ -9,6 +10,61 @@ function insertLink(){
 	var url = prompt("URL (https://...)");
 	var hypertext = prompt("Hyperlink");
 	insertForm(" [" + hypertext + "](" + url + ") ");
+}
+function save(manual){
+	if(manual =='manual'){
+		$("#save-button").text("Saved!");
+		$("#save-button").animate({"width":"100px"},function(){
+			$(this).delay(200).animate({"width":"80px"},function(){
+				$(this).text("Save");
+			});
+		})
+	}
+}
+function loadSave(){
+
+}
+function toggleAutoSave(){
+	autoSave = !autoSave;
+	var $autoButton = jQuery("#auto-save-btn");
+	if($autoButton.val() == "on"){
+		$autoButton.val("off");
+		$autoButton.css({"background-color":" #ED9C0E","color":"white"});
+		$autoButton.text("Off");
+	}else{
+		$autoButton.val("on");
+		$autoButton.css({"background-color":" #49AABC","color":"black"});
+		$autoButton.text("On");
+	}
+}
+function hideNoteToggle(){
+	var $hideButton = jQuery("#hide-note-btn");
+	if($hideButton.val() == "public"){
+		$hideButton.val("private");
+		$hideButton.css({"background-color":" #49AABC","color":"black"});
+		$hideButton.text("On");
+	}else{
+		$hideButton.val("public");
+		$hideButton.css({"background-color":" #ED9C0E","color":"white"});
+		$hideButton.text("Off");
+	}
+}
+function protectNoteToggle(){
+	var $protectButton = $("#protect-note-btn");
+	if($protectButton.val() == "unprotected"){
+		$protectButton.val("protected");
+		$protectButton.css({"background-color":" #49AABC","color":"black"});
+		$protectButton.text("On");
+	}else{
+		$protectButton.val("unprotected");
+		$protectButton.css({"background-color":" #ED9C0E","color":"white"});
+		$protectButton.text("Off");
+	}
+}
+function wipeEditor(){
+	if(confirm("Do you want to clear the editor?")){
+		$("#text_area").val("");
+	}
 }
 $("#text_area").keydown(function(e) {
 	if(e.keyCode === 9) { // tab was pressed
@@ -31,23 +87,8 @@ $("#text_area").keydown(function(e) {
 	}
 });
 $(document).ready(function(){
-	/*
-	$(".header-insert").hide();
-	$("#headers-toggle, .header-insert").mouseenter(function(){
-		$( ".header-insert" ).first().show(150, function showNext() {
-			$( this ).next( ".header-insert" ).show(150, showNext );
-		});
-	})
-	
-	$("#headers-toggle, .header-insert").mouseleave( function() {
-		if ($('.header-insert:hover').length == 0) {
-			$( ".header-insert" ).first().hide(150, function showNext() {
-				$( this ).next( ".header-insert" ).hide(150, showNext );
-			});
-		}
-	});
-	*/
 	var sidebar_out = false;
+	loadSave();
 	function toggleSidebar(){
 		if(!sidebar_out){
 			$("body").css({"background-color":"#D1D1D1"});
@@ -65,7 +106,6 @@ $(document).ready(function(){
 			sidebar_out = false;
 		}
 	}
-	
 	$(".header-insert").animate({width:'toggle'},50);
 	$("#header-outer-ctrl").mouseenter(function(){
 		$( ".header-insert" ).first().animate({width:'toggle'},150,function showNext() {
@@ -77,16 +117,9 @@ $(document).ready(function(){
 			$( this ).next( ".header-insert" ).animate({width:'toggle'},150, showNext );
 		});
 	})
-	/*
-	$("#headers-div").mouseleave( function() {
-		if ($("#headers-toggle").length != 0) {
-			$("#headers-div").animate({width:'toggle'},300);
-		}
-	});*/
 	$(".sidebar-window").each(function() {
 		$(this).animate({width:'toggle'},50);
 	});
-	
 	$("#counter-tab").click(function(){
 		$(this).parent().find(".sidebar-window").animate({width:'toggle'},200).animate({width:'-=40px'},80).animate({width:'+=40px'},60).animate({width:'-=20px'},40).animate({width:'+=20px'},10);
 		$("#info-tab").animate({opacity: 'toggle'},60);
@@ -104,10 +137,20 @@ $(document).ready(function(){
 	$("#fontsize-select").change(function(){
 		$("#text_area").css({"font-size":$(this).val()});
 	});
+
+	$("#spacing-select").change(function(){
+		$("#text_area").css({"line-height":$(this).val() + "em"})
+	})
 	$(".btn").mousedown(function(){
-		$(this).animate({"margin-top":"+=5px"});
+		$(this).css({"margin-top":"+=5px"});
 	}).mouseup(function(){
-		$(this).animate({"margin-top":"-=5px"});
+		$(this).css({"margin-top":"-=5px"});
+	})
+
+	$(".format-insert").mousedown(function(){
+		$(this).css({"padding-top":"+=5px"});
+	}).mouseup(function(){
+		$(this).css({"padding-top":"-=5px"});
 	})
 	
 	$("#text_area").keyup(function(){
