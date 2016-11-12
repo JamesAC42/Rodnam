@@ -1,12 +1,12 @@
 <head>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-<link href="https://fonts.googleapis.com/css?family=Dosis|Eczar|Share+Tech+Mono|Ubuntu|Ubuntu+Mono" rel="stylesheet">
-<script src="wordcount.js"></script>
-<script src="ckeditor/ckeditor.js"></script>
-<title>textinsert</title>
-<meta charset="utf-8">
-<meta author="jamesac">
-<link href="textarea.css" rel="stylesheet">
+	<meta charset="utf-8">
+	<meta author="jamesac">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<link href="https://fonts.googleapis.com/css?family=Dosis|Eczar|Share+Tech+Mono|Ubuntu|Ubuntu+Mono" rel="stylesheet">
+	<script src="wordcount.js"></script>
+	<script src="ckeditor/ckeditor.js"></script>
+	<title>textinsert</title>
+	<link href="textarea.css" rel="stylesheet">
 </head>
 <body>
 <div class="sidebar-wrapper" id="counter-wrapper">
@@ -136,6 +136,14 @@
 						</div>
 						<div class="col">
 							<button class="btn setting-btn" type="button" onclick="wipeEditor()" id="clear-editor-btn">X</button>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col setting-desc">
+							Wipe Save
+						</div>
+						<div class="col">
+							<button class="btn setting-btn" type="button" onclick="wipeSave()" id="wipe-save-button">X</button>
 						</div>
 					</div>
 				</div>

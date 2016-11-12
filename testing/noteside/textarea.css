@@ -34,6 +34,7 @@ body {
 	float:left;
 	line-height:50px;
 	user-select:none;
+	cursor:pointer;
 }
 .pointer-end-tab{
 	width:0;
@@ -42,6 +43,7 @@ body {
 	border-bottom: 25px solid transparent;
 	float:left;
 	border-left: 20px solid #6074C7;
+	cursor:pointer;
 }
 #counter-pointer{
 	margin-top:35vh;
@@ -130,7 +132,7 @@ body {
 	border-bottom:1px solid gray;
 }
 #settings-div{
-	padding-bottom:500px;
+	padding-bottom:50px;
 }
 .settings-label{
 	float:left;
@@ -190,7 +192,7 @@ input{
 	background-color:#ED9C0E;
 	color:white;
 }
-#clear-editor-btn{
+#clear-editor-btn, #wipe-save-button{
 	background-color:#D60842;
 	color:white;
 }
@@ -241,6 +243,7 @@ li{
 	float:left;
 	border:1px solid black;
 	display:inline-block;
+	cursor:pointer;
 }
 li a, .dropbtn{
 	display:inline-block;

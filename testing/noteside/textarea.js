@@ -11,6 +11,20 @@ function insertLink(){
 	var hypertext = prompt("Hyperlink");
 	insertForm(" [" + hypertext + "](" + url + ") ");
 }
+function updateFontSetting(){
+	$("#text_area").css({"font-family":$("#fontfamily-select").val()});
+	$("#text_area").css({"font-size":$("#fontsize-select").val()});
+	$("#text_area").css({"line-height":$("#spacing-select").val() + "em"})
+	console.log("updatefont");
+}
+function buttonConfirm(button, text){
+	$("#save-button").text("Saved!");
+		$("#save-button").animate({"width":"100px"},function(){
+		$(this).delay(200).animate({"width":"80px"},function(){
+			$(this).text("Save");
+		});
+	})
+}
 function save(manual){
 	if(manual =='manual'){
 		$("#save-button").text("Saved!");
@@ -20,9 +34,55 @@ function save(manual){
 			});
 		})
 	}
+	console.log("saved");
+	localStorage.textValue = $("#text_area").val();
+	localStorage.title = $("#title-input").val();
+	localStorage.chapter = $("#section-input").val();
+	localStorage.className = $("#class-input").val();
+	localStorage.teacher = $("#teacher-input").val();
+	localStorage.fontfamily = $("#fontfamily-select").val();
+	localStorage.fontsize = $("#fontsize-select").val();
+	localStorage.spacing = $("#spacing-select").val();
+	localStorage.noteHidden = $("#hide-note-btn").val();
+	localStorage.noteProtected = $("#protect-note-bnt").val();
+	localStorage.autoSave = $("#auto-save-btn").val();
 }
 function loadSave(){
-
+	if(typeof(Storage) !== "undefined"){
+		$("#text_area").val(localStorage.textValue);
+		$("#title-input").val(localStorage.title);
+		$("#section-input").val(localStorage.chapter);
+		$("#class-input").val(localStorage.className);
+		$("#teacher-input").val(localStorage.teacher);
+		$("#fontfamily-select").val(localStorage.fontfamily);
+		$("#fontsize-select").val(localStorage.fontsize);
+		$("#spacing-select").val(localStorage.spacing);
+		if(localStorage.noteHidden == "private"){
+			hideNoteToggle();
+		}
+		if(localStorage.noteProtected == "protected"){
+			protectNoteToggle();
+		}
+		if(localStorage.autoSave == "off"){
+			toggleAutoSave();
+		}
+		updateFontSetting();
+	}
+}
+function wipeSave(){
+	if(confirm("Do you want to remove your saves?")){
+		localStorage.removeItem(textValue);
+		localStorage.removeItem(title);
+		localStorage.removeItem(chapter);
+		localStorage.removeItem(className);
+		localStorage.removeItem(teacher);
+		localStorage.removeItem(fontfamily);
+		localStorage.removeItem(fontsize);
+		localStorage.removeItem(spacing);
+		localStorage.removeItem(noteHidden);
+		localStorage.removeItem(noteProtected);
+		localStorage.removeItem(autoSave);
+	}
 }
 function toggleAutoSave(){
 	autoSave = !autoSave;
@@ -65,6 +125,14 @@ function wipeEditor(){
 	if(confirm("Do you want to clear the editor?")){
 		$("#text_area").val("");
 	}
+}
+window.onload = function startSave(){
+	autoSaveInterval();
+}
+function autoSaveInterval(){
+	window.setInterval(function(){
+		if(autoSave){save("auto")}
+	},30000)
 }
 $("#text_area").keydown(function(e) {
 	if(e.keyCode === 9) { // tab was pressed
@@ -129,18 +197,7 @@ $(document).ready(function(){
 		$(this).parent().find(".sidebar-window").animate({width:'toggle'},200).animate({width:'-=40px'},80).animate({width:'+=40px'},60).animate({width:'-=20px'},40).animate({width:'+=20px'},10);
 		toggleSidebar();
 	});
-	
-	$("#fontfamily-select").change(function(){
-		$("#text_area").css({"font-family":$(this).val()});
-	});
-	
-	$("#fontsize-select").change(function(){
-		$("#text_area").css({"font-size":$(this).val()});
-	});
-
-	$("#spacing-select").change(function(){
-		$("#text_area").css({"line-height":$(this).val() + "em"})
-	})
+	$("#fontfamily-select, #fontsize-select, #spacing-select").change(updateFontSetting());
 	$(".btn").mousedown(function(){
 		$(this).css({"margin-top":"+=5px"});
 	}).mouseup(function(){
