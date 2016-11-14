@@ -2,7 +2,7 @@
 	<meta charset="utf-8">
 	<meta author="jamesac">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-	<link href="https://fonts.googleapis.com/css?family=Dosis|Eczar|Share+Tech+Mono|Ubuntu|Ubuntu+Mono" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Dosis|Eczar|Share+Tech+Mono|Ubuntu|Ubuntu+Monoz|Patua+One" rel="stylesheet">
 	<script src="wordcount.js"></script>
 	<script src="ckeditor/ckeditor.js"></script>
 	<title>textinsert</title>
@@ -16,7 +16,6 @@
 				<span class="sidebar-head" id="counter-head"><strong>Word Count</strong></span>
 			</div>
 			<div id="stat-div">
-				<!--<span id="stat">Type Something!</span>-->
 				<div class="stat-entry"><span class="no-text">Type Something! That's the idea!</span></div>
 			</div>
 		</div>
@@ -34,24 +33,24 @@
 					<div class="row">
 						<div class="col">
 							<label for="title-input">Title</label>
-							<input id="title-input" type="text" required></input>
+							<input name="title" id="title-input" type="text" required></input>
 						</div>
 						<div class="col">
 							<label for="section-input">Chapter/ Section</label>
-							<input id="section-input" type="text" required>
+							<input name="sectionName" id="section-input" type="text" required>
 						</div>
 					</div>
 					<div class="row">
 						<div class="col">
 							<label for="class-input">Class</label>
-							<select id="class-input" required>
+							<select name="className" id="class-input" required>
 								<option value="class">Class</option>
 							</select>
 						</div>
 						<div class="col">
 							<label for="teacher-input">Teacher</label>
-							<select id="teacher-input" required>
-								<option value="teacher">Teacher</option>
+							<select name="teacher" id="teacher-input" required>
+								<option value="teacherName">Teacher</option>
 							</select>
 						</div>
 					</div>
@@ -130,6 +129,9 @@
 							<button value="unprotected" class="btn setting-btn" type="button" onclick="protectNoteToggle()" form="submit-note" id="protect-note-btn">Off</button>
 						</div>
 					</div>
+					<div class="row" id="protectedPasswordRow">
+						<input name="protectedPassword" type="password" id="protectedPassword" placeholder="Password">
+					</div>
 					<div class="row">
 						<div class="col setting-desc">
 							Clear Editor
@@ -181,7 +183,6 @@
 		</ul>
 	</div>
 	<textarea name="note-editor" id="text_area" form="submit-note"></textarea>
-	
 </div>
 <script src="textarea.js"></script>
 </body>

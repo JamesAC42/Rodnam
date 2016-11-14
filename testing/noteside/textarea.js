@@ -18,21 +18,17 @@ function updateFontSetting(){
 	console.log("updatefont");
 }
 function buttonConfirm(button, text){
-	$("#save-button").text("Saved!");
-		$("#save-button").animate({"width":"100px"},function(){
+	var originalText = $(button).text();
+	$(button).text(text);
+	$(button).animate({"width":"100px"},function(){
 		$(this).delay(200).animate({"width":"80px"},function(){
-			$(this).text("Save");
+			$(this).text(originalText);
 		});
 	})
 }
 function save(manual){
 	if(manual =='manual'){
-		$("#save-button").text("Saved!");
-		$("#save-button").animate({"width":"100px"},function(){
-			$(this).delay(200).animate({"width":"80px"},function(){
-				$(this).text("Save");
-			});
-		})
+		buttonConfirm("#save-button","Saved!");
 	}
 	console.log("saved");
 	localStorage.textValue = $("#text_area").val();
@@ -71,17 +67,17 @@ function loadSave(){
 }
 function wipeSave(){
 	if(confirm("Do you want to remove your saves?")){
-		localStorage.removeItem(textValue);
-		localStorage.removeItem(title);
-		localStorage.removeItem(chapter);
-		localStorage.removeItem(className);
-		localStorage.removeItem(teacher);
-		localStorage.removeItem(fontfamily);
-		localStorage.removeItem(fontsize);
-		localStorage.removeItem(spacing);
-		localStorage.removeItem(noteHidden);
-		localStorage.removeItem(noteProtected);
-		localStorage.removeItem(autoSave);
+		localStorage.removeItem("textValue");
+		localStorage.removeItem("title");
+		localStorage.removeItem("chapter");
+		localStorage.removeItem("className");
+		localStorage.removeItem("teacher");
+		localStorage.removeItem("fontfamily");
+		localStorage.removeItem("fontsize");
+		localStorage.removeItem("spacing");
+		localStorage.removeItem("noteHidden");
+		localStorage.removeItem("noteProtected");
+		localStorage.removeItem("autoSave");
 	}
 }
 function toggleAutoSave(){
@@ -115,10 +111,13 @@ function protectNoteToggle(){
 		$protectButton.val("protected");
 		$protectButton.css({"background-color":" #49AABC","color":"black"});
 		$protectButton.text("On");
+		$("#protectedPasswordRow").show("fast");
 	}else{
 		$protectButton.val("unprotected");
 		$protectButton.css({"background-color":" #ED9C0E","color":"white"});
 		$protectButton.text("Off");
+		$("#protectedPasswordRow").hide("fast");
+		$("#protectedPassword").val("");
 	}
 }
 function wipeEditor(){
@@ -157,6 +156,8 @@ $("#text_area").keydown(function(e) {
 $(document).ready(function(){
 	var sidebar_out = false;
 	loadSave();
+	$("#protectedPasswordRow").hide("fast");
+	$("#protectedPassword").val("");
 	function toggleSidebar(){
 		if(!sidebar_out){
 			$("body").css({"background-color":"#D1D1D1"});

@@ -175,6 +175,9 @@ body {
 input{
 	padding:10px 10px;
 }
+#protectedPassword {
+	font-size:20px;
+}
 .btn{
 	height:40px;
 	width:80px;
@@ -253,6 +256,7 @@ li a, .dropbtn{
 	color:black;
 	background-color:#69C4DB;
 	user-select: none;
+	font-family: 'Patua One','Ubuntu';
 }
 li.dropdown{
 	display:inline-block;
