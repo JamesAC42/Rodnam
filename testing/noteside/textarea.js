@@ -15,7 +15,6 @@ function updateFontSetting(){
 	$("#text_area").css({"font-family":$("#fontfamily-select").val()});
 	$("#text_area").css({"font-size":$("#fontsize-select").val()});
 	$("#text_area").css({"line-height":$("#spacing-select").val() + "em"})
-	console.log("updatefont");
 }
 function buttonConfirm(button, text){
 	var originalText = $(button).text();
@@ -30,7 +29,6 @@ function save(manual){
 	if(manual =='manual'){
 		buttonConfirm("#save-button","Saved!");
 	}
-	console.log("saved");
 	localStorage.textValue = $("#text_area").val();
 	localStorage.title = $("#title-input").val();
 	localStorage.chapter = $("#section-input").val();
@@ -44,15 +42,21 @@ function save(manual){
 	localStorage.autoSave = $("#auto-save-btn").val();
 }
 function loadSave(){
+	$("#fontfamily-select").val("Ubuntu Mono");
+	$("#fontsize-select").val("16");
+	$("spacing-select").val("1");
 	if(typeof(Storage) !== "undefined"){
 		$("#text_area").val(localStorage.textValue);
 		$("#title-input").val(localStorage.title);
 		$("#section-input").val(localStorage.chapter);
 		$("#class-input").val(localStorage.className);
 		$("#teacher-input").val(localStorage.teacher);
-		$("#fontfamily-select").val(localStorage.fontfamily);
-		$("#fontsize-select").val(localStorage.fontsize);
-		$("#spacing-select").val(localStorage.spacing);
+		var fontfamilySet = (typeof(localStorage.fontfamily) !== "string") ? "Ubuntu Mono" : localStorage.fontfamily;
+		$("#fontfamily-select").val(fontfamilySet);
+		var fontsizeSet = (typeof(localStorage.fontsize) !== "string") ? "16" : localStorage.fontsize;
+		$("#fontsize-select").val(fontsizeSet);
+		var spacingSet = (typeof(localStorage.spacing) !== "string") ? "1" : localStorage.spacing;
+		$("#spacing-select").val(spacingSet);
 		if(localStorage.noteHidden == "private"){
 			hideNoteToggle();
 		}
@@ -63,6 +67,11 @@ function loadSave(){
 			toggleAutoSave();
 		}
 		updateFontSetting();
+		countAll();
+	}else{
+		$("#fontfamily-select").val("Ubuntu Mono");
+		$("#fontsize-select").val("16");
+		$("spacing-select").val("1");
 	}
 }
 function wipeSave(){
@@ -78,6 +87,7 @@ function wipeSave(){
 		localStorage.removeItem("noteHidden");
 		localStorage.removeItem("noteProtected");
 		localStorage.removeItem("autoSave");
+		buttonConfirm("#wipe-save-button","Cleared!");
 	}
 }
 function toggleAutoSave(){
@@ -198,7 +208,9 @@ $(document).ready(function(){
 		$(this).parent().find(".sidebar-window").animate({width:'toggle'},200).animate({width:'-=40px'},80).animate({width:'+=40px'},60).animate({width:'-=20px'},40).animate({width:'+=20px'},10);
 		toggleSidebar();
 	});
-	$("#fontfamily-select, #fontsize-select, #spacing-select").change(updateFontSetting());
+	$("#fontfamily-select, #fontsize-select, #spacing-select").change(function(){
+		updateFontSetting();
+	});
 	$(".btn").mousedown(function(){
 		$(this).css({"margin-top":"+=5px"});
 	}).mouseup(function(){

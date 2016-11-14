@@ -256,7 +256,7 @@ li a, .dropbtn{
 	color:black;
 	background-color:#69C4DB;
 	user-select: none;
-	font-family: 'Patua One','Ubuntu';
+	font-family: 'Ubuntu Mono','Ubuntu';
 }
 li.dropdown{
 	display:inline-block;
