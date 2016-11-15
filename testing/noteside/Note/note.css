@@ -6,7 +6,7 @@ body{
 	width:100vw;
 	margin-left:-10px;
 	height:40px;
-	margin-top:-15px;
+	margin-top:-18px;
 	padding:10px;
 	padding-bottom:5px;
 	position:fixed;
@@ -32,9 +32,8 @@ li{
 	display:block;
 	color:#E3F7FF;
 	text-align:center;
-	padding:10px 20px;
-	margin-right:20px;
-	margin-top:-5px;
+	padding:10px 40px;
+	margin-top:-3px;
 	font-family:'Ubuntu',sans-serif;
 	font-size:22px;
 	text-decoration: none;
@@ -42,6 +41,9 @@ li{
 }
 .navbar li a:hover{
 	background-color:#0E5887;
+}
+#nav-header:hover{
+	background-color:#2183B1;
 }
 #nav-header{
 	font-size:40px;
@@ -138,7 +140,7 @@ li{
 }
 .note-info-row a{
 	text-decoration:none;
-	color:#217F97;
+	color:#225CBC;
 }
 .note-content{
 	margin:0 auto;
