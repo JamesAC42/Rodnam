@@ -1,157 +1,232 @@
-body{
-	background-color: #00607D;
+@media screen{
+	body{
+		background-color: #00607D;
+	}
+	.navbar-div{
+		background-color:#2183B1;
+		width:100vw;
+		margin-left:-10px;
+		height:42px;
+		margin-top:-18px;
+		padding:10px;
+		padding-bottom:5px;
+		position:fixed;
+		z-index:10;
+	}
+	.navbar{
+		list-style-type: none;
+		margin:0;
+		padding:0;
+		background-color:#2183B1;
+	}
+	.navbar li{
+		height:10px;
+		line-height:30px;
+	}
+	.left li{
+		float:left;
+	}
+	.right li{
+		float:right;
+	}
+	.navbar li a{
+		display:block;
+		color:#E3F7FF;
+		text-align:center;
+		padding:10px 40px;
+		margin-top:-3px;
+		font-family:'Ubuntu',sans-serif;
+		font-size:22px;
+		text-decoration: none;
+		background-color: #2183B1;
+	}
+	.navbar li a:hover{
+		background-color:#0E5887;
+	}
+	#nav-header:hover{
+		background-color:#2183B1;
+	}
+	#nav-header{
+		font-size:40px;
+	}
+	.container{
+		height:100vh;
+		width:80vw;
+		position:fixed;
+		right:0;
+		left:0;
+		margin-left: auto;
+		margin-right:auto;
+		display:block;
+	}
+	.sidebar{
+		height:100%;
+		width:11vw;
+		float:left;
+		margin-left:-5px;
+		/*border-right:2px solid #77F6C8;*/
+	}
+	.toolbar-div{
+		padding-top:40vh;
+	}
+	.toolbar{
+		list-style-type: none;
+		margin:0;
+		padding:0;
+	}
+	.toolbar li{
+		height:30px;
+		line-height:30px;
+		margin-bottom:20px;
+	}
+	.toolbar li a{
+		display:block;
+		color:#CBEAF8;
+		text-align:right;
+		padding:20px 20px;
+		margin-right:20px;
+		margin-bottom:40px;
+		margin:10px;
+		font-family:'Ubuntu',sans-serif;
+		font-size:22px;
+		text-decoration: none;
+	}
+	.note-container{
+		height:100%;
+		width:69vw;
+		float:right;
+		margin-right:-5px;
+		overflow-y:scroll;
+	}
+	.note-container::-webkit-scrollbar{
+		display:none;
+	}
+	.note-title-div{
+		width:100%;
+		height:100px;
+		margin:0 auto;
+		margin-top:40px;
+		text-align:center;
+		overflow-x:scroll;
+		background-color:#5edaed;
+	}
+	.note-title-div::-webkit-scrollbar{
+		display:none;
+	}
+	.note-title{
+		font-size:45px;
+		line-height:100px;
+		font-family:'Ubuntu',sans-serif;
+	}
+	.note-info-div{
+		width:100%;
+		height:75px;
+		margin:0 auto;
+		margin-top:-10px;
+		border-bottom:1px solid #29557A;
+		padding:0;
+		background-color:#5edaed;
+	}
+	.note-info-row{
+		margin:0;
+		padding:10px;
+		display:block;
+		width:31%;
+		height:37px;
+		float:left;
+		text-align:center;
+		font-family: 'Ubuntu', sans-serif;
+		font-size:20px;
+		line-height:37px;
+	}
+	.note-info-row a{
+		text-decoration:none;
+		color:#225CBC;
+	}
+	.note-content{
+		margin:0 auto;
+		padding:25px;
+		padding-right:40px;
+		display:block;
+		max-width: 100%;
+		min-height: 100%;
+		margin-top:5px;
+		border:1px solid black;
+		font-size:20px;
+		background-color:#f2f2f2;
+		font-family:'Eczar',serif;
+		line-height: 1.5em;
+	}
 }
-.navbar-div{
-	background-color:#2183B1;
-	width:100vw;
-	margin-left:-10px;
-	height:40px;
-	margin-top:-18px;
-	padding:10px;
-	padding-bottom:5px;
-	position:fixed;
-	z-index:10;
-}
-.navbar{
-	list-style-type: none;
-	margin:0;
-	padding:0;
-	background-color:#2183B1;
-}
-li{
-	height:10px;
-	line-height:30px;
-}
-.left li{
-	float:left;
-}
-.right li{
-	float:right;
-}
-.navbar li a{
-	display:block;
-	color:#E3F7FF;
-	text-align:center;
-	padding:10px 40px;
-	margin-top:-3px;
-	font-family:'Ubuntu',sans-serif;
-	font-size:22px;
-	text-decoration: none;
-	background-color: #2183B1;
-}
-.navbar li a:hover{
-	background-color:#0E5887;
-}
-#nav-header:hover{
-	background-color:#2183B1;
-}
-#nav-header{
-	font-size:40px;
-}
-.container{
-	height:100vh;
-	width:75vw;
-	position:fixed;
-	right:0;
-	left:0;
-	margin-left: auto;
-	margin-right:auto;
-	display:block;
-}
-.sidebar{
-	height:100%;
-	width:10vw;
-	float:left;
-	margin-left:-5px;
-	/*border-right:2px solid #77F6C8;*/
-}
-.toolbar-div{
-	padding-top:30vh;
-}
-.toolbar{
-	list-style-type: none;
-	margin:0;
-	padding:0;
-}
-.toolbar li{
-	height:30px;
-	line-height:30px;
-	margin-bottom:20px;
-}
-.toolbar li a{
-	display:block;
-	color:#CBEAF8;
-	text-align:center;
-	padding:20px 20px;
-	margin-right:20px;
-	margin-bottom:40px;
-	margin:10px;
-	font-family:'Ubuntu',sans-serif;
-	font-size:22px;
-	text-decoration: none;
-}
-.note-container{
-	height:100%;
-	width:65vw;
-	float:right;
-	margin-right:-5px;
-	overflow-y:scroll;
-}
-.note-container::-webkit-scrollbar{
-	display:none;
-}
-.note-title-div{
-	width:100%;
-	height:100px;
-	margin:0 auto;
-	margin-top:40px;
-	text-align:center;
-	overflow-x:scroll;
-	background-color:#89D6E2;
-}
-.note-title-div::-webkit-scrollbar{
-	display:none;
-}
-.note-title{
-	font-size:45px;
-	line-height:100px;
-	font-family:'Ubuntu',sans-serif;
-}
-.note-info-div{
-	width:100%;
-	height:75px;
-	margin:0 auto;
-	margin-top:-10px;
-	border-bottom:1px solid #29557A;
-	padding:0;
-	background-color:#89D6E2;
-}
-.note-info-row{
-	margin:0;
-	padding:10px;
-	display:block;
-	width:31%;
-	height:37px;
-	float:left;
-	text-align:center;
-	font-family: 'Ubuntu', sans-serif;
-	font-size:20px;
-	line-height:37px;
-}
-.note-info-row a{
-	text-decoration:none;
-	color:#225CBC;
-}
-.note-content{
-	margin:0 auto;
-	padding:25px;
-	padding-right:40px;
-	display:block;
-	max-width: 100%;
-	margin-top:5px;
-	border:1px solid black;
-	font-size:20px;
-	background-color:#CCD9DE;
-	font-family:'Eczar',serif;
-	line-height: 1.5em;
+@media print{
+	.navbar-div{
+		display:none;
+	}
+	.sidebar{
+		display: none;
+	}
+	.container{
+		right:0;
+		left:0;
+		margin-left: auto;
+		margin-right:auto;
+		display:block;
+	}
+	.note-container::-webkit-scrollbar{
+		display:none;
+	}
+	.note-title-div{
+		width:100%;
+		height:60px;
+		margin:0 auto;
+		margin-top:10px;
+		text-align:center;
+		overflow-x:scroll;
+		background-color:#89D6E2;
+	}
+	.note-title-div::-webkit-scrollbar{
+		display:none;
+	}
+	.note-title{
+		font-size:25px;
+		line-height:60px;
+		font-family:'Ubuntu',sans-serif;
+	}
+	.note-info-div{
+		width:100%;
+		height:60px;
+		margin:0 auto;
+		margin-top:-10px;
+		border-bottom:1px solid #29557A;
+		padding:0;
+		background-color:#89D6E2;
+	}
+	.note-info-row{
+		margin:0;
+		padding:10px;
+		display:block;
+		width:29%;
+		height:35px;
+		float:left;
+		text-align:center;
+		font-family: 'Ubuntu', sans-serif;
+		font-size:12px;
+		line-height:60px;
+	}
+	.note-info-row a{
+		text-decoration:none;
+		color:#225CBC;
+	}
+	.note-content{
+		margin:0 auto;
+		padding:25px;
+		padding-right:40px;
+		padding-left:30px;
+		margin-top:5px;
+		font-size:15px;
+		overflow:visible;
+		background-color:#CCD9DE;
+		font-family:'Eczar',serif;
+		line-height: 1.4em;
+	}
 }
