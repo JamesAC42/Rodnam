@@ -1,12 +1,22 @@
-<head>
+<?php include 'hidden/createnote.php'; ?><head>
 	<meta charset="utf-8">
 	<meta author="jamesac">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 	<link href="https://fonts.googleapis.com/css?family=Dosis|Eczar|Share+Tech+Mono|Ubuntu|Ubuntu+Mono" rel="stylesheet">
-	<script src="wordcount.js"></script>
-	<script src="ckeditor/ckeditor.js"></script>
-	<title>textinsert</title>
-	<link href="textarea.css" rel="stylesheet">
+	<script src="/js/wordcount.js"></script>
+	<title>Create Note</title>
+	<link href="/css/textarea.css" rel="stylesheet">
+	<link rel="icon" href="images/favicon.ico" type="image/x-icon">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	<script>
+	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+	  ga('create', 'UA-75497871-2', 'auto');
+	  ga('send', 'pageview');
+	</script>
 </head>
 <body>
 <div class="navbar-div">
@@ -39,34 +49,56 @@
 				<span class="sidebar-head" id="info-head"><strong>Note Info</strong></span>
 			</div>
 			<div class="window-inner-div" id="form-submit-div">
-				<form id="submit-note">
+				<form action="" method="post" id="submit-note">
 					<div class="row">
 						<div class="col">
 							<label for="title-input">Title</label>
-							<input name="title" id="title-input" type="text" required></input>
+							<input name="note-title" id="title-input" type="text" required></input>
 						</div>
 						<div class="col">
 							<label for="section-input">Chapter/ Section</label>
-							<input name="sectionName" id="section-input" type="text" required>
+							<input name="section-name" id="section-input" type="text" required>
 						</div>
 					</div>
 					<div class="row">
 						<div class="col">
 							<label for="class-input">Class</label>
-							<select name="className" id="class-input" required>
-								<option value="class">Class</option>
+							<select name="class-name" id="class-input" required>
+								<?php
+									$sqlgetclasses = "SELECT * FROM user_classes WHERE username='$username';";
+									$getclasses = mysql_query($sqlgetclasses);
+									if(mysql_num_rows($getclasses) == 0){
+										echo "<option disabled>You have no classes!</option>";
+									}else{
+										while ($class = mysql_fetch_assoc($getclasses)) {
+											$classname = $class['classname'];
+											echo '<option value="' . $classname . '">' . $classname . '</option>';
+										}
+									}
+								  ?>
 							</select>
 						</div>
 						<div class="col">
 							<label for="teacher-input">Teacher</label>
-							<select name="teacher" id="teacher-input" required>
-								<option value="teacherName">Teacher</option>
+							<select name="teacher-name" id="teacher-input" required>
+								<?php
+									$sqlgetteachers = "SELECT * FROM user_teachers WHERE username='$username';";
+									$getteachers = mysql_query($sqlgetteachers);
+									if(mysql_num_rows($getteachers) == 0){
+										echo "<option disabled>You have no teachers!</option>";
+									}else{
+										while ($teacher = mysql_fetch_assoc($getteachers)) {
+											$teachername = $teacher['teacher'];
+											echo '<option value="' . $teachername . '">' . $teachername . '</option>';
+										}
+									}
+								  ?>
 							</select>
 						</div>
 					</div>
 					<div class="row">
 						<div class="col">
-							<button type="submit" id="submit-button" class="btn" value="note-submit">Create</button>
+							<button type="submit" id="submit-button" class="btn" name="action" value="note-submit">Create</button>
 						</div>
 						<div class="col">
 							<button id="save-button" type="button" onclick="save('manual')" class="btn">Save</button>
@@ -128,7 +160,7 @@
 							Private
 						</div>
 						<div class="col">
-							<button value="public" class="btn setting-btn" type="button" onclick="hideNoteToggle()" form="submit-note" id="hide-note-btn">Off</button>
+							<button value="public" class="btn setting-btn" type="button" onclick="WQhideNoteToggle()" form="submit-note" id="hide-note-btn">Off</button>
 						</div>
 					</div>
 					<div class="row">
@@ -192,7 +224,7 @@
 			<li class="format-li"><a id="code-block" class="format-insert" onclick="insertForm('\n\n\    codeblocks are indented by 4 spaces')">Code Block</a></li>
 		</ul>
 	</div>
-	<textarea name="note-editor" id="text_area" form="submit-note"></textarea>
+	<textarea name="note-content" id="text_area" form="submit-note" required></textarea>
 </div>
 <script src="textarea.js"></script>
 </body>

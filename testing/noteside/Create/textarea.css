@@ -1,6 +1,55 @@
 body {
 	font-family:'Ubuntu',sans-serif;
-	background-color: #ffffff;
+	background-color: #00607D;
+}
+h1 {
+	color:#E0F0F9;
+}
+
+
+.navbar-div{
+	background-color:#2183B1;
+	width:100vw;
+	margin-left:-10px;
+	height:42px;
+	margin-top:-40px;
+	padding:10px;
+	padding-bottom:4px;
+	position:fixed;
+	z-index:10;
+}
+.navbar{
+	list-style-type: none;
+	margin:0;
+	padding:0;
+	background-color:#2183B1;
+}
+.navbar li{
+	height:10px;
+	line-height:30px;
+}
+.left li{
+	float:left;
+}
+.right li{
+	float:right;
+}
+.navbar li a{
+	display:block;
+	color:#E3F7FF;
+	text-align:center;
+	padding:10px 40px;
+	margin-top:-3px;
+	font-family:'Ubuntu',sans-serif;
+	font-size:22px;
+	text-decoration: none;
+	background-color: #2183B1;
+}
+.navbar li a:hover{
+	background-color: #0E5887;
+}
+#nav-header{
+	font-size:40px;
 }
 .sidebar-wrapper{
 	position:absolute;
@@ -8,6 +57,7 @@ body {
 	height:100vh;
 	margin-top:-30px;
 	background-color: rgba(255,255,255,0.0);
+	z-index:1000;
 }
 #info-wrapper{
 	pointer-events:none;
@@ -62,6 +112,7 @@ body {
 	width:80%;
 	margin:0 auto;
 	margin-top:30px;
+	padding-top:25px;
 }
 .window-container{
 	height:90%;
@@ -187,6 +238,7 @@ input{
 	font-family:'Ubuntu',sans-serif;
 	background-color: #49AABC;
 }
+
 .btn:hover{
 	/*background-color: #057F96;*/
 	filter: brightness(85%);
@@ -242,24 +294,24 @@ input{
 	padding:0;
 	margin:0;
 }
-#format-bar-div ul div li, #format-bar-div ul li, #format-bar-div ul div li div li{
+.format-li, #format-bar-div ul li, .header-insert{
 	float:left;
 	border:1px solid black;
 	display:inline-block;
 	cursor:pointer;
 }
-li a, .dropbtn{
+.format-li a, #format-bar-div ul li a, .dropbtn{
 	display:inline-block;
 	text-align:center;
 	padding:14px 16px;
 	text-decoration:none;
 	color:black;
-	background-color:#69C4DB;
+	background-color: #32aecd;
 	user-select: none;
 	font-family: 'Ubuntu Mono','Ubuntu';
 }
-li.dropdown{
-	display:inline-block;
+.format-li a:hover, #format-bar-div ul li a:hover, .dropbtn:hover{
+	background-color:#237a90;
 }
 .dropdown-content{
 	display:none;
@@ -268,7 +320,6 @@ li.dropdown{
 	min-width:120px;
 	box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
 }
-
 #header-content{
 	border:none;
 	padding-bottom:-5px;
@@ -287,17 +338,11 @@ li.dropdown{
 	display:block;
 	text-align:left
 }
-.dropdown-content a:hover{
-	background-color:#f1f178;
-}
-.dropdown:hover .dropdown-content{
-	display:block;
-}
 #text_area{
-	font-family:'Ubuntu Mono',monospace;
+	font-family:'Ubuntu Mono', sans-serif;
 	font-size:16px;
 	width:100%;
-	height:75%;
+	height:70%;
 	resize:none;
 	margin-top:-5px;
 	padding:20px;
