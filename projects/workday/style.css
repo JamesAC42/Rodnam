@@ -18,7 +18,7 @@ body{
 	margin:0;
 	height:100%;
 	background:#4FE17C;
-	transition: width ease;
+	transition: width ease-in-out;
 }
 
 @keyframes flash{
@@ -81,13 +81,61 @@ body{
 }
 
 .horizontal{
-	height:20px;
-	width:150px;
+	height:30px;
+	width:120px;
+}
+
+.horizontal::before{
+	display:block;
+	content:"";
+	position:absolute;
+	background:#4771DC;
+	height:21.5px;
+	width:21.5px;
+	transform:rotate(45deg);
+	top:4px;
+	left:-10px;
+}
+
+.horizontal::after{
+	display:block;
+	content:"";
+	position:absolute;
+	background:#4771DC;
+	height:21.6px;
+	width:21.6px;
+	transform:rotate(45deg);
+	top:4px;
+	right:-10px;
 }
 
 .vertical{
-	height:150px;
-	width:20px;
+	height:120px;
+	width:30px;
+}
+
+.vertical::before{
+	display:block;
+	content:"";
+	position:absolute;
+	background:#4771DC;
+	height:21.5px;
+	width:21.5px;
+	transform:rotate(45deg);
+	top:-10px;
+	left:4px;
+}
+
+.vertical::after{
+	display:block;
+	content:"";
+	position:absolute;
+	background:#4771DC;
+	height:21.5px;
+	width:21.5px;
+	transform:rotate(45deg);
+	bottom:-10px;
+	left:4px;
 }
 
 .top{
@@ -97,12 +145,12 @@ body{
 }
 
 .top-left{
-	top:20px;
+	top:40px;
 	left:0;
 }
 
 .top-right{
-	top:20px;
+	top:40px;
 	right:0;
 }
 
@@ -113,12 +161,12 @@ body{
 }
 
 .bottom-left{
-	bottom:20px;
+	bottom:40px;
 	left:0;
 }
 
 .bottom-right{
-	bottom:20px;
+	bottom:40px;
 	right:0;
 }
 
