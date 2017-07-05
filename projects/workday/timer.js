@@ -30,11 +30,12 @@ setInterval(function(){
 		var percent = Math.floor((currentTime / endTime) * 100);
 		$(".progress-bar-inner").css("width", percent + "%");
 	}else{
-		if(currentTime > endTime){
+		if(currentTime >= endTime){
 			$(".number-outer-inner").each(function(){
 				$(this).removeClass();
 				$(this).addClass("number-outer-inner zero");
 			});
+			$(".progress-bar-inner").css("width", "100%");
 			$(".progress-bar-inner").css("animation", "flash .5s infinite");
 		}
 	}
