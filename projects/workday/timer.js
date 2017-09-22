@@ -38,6 +38,10 @@ function renderTime(){
 			$(this).removeClass();
 			$(this).addClass("number-outer-inner");
 			$(this).addClass(wordList[n]);
+			if(precZero(wordList, n)){
+				$(this).addClass("grayed");
+			}
+			console.log(wordList);
 			n++;
 		});
 		var percent = Math.floor((currentTime / endTime) * 100);
@@ -57,16 +61,27 @@ function renderTime(){
 	timeLeft--;
 }
 
+function precZero(list, index){
+	for(var i=list.length-1;i>=index;i--){
+		if(list[i] != "zero"){
+			return false;
+		}
+	}
+	return true;
+}
+
 function setWork(){
 	currentTime = ((date.getHours() * 60 * 60) + (date.getMinutes() * 60) + (date.getSeconds())) - 28800;
 	endTime = 32400;
 	timeLeft = endTime - currentTime;
+	document.title = "Workday";
 }
 
 function setSchool(){
-	currentTime = ((date.getHours() * 60 * 60) + (date.getMinutes() * 60) + (date.getSeconds())) - 29700;
-	endTime = 25200;
+	currentTime = ((date.getHours() * 60 * 60) + (date.getMinutes() * 60) + (date.getSeconds())) - 28500;
+	endTime = 24000;
 	timeLeft = endTime - currentTime;
+	document.title = "Schoolday";
 }
 
 function setCustom(){
@@ -78,6 +93,7 @@ function setCustom(){
 	}else{
 		alert("Invalid Time");
 	}
+	document.title = "Timer";
 }
 
 $(".tab").click(function(){
@@ -89,3 +105,4 @@ $(".set-work").click(setWork);
 $(".set-school").click(setSchool);
 
 setInterval(renderTime,1000);
+setSchool();
