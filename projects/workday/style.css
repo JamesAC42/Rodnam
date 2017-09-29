@@ -1,5 +1,5 @@
 body{
-	background: #EBEBEB;
+	background: #fff;
 	overflow:hidden;
 }
 
@@ -13,6 +13,8 @@ body{
 	margin:0;
 	padding:0;
 	background: #000;
+	z-index:1;
+	transition:all .2s ease-in-out;
 }
 
 .progress-bar-inner{
@@ -22,12 +24,186 @@ body{
 	transition: width .2s ease-in-out;
 }
 
-@keyframes flash{
-	50%{
-		background: #fff;
+.progress-bar-small{
+	width:70vw;
+}
+
+div.settings-button{
+	position:absolute;
+	height:30px;
+	width:30px;
+	top:20px;
+	right:20px;
+	margin:0;
+	padding:0;
+	/*background:#4B9BCD;*/
+	background:#000;
+	border:1px solid white;
+	border-radius: 5px;
+	z-index:100;
+	cursor:pointer;
+	transition: all .2s ease-in-out;
+}
+
+div.settings-button-expand{
+	background:#F14242;
+	transform:rotate(90deg);
+}
+
+div.settings-button:hover{
+	background:#fff;
+}
+
+div.settings-button-expand:hover{
+	background:#962A2A;
+}
+
+div.settings-pane{
+	position:absolute;
+	top:0;
+	right:0;
+	height:100vh;
+	width:30vw;
+	margin:0;
+	padding:0;
+	background:#eee;
+	transform:translateX(30vw);
+	transition:all .2s ease-in-out;
+}
+
+div.settings-pane-visible{
+	transform:translateX(0);
+}
+
+.settings-pane-inner{
+	position:relative;
+	height:100vh;
+	width:20vw;
+	margin:0;
+}
+
+.timer-setting-label{
+	position:absolute;
+	top:20vh;
+	transform:translateX(25%);
+	height:5vh;
+	width:21vw;
+	margin:0;
+	padding:0;
+	border-bottom:1px solid #aaa;
+}
+
+.timer-setting-label div{
+	position:relative;
+	float:left;
+	height:5vh;
+	width:7vw;
+	margin:0;
+	padding:0;
+	text-align:center;
+	line-height: 5vh;
+	font-size:14px;
+	color:#999;
+	font-family: 'Open Sans',sans-serif;
+}
+
+.timer-setting{
+	position:absolute;
+	top:25vh;
+	transform:translateX(25%);
+	height:10vh;
+	width:21vw;
+	margin:0;
+	padding:0;
+	border-bottom:1px solid #aaa;
+}
+
+.scroll{
+	position:relative;
+	float:left;
+	width:7vw;
+	height:10vh;
+	margin:0;
+	padding:0;
+	overflow-y:scroll;
+}
+
+.scroll div{
+	height:10vh;
+	width:7vw;
+	float:left;
+	margin:0;
+	padding:0;
+	line-height: 10vh;
+	text-align:center;
+	font-family:'Open Sans', sans-serif;
+	font-size:32px;
+}
+
+.scroll::-webkit-scrollbar{
+	display:none;
+}
+
+.time-btn{
+	position:absolute;
+	width:75px;
+	height:40px;
+	background:#EAE1D3;
+	border-radius: 5px;
+	border:1px solid #B9A487;
+	color:#B9A487;
+	text-align: center;
+	line-height: 40px;
+	font-size:22px;
+	font-family: 'Open Sans',sans-serif;
+	cursor:pointer;
+	transition:all .1s ease-in-out;
+}
+
+.time-btn:hover{
+	background:#AC946E;
+	color:#fff;
+}
+
+.set-time{
+	top:40vh;
+	left:45%;
+}
+
+.save-time{
+	top:40vh;
+	left:85%;
+}
+
+.saved-times-label{
+	position:absolute;
+	top:55vh;
+	left:25%;
+	width:21vw;
+	height:5vh;
+	font-family: 'Open Sans', sans-serif;
+	font-size:22px;
+	color:#999;
+	border-bottom:1px solid #aaa;
+	text-align: center;
+	line-height: 5vh;
+}
+
+@keyframes progress{
+	0%{
+		width:0%;
 	}
 	100%{
+		width:100%;
+	}
+}
+
+@keyframes flash{
+	25%{
 		background: #000;
+	}
+	75%{
+		background: #fff;
 	}
 }
 
@@ -43,10 +219,18 @@ body{
 	border-radius:20px;
 	margin:0;
 	padding:30px 20px;
+	z-index:100;
+	transition:all .2s ease-in-out;
 	/*
 	-webkit-box-shadow: 0px 0px 94px 2px rgba(0,0,0,0.75);
 	-moz-box-shadow: 	0px 0px 94px 2px rgba(0,0,0,0.75);
 	box-shadow: 		0px 0px 94px 2px rgba(0,0,0,0.75); */
+}
+
+.timer-small{
+	top:0;
+	left:0;
+	transform:scale(0.5) translate(-20vw,50%);
 }
 
 .number-outer{
@@ -73,8 +257,12 @@ body{
 	box-shadow: inset 13px 13px 8px -12px rgba(0,0,0,0.75); */
 }
 
+.finished, .finished::before, .finished::after{
+	animation:flash .8s infinite;
+}
+
 .grayed .section {
-	background:#999;
+	background:#666;
 }
 
 .horizontal{
@@ -107,11 +295,11 @@ body{
 }
 
 .grayed .horizontal::before{
-	background:#999;
+	background:#666;
 }
 
 .grayed .horizontal::after{
-	background:#999;
+	background:#666;
 }
 
 .vertical{
@@ -144,11 +332,11 @@ body{
 }
 
 .grayed .vertical::before{
-	background:#999;
+	background:#666;
 }
 
 .grayed .vertical::after{
-	background:#999;
+	background:#666;
 }
 
 .top{
@@ -196,16 +384,16 @@ body{
 	height:50px;
 	width:50px;
 	line-height: 50px;
-	text-align:center;
-	font-size:35px;
-	font-weight:bold;
-	font-family:sans-serif;
-	color:#fff;
 	cursor:pointer;
 	background:#000;
 	border:1px solid #fff;
 	border-right:1px solid #000;
+	border-top:1px solid #000;
 	transition:transform .2s ease-in-out;
+}
+
+.tab img {
+	width:50px;
 }
 
 .settings{
@@ -217,6 +405,7 @@ body{
 	transform:translateX(705px);
 	background:#000;
 	border:1px solid #fff;
+	border-top:1px solid #000;
 	transition:transform .2s ease-in-out;
 }
 

@@ -2,6 +2,7 @@ var date = new Date();
 var currentTime = 0;
 var endTime = 0;
 var timeLeft = 0;
+var mode;
 
 var numberWords = {
 	"1":"one",
@@ -41,12 +42,12 @@ function renderTime(){
 			if(precZero(wordList, n)){
 				$(this).addClass("grayed");
 			}
-			console.log(wordList);
 			n++;
 		});
 		var percent = Math.floor((currentTime / endTime) * 100);
 		$(".progress-bar-inner").css("width", percent + "%");
 		$(".progress-bar-inner").css("animation", "none");
+		document.title = mode + " - " + timeLeft + " seconds remaining";
 	}else{
 		if(currentTime >= endTime){
 			$(".number-outer-inner").each(function(){
@@ -54,7 +55,8 @@ function renderTime(){
 				$(this).addClass("number-outer-inner zero");
 			});
 			$(".progress-bar-inner").css("width", "100%");
-			$(".progress-bar-inner").css("animation", "flash .5s infinite");
+			$(".section").addClass("finished");
+			document.title = mode + " - " + "Finished";
 		}
 	}
 	currentTime++;
@@ -71,20 +73,23 @@ function precZero(list, index){
 }
 
 function setWork(){
+	$(".section").removeClass("finished");
 	currentTime = ((date.getHours() * 60 * 60) + (date.getMinutes() * 60) + (date.getSeconds())) - 28800;
 	endTime = 32400;
 	timeLeft = endTime - currentTime;
-	document.title = "Workday";
+	mode = "Workday";
 }
 
 function setSchool(){
+	$(".section").removeClass("finished");
 	currentTime = ((date.getHours() * 60 * 60) + (date.getMinutes() * 60) + (date.getSeconds())) - 28500;
 	endTime = 24000;
 	timeLeft = endTime - currentTime;
-	document.title = "Schoolday";
+	mode = "School";
 }
 
 function setCustom(){
+	$(".section").removeClass("finished");
 	if(/^\d+$/.test($("#seconds-input").val())){
 		currentTime = 1;
 		endTime = parseInt($("#seconds-input").val()) + 1;
@@ -93,7 +98,14 @@ function setCustom(){
 	}else{
 		alert("Invalid Time");
 	}
-	document.title = "Timer";
+	mode = "Timer";
+}
+
+function openSettings(){
+	$(".timer").toggleClass("timer-small");
+	$(".settings-button").toggleClass("settings-button-expand");
+	$(".progress-bar").toggleClass("progress-bar-small");
+	$(".settings-pane").toggleClass("settings-pane-visible");
 }
 
 $(".tab").click(function(){
@@ -103,6 +115,10 @@ $(".tab").click(function(){
 $(".submit").click(setCustom);
 $(".set-work").click(setWork);
 $(".set-school").click(setSchool);
+
+$(".settings-button").click(openSettings);
+
+$(".scroll").snapscroll();
 
 setInterval(renderTime,1000);
 setSchool();

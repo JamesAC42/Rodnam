@@ -4,7 +4,7 @@
 .one .top-left{
 	display:none;
 }
-.one.top-right{
+.one .top-right{
 	display:block;
 }
 .one .middle{
