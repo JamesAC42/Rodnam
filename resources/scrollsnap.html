@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>scrollsnap</title>
+</head>
+<body>
+	<style>
+		.scroll-outer{
+			position:absolute;
+			top:50%;
+			left:50%;
+			transform:translate(-50%,-50%);
+			float:left;
+			height:400px;
+			width:200px;
+			transform:translate(-50%,-50%);
+			border:1px solid #aaa;
+			background:#fff;
+			padding-right:-20px;
+			overflow:hidden;
+		}
+		.scroll-inner{
+			margin:0;
+			padding:0;
+			height:400px;
+			width:217px;
+			overflow-y: scroll;
+		}
+		.page{
+			height:400px;
+			width:200px;
+			float:left;
+			text-align: center;
+			line-height: 400px;
+			font-family: sans-serif;
+			font-size: 48px;
+		}
+		.output{
+			position:absolute;
+			top:10px;
+			left:10px;
+			height:50px;
+			width:50px;
+			text-align: center;
+			line-height: 50px;
+			font-family: sans-serif;
+			font-size:25px;
+			color:#222;
+			border:1px solid #bbb;
+		}
+		.btn{
+			position:absolute;
+			height:50px;
+			width:200px;
+			left:50%;
+			transform:translateX(-50%);
+			border:1px solid #bbb;
+			transition:all .1s ease-in-out;
+		}
+		.btn:hover{
+			background:#ddd;
+		}
+		.up-btn{
+			top:10%;
+		}
+		.down-btn{
+			bottom:10%;
+		}
+	</style>
+		<div class="btn up-btn"></div>
+		<div class="scroll-outer">
+			<div class="scroll-inner">
+				<div class="page">0</div>
+				<div class="page">1</div>
+				<div class="page">2</div>
+				<div class="page">3</div>
+				<div class="page">4</div>
+				<div class="page">5</div>
+				<div class="page">6</div>
+				<div class="page">7</div>
+				<div class="page">8</div>
+				<div class="page">9</div>
+				<div class="page">10</div>
+				<div class="page">11</div>
+				<div class="page">12</div>
+				<div class="page">13</div>
+				<div class="page">14</div>
+				<div class="page">15</div>
+				<div class="page">16</div>
+				<div class="page">17</div>
+				<div class="page">18</div>
+				<div class="page">19</div>
+				<div class="page">20</div>
+				<div class="page">21</div>
+				<div class="page">22</div>
+				<div class="page">23</div>
+				<div class="page">24</div>
+				<div class="page">25</div>
+				<div class="page">26</div>
+				<div class="page">27</div>
+				<div class="page">28</div>
+				<div class="page">29</div>
+				<div class="page">30</div>
+				<div class="page">31</div>
+				<div class="page">32</div>
+				<div class="page">33</div>
+				<div class="page">34</div>
+				<div class="page">35</div>
+				<div class="page">36</div>
+				<div class="page">37</div>
+				<div class="page">38</div>
+				<div class="page">39</div>
+				<div class="page">40</div>
+				<div class="page">41</div>
+				<div class="page">42</div>
+				<div class="page">43</div>
+				<div class="page">44</div>
+				<div class="page">45</div>
+				<div class="page">46</div>
+				<div class="page">47</div>
+				<div class="page">48</div>
+				<div class="page">49</div>
+				<div class="page">50</div>
+				<div class="page">51</div>
+				<div class="page">52</div>
+				<div class="page">53</div>
+				<div class="page">54</div>
+				<div class="page">55</div>
+				<div class="page">56</div>
+				<div class="page">57</div>
+				<div class="page">58</div>
+				<div class="page">59</div>
+			</div>
+		</div>
+		<div class="btn down-btn"></div>
+		<div class="output"></div>
+	<script
+	  src="http://code.jquery.com/jquery-3.2.1.min.js"
+	  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+	  crossorigin="anonymous"></script>
+	<script>
+
+		$.fn.scrollStopped = function(callback) {
+			var that = this, $this = $(that);
+			$this.scroll(function(ev) {
+				clearTimeout($this.data('scrollTimeout'));
+				$this.data('scrollTimeout', setTimeout(callback.bind(that), 250, ev));
+			});
+		};
+
+		$(".scroll-inner").scrollStopped(function(ev){
+			let scrollPos = $(".scroll-inner").scrollTop();
+			let offset = scrollPos % 400;
+			let newPos = scrollPos - offset;
+			if (offset >= 200) {
+				newPos = scrollPos += (400 - offset);
+			}
+			//$(".scroll-inner").animate({scrollTop: newPos},'1');
+			$(".scroll-inner").scrollTop(newPos);
+			$(".output").text((newPos / 400) + 1);
+		});
+
+		$(".down-btn").click(function(e){
+			let scrollPos = $(".scroll-inner").scrollTop();
+			if (scrollPos <= 59 * 400) {
+				$(".scroll-inner").animate({scrollTop:scrollPos + 400});
+			}
+		});
+
+		$(".up-btn").click(function(e){
+			let scrollPos = $(".scroll-inner").scrollTop();
+			if (scrollPos >= 400) {
+				$(".scroll-inner").animate({scrollTop:scrollPos - 400});
+			}
+		})
+
+	</script>
+</body>
+</html>
