@@ -118,7 +118,5 @@ $(".set-school").click(setSchool);
 
 $(".settings-button").click(openSettings);
 
-$(".scroll").snapscroll();
-
 setInterval(renderTime,1000);
 setSchool();

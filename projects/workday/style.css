@@ -125,10 +125,18 @@ div.settings-pane-visible{
 	height:10vh;
 	margin:0;
 	padding:0;
+	overflow:hidden;
+}
+
+.scroll-inner{
+	width:8vw;
+	height:10vh;
+	margin:0;
+	padding:0;
 	overflow-y:scroll;
 }
 
-.scroll div{
+.scroll-inner div{
 	height:10vh;
 	width:7vw;
 	float:left;
@@ -138,10 +146,6 @@ div.settings-pane-visible{
 	text-align:center;
 	font-family:'Open Sans', sans-serif;
 	font-size:32px;
-}
-
-.scroll::-webkit-scrollbar{
-	display:none;
 }
 
 .time-btn{
