@@ -21,12 +21,14 @@ var score, extra, apple;
 var startSegment = new Point(0, 0);
 var segments = [];
 var loseCondition = true;
+var paused = false;
 
 function startGame(){
 	segments = [startSegment];
 	score = 1;
 	extra = 0;
 	loseCondition = false;
+	paused = false;
 	apple = randomPoint();
 }
 
@@ -134,6 +136,8 @@ document.onkeydown = function(e) {
     			params.direction = "down";
     		}
     		break;
+    	case 80:
+    		paused = !paused;
     	default:
     		return;
     }
@@ -141,7 +145,7 @@ document.onkeydown = function(e) {
 }
 
 setInterval(function(){
-	if(!loseCondition){
+	if(!loseCondition && !paused){
 		render();
 	}
 }, 50);
