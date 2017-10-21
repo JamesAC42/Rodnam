@@ -3,6 +3,7 @@ var currentTime = 0;
 var endTime = 0;
 var timeLeft = 0;
 var mode;
+var customtimes = [0,0,0];
 
 var numberWords = {
 	"1":"one",
@@ -16,6 +17,11 @@ var numberWords = {
 	"9":"nine",
 	"0":"zero"
 };
+
+var savedTimes = {
+	"school" : [28500, 24000],
+	"work" : [28800, 32400]
+}
 
 function numberToDigits(n){
 	var s = n.toString();
@@ -72,32 +78,22 @@ function precZero(list, index){
 	return true;
 }
 
-function setWork(){
+function setElapsed(endpoints, name){
 	$(".section").removeClass("finished");
-	currentTime = ((date.getHours() * 60 * 60) + (date.getMinutes() * 60) + (date.getSeconds())) - 28800;
-	endTime = 32400;
+	currentTime = ((date.getHours() * 60 * 60) + (date.getMinutes() * 60) + (date.getSeconds())) - endpoints[0];
+	endTime = endpoints[1];
 	timeLeft = endTime - currentTime;
-	mode = "Workday";
-}
-
-function setSchool(){
-	$(".section").removeClass("finished");
-	currentTime = ((date.getHours() * 60 * 60) + (date.getMinutes() * 60) + (date.getSeconds())) - 28500;
-	endTime = 24000;
-	timeLeft = endTime - currentTime;
-	mode = "School";
+	mode = name;
 }
 
 function setCustom(){
 	$(".section").removeClass("finished");
-	if(/^\d+$/.test($("#seconds-input").val())){
-		currentTime = 1;
-		endTime = parseInt($("#seconds-input").val()) + 1;
-		timeLeft = endTime - currentTime;
-		$("#seconds-input").val("");
-	}else{
-		alert("Invalid Time");
-	}
+	currentTime = 1;
+	endTime = (customtimes[0] * 60 * 60) + (customtimes[1] * 60) + (customtimes[2]) + 1;
+	timeLeft = endTime - currentTime;
+	$(".hour-scroll-inner, .minute-scroll-inner, .second-scroll-inner").scrollTop(0);
+	customtimes = [0,0,0];
+	openSettings();
 	mode = "Timer";
 }
 
@@ -108,15 +104,42 @@ function openSettings(){
 	$(".settings-pane").toggleClass("settings-pane-visible");
 }
 
-$(".tab").click(function(){
-	$(".settings").toggleClass("visible");
-	$(".tab").toggleClass("tab-on");
-});
-$(".submit").click(setCustom);
-$(".set-work").click(setWork);
-$(".set-school").click(setSchool);
+$.fn.scrollStopped = function(callback) {
+	var that = this, $this = $(that);
+	$this.scroll(function(ev) {
+		clearTimeout($this.data('scrollTimeout'));
+		$this.data('scrollTimeout', setTimeout(callback.bind(that), 250, ev));
+	});
+};
 
+function setScroll(pos, i, e){
+	let offset = pos % 100;
+	let newPos = pos - offset;
+	if (offset >= 50) {
+		newPos = pos += (100 - offset);
+	}
+	e.scrollTop(newPos);
+	customtimes[i] = newPos / 100;
+}
+
+$(".hour-scroll-inner").scrollStopped(function(ev){
+	let scrollPos = $(this).scrollTop();
+	setScroll(scrollPos, 0, $(this));
+});
+
+$(".minute-scroll-inner").scrollStopped(function(ev){
+	let scrollPos = $(this).scrollTop();
+	setScroll(scrollPos, 1, $(this))
+});
+
+$(".second-scroll-inner").scrollStopped(function(ev){
+	let scrollPos = $(this).scrollTop();
+	setScroll(scrollPos, 2, $(this))
+});
+
+$(".set-work").click(setElapsed(savedTimes.work, "Work"));
+$(".set-school").click(setElapsed(savedTimes.school, "School"));
+$(".set-time").click(setCustom);
 $(".settings-button").click(openSettings);
 
 setInterval(renderTime,1000);
-setSchool();

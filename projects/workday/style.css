@@ -78,14 +78,15 @@ div.settings-pane-visible{
 .settings-pane-inner{
 	position:relative;
 	height:100vh;
-	width:20vw;
+	width:30vw;
 	margin:0;
 }
 
 .timer-setting-label{
 	position:absolute;
 	top:20vh;
-	transform:translateX(25%);
+	left:50%;
+	transform:translateX(-50%);
 	height:5vh;
 	width:21vw;
 	margin:0;
@@ -110,8 +111,9 @@ div.settings-pane-visible{
 .timer-setting{
 	position:absolute;
 	top:25vh;
-	transform:translateX(25%);
-	height:10vh;
+	left:50%;
+	transform:translateX(-50%);
+	height:100px;
 	width:21vw;
 	margin:0;
 	padding:0;
@@ -122,7 +124,7 @@ div.settings-pane-visible{
 	position:relative;
 	float:left;
 	width:7vw;
-	height:10vh;
+	height:100px;
 	margin:0;
 	padding:0;
 	overflow:hidden;
@@ -130,22 +132,40 @@ div.settings-pane-visible{
 
 .scroll-inner{
 	width:8vw;
-	height:10vh;
+	height:100px;
 	margin:0;
 	padding:0;
 	overflow-y:scroll;
 }
 
 .scroll-inner div{
-	height:10vh;
+	height:100px;
 	width:7vw;
 	float:left;
 	margin:0;
 	padding:0;
-	line-height: 10vh;
+	line-height: 100px;
 	text-align:center;
 	font-family:'Open Sans', sans-serif;
 	font-size:32px;
+}
+
+.buttons-container{
+	position:absolute;
+	top:40vh;
+	left:50%;
+	transform:translateX(-50%);
+	height:45vh;
+	width:21vw;
+	margin:0;
+	padding:0;
+}
+
+.buttons-container-inner{
+	position:relative;
+	margin:0;
+	height:40vh;
+	width:21vw;
 }
 
 .time-btn{
@@ -170,27 +190,55 @@ div.settings-pane-visible{
 }
 
 .set-time{
-	top:40vh;
-	left:45%;
+	top:0;
+	left:20%;
 }
 
 .save-time{
-	top:40vh;
-	left:85%;
+	top:0;
+	right:20%;
 }
 
 .saved-times-label{
 	position:absolute;
-	top:55vh;
-	left:25%;
+	top:8vh;
+	left:50%;
+	transform:translateX(-50%);
 	width:21vw;
 	height:5vh;
 	font-family: 'Open Sans', sans-serif;
 	font-size:22px;
 	color:#999;
-	border-bottom:1px solid #aaa;
 	text-align: center;
 	line-height: 5vh;
+}
+
+.saved-times{
+	position:absolute;
+	top:13vh;
+	height:300px;
+	width:21vw;
+	margin:0;
+	padding:0;
+	border-top:1px solid #aaa;
+	border-bottom:1px solid #aaa;
+	overflow-y:scroll;
+}          
+.saved-times-list{
+	list-style-type: none;
+}
+.saved-times-list li{
+	width:80%;
+	height:40px;
+	text-align:center;
+	line-height: 20px;
+	margin-top:20px;
+	margin-bottom:20px;
+	padding-left:20px;
+	font-family: 'Open Sans',sans-serif;
+	font-size:20px;
+	color:#333;
+	border-bottom:1px solid #ddd;
 }
 
 @keyframes progress{
@@ -225,16 +273,12 @@ div.settings-pane-visible{
 	padding:30px 20px;
 	z-index:100;
 	transition:all .2s ease-in-out;
-	/*
-	-webkit-box-shadow: 0px 0px 94px 2px rgba(0,0,0,0.75);
-	-moz-box-shadow: 	0px 0px 94px 2px rgba(0,0,0,0.75);
-	box-shadow: 		0px 0px 94px 2px rgba(0,0,0,0.75); */
 }
 
 .timer-small{
 	top:0;
 	left:0;
-	transform:scale(0.5) translate(-20vw,50%);
+	transform:scale(0.5) translate(0,150%);
 }
 
 .number-outer{
