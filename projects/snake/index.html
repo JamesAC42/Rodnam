@@ -68,6 +68,20 @@
 			text-align:center;
 			color:#2D4980;
 		}
+		div.source-link{
+			position:absolute;
+			bottom:10px;
+			right:10px;
+			font-size:1.8em;
+			font-family:'VT323', sans-serif;
+		}
+		div.source-link a{
+			color:#6788C8;
+			text-decoration:none;
+		}
+		div.source-link a:hover{
+			color:#3B5993;
+		}
 
 		@media screen and (max-height: 900px) {
 	    	div.title{
@@ -105,6 +119,9 @@
 	<button class="start-button" onclick="startGame()">START</button>
 	<div class="description-container">	
 		Eat the apples to get longer. Use the arrow keys to move. You can teleport through the walls. Press P to pause.
+	</div>
+	<div class="source-link">	
+		<a href="https://github.com/JamesAC42/Rodnam/tree/gh-pages/projects/snake">Source Code</a>
 	</div>
 	<script src="snake.js"></script>
 </body>
