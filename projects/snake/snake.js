@@ -1,8 +1,8 @@
 var c = document.getElementById("canvas");
 var ctx = c.getContext("2d");
 
-var winHeight = 500 //window.innerHeight - 50;
-var winWidth = 1000 //window.innerWidth - 50;
+var winHeight = 500;
+var winWidth = 1000;
 
 c.height = winHeight;
 c.width = winWidth;
@@ -15,55 +15,63 @@ function Point(x,y){
 var params = {
 	"segmentSize":10,
 	"direction":"down",
-	"appleColor":"#f00"
 }
 
-ctx.fillStyle = params.appleColor;
+var score, extra, apple;
+var startSegment = new Point(0, 0);
+var segments = [];
+var loseCondition = true;
 
-let startSegment = new Point(0, 0);
-
-let appleX = Math.floor((Math.random() * 1000) + 1);
-appleX -= appleX % 10;
-let appleY = Math.floor((Math.random() * 500) + 1);
-appleY -= appleY % 10;
-let apple = new Point(appleX, appleY);
-console.log(appleX, appleY);
-
-var segments = [startSegment];
-var extra = 0;
+function startGame(){
+	segments = [startSegment];
+	score = 1;
+	extra = 0;
+	loseCondition = false;
+	apple = randomPoint();
+}
 
 function render(){
-	ctx.clearRect(0,0,winWidth,winHeight);
+	ctx.fillStyle = "#000";
+	ctx.fillRect(0,0,winWidth,winHeight);
 	let front = segments[0];
 	let newSegment = new Point(front.x, front.y);
 	switch(params.direction){
 		case "left":
-			newSegment.x = front.x - 10;
+			newSegment.x -= 10;
 			break;
 		case "right":
-			newSegment.x = front.x + 10;
+			newSegment.x += 10;
 			break;
 		case "up":
-			newSegment.y = front.y - 10;
+			newSegment.y -= 10;
 			break;
 		case "down":
-			newSegment.y = front.y + 10;
+			newSegment.y += 10;
+			break;
+	}
+	if (newSegment.x < 0) {
+		newSegment.x = winWidth - params.segmentSize;
+	} else if (newSegment.x == winWidth) {
+		newSegment.x = 0;
+	}
+	if (newSegment.y < 0) {
+		newSegment.y = winHeight - params.segmentSize;
+	} else if (newSegment.y == winHeight) {
+		newSegment.y = 0;
 	}
 
-	if(newSegment.x == apple.x && newSegment.y == apple.y){
-		let newAppleX, newAppleY;
-		let validPoint = false;
-		while(!validPoint){
-			newAppleX = Math.floor((Math.random() * 1000) + 1);
-			newAppleX -= newAppleX % 10;
-			newAppleY = Math.floor((Math.random() * 500) + 1);
-			newAppleY -= newAppleY % 10;
-			segments.forEach(function(item, index){
+	if(snakeExistsThere(newSegment, 1)){
+		loseCondition = true;
+	}
 
-			});
+	if (newSegment.x == apple.x && newSegment.y == apple.y) {
+		let newApple = randomPoint();
+		while(snakeExistsThere(newApple, 0)){
+			console.log("foo");
+			newApple = randomPoint();
 		}
-		apple.x = newAppleX;
-		apple.y = newAppleY;
+		apple.x = newApple.x;
+		apple.y = newApple.y;
 		extra = 5;
 	} else {
 		if (!extra) {
@@ -75,11 +83,32 @@ function render(){
 
 	segments.splice(0, 0, newSegment);
 
+	ctx.fillStyle = "#31F431";
 	segments.forEach(function(item, index){
-		ctx.strokeRect(item.x, item.y, params.segmentSize, params.segmentSize)
+		ctx.fillRect(item.x, item.y, params.segmentSize, params.segmentSize)
 	});
 	ctx.fillStyle = "#f00";
 	ctx.fillRect(apple.x, apple.y, params.segmentSize, params.segmentSize);
+
+	document.getElementById("score").innerHTML = segments.length;
+}
+
+function snakeExistsThere(point, start){
+	for (var i = segments.length - 1; i >= start; i--) {
+		if(segments[i].x == point.x && segments[i].y == point.y){
+			return true;
+		}
+	}
+	return false;
+}
+
+function randomPoint(){
+	let newX = Math.floor((Math.random() * 1000));
+	newX -= newX % 10;
+	let newY = Math.floor((Math.random() * 500));
+	newY -= newY % 10;
+	let newPoint = new Point(newX, newY);
+	return newPoint;
 }
 
 document.onkeydown = function(e) {
@@ -111,6 +140,10 @@ document.onkeydown = function(e) {
     e.preventDefault();
 }
 
-setInterval(render, 50);
+setInterval(function(){
+	if(!loseCondition){
+		render();
+	}
+}, 50);
 
 

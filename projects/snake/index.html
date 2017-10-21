@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>snake</title>
+	<link href="https://fonts.googleapis.com/css?family=Press+Start+2P|VT323" rel="stylesheet"> 
+</head>
+<body>
+	<style>
+		body{
+			background:#0F1A30;
+		}
+		#canvas{
+			position:absolute;
+			top:50%;
+			left:50%;
+			transform:translate(-50%,-50%);
+			border:1px solid #666;
+		}
+		div.title, div.score-container{
+			position:absolute;
+			left:50%;
+			transform:translateX(-50%);
+			text-align:center;
+			font-family:'Press Start 2P', monospace;
+			color:#9AF3F2;
+		}
+		div.title{
+			top:1em;
+			height:2.2em;
+			line-height:2.2em;
+			font-size:2.2em;
+		}
+		div.score-container{
+			top:6em;
+			height:1em;
+			line-height: 1em;
+			font-size:1em;
+		}
+		button.start-button{
+			position:absolute;
+			top:8em;
+			left:50%;
+			transform:translateX(-50%);
+			background:#3845C2;
+			height:1.4em;
+			line-height: 1.4em;
+			text-align:center;
+			font-size:1.2em;
+			font-family: 'Press Start 2P', monospace;
+			border:none;
+			border-top:2px solid #7381ED;
+			outline:none;
+			cursor:pointer;
+		}
+		button.start-button:hover{
+			border-top:none;
+			border-bottom:2px solid #7381ED;
+		}
+		div.description-container{
+			position:absolute;
+			left:50%;
+			transform:translateX(-50%);
+			bottom:3em;
+			font-family:'VT323', monospace;
+			font-size:2em;
+			text-align:center;
+			color:#2D4980;
+		}
+	</style>
+	<canvas id="canvas"></canvas>
+	<div class="title">SNAKE</div>
+	<div class="score-container">
+		Score: <span id="score">0</span>
+	</div>
+	<button class="start-button" onclick="startGame()">START</button>
+	<div class="description-container">	
+		Eat the apples to get longer. Use the arrow keys to move. You can teleport through the walls.
+	</div>
+	<script src="snake.js"></script>
+</body>
+</html>
