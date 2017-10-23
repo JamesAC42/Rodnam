@@ -23,6 +23,9 @@ var segments = [];
 var loseCondition = true;
 var paused = false;
 
+ctx.font = "32px monospace";
+ctx.textAlign = "center";
+
 function startGame(){
 	segments = [startSegment];
 	score = 1;
@@ -87,13 +90,21 @@ function render(){
 
 	ctx.fillStyle = "#31F431";
 	segments.forEach(function(item, index){
-		ctx.fillRect(item.x, item.y, params.segmentSize, params.segmentSize)
+		ctx.fillRect(item.x, item.y, params.segmentSize, params.segmentSize);
 	});
 	ctx.fillStyle = "#f00";
 	ctx.fillRect(apple.x, apple.y, params.segmentSize, params.segmentSize);
 
 	document.getElementById("score").innerHTML = segments.length;
+
+	if(loseCondition){
+		ctx.fillStyle = "#0F1A30";
+		ctx.fillRect(350,225,300,50);
+		ctx.fillStyle = "#31F431";
+		ctx.fillText("GAME OVER",500,260);
+	}
 }
+
 
 function snakeExistsThere(point, start){
 	for (var i = segments.length - 1; i >= start; i--) {
@@ -148,6 +159,6 @@ setInterval(function(){
 	if(!loseCondition && !paused){
 		render();
 	}
-}, 50);
+}, 45);
 
 
