@@ -1,0 +1,15 @@
+doctype html
+head(lang="en")
+	title snake
+	link(rel="stylesheet" href="https://fonts.googleapis.com/css?family=Press+Start+2P|VT323")
+	link(rel="stylesheet" href="snake.css")
+body
+	canvas#canvas
+	.title
+	.score-container Score:
+		span#score 0
+	button.start-button(onclick="startGame()") START
+	.description-container Eat the apples to get longer. Use the arrow keys to move. You can teleport through the walls. Press P to pause.
+	.source-link
+		a(href="https://github.com/JamesAC42/Rodnam/tree/gh-pages/projects/snake") Source Code
+	script(src="snake.js");

@@ -4,113 +4,9 @@
 	<meta charset="UTF-8">
 	<title>snake</title>
 	<link href="https://fonts.googleapis.com/css?family=Press+Start+2P|VT323" rel="stylesheet"> 
+	<link rel="stylesheet" href="snake.css">
 </head>
 <body>
-	<style>
-		body{
-			background:#0F1A30;
-		}
-		#canvas{
-			position:absolute;
-			top:50%;
-			left:50%;
-			transform:translate(-50%,-50%);
-			border:1px solid #666;
-			background:#000;
-		}
-		div.title, div.score-container{
-			position:absolute;
-			left:50%;
-			transform:translateX(-50%);
-			text-align:center;
-			font-family:'Press Start 2P', monospace;
-			color:#9AF3F2;
-		}
-		div.title{
-			top:1em;
-			height:2.2em;
-			line-height:2.2em;
-			font-size:2.2em;
-		}
-		div.score-container{
-			top:6em;
-			height:1em;
-			line-height: 1em;
-			font-size:1em;
-		}
-		button.start-button{
-			position:absolute;
-			top:8em;
-			left:50%;
-			transform:translateX(-50%);
-			background:#3845C2;
-			height:1.4em;
-			line-height: 1.4em;
-			text-align:center;
-			font-size:1.2em;
-			font-family: 'Press Start 2P', monospace;
-			border:none;
-			border-top:2px solid #7381ED;
-			outline:none;
-			cursor:pointer;
-		}
-		button.start-button:hover{
-			border-top:none;
-			border-bottom:2px solid #7381ED;
-		}
-		div.description-container{
-			position:absolute;
-			left:50%;
-			transform:translateX(-50%);
-			bottom:3em;
-			font-family:'VT323', monospace;
-			font-size:2em;
-			text-align:center;
-			color:#2D4980;
-		}
-		div.source-link{
-			position:absolute;
-			bottom:10px;
-			right:10px;
-			font-size:1.8em;
-			font-family:'VT323', sans-serif;
-		}
-		div.source-link a{
-			color:#6788C8;
-			text-decoration:none;
-		}
-		div.source-link a:hover{
-			color:#3B5993;
-		}
-
-		@media screen and (max-height: 900px) {
-	    	div.title{
-				top:.5em;
-				height:1.8em;
-				line-height: 1.8em;
-				font-size:1.6em;
-				left:25%;
-			}
-	    	div.score-container{
-				top:.5em;
-				height:1.8em;
-				line-height: 1.8em;
-				font-size:1.6em;
-				left:75%;
-	    	}
-	    	button.start-button{
-	    		top:2em;
-	    		height:1.2em;
-	    		line-height: 1.2em;
-	    		font-size:1em;
-	    	}
-	    	div.description-container{
-	    		bottom:.5em;
-	    		font-size:1.4em;
-	    	}
-		}
-
-	</style>
 	<canvas id="canvas"></canvas>
 	<div class="title">SNAKE</div>
 	<div class="score-container">
@@ -123,6 +19,37 @@
 	<div class="source-link">	
 		<a href="https://github.com/JamesAC42/Rodnam/tree/gh-pages/projects/snake">Source Code</a>
 	</div>
+	<div class="show-scores-container">
+		<button class="show-scores-button" onclick="toggleShowScore(2)">LEADERBOARD</button>
+	</div>
+	<div class="scores-container">
+		<div class="scores-container-inner">
+			<div class="score-title">HIGH SCORES</div>
+			<div class="scores">
+				<div class="score">0. ___ .......... ___ </div>
+				<div class="score">1. ___ .......... ___ </div>
+				<div class="score">2. ___ .......... ___ </div>
+				<div class="score">3. ___ .......... ___ </div>
+				<div class="score">4. ___ .......... ___ </div>
+				<div class="score">5. ___ .......... ___ </div>
+				<div class="score">6. ___ .......... ___ </div>
+				<div class="score">7. ___ .......... ___ </div>
+				<div class="score">8. ___ .......... ___ </div>
+				<div class="score">9. ___ .......... ___ </div>
+			</div>
+		</div>
+	</div>
+	<div class="score-submit-button-container">
+		<button class="score-submit-button" onclick="toggleSubmitScore(2)">SUBMIT SCORE</button>
+	</div>
+	<div class="score-submit-container">
+		<div class="score-submit-inner">
+			<div class="score-submit-label">ENTER YOUR INTIALS</div>
+			<input id="score-input" type="text" name="score-name" maxlength="3">
+			<button class="submit-score" onclick="submitScore()">SUBMIT</button>
+		</div>
+	</div>
+	<script src="jquery-3.2.1.min.js"></script>
 	<script src="snake.js"></script>
 </body>
 </html>

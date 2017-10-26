@@ -20,6 +20,7 @@ var params = {
 var score, extra, apple;
 var startSegment = new Point(0, 0);
 var segments = [];
+var falseCollide = false;
 var loseCondition = true;
 var paused = false;
 
@@ -33,6 +34,7 @@ function startGame(){
 	loseCondition = false;
 	paused = false;
 	apple = randomPoint();
+	hideInfo();
 }
 
 function render(){
@@ -66,7 +68,29 @@ function render(){
 	}
 
 	if(snakeExistsThere(newSegment, 1)){
-		loseCondition = true;
+		if(falseCollide){
+			switch(params.direction){
+				case "left":
+					newSegment.x += 10;
+					params.direction = "right";
+					break;
+				case "right":
+					newSegment.x -= 10;
+					params.direction = "left";
+					break;
+				case "up":
+					newSegment.y -= 10;
+					params.direction = "down";
+					break;
+				case "down":
+					newSegment.y -= 10;
+					params.direction = "up";
+					break;
+			}
+			falseCollide = false;
+		}else{
+			loseCondition = true;
+		}
 	}
 
 	if (newSegment.x == apple.x && newSegment.y == apple.y) {
@@ -102,13 +126,17 @@ function render(){
 		ctx.fillRect(350,225,300,50);
 		ctx.fillStyle = "#31F431";
 		ctx.fillText("GAME OVER",500,260);
+		toggleSubmitScoreButton(1);
 	}
 }
 
 
 function snakeExistsThere(point, start){
-	for (var i = segments.length - 1; i >= start; i--) {
+	for (var i = start; i < segments.length; i++) {
 		if(segments[i].x == point.x && segments[i].y == point.y){
+			if(i == 1){
+				falseCollide = true;
+			}
 			return true;
 		}
 	}
@@ -126,6 +154,7 @@ function randomPoint(){
 
 document.onkeydown = function(e) {
     e = e || window.event;
+    buffer = params.direction;
     switch(e.which || e.keyCode) {
     	case 37:
     		if (params.direction != "right"){
@@ -154,6 +183,78 @@ document.onkeydown = function(e) {
     }
     e.preventDefault();
 }
+
+function toggleShowScore(state){
+	console.log(state, typeof(state));
+	if(state==2){
+		console.log('J');
+		$(".scores-container").toggleClass("scores-container-visible");
+		paused = !paused;
+	}else if(state==1){
+		$(".scores-container").addClass("scores-container-visible");
+		paused = true;
+	}else{
+		$(".scores-container").removeClass("scores-container-visible");
+		paused = false;
+	}
+}
+
+function toggleSubmitScoreButton(state){
+	if(state==2){
+		$(".score-submit-button-container").toggleClass("score-submit-button-container-visible");
+	}else if(state==1){
+		$(".score-submit-button-container").addClass("score-submit-button-container-visible");
+	}else{
+		$(".score-submit-button-container").removeClass("score-submit-button-container-visible");
+	}
+}
+
+function toggleSubmitScore(state){
+	if(state==2){
+		$(".score-submit-container").toggleClass("score-submit-container-visible");
+	}else if(state==1){
+		$(".score-submit-container").addClass("score-submit-container-visible");
+	}else{
+		$(".score-submit-container").removeClass("score-submit-container-visible");
+	}
+}
+
+function hideInfo(){
+	toggleSubmitScore(0);
+	toggleSubmitScoreButton(0);
+	toggleShowScore(0);
+}
+
+function submitScore(){
+	var name = $("#score-input").val();
+	if (name.length < 3) return;
+	var score = segments.length;
+	$.post("/snake/submitScore",{name, score},success=>{
+		renderScores(success);
+		hideInfo();
+		return;
+	});
+}
+
+function renderScores(data){
+	var scores = JSON.parse(data);
+	$(".scores").empty();
+	scores.forEach((item, index) => {
+		var dom = "<div class='score'>"
+					+ index + ". "
+					+ item.name
+					+ " .......... "
+					+ item.score; 
+		$(".scores").append(dom);
+	});
+}
+
+$(document).ready(function(){
+	$.post("/snake/getHighScores",{},success=>{
+		renderScores(success);
+		return;
+	});
+});
 
 setInterval(function(){
 	if(!loseCondition && !paused){
