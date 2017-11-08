@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>joystick</title>
+</head>
+<body>
+	<style>
+		.pad-outer{
+			position:absolute;
+			top:50%;
+			left:50%;
+			transform:translate(-50%,-50%);
+			height:200px;
+			width:200px;
+			border-radius:50%;
+			background:#ddd;
+			padding:0;
+		}
+		.pad-inner{
+			margin:0;
+			padding:0;
+			position:relative;
+			height:200px;
+			width:200px;
+			border-radius:50%;
+		}
+		.handle{
+			position:absolute;
+			top:50%;
+			left:50%;
+			transform:translate(-50px, -50px);
+			height:100px;
+			width:100px;
+			border-radius:50%;
+			background:#FA4347;
+			z-index:100;
+		}
+		.handle:before{
+			display:block;
+			content:'';
+			position:absolute;
+			left:20px;
+			top:20px;
+			height:25px;
+			width:25px;
+			border-radius:50%;
+			background:#E6ACAD;
+		}
+		div.shadow{
+			position:absolute;
+			top:50%;
+			left:50%;
+			transform: translate(-50%,-50%);
+			height:100px;
+			width:100px;
+			border-radius: 50%;
+			background: #aaa;
+			z-index:1;
+		}
+	</style>
+	<div id="joystick" class="pad-outer">
+		<div class="pad-inner">
+			<div class="handle"></div>
+			<div class="shadow"></div>
+		</div>
+	</div>
+	<script src="./js/jquery-3.2.1.min.js"></script>
+	<script>
+		var padOffset = $("#joystick").offset();
+		var padX = padOffset.left + 100;
+		var padY = padOffset.top + 100;
+		$("#joystick")
+		.mousemove(function(e){
+			let mouseX = e.pageX;
+			let mouseY = e.pageY;
+			let x = mouseX - padX;
+			let y = mouseY -padY;
+			let angle = -1 * Math.atan(y/x);
+			if (x < 0) angle += Math.PI;
+			if (angle < 0) angle += 2 * Math.PI;
+			let yt = -1 * Math.round(Math.sin(angle) * 50) - 50;
+			let xt = Math.round(Math.cos(angle) * 50) - 50;
+			let valString = "translate(" + xt + "px, " + yt + "px)";
+			$(".handle").css("transform", valString);
+		})
+		.mouseleave(function(){
+			$(".handle").css("transform", "translate(-50%, -50%)");
+		});
+	</script>
+</body>
+</html>
