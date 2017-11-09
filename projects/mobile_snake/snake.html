@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>snake</title>
+	<link href="https://fonts.googleapis.com/css?family=Press+Start+2P|VT323" rel="stylesheet"> 
+	<link rel="stylesheet" href="./css/snake.css">
+</head>
+<body>
+	<div class="sidebar">
+		<div class="title">
+			SNAKE
+		</div>
+		<div class="score-outer">
+			SCORE: <span id="score">999</span>
+		</div>
+		<div class="leaderboard">
+			<div class="leaderboard-inner">
+				
+			</div>
+		</div>
+		<div class="joystick-outer">
+			<div id="joystick" class="pad-outer">
+				<div class="pad-inner">
+					<div class="handle"></div>
+					<div class="shadow"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="main">
+		<div class="main-inner">
+			<canvas id="canvas"></canvas>
+		</div>
+	</div>
+	<script src="./js/jquery-3.2.1.min.js"></script>
+	<script src="./js/snake.js"></script>
+</body>
+</html>

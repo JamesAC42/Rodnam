@@ -1,0 +1,141 @@
+body{
+	background:#000;
+	overflow:hidden;
+}
+.sidebar{
+	position:absolute;
+	width:20vw;
+	height:100vh;
+	margin:0;
+	padding:0;
+	padding-top:5vh;
+	top:0;
+	right:0;
+	background:#0F1A30;
+}
+.title{
+	position:relative;
+	float:left;
+	width:20vw;
+	height:5vh;
+	margin:0;
+	text-align: center;
+	line-height: 5vh;
+	font-family: 'Press Start 2P', sans-serif;
+	font-size:2.2em;
+	color:#45F165;
+}
+.score-outer{
+	position:relative;
+	float:left;
+	width:20vw;
+	height:5vh;
+	margin:0;
+	text-align: center;
+	line-height: 5vh;
+	font-family: 'Press Start 2P', sans-serif;
+	font-size:1.1em;
+	color:#45F165;
+}
+.leaderboard{
+	position:relative;
+	float:left;
+	width:20vw;
+	height:50vh;
+	margin:0;
+	margin-top:5vh;
+}
+.leaderboard-inner{
+	position:absolute;
+	width:18vw;
+	height:50vh;
+	margin:0;
+	top:0;
+	left:50%;
+	transform:translateX(-50%);
+	border-top:1px solid #C0C4FF;
+	border-bottom:1px solid #C0C4FF;
+}
+.joystick-outer{
+	position:relative;
+	float:left;
+	width:20vw;
+	height:15vw;
+	margin:0;
+}
+
+.main{
+	position:absolute;
+	width:80vw;
+	height:100vw;
+	margin:0;
+	padding:0;
+	top:0;
+	left:0;
+}
+.main-inner{
+	position:relative;
+	width:80vw;
+	height:100vh;
+	margin:0;
+}
+#canvas{
+	position:absolute;
+	top:50%;
+	left:50%;
+	transform:translate(-50%,-50%);
+	border:1px solid #eee;
+}
+
+.pad-outer{
+	position:absolute;
+	top:50%;
+	left:50%;
+	transform:translate(-50%,-50%);
+	height:200px;
+	width:200px;
+	border-radius:50%;
+	background:#ddd;
+	padding:0;
+}
+.pad-inner{
+	margin:0;
+	padding:0;
+	position:relative;
+	height:200px;
+	width:200px;
+	border-radius:50%;
+}
+.handle{
+	position:absolute;
+	top:50%;
+	left:50%;
+	transform:translate(-50px, -50px);
+	height:100px;
+	width:100px;
+	border-radius:50%;
+	background:#FA4347;
+	z-index:100;
+}
+.handle:before{
+	display:block;
+	content:'';
+	position:absolute;
+	left:20px;
+	top:20px;
+	height:25px;
+	width:25px;
+	border-radius:50%;
+	background:#E6ACAD;
+}
+div.shadow{
+	position:absolute;
+	top:50%;
+	left:50%;
+	transform: translate(-50%,-50%);
+	height:100px;
+	width:100px;
+	border-radius: 50%;
+	background: #aaa;
+	z-index:1;
+}
