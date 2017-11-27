@@ -1,0 +1,92 @@
+body {
+	
+	overflow:hidden;
+	background-image: url("../backgrounds/bg-2.jpg");
+
+}
+
+div.navbar {
+
+	position:absolute;
+	top:0;
+	bottom:0;
+	left:0;
+	width:200px;
+	height:100vh;
+
+	margin:0;
+	padding:0;
+
+}
+
+div.navbar-inner {
+
+	position:relative;
+	width:200px;
+	height:100vh;
+
+	margin:0;
+	padding:0;
+
+}
+
+div.icons-container {
+
+	position:absolute;
+	width:50px;
+
+	margin:0;
+	padding:0;
+
+	top:50%;
+	left:50%;
+
+	transform:translate(-50%,-50%);
+
+}
+
+a.icon {
+
+	display:block;
+	height:60px;
+	width:50px;
+	
+	position: relative;
+	float:left;
+
+	margin:0;
+	padding:0;
+
+	transition:all .2s ease-in-out;
+
+}
+
+a.icon img {
+
+	position:absolute;
+	width:35px;
+
+	margin:0;
+
+	top:50%;
+	transform:translateY(-50%);
+
+	transition:all .2s ease-in-out;
+
+}
+
+div.icons-container:hover a.icon{
+
+	height:80px;
+
+}
+
+div.icons-container:hover a.icon img{
+	
+	width:40px;
+
+}
+
+a.icon:hover img{
+	transform:translate(50%,-50%);
+}
