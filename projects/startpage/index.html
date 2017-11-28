@@ -6,41 +6,66 @@
 	<link rel="stylesheet" href="./css/index.css">
 </head>
 <body>
+	<div class="blur"></div>
 	<div class="navbar">
 		<div class="navbar-inner">
+			<div class="navbar-glow"></div>
 			<div class="icons-container">
-				<a href="#" class="icon">
+				<a id="school-tab" href="#" class="icon">
 					<img src="./icons/book-white.png" alt="">
 				</a>
-				<a href="#" class="icon">
+				<a id="tech-tab" href="#" class="icon">
 					<img src="./icons/terminal-white.png" alt="">
 				</a>
-				<a href="#" class="icon">
+				<a id="misc-tab" href="#" class="icon">
 					<img src="./icons/rocket-white.png" alt="">
 				</a>
-				<a href="#" class="icon">
+				<a id="nip-tab" href="#" class="icon">
 					<img src="./icons/japan-white.png" alt="">
 				</a>
-				<a href="#" class="icon">
+				<a id="settings-tab" href="#" class="icon">
 					<img src="./icons/settings-white.png" alt="">
 				</a>
 			</div>
 		</div>
 	</div>
-	<div class="links">
-		<div class="links-inner">
-			
+	<div class="testing"></div>
+	<div class="windows-container">
+		<div class="windows-container-inner">
+			<div id="links" class="window">
+				<div class="window-inner">
+					<div class="title-bar">Favorites - School</div>
+					<div class="exit-button">X</div>
+					<div class="window-content">
+						
+					</div>
+				</div>
+			</div>
+			<div id="time" class="window">
+				<div class="window-inner">
+					<div class="title-bar">Time</div>
+					<div class="exit-button">X</div>
+					<div class="window-content">
+						<div class="time-stamp">
+							12:12 <span>a.m.</span>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div id="weather" class="window">
+				<div class="window-inner">
+					<div class="title-bar">Weather - Furlong</div>
+					<div class="exit-button">X</div>
+					<div class="window-content">
+						
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
-	<div class="time">
-		<div class="time-inner">
-			
-		</div>
-	</div>
-	<div class="weather">
-		<div class="weather-inner">
-			
-		</div>
+	<div id="searchbar">
+		<div class="glyph">jamescrovo:<span>~$</span></div>
+		<input id="search-input" type="text">
 	</div>
 	<script src="./js/jquery-3.2.1.min.js"></script>
 	<script src="./js/index.js"></script>

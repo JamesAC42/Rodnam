@@ -1,7 +1,39 @@
+@font-face {
+
+	font-family: LucidaSansTypewriter;
+	src: url("../font/lucida-sans-typewriter-regular.ttf");
+
+}
+
+@font-face {
+
+	font-family: RobotoLight;
+	src: url("../font/Roboto-Light.ttf");
+
+}
+
 body {
-	
+
+	font-family: LucidaSansTypewriter;
 	overflow:hidden;
-	background-image: url("../backgrounds/bg-2.jpg");
+	background-image: url("../backgrounds/bg-0.jpg");
+
+}
+
+div.blur {
+
+	position:absolute;
+	top:0;
+	left:0;
+
+	height:100vh;
+	width:100vw;
+
+	background:#fff;
+	opacity:0.1;
+
+	margin:0;
+	padding:0;
 
 }
 
@@ -27,6 +59,37 @@ div.navbar-inner {
 
 	margin:0;
 	padding:0;
+
+}
+
+div.navbar-glow {
+
+	position:absolute;
+	width:200px;
+	height:300px;
+
+	margin:0;
+
+	top:50%;
+	left:0;
+
+	transform:translate(-200px,-50%);
+
+	-webkit-box-shadow: 31px 0px 88px 3px rgba(255,255,255,0.88);
+	-moz-box-shadow: 31px 0px 88px 3px rgba(255,255,255,0.88);
+	box-shadow: 31px 0px 88px 3px rgba(255,255,255,0.88);
+
+	transition: all .2s ease-in-out;
+
+}
+
+div.navbar-glow-highlight {
+
+	height:400px;
+
+	-webkit-box-shadow: 35px 0px 63px 4px rgba(255,255,255,0.9);
+	-moz-box-shadow: 35px 0px 63px 4px rgba(255,255,255,0.9);
+	box-shadow: 35px 0px 63px 4px rgba(255,255,255,0.9);
 
 }
 
@@ -75,18 +138,265 @@ a.icon img {
 
 }
 
-div.icons-container:hover a.icon{
+div.icons-container:hover a.icon {
 
 	height:80px;
 
+
 }
 
-div.icons-container:hover a.icon img{
+div.icons-container:hover a.icon img {
 	
-	width:40px;
+	width:50px;
 
 }
 
-a.icon:hover img{
-	transform:translate(50%,-50%);
+a.icon:hover img {
+
+	transform:translate(100%,-50%);
+
 }
+
+a.icon-support img {
+
+	transform:translate(25%,-50%);
+
+}
+
+#searchbar {
+
+	position:absolute;
+	bottom:0;
+	left:0;
+	right:0;
+
+	width:100vw;
+	height:40px;
+
+	background:#292929;
+
+	margin:0;
+	padding:0;
+
+}
+
+div.glyph {
+
+	position:relative;
+	float:left;
+
+	height:40px;
+	line-height: 40px;
+	text-align: right;
+
+	font-size:16px;
+	color:#5B71F4;
+
+	margin:0 10px;
+	padding:0;
+
+}
+
+div.glyph span {
+	color:#BF8437;
+}
+
+#search-input {
+
+	background:#292929;
+
+	height:40px;
+	line-height: 40px;
+	width:80vw;
+	text-align:left;
+
+	font-size:16px;
+	color:#BF8437;
+	
+	outline:none;
+	border:none;
+
+}
+
+div.windows-container {
+
+	position:absolute;
+	top:50%;
+	left:15%;
+
+	height:70vh;
+	width:70vw;
+
+	transform:translateY(-50%);
+
+	margin:0;
+	padding:0;
+
+}
+
+div.windows-container-inner {
+
+	position:relative;
+
+	height: 70vh;
+	width:70vw;
+
+	margin:0;
+	padding:0;
+
+}
+
+div.window {
+
+	background:#292929;
+	opacity:1;
+
+	position:absolute;
+
+	margin:0;
+	padding:0;
+
+	-webkit-box-shadow: 0px 6px 32px -2px rgba(0,0,0,0.75);
+	-moz-box-shadow: 0px 6px 32px -2px rgba(0,0,0,0.75);
+	box-shadow: 0px 6px 32px -2px rgba(0,0,0,0.75);
+
+	border:2px solid #E3E3E3;
+
+}
+
+div.window-inner {
+
+	position:relative;
+
+	margin:0;
+	padding:0;
+
+}
+
+div.title-bar {
+
+	position:absolute;
+	top:0;
+	left:0;
+
+	height:15px;
+	width:100%;
+	line-height: 15px;
+	text-align:center;
+
+	font-size:10px;
+	color:#fff;
+
+	margin:0;
+	padding:0;
+
+}
+
+div.exit-button {
+
+	position:absolute;
+	top:0;
+	right:0;
+
+	height:15px;
+	line-height:15px;
+	width:20px;
+	
+	font-size:12px;
+	text-align:center;
+	/*background:#FF4362;*/
+	color:#fff;
+
+
+	margin:0;
+	padding:0;
+
+}
+
+div.window-content {
+
+	position:relative;
+
+	margin:0;
+	padding:0;
+
+}
+
+#links {
+
+	height:70vh;
+	width:40vw;
+
+	top:0;
+	left:0;
+
+	transform:translateY(0);
+
+}
+
+#links div.window-inner, #links div.window-content {
+
+	height:70vh;
+	width:40vw;
+
+}
+
+#time {
+
+	height:15vh;
+	width:27vw;
+
+	top:0;
+	right:0;
+
+}
+
+#time div.window-inner, #time div.window-content {
+
+	height:15vh;
+	width:27vw;
+
+}
+
+div.time-stamp {
+
+	position:absolute;
+	left:50%;
+	top:50%;
+	transform:translate(-50%,-50%);
+
+	height:15vh;
+	line-height: 15vh;
+	width:27vw;
+	text-align:center;
+
+	font-family: RobotoLight;
+	font-size:62px;
+
+	color:#53A1DE;
+
+}
+
+div.time-stamp span {
+
+	font-size:38px;
+
+}
+
+#weather {
+
+	height:50vh;
+	width:27vw;
+
+	bottom:-4px;
+	right:0;
+
+}
+
+#weather div.window-inner, #weather div.window-content {
+
+	height:50vh;
+	width:27vw;
+
+}
+
