@@ -249,7 +249,7 @@ div.windows-container-inner {
 div.window {
 
 	background:#292929;
-	opacity:1;
+	opacity:0.8;
 
 	position:absolute;
 
@@ -279,13 +279,16 @@ div.title-bar {
 	top:0;
 	left:0;
 
+	background:#764CFD;
+	opacity:0.9;
+
 	height:15px;
 	width:100%;
 	line-height: 15px;
 	text-align:center;
 
 	font-size:10px;
-	color:#fff;
+	color:#E1E1E1;
 
 	margin:0;
 	padding:0;
@@ -361,25 +364,58 @@ div.window-content {
 div.time-stamp {
 
 	position:absolute;
-	left:50%;
+	left:0;
 	top:50%;
-	transform:translate(-50%,-50%);
+	transform:translateY(-45%);
 
 	height:15vh;
+	width:13vw;
 	line-height: 15vh;
-	width:27vw;
-	text-align:center;
+	text-align:right;
 
 	font-family: RobotoLight;
-	font-size:62px;
+	font-size:46px;
 
-	color:#53A1DE;
+	color:#fff;
+
+	margin:0;
+	padding:0;
 
 }
 
-div.time-stamp span {
+div.date-stamp {
 
-	font-size:38px;
+	position:absolute;
+	right:0;
+	top:50%;
+	transform:translateY(-45%);
+
+	height:9vh;
+	width:13vw;
+
+	margin:0;
+	padding:0;
+
+}
+
+div.date-sect {
+
+
+	position:relative;
+	float:left;
+
+	height:3vh;
+	line-height: 3vh;
+	width:13vw;
+	text-align:left;
+
+	font-family: RobotoLight;
+	font-size:12px;
+
+	color:#D2D1D1;
+
+	margin:0;
+	padding:0;
 
 }
 
@@ -398,5 +434,268 @@ div.time-stamp span {
 	height:50vh;
 	width:27vw;
 
+	font-family: RobotoLight;
+
+}
+
+div.weather-symbol {
+
+	position:absolute;
+	top:10%;
+	left:5%;
+
+	height:50px;
+	width:7vw;
+
+	margin:0;
+	padding:0;
+
+}
+
+div.summary {
+
+	position:absolute;
+	top:10%;
+	right:5%;
+
+	height:50px;
+	width:20vw;
+
+	margin:0;
+	padding:0;
+
+}
+
+div.temp-sum {
+
+	position:relative;
+	float:left;
+
+	height:50px;
+	line-height:50px;
+	width:5vw;
+	text-align:left;
+
+	color:#fff;
+	font-size:46px;
+
+	margin:0;
+	padding:0;
+
+}
+
+div.temp-high-low {
+
+	position:relative;
+	float:left;
+
+	height:50px;
+	width:4vw;
+
+	margin:0;
+	padding:0;
+
+}
+
+div.temp-inf{
+
+	position:relative;
+	float:left;
+
+	height:25px;
+	line-height:25px;
+	width:4vw;
+	text-align:left;
+
+	color:#fff;
+	font-size:20px;
+
+	margin:0;
+	padding:0;
+
+}
+
+div.air-sum {
+
+	position:relative;
+	float:left;
+
+	height:50px;
+	width:11vw;
+
+	margin:0;
+	padding:0;
+
+}
+
+div.air-sum-comp {
+
+	position:relative;
+	float:left;
+
+	height:16px;
+	line-height:16px;
+	width:11vw;
+	text-align:left;
+
+	color:#fff;
+	font-size:12px;
+
+	margin:0;
+	padding:0;
+
+}
+
+div.air-sum-comp span {
+
+	position:absolute;
+	top:0;
+	right:0;
+
+	height:16px;
+	line-height:16px;
+
+	margin:0;
+	padding:0;
+
+}
+
+div.weather-description {
+
+	position:absolute;
+	top:30%;
+
+	height:12px;
+	line-height: 12px;
+	width:27vw;
+	text-align:center;
+
+	color:#fff;
+	font-size:12px;
+
+	margin:0;
+	padding:0;
+
+}
+
+div.forecast {
+
+	position:absolute;
+	bottom:5%;
+	left:50%;
+	transform:translateX(-50%);
+	
+	height:30vh;
+	width:24vw;
+	
+	margin:0;
+	padding:0;
+
+}
+
+div.forecast-item {
+
+	position:relative;
+	float:left;
+	
+	height:30vh;
+	width:6vw;
+
+	margin:0;
+	padding:0;
+
+}
+
+div.forecast-item-info {
+
+	position:relative;
+	float:left;
+
+	width:6vw;
+
+	margin:0;
+	padding:0;
+
+}
+
+div.forecast-time {
+	
+	height:5vh;
+	line-height: 5vh;
+	text-align: center;
+
+	color:#fff;
+	font-size:14px;
+
+	border-bottom:1px solid #eee;
+
+}
+
+div.forecast-symbol {
+
+	height:10vh;
+
+}
+
+div.forecast-symbol img {
+
+	position:absolute;
+	top:50%;
+	left:50%;
+	transform:translate(-50%,-50%);
+
+	width:30px;
+
+}
+
+div.forecast-temp {
+	
+	height:10vh;
+	line-height:10vh;
+	text-align: center;
+
+	color:#fff;
+	font-size:18px;
+
+}
+
+div.forecast-precip {
+
+	height:5vh;
+
+}
+
+div.forecast-precip img {
+
+	position:absolute;
+	top:50%;
+	left:20%;
+	transform:translateY(-50%);
+	
+	width:14px;
+
+	margin:0;
+	padding:0;
+	
+}
+
+span.forecast-precip-val {
+
+	display:block;
+	position:absolute;
+	top:50%;
+	right:20%;
+	transform: translateY(-50%);
+
+	height:14px;
+	line-height:14px;
+	text-align:left;
+
+	color:#fff;
+	font-size:14px;
+
+	margin:0;
+	padding:0;
+	
 }
 
