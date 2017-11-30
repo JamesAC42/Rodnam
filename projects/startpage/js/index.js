@@ -1,6 +1,4 @@
 
-var weatherurl = "https://api.darksky.net/forecast/6ac07386f336de7ba7deba67ef905ffa/39.952584,-75.165222?exclude=[minutely,daily,alerts,flags,hourly]";
-
 function getWeather() {
 
 	navigator.geolocation.getCurrentPosition((position)=>{
@@ -47,6 +45,36 @@ $(document).ready(function(){
 			window.location.href = "https://www.google.com/search?q=" + query;
 			return;
 		}
+	});
+
+	$("#school-tab").mouseenter(function(){
+		$(this).children().attr("src","./icons/book-blue.png");
+	}).mouseleave(function(){
+		$(this).children().attr("src","./icons/book-white.png");
+	});
+
+	$("#tech-tab").mouseenter(function(){
+		$(this).children().attr("src","./icons/terminal-green.png");
+	}).mouseleave(function(){
+		$(this).children().attr("src","./icons/terminal-white.png");
+	});
+
+	$("#misc-tab").mouseenter(function(){
+		$(this).children().attr("src","./icons/puzzle-orange.png");
+	}).mouseleave(function(){
+		$(this).children().attr("src","./icons/puzzle-white.png");
+	});
+
+	$("#nip-tab").mouseenter(function(){
+		$(this).children().attr("src","./icons/japan-red.png");
+	}).mouseleave(function(){
+		$(this).children().attr("src","./icons/japan-white.png");
+	});
+
+	$("#settings-tab").mouseenter(function(){
+		$(this).children().attr("src","./icons/settings-purple.png");
+	}).mouseleave(function(){
+		$(this).children().attr("src","./icons/settings-white.png");
 	});
 
 });

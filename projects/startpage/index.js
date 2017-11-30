@@ -1,16 +1,20 @@
-var http = require("http").createServer(handler);
+var http = require("http");
 var fs = require("fs");
+var formidable = require("formidable");
 var path = require("path");
+var fetch = require("node-fetch");
 
-http.listen(3000);
+var weatherHost = "https://api.darksky.net";
+var weatherPath = "/forecast/6ac07386f336de7ba7deba67ef905ffa/";
+var weatherParams = "?exclude=[minutely,daily,alerts,flags,hourly]"
 
-function handler(req, res) {
+var server = http.createServer(function(req, res) {
 	if (req.method.toLowerCase() == "get") {
 		respondPage(req, res);
 	} else {
 		postData(req,res);
 	}
-}
+});
 
 function respondPage(req, res) {
 	var filePath = req.url;
@@ -43,8 +47,27 @@ function respondPage(req, res) {
 }
 
 function postData(req, res) {
-	console.log("received");
-	res.writeHead(200, {'Content-Type': 'text/plain'});
-	res.write("{'hello':'world'}");
-	res.end();
+	let form = new formidable.IncomingForm();
+	form.parse(req, function(err, fields, files){
+
+		let latitude = fields.latitude;
+		let longitude = fields.longitude;
+
+		let reqUrl = weatherHost + weatherPath + latitude + "," + longitude + weatherParams;
+
+		console.info(reqUrl);
+
+		res.writeHead(200, {'Content-Type': 'text/plain'});
+
+		fetch(reqUrl)
+			.then(function (fetch_res) {
+				return fetch_res.text();
+			}).then(function (body){
+				console.info(body);
+				res.end(body);
+			}).catch(err => require('utils').inspect(err));
+	});
 }
+
+server.listen(3000);
+console.info("Server listening at 3000...");
