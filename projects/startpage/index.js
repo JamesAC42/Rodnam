@@ -4,9 +4,11 @@ var formidable = require("formidable");
 var path = require("path");
 var fetch = require("node-fetch");
 
+var https = require("https");
+
 var weatherHost = "https://api.darksky.net";
 var weatherPath = "/forecast/6ac07386f336de7ba7deba67ef905ffa/";
-var weatherParams = "?exclude=[minutely,daily,alerts,flags,hourly]"
+var weatherParams = "?exclude=[minutely,daily,alerts,flags]"
 
 var server = http.createServer(function(req, res) {
 	if (req.method.toLowerCase() == "get") {
@@ -58,14 +60,17 @@ function postData(req, res) {
 		console.info(reqUrl);
 
 		res.writeHead(200, {'Content-Type': 'text/plain'});
+		
+		const agent = new https.Agent({
+			rejectUnauthorized: false
+		});
 
-		fetch(reqUrl)
+		fetch(reqUrl, {agent})
 			.then(function (fetch_res) {
 				return fetch_res.text();
 			}).then(function (body){
-				console.info(body);
 				res.end(body);
-			}).catch(err => require('utils').inspect(err));
+			}).catch(err => console.info(err.message));
 	});
 }
 
