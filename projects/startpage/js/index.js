@@ -147,7 +147,7 @@ function loadWeather(data) {
 
 	$(".forecast-item").each(function(i){
 
-		let dataItem = forecastHours[i];
+		let dataItem = forecastHours[i+1];
 		let time  = dataItem["time"];
 		let icon = dataItem["icon"];
 		let precipProbability = dataItem["precipProbability"];
