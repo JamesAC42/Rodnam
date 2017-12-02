@@ -129,8 +129,8 @@ function loadWeather(data) {
 
 	$("#weather-location").text(location);
 	$(".temp-sum").text(temperature + "\u00B0");
-	$("#precipitation-val").text(precipProbability * 100 + "%");
-	$("#humidity-val").text(humidity * 100 + "%");
+	$("#precipitation-val").text(Math.round(precipProbability * 100) + "%");
+	$("#humidity-val").text(Math.round(humidity * 100) + "%");
 	$("#windspeed-val").text(windSpeed + " MPH");
 
 	$("#current-weather-img").attr("src","./icons/weather/" + weatherIcons[icon]);
@@ -163,7 +163,7 @@ function loadWeather(data) {
 		$(this).children(".forecast-time").text(hours + ":" + minutes);
 		$(this).children(".forecast-symbol").children().attr("src","./icons/weather/" + weatherIcons[icon]);
 		$(this).children(".forecast-temp").text(temperature + "\u00B0");
-		$(this).children(".forecast-precip").children(".forecast-precip-val").text(precipProbability * 100 + "%");
+		$(this).children(".forecast-precip").children(".forecast-precip-val").text(Math.round(precipProbability * 100) + "%");
 
 	});
 
