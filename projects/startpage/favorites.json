@@ -1,0 +1,47 @@
+{
+	"school": {
+		"name": "school",
+		"img-name": "book",
+		"img-color": "blue",
+		"color": "#1A85D0",
+		"links": [
+			{
+				"item": "LSCHS",
+				"url": "http://www.lschs.org"
+			}
+		]
+	},
+	"tech": {
+		"name": "tech",
+		"img-name": "terminal",
+		"img-color": "green",
+		"color": "#27BF3C",
+		"links": []
+	},
+	"misc": {
+		"name": "misc",
+		"img-name": "puzzle",
+		"img-color": "orange",
+		"color": "#EE7204",
+		"links": []
+	},
+	"nip": {
+		"name": "nip",
+		"img-name": "japan",
+		"img-color": "red",
+		"color": "#F53737",
+		"links": []
+	},
+	"settings": {
+		"name": "settings",
+		"img-name": "settings",
+		"img-color": "purple",
+		"color": "#764CFD",
+		"links": [
+			{
+				"item": "Darksky.net",
+				"url": "https://darksky.net"
+			}
+		]
+	}
+}

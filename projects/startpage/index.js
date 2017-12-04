@@ -49,6 +49,16 @@ function respondPage(req, res) {
 }
 
 function postData(req, res) {
+	if (req.url == "/getWeather") {
+		returnWeather(req, res);
+	} else if (req.url == "/getFavorites") {
+		returnFavorites(req, res);
+	} else if (req.url == "/updateFavorites") {
+		updateFavorites(req, res);
+	}
+}
+
+function returnWeather(req, res) {
 	let form = new formidable.IncomingForm();
 	form.parse(req, function(err, fields, files){
 
@@ -56,8 +66,6 @@ function postData(req, res) {
 		let longitude = fields.longitude;
 
 		let reqUrl = weatherHost + weatherPath + latitude + "," + longitude + weatherParams;
-
-		console.info(reqUrl);
 
 		res.writeHead(200, {'Content-Type': 'text/plain'});
 		
@@ -71,6 +79,28 @@ function postData(req, res) {
 			}).then(function (body){
 				res.end(body);
 			}).catch(err => console.info(err.message));
+	});
+}
+
+function returnFavorites(req, res) {
+	fs.readFile("./favorites.json", function(error, content) {
+		if (error) {
+			res.writeHead(500);
+			res.end();
+		}
+		else {                   
+			res.writeHead(200, { 'Content-Type': "text/plain" });
+			res.end(content, 'utf8');                  
+		}
+	})
+}
+
+function updateFavorites(req, res) {
+	var form = new formidable.IncomingForm();
+	form.parse(req, function(err, fields, files) {
+		let links = JSON.parse(fields.linkJSON);
+		fs.writeFile("./favorites.json", JSON.stringify(links, null, '	'), "utf8", callback => {return;});
+		res.end();
 	});
 }
 

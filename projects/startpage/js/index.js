@@ -2,71 +2,7 @@
 var weekdays = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
 var months = ["January", "February","March","April","May","June","July","August","September","October","November","December"];
 
-function getWeather() {
-
-	navigator.geolocation.getCurrentPosition((position)=>{
-
-		let latitude = position["coords"]["latitude"];
-		let longitude = position["coords"]["longitude"];
-
-		let coords = {latitude, longitude};
-
-		$.post("/", coords, (forecastData) => {
-			
-			dataObject = JSON.parse(forecastData);
-			loadWeather(dataObject);
-
-		});
-
-	});
-
-}
-
-getWeather();
-
-var linkData = {
-	"school":{
-		"name":"school",
-		"img-name":"book",
-		"img-color":"blue",
-		"color":"#1A85D0",
-		"links":[],
-		"active":true
-	},
-	"tech":{
-		"name":"tech",
-		"img-name":"terminal",
-		"img-color":"green",
-		"color":"#27BF3C",
-		"links":[
-		],
-		"active":false
-	},
-	"misc":{
-		"name":"misc",
-		"img-name":"puzzle",
-		"img-color":"orange",
-		"color":"#EE7204",
-		"links":[],
-		"active":false
-	},
-	"nip":{
-		"name":"nip",
-		"img-name":"japan",
-		"img-color":"red",
-		"color":"#F53737",
-		"links":[],
-		"active":false
-	},
-	"settings":{
-		"name":"settings",
-		"img-name":"settings",
-		"img-color":"purple",
-		"color":"#764CFD",
-		"links":[],
-		"active":false
-	}
-}
+var linkData;
 
 var weatherIcons = {
 	"clear-day":"sunny-white.png",
@@ -81,27 +17,63 @@ var weatherIcons = {
 	"partly-cloudy-night":"partlycloudynight.png"
 }
 
+var active = "school";
+
 function loadLinks(cat) {
 	$("div.title-bar").css("background",linkData[cat]["color"]);
 	for (let item in linkData) {
 		let entry = linkData[item];
-		if(entry["active"]) {
-			$("#" + entry["name"] + "-tab").children().attr("src","./icons/" + entry["img-name"] + "-white.png");
-			entry["active"] = false;
+		if(entry["name"] == active) {
+			$("#" + active + "-tab").children().attr("src","./icons/" + entry["img-name"] + "-white.png");
 		}
 	}
+	console.log(cat);
+	active = cat;
 	$("#" + linkData[cat]["name"] + "-tab").children().attr("src","./icons/" + linkData[cat]["img-name"] + "-" + linkData[cat]["img-color"] + ".png");
-	linkData[cat]["active"] = true;
 	$("#links-list-1, #links-list-2").empty();
 	let links = linkData[cat]["links"];
 	for (let i = 0; i < links.length; i++) {
-		let $listItem = $("<li><a href='" + links[i]["url"] + "'>" + links[i]["title"] + "</a></li>");
+		let $listItem = $("<li><a href='" + links[i]["url"] + "'>" + links[i]["item"] + "</a></li>");
 		if(i%2==1) {
 			$("#links-list-1").append($listItem);
 		} else {
 			$("#links-list-2").append($listItem);
 		}
 	}
+	$("#favorites-cat").text(active);
+}
+
+function updateFavorites() {
+	let linkJSON = JSON.stringify(linkData);
+	$.post("/updateFavorites", {linkJSON}, success => {return true;});
+}
+
+function getFavorites() {
+	$.post("/getFavorites", success => {
+		linkData = JSON.parse(success);
+		loadLinks(active);
+		return true;
+	})
+}
+
+function getWeather() {
+
+	navigator.geolocation.getCurrentPosition((position)=>{
+
+		let latitude = position["coords"]["latitude"];
+		let longitude = position["coords"]["longitude"];
+
+		let coords = {latitude, longitude};
+
+		$.post("/getWeather", coords, (forecastData) => {
+			
+			dataObject = JSON.parse(forecastData);
+			loadWeather(dataObject);
+
+		});
+
+	});
+
 }
 
 function loadWeather(data) {
@@ -189,35 +161,78 @@ $(document).ready(function(){
 	$("#search-input").keydown(function(e){
 		if (e.keyCode === 13) {
 			e.preventDefault();
-			let query = $(this).val();
-
-			let sections = query.split(" ");
+			let input = $(this).val();
 			
+			let sections = input.split(" ");
+			let cat = sections[1];
+			let item;
+			let links;
+
 			switch(sections[0]){
-				case "search":
+				case "s":
+					sections.splice(0,1);
+					let query = sections.join(" ");
 					window.location.href = "https://www.google.com/search?q=" + query;
-				case "add-item":
-					let cat = sections[1];
-					let title = sections[2];
+					break;
+				case "add":
+					item = sections[2];
 					let url = sections[3];
 
-					let entry = {title, url};
+					let entry = {item, url};
 
 					linkData[cat]["links"].push(entry);
 
-					if (linkData[cat]["active"]) {
-						let $listItem = $("<li><a href='" + url + "'>" + title + "</a></li>");
+					if (cat == active) {
+						let $listItem = $("<li><a href='" + url + "'>" + item + "</a></li>");
 						if (linkData[cat]["links"].length % 2 == 0){
 							$("#links-list-1").append($listItem);
 						} else {
 							$("#links-list-2").append($listItem);
 						}
 					};
-					$(this).val("");
-					console.log(linkData);
-					return;
+					updateFavorites();
+					break;
+				case "rename":
+					links = linkData[cat]["links"];
+					console.info(links);
+					item = sections[2];
+					let newName = sections[3];
+					console.info(sections);
+					for(let i = 0;i < links.length;i++) {
+						if (links[i]["item"] == item) {
+							linkData[cat]["links"][i]["item"] = newName;
+						}
+					}
+					loadLinks(cat);
+					updateFavorites();
+					break;
+				case "relink":
+					links = linkData[cat]["links"];
+					item = sections[2];
+					let newLink = sections[3];
+					for(let i = 0;i < links.length;i++) {
+						if (links[i]["item"] == item) {
+							linkData[cat]["links"][i]["url"] = newLink;
+						}
+					}
+					loadLinks(cat);
+					updateFavorites();
+					break;
+				case "rm":
+					links = linkData[cat]["links"];
+					item = sections[2];
+					for(let i = 0;i < links.length;i++) {
+						if (links[i]["item"] == item) {
+							linkData[cat]["links"].splice(i, 1);
+						}
+					}
+					loadLinks(cat);
+					updateFavorites();
+					break;
+				default:
+					break;
 			}
-			
+			$(this).val("");
 		}
 	});
 
@@ -239,7 +254,7 @@ $(document).ready(function(){
 		}
 	}).click(function(){
 		loadLinks("tech");
-	})
+	});
 
 	$("#misc-tab").mouseenter(function(){
 		$(this).children().attr("src","./icons/puzzle-orange.png");
@@ -249,7 +264,7 @@ $(document).ready(function(){
 		}
 	}).click(function(){
 		loadLinks("misc");
-	})
+	});
 
 	$("#nip-tab").mouseenter(function(){
 		$(this).children().attr("src","./icons/japan-red.png");
@@ -259,7 +274,7 @@ $(document).ready(function(){
 		}
 	}).click(function(){
 		loadLinks("nip");
-	})
+	});
 
 	$("#settings-tab").mouseenter(function(){
 		$(this).children().attr("src","./icons/settings-purple.png");
@@ -269,8 +284,12 @@ $(document).ready(function(){
 		}
 	}).click(function(){
 		loadLinks("settings");
-	})
+	});
+	
+	getWeather();
+	getFavorites();
 
+	$("#search-input").focus();
 
 });
 

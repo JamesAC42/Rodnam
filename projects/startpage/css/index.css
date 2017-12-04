@@ -12,6 +12,13 @@
 
 }
 
+@font-face {
+
+	font-family: Hellovetica;
+	src: url("../font/hellovetica.ttf");
+
+}
+
 body {
 
 	font-family: LucidaSansTypewriter;
@@ -216,6 +223,15 @@ div.glyph span {
 	outline:none;
 	border:none;
 
+}
+
+#search-input:focus {
+
+	outline:none;
+	border:none;
+	margin:0;
+	padding:0;
+	
 }
 
 div.windows-container {
