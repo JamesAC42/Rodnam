@@ -23,7 +23,10 @@ body {
 
 	font-family: LucidaSansTypewriter;
 	overflow:hidden;
-	background-image: url("../backgrounds/bg-0.jpg");
+
+	background-image: url("../backgrounds/bg-30.png");
+	background-repeat: no-repeat;
+	background-size: cover;
 
 }
 
@@ -237,8 +240,8 @@ div.glyph span {
 div.windows-container {
 
 	position:absolute;
-	top:50%;
-	left:15%;
+	top:48%;
+	left:18%;
 
 	height:70vh;
 	width:70vw;
@@ -330,6 +333,40 @@ div.exit-button {
 	margin:0;
 	padding:0;
 
+	z-index:1000;
+	cursor:pointer;
+
+	transition: all .1s ease-in-out;
+
+}
+
+div.exit-button:hover {
+
+	background:#FF4362;
+
+}
+
+@keyframes shake {
+	
+	25% {
+		transform:translateX(-100px);
+	}
+	50% {
+		transform:translateX(50px);
+	}
+	75% {
+		transform:translateX(-25px);
+	}
+	100% {
+		transform:translateX(0);
+	}
+
+}
+
+div.window-shake {
+
+	animation:shake .5s;
+
 }
 
 div.window-content {
@@ -343,7 +380,7 @@ div.window-content {
 
 #links {
 
-	height:70vh;
+	height:35vh;
 	width:40vw;
 
 	top:0;
@@ -355,7 +392,7 @@ div.window-content {
 
 #links div.window-inner, #links div.window-content {
 
-	height:70vh;
+	height:35vh;
 	width:40vw;
 
 }
@@ -398,8 +435,8 @@ div.links-list-container ul li {
 
 	display:block;
 
-	height:36px;
-	line-height: 36px;
+	height:26px;
+	line-height:26px;
 
 	text-align:center;
 
@@ -409,13 +446,83 @@ div.links-list-container ul li a {
 
 	text-decoration:none;
 
-	font-size:22px;
-	font-family:LucidaSansTypewriter;
+	font-size:10px;
+	font-family:Hellovetica;
 	color:#fff;
 
 }
 
 div.links-list-container ul li:hover a{
+
+	text-decoration:underline;
+	
+}
+
+#news {
+
+	height:30vh;
+	width:40vw;
+
+	bottom:-4px;
+	left:0;
+
+}
+
+#news div.window-inner, #news div.window-content {
+
+	height:30vh;
+	width:40vw;
+
+}
+
+div.news-list-container {
+
+	position:absolute;
+	left:50%;
+	top:50%;
+	transform:translate(-50%,-50%);
+
+	width:40vw;
+
+	margin:0;
+	padding:0;
+
+}
+
+#news-list {
+
+	list-style-type: none;
+	margin:0;
+	padding:0;
+
+	overflow:hidden;
+
+}
+
+#news-list li {
+
+	display:block;
+
+	height:28px;
+	line-height: 28px;
+
+	white-space: nowrap;
+
+	text-align:center;
+
+}
+
+#news-list li a {
+
+	text-decoration:none;
+
+	font-size:8px;
+	font-family:Hellovetica;
+	color:#fff;
+
+}
+
+#news-list li:hover a{
 
 	text-decoration:underline;
 	

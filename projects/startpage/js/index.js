@@ -19,6 +19,8 @@ var weatherIcons = {
 
 var active = "school";
 
+var time;
+
 function loadLinks(cat) {
 	$("div.title-bar").css("background",linkData[cat]["color"]);
 	for (let item in linkData) {
@@ -27,7 +29,6 @@ function loadLinks(cat) {
 			$("#" + active + "-tab").children().attr("src","./icons/" + entry["img-name"] + "-white.png");
 		}
 	}
-	console.log(cat);
 	active = cat;
 	$("#" + linkData[cat]["name"] + "-tab").children().attr("src","./icons/" + linkData[cat]["img-name"] + "-" + linkData[cat]["img-color"] + ".png");
 	$("#links-list-1, #links-list-2").empty();
@@ -53,7 +54,21 @@ function getFavorites() {
 		linkData = JSON.parse(success);
 		loadLinks(active);
 		return true;
-	})
+	});
+}
+
+function getNews() {
+	$.post("/getNews", success => {
+		newsData = JSON.parse(success);
+		$("#news-list").empty();
+		let articles = newsData["articles"];
+		articles = articles.splice(5,articles.length - 5);
+		articles.forEach(function(item, index) {
+			let $newsitem = $("<li><a href='" + item["url"] + "'>" + item["title"] + "</a></li>");
+			$("#news-list").append($newsitem);
+		});
+		return;
+	});
 }
 
 function getWeather() {
@@ -88,6 +103,8 @@ function loadWeather(data) {
 	let humidity = currently["humidity"];
 	let location = data.timezone;
 	let date = new Date(time * 1000);
+
+	time = date.getTime();
 
 	let hours = date.getHours();
 	let minutes = date.getMinutes();
@@ -285,9 +302,23 @@ $(document).ready(function(){
 	}).click(function(){
 		loadLinks("settings");
 	});
+
+	$("div.exit-button").click(function() {	
+	      	      
+		var el = $(this).parent().parent();
+
+		el.addClass("window-shake");
+
+		el.remove();
+		newone = el.clone(true);
+		   
+		el.before(newone);
+
+	});
 	
 	getWeather();
 	getFavorites();
+	getNews();
 
 	$("#search-input").focus();
 

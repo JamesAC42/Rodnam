@@ -10,6 +10,14 @@ var weatherHost = "https://api.darksky.net";
 var weatherPath = "/forecast/6ac07386f336de7ba7deba67ef905ffa/";
 var weatherParams = "?exclude=[minutely,daily,alerts,flags]"
 
+var newsHost = "https://newsapi.org";
+var newsPath = "/v2/top-headlines";
+var newsParams = "?sources=breitbart-news&lang=en&apiKey=60be92f788ba466791fce6580770f180";
+
+const agent = new https.Agent({
+	rejectUnauthorized: false
+});
+
 var server = http.createServer(function(req, res) {
 	if (req.method.toLowerCase() == "get") {
 		respondPage(req, res);
@@ -55,7 +63,21 @@ function postData(req, res) {
 		returnFavorites(req, res);
 	} else if (req.url == "/updateFavorites") {
 		updateFavorites(req, res);
+	} else if (req.url == "/getNews") {
+		returnNews(req, res);
 	}
+}
+
+function returnNews(req, res) {
+	res.writeHead(200, {'Content-Type':'text/plain'});
+	reqUrl = newsHost + newsPath + newsParams;
+	fetch(reqUrl, {agent})
+		.then(function (fetch_res) {
+			return fetch_res.text();
+		}).then(function (body){
+			res.end(body);
+		}).catch(err => console.info(err.message));
+
 }
 
 function returnWeather(req, res) {
@@ -68,10 +90,6 @@ function returnWeather(req, res) {
 		let reqUrl = weatherHost + weatherPath + latitude + "," + longitude + weatherParams;
 
 		res.writeHead(200, {'Content-Type': 'text/plain'});
-		
-		const agent = new https.Agent({
-			rejectUnauthorized: false
-		});
 
 		fetch(reqUrl, {agent})
 			.then(function (fetch_res) {
