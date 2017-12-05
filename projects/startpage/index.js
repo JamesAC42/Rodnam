@@ -12,7 +12,7 @@ var weatherParams = "?exclude=[minutely,daily,alerts,flags]"
 
 var newsHost = "https://newsapi.org";
 var newsPath = "/v2/top-headlines";
-var newsParams = "?sources=breitbart-news&lang=en&apiKey=60be92f788ba466791fce6580770f180";
+var newsParams = "?sources=google-news&lang=en&apiKey=60be92f788ba466791fce6580770f180";
 
 const agent = new https.Agent({
 	rejectUnauthorized: false

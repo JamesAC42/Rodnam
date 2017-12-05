@@ -20,6 +20,7 @@ var weatherIcons = {
 var active = "school";
 
 var time;
+var bgAmt = 32;
 
 function loadLinks(cat) {
 	$("div.title-bar").css("background",linkData[cat]["color"]);
@@ -256,7 +257,7 @@ $(document).ready(function(){
 	$("#school-tab").mouseenter(function(){
 		$(this).children().attr("src","./icons/book-blue.png");
 	}).mouseleave(function(){
-		if(!linkData["school"]["active"]) {
+		if(active != 'school') {
 			$(this).children().attr("src","./icons/book-white.png");
 		}
 	}).click(function(){
@@ -266,7 +267,7 @@ $(document).ready(function(){
 	$("#tech-tab").mouseenter(function(){
 		$(this).children().attr("src","./icons/terminal-green.png");
 	}).mouseleave(function(){
-		if(!linkData["tech"]["active"]) {
+		if(active != 'tech') {
 			$(this).children().attr("src","./icons/terminal-white.png");
 		}
 	}).click(function(){
@@ -276,7 +277,7 @@ $(document).ready(function(){
 	$("#misc-tab").mouseenter(function(){
 		$(this).children().attr("src","./icons/puzzle-orange.png");
 	}).mouseleave(function(){
-		if(!linkData["misc"]["active"]) {
+		if(active != 'misc') {
 			$(this).children().attr("src","./icons/puzzle-white.png");
 		}
 	}).click(function(){
@@ -286,7 +287,7 @@ $(document).ready(function(){
 	$("#nip-tab").mouseenter(function(){
 		$(this).children().attr("src","./icons/japan-red.png");
 	}).mouseleave(function(){
-		if(!linkData["nip"]["active"]) {
+		if(active != 'nip') {
 			$(this).children().attr("src","./icons/japan-white.png");
 		}
 	}).click(function(){
@@ -296,7 +297,7 @@ $(document).ready(function(){
 	$("#settings-tab").mouseenter(function(){
 		$(this).children().attr("src","./icons/settings-purple.png");
 	}).mouseleave(function(){
-		if(!linkData["settings"]["active"]) {
+		if(active != 'settings') {
 			$(this).children().attr("src","./icons/settings-white.png");
 		}
 	}).click(function(){
@@ -306,16 +307,13 @@ $(document).ready(function(){
 	$("div.exit-button").click(function() {	
 	      	      
 		var el = $(this).parent().parent();
-
-		el.addClass("window-shake");
-
 		el.remove();
-		newone = el.clone(true);
-		   
-		el.before(newone);
 
 	});
 	
+	let bgNum = Math.floor((Math.random() * (bgAmt + 1)));
+	$("body").css("background-image", "url('/backgrounds/bg-" + bgNum + ".jpg')");
+
 	getWeather();
 	getFavorites();
 	getNews();

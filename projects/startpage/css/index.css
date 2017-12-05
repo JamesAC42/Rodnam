@@ -24,7 +24,6 @@ body {
 	font-family: LucidaSansTypewriter;
 	overflow:hidden;
 
-	background-image: url("../backgrounds/bg-30.png");
 	background-repeat: no-repeat;
 	background-size: cover;
 
@@ -163,13 +162,13 @@ div.icons-container:hover a.icon img {
 
 a.icon:hover img {
 
-	transform:translate(100%,-50%);
+	transform:translate(55%,-50%);
 
 }
 
 a.icon-support img {
 
-	transform:translate(25%,-50%);
+	transform:translate(15%,-50%);
 
 }
 
@@ -343,29 +342,6 @@ div.exit-button {
 div.exit-button:hover {
 
 	background:#FF4362;
-
-}
-
-@keyframes shake {
-	
-	25% {
-		transform:translateX(-100px);
-	}
-	50% {
-		transform:translateX(50px);
-	}
-	75% {
-		transform:translateX(-25px);
-	}
-	100% {
-		transform:translateX(0);
-	}
-
-}
-
-div.window-shake {
-
-	animation:shake .5s;
 
 }
 
@@ -550,7 +526,7 @@ div.time-stamp {
 	position:absolute;
 	left:0;
 	top:50%;
-	transform:translateY(-40%);
+	transform:translateY(-45%);
 
 	height:15vh;
 	width:13vw;
