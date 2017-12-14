@@ -3,7 +3,6 @@ var fs = require("fs");
 var formidable = require("formidable");
 var path = require("path");
 var fetch = require("node-fetch");
-
 var https = require("https");
 
 var weatherHost = "https://api.darksky.net";

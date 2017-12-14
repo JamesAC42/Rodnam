@@ -6,7 +6,7 @@
 		"color": "#1A85D0",
 		"links": [
 			{
-				"item": "LSCHS",
+				"item": "Home",
 				"url": "http://www.lschs.org"
 			},
 			{
@@ -36,6 +36,10 @@
 			{
 				"item": "PhysicsClassroom",
 				"url": "http://www.physicsclassroom.com/"
+			},
+			{
+				"item": "Thesaurus",
+				"url": "http://www.thesaurus.com/"
 			}
 		]
 	},
@@ -84,6 +88,10 @@
 			{
 				"item": "SICP",
 				"url": "https://mitpress.mit.edu/sicp/"
+			},
+			{
+				"item": "G",
+				"url": "example.com"
 			}
 		]
 	},
