@@ -39,15 +39,11 @@
 			},
 			{
 				"item": "Thesaurus",
-<<<<<<< HEAD
 				"url": "http://www.thesaurus.com/"
-=======
-				"url": "http://www.thesaurus.com"
 			},
 			{
 				"item": "APNotes",
 				"url": "http://apnotes.net/ap-15e.html"
->>>>>>> 4c6c0915472929390881684dc813a9aeba05d7e8
 			}
 		]
 	},

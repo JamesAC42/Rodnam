@@ -19,8 +19,6 @@
 	<input type="file" id="image-ipt"><br><br>
 	<button id="render">Render</button>
 	<canvas id="canvas"></canvas>
-
-	<script src="./underscore-min.js"></script>
 	<script>
 
 		const canvas = document.getElementById("canvas");
@@ -35,17 +33,19 @@
 		let colors = [];
 		let sim_min = 0.6;
 
+		let imageData_og;
 		let imageData_old;
 		let imageData_new;
 		
-		let margin;
+		let ready = false;
+		let margin = 0;
 
 		function getColors() {
-			let imageData = ctx.getImageData(0,0,c_height,c_width);
-			for (let i = 0;i<imageData.data.length;i+=4) {
-				let r = imageData.data[i];
-				let g = imageData.data[i + 1];
-				let b = imageData.data[i + 2];
+			imageData_og = ctx.getImageData(0,0,c_height,c_width);
+			for (let i = 0;i<imageData_og.data.length;i+=4) {
+				let r = imageData_og.data[i];
+				let g = imageData_og.data[i + 1];
+				let b = imageData_og.data[i + 2];
 				colors.push([r,g,b]);
 			}
 			return;
@@ -71,7 +71,67 @@
 					}
 				};
 				reader.readAsDataURL(file);
+				ready = true;
 			}
+		});
+
+		const render_btn = document.getElementById("render");
+
+		render_btn.addEventListener('click', event => {
+
+			if (!ready) return;
+
+			imageData_old = ctx.getImageData(c_width, 0, c_width, c_height);
+
+			while (margin < 0.4) {
+
+				let colorIndex = Math.floor(Math.random() * colors.length);
+				let color = colors[colorIndex];
+
+				let blotchX = c_width + 50 + Math.floor(Math.random() * c_width);
+				let blotchY = Math.floor(Math.random() * c_height);
+
+
+				ctx.beginPath();
+				ctx.arc(blotchX, blotchY, 50, 0, 2 * Math.PI);
+
+				let color_s = "rgb(" + color.join(',') + ")";
+
+				ctx.fillStyle = color_s;
+				ctx.fill();
+
+				imageData_new = ctx.getImageData(c_width, 0, c_width, c_height);
+
+				let total = 0;
+				let amt_same = 0;
+
+				for (let i = 0;i<imageData_new.data.length;i+=4) {
+
+					let og_r = imageData_og.data[i];
+					let og_g = imageData_og.data[i + 1];
+					let og_b = imageData_og.data[i + 2];
+
+					let new_r = imageData_new.data[i];
+					let new_g = imageData_new.data[i + 1];
+					let new_b = imageData_new.data[i + 2];
+
+					if (og_r == new_r && og_g == new_g && og_b == new_b) {
+						amt_same += 1;
+					}
+					total += 1;
+
+				}
+
+				let new_margin = amt_same / total;
+				if (new_margin > margin) {
+					console.log(margin);
+					margin = new_margin;
+					imageData_old = imageData_new;
+				}
+				
+				ctx.putImageData(imageData_old, c_width, 0);
+			}
+			console.log("done");
 		});
 
 	</script>
