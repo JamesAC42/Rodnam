@@ -5,10 +5,76 @@
 	<title>image estimate</title>
 </head>
 <body>
-	<canvas id="canvas" height="300" width="900"></canvas>
+
+	<style>
+		#canvas { 
+			position:absolute;
+			top:50%;
+			left:50%;
+			transform:translate(-50%,-50%);
+			border:1px solid #000;
+		}	
+	</style>
+
+	<input type="file" id="image-ipt"><br><br>
+	<button id="render">Render</button>
+	<canvas id="canvas"></canvas>
+
+	<script src="./underscore-min.js"></script>
 	<script>
-		var canvas = document.getElementById("canvas");
-		var ctx = canvas.getContext("2d");
+
+		const canvas = document.getElementById("canvas");
+		const ctx = canvas.getContext("2d");
+
+		var c_height = 500;
+		var c_width = 500;
+
+		canvas.height = c_height;
+		canvas.width = c_width * 2;
+
+		let colors = [];
+		let sim_min = 0.6;
+
+		let imageData_old;
+		let imageData_new;
+		
+		let margin;
+
+		function getColors() {
+			let imageData = ctx.getImageData(0,0,c_height,c_width);
+			for (let i = 0;i<imageData.data.length;i+=4) {
+				let r = imageData.data[i];
+				let g = imageData.data[i + 1];
+				let b = imageData.data[i + 2];
+				colors.push([r,g,b]);
+			}
+			return;
+		}
+
+		function renderOriginal(image) {
+			ctx.clearRect(0,0,c_height,c_width);
+			ctx.drawImage(image, 0,0);
+			ctx.clearRect(c_width,0,c_width,c_height);
+		}
+
+		const file_input = document.getElementById("image-ipt"); 
+		file_input.addEventListener('change', event => {
+			if (event.target.files[0]) {
+				const file = event.target.files[0];
+				const reader = new FileReader();
+				reader.onload = event => {
+					const image = new Image();
+					image.src = event.target.result;
+					image.onload = () => {
+						renderOriginal(image);
+						getColors(image);
+					}
+				};
+				reader.readAsDataURL(file);
+			}
+		});
+
 	</script>
+
 </body>
 </html>
