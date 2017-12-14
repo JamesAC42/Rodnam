@@ -36,6 +36,14 @@
 			{
 				"item": "PhysicsClassroom",
 				"url": "http://www.physicsclassroom.com/"
+			},
+			{
+				"item": "Thesaurus",
+				"url": "http://www.thesaurus.com"
+			},
+			{
+				"item": "APNotes",
+				"url": "http://apnotes.net/ap-15e.html"
 			}
 		]
 	},
@@ -126,12 +134,12 @@
 				"url": "https://4chan.org/a/"
 			},
 			{
-				"item": "g",
-				"url": "https://4chan.org/g/"
-			},
-			{
 				"item": "Soundcloud",
 				"url": "https://soundcloud.com"
+			},
+			{
+				"item": "/g/",
+				"url": "http://www.4chan.org/g/"
 			}
 		]
 	},
