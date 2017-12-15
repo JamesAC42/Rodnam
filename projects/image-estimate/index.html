@@ -18,7 +18,10 @@
 
 	<input type="file" id="image-ipt"><br><br>
 	<button id="render">Render</button>
+	<button id="stop">Stop</button>
 	<canvas id="canvas"></canvas>
+	<p id="percent"></p>
+	<script src="lodash.core.js"></script>
 	<script>
 
 		const canvas = document.getElementById("canvas");
@@ -31,7 +34,8 @@
 		canvas.width = c_width * 2;
 
 		let colors = [];
-		let sim_min = 0.6;
+		let sim_min = 0.2;
+		let radius = 30;
 
 		let imageData_og;
 		let imageData_old;
@@ -57,43 +61,18 @@
 			ctx.clearRect(c_width,0,c_width,c_height);
 		}
 
-		const file_input = document.getElementById("image-ipt"); 
-		file_input.addEventListener('change', event => {
-			if (event.target.files[0]) {
-				const file = event.target.files[0];
-				const reader = new FileReader();
-				reader.onload = event => {
-					const image = new Image();
-					image.src = event.target.result;
-					image.onload = () => {
-						renderOriginal(image);
-						getColors(image);
-					}
-				};
-				reader.readAsDataURL(file);
-				ready = true;
-			}
-		});
-
-		const render_btn = document.getElementById("render");
-
-		render_btn.addEventListener('click', event => {
-
+		function render(){
 			if (!ready) return;
-
-			imageData_old = ctx.getImageData(c_width, 0, c_width, c_height);
-
-			while (margin < 0.4) {
-
+			while (margin < sim_min) {
+				
 				let colorIndex = Math.floor(Math.random() * colors.length);
 				let color = colors[colorIndex];
 
-				let blotchX = c_width + 50 + Math.floor(Math.random() * c_width);
+				let blotchX = c_width + radius + Math.floor(Math.random() * c_width);
 				let blotchY = Math.floor(Math.random() * c_height);
 
-
 				ctx.beginPath();
-				ctx.arc(blotchX, blotchY, 50, 0, 2 * Math.PI);
+				ctx.arc(blotchX, blotchY, radius, 0, 2 * Math.PI);
 
 				let color_s = "rgb(" + color.join(',') + ")";
 
@@ -123,15 +102,50 @@
 				}
 
 				let new_margin = amt_same / total;
+
 				if (new_margin > margin) {
-					console.log(margin);
 					margin = new_margin;
+					console.info(margin);
+					const p = document.getElementById("percent");
+					p.innerText = margin + "%";
 					imageData_old = imageData_new;
 				}
-				
 				ctx.putImageData(imageData_old, c_width, 0);
 			}
-			console.log("done");
+		}
+
+		const file_input = document.getElementById("image-ipt"); 
+		file_input.addEventListener('change', event => {
+			if (event.target.files[0]) {
+				const file = event.target.files[0];
+				const reader = new FileReader();
+				reader.onload = event => {
+					const image = new Image();
+					image.src = event.target.result;
+					image.onload = () => {
+						renderOriginal(image);
+						getColors(image);
+					}
+				};
+				reader.readAsDataURL(file);
+				ready = true;
+			}
+		});
+
+		const stop_btn = document.getElementById("stop");
+		stop_btn.addEventListener('click', event => {
+			ready = false;
+		});
+
+		const render_btn = document.getElementById("render");
+		render_btn.addEventListener('click', event => {
+
+			if (!ready) return;
+
+			imageData_old = ctx.getImageData(c_width, 0, c_width, c_height);
+			render();
+			return;
+			
 		});
 
 	</script>
