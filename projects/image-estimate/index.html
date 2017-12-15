@@ -7,12 +7,16 @@
 <body>
 
 	<style>
+		body {
+			color:#fff;
+			background:#14284A;
+		}
 		#canvas { 
 			position:absolute;
 			top:50%;
 			left:50%;
 			transform:translate(-50%,-50%);
-			border:1px solid #000;
+			border:1px solid #fff;
 		}	
 	</style>
 
@@ -34,7 +38,7 @@
 		canvas.width = c_width * 2;
 
 		let colors = [];
-		let sim_min = 0.2;
+		let sim_min = 0.9;
 		let radius = 30;
 
 		let imageData_og;
@@ -61,57 +65,89 @@
 			ctx.clearRect(c_width,0,c_width,c_height);
 		}
 
+		const a = () => Math.floor(Math.random() * 255);
+
+		function nextFrame() {
+
+				// let colorIndex = Math.floor(Math.random() * colors.length);
+				// let color = colors[colorIndex];
+				const startTime = new Date().getTime();
+
+				while (new Date().getTime() - startTime < 1000 / 30) {
+
+					const color = [a(), a(), a()];
+
+					const radius = Math.random() * 20;
+
+					let blotchX = c_width + radius + Math.floor(Math.random() * c_width);
+					let blotchY = Math.floor(Math.random() * c_height);
+
+					ctx.beginPath();
+					ctx.arc(blotchX, blotchY, radius, 0, 2 * Math.PI);
+
+					let color_s = "rgb(" + color.join(',') + ")";
+
+					ctx.fillStyle = color_s;
+					ctx.fill();
+
+					imageData_new = ctx.getImageData(c_width, 0, c_width, c_height);
+
+					let total = 0;
+					let amt_same = 0;
+
+					/*
+					let imageDataColors_new = _.chunk(imageData_new.data, 4);
+					let imageDataColors_og = _.chunk(imageData_og.data,4);
+
+					for (let i = 0;i < imageDataColors_new.length;i++) {
+						if (_.isEqual(imageDataColors_new[i], imageDataColors_og[i])) {
+							amt_same += 1;
+						}
+						total += 1
+					}
+					*/
+					
+					for (let i = 0;i<imageData_new.data.length;i+=4) {
+						total += 1;
+						console.info(imageData_old.data[i + 3]);
+						if (imageData_old.data[i + 3] !== 0) {
+							amt_same++;
+						}
+						let og_r = imageData_og.data[i];
+						let og_g = imageData_og.data[i + 1];
+						let og_b = imageData_og.data[i + 2];
+
+						let new_r = imageData_new.data[i];
+						let new_g = imageData_new.data[i + 1];
+						let new_b = imageData_new.data[i + 2];
+
+						amt_same += 1 - Math.pow(Math.pow((new_r - og_r), 2) + Math.pow((new_g - og_g), 2) + Math.pow((new_b - og_b), 2), 1/3)/57.99633349791179; 
+						
+						// if (og_r == new_r && og_g == new_g && og_b == new_b) {
+						// 	amt_same += 1;
+						// }
+
+
+					}
+					
+
+					let new_margin = amt_same / total;
+
+					if (new_margin > margin) {
+						margin = new_margin;
+						console.info(margin);
+						const p = document.getElementById("percent");
+						p.innerText = margin + "%";
+						imageData_old = imageData_new;
+					}
+					ctx.putImageData(imageData_old, c_width, 0);
+				}
+				if (ready) requestAnimationFrame(nextFrame);
+		}
+
 		function render(){
 			if (!ready) return;
-			while (margin < sim_min) {
-				
-				let colorIndex = Math.floor(Math.random() * colors.length);
-				let color = colors[colorIndex];
-
-				let blotchX = c_width + radius + Math.floor(Math.random() * c_width);
-				let blotchY = Math.floor(Math.random() * c_height);
-
-				ctx.beginPath();
-				ctx.arc(blotchX, blotchY, radius, 0, 2 * Math.PI);
-
-				let color_s = "rgb(" + color.join(',') + ")";
-
-				ctx.fillStyle = color_s;
-				ctx.fill();
-
-				imageData_new = ctx.getImageData(c_width, 0, c_width, c_height);
-
-				let total = 0;
-				let amt_same = 0;
-
-				for (let i = 0;i<imageData_new.data.length;i+=4) {
-
-					let og_r = imageData_og.data[i];
-					let og_g = imageData_og.data[i + 1];
-					let og_b = imageData_og.data[i + 2];
-
-					let new_r = imageData_new.data[i];
-					let new_g = imageData_new.data[i + 1];
-					let new_b = imageData_new.data[i + 2];
-
-					if (og_r == new_r && og_g == new_g && og_b == new_b) {
-						amt_same += 1;
-					}
-					total += 1;
-
-				}
-
-				let new_margin = amt_same / total;
-
-				if (new_margin > margin) {
-					margin = new_margin;
-					console.info(margin);
-					const p = document.getElementById("percent");
-					p.innerText = margin + "%";
-					imageData_old = imageData_new;
-				}
-				ctx.putImageData(imageData_old, c_width, 0);
-			}
+			nextFrame();
 		}
 
 		const file_input = document.getElementById("image-ipt"); 
