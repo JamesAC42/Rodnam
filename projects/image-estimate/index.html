@@ -56,58 +56,59 @@
 
 		function nextFrame() {
 
-				const startTime = new Date().getTime();
+			const startTime = new Date().getTime();
 
-				while (new Date().getTime() - startTime < 1000 / 30) {
+			while (new Date().getTime() - startTime < 1000 / 30) {
 
-					let colorIndex = Math.floor(Math.random() * (imageData_og.data.length / 4)) * 4;
-					let color = [imageData_og.data[colorIndex], imageData_og.data[colorIndex + 1], imageData_og.data[colorIndex + 2]];
+				let colorIndex = Math.floor(Math.random() * (imageData_og.data.length / 4)) * 4;
+				let color = [imageData_og.data[colorIndex], imageData_og.data[colorIndex + 1], imageData_og.data[colorIndex + 2]];
 
-					const radius = Math.random() * 30;
+				const radius = Math.random() * 30;
 
-					let blotchX = c_width + radius + Math.floor(Math.random() * c_width);
-					let blotchY = Math.floor(Math.random() * c_height);
+				let blotchX = c_width + radius + Math.floor(Math.random() * c_width);
+				let blotchY = Math.floor(Math.random() * c_height);
 
-					ctx.beginPath();
-					ctx.arc(blotchX, blotchY, radius, 0, 2 * Math.PI);
+				ctx.beginPath();
+				ctx.arc(blotchX, blotchY, radius, 0, 2 * Math.PI);
 
-					let color_s = "rgb(" + color.join(',') + ")";
+				let color_s = "rgb(" + color.join(',') + ")";
 
-					ctx.fillStyle = color_s;
-					ctx.fill();
+				ctx.fillStyle = color_s;
+				ctx.fill();
 
-					imageData_new = ctx.getImageData(c_width, 0, c_width, c_height);
+				imageData_new = ctx.getImageData(c_width, 0, c_width, c_height);
 
-					let total = 0;
-					let amt_same = 0;
+				let total = 0;
+				let amt_same = 0;
+				
+				for (let i = 0;i<imageData_new.data.length;i+=4) {
+
+					total += 1;
+					let og_r = imageData_og.data[i];
+					let og_g = imageData_og.data[i + 1];
+					let og_b = imageData_og.data[i + 2];
+
+					let new_r = imageData_new.data[i];
+					let new_g = imageData_new.data[i + 1];
+					let new_b = imageData_new.data[i + 2];
+
+					amt_same += 1 - Math.pow(Math.pow((new_r - og_r), 2) + Math.pow((new_g - og_g), 2) + Math.pow((new_b - og_b), 2), 1/3)/441.672955930063709849498817084; 
 					
-					for (let i = 0;i<imageData_new.data.length;i+=4) {
-						total += 1;
-						let og_r = imageData_og.data[i];
-						let og_g = imageData_og.data[i + 1];
-						let og_b = imageData_og.data[i + 2];
-
-						let new_r = imageData_new.data[i];
-						let new_g = imageData_new.data[i + 1];
-						let new_b = imageData_new.data[i + 2];
-
-						amt_same += 1 - Math.pow(Math.pow((new_r - og_r), 2) + Math.pow((new_g - og_g), 2) + Math.pow((new_b - og_b), 2), 1/3)/57.99633349791179; 
-						
-					}
-					
-
-					let new_margin = amt_same / total;
-
-					if (new_margin > margin) {
-						margin = new_margin;
-						console.info(margin);
-						const p = document.getElementById("percent");
-						p.innerText = margin * 100 + "%";
-						imageData_old = imageData_new;
-					}
-					ctx.putImageData(imageData_old, c_width, 0);
 				}
-				if (ready) requestAnimationFrame(nextFrame);
+				
+
+				let new_margin = amt_same / total;
+
+				if (new_margin > margin) {
+					margin = new_margin;
+					const p = document.getElementById("percent");
+					p.innerText = margin * 100 + "%";
+					imageData_old = imageData_new;
+				}
+				ctx.putImageData(imageData_old, c_width, 0);
+
+			}
+			if (ready) requestAnimationFrame(nextFrame);
 		}
 
 		function render(){
