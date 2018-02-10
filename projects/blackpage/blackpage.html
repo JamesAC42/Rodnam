@@ -5,12 +5,72 @@
 	<title>Black Screen</title>
 	<link rel="icon" type="image/ico" href="../../images/favicon.ico"/>
 </head>
-<body style="background:#000">
+<body>
 	<script>
-		var url = window.location.search;
-		if (url != "") {
-			document.body.style.backgroundColor = "#" + url.slice(1, url.length);
+		function toggleFullScreen() {
+		  if ((document.fullScreenElement && document.fullScreenElement !== null) ||    
+		   (!document.mozFullScreen && !document.webkitIsFullScreen)) {
+		    if (document.documentElement.requestFullScreen) {  
+		      document.documentElement.requestFullScreen();  
+		    } else if (document.documentElement.mozRequestFullScreen) {  
+		      document.documentElement.mozRequestFullScreen();  
+		    } else if (document.documentElement.webkitRequestFullScreen) {  
+		      document.documentElement.webkitRequestFullScreen(Element.ALLOW_KEYBOARD_INPUT);  
+		    }  
+		  } else {  
+		    if (document.cancelFullScreen) {  
+		      document.cancelFullScreen();  
+		    } else if (document.mozCancelFullScreen) {  
+		      document.mozCancelFullScreen();  
+		    } else if (document.webkitCancelFullScreen) {  
+		      document.webkitCancelFullScreen();  
+		    }  
+		  }  
 		}
+	</script>
+	<style>
+		body {
+			overflow:hidden;
+		}
+		div#background {
+			position:absolute;
+			height:100vh;
+			width:100vw;
+			top:0;
+			left:0;
+			margin:0;
+			padding:0;
+			background:#000;
+		}
+		button#fullscreen-btn {
+			position:absolute;
+			height:50px;
+			width:175px;
+			top:50%;
+			left:50%;
+			transform:translate(-50%,-50%);
+			background:none;
+			font-family: monospace;
+			text-align:center;
+			line-height: 50px;
+			font-size:16px;
+			color:#333;
+			border:1px solid #333;
+			border-radius:10px;
+			cursor:pointer;
+			margin:0;
+		}
+		button:hover{ color:#eee; }
+		button:focus{ outline:none; }
+	</style>
+	<div id="background">
+		<button id="fullscreen-btn" onclick="toggleFullScreen()">Full Screen</button>
+	</div>
+	<script>
+		let url = window.location.search;
+		let color = (url === "") ? ":#000" : "#" + url.slice(1, url.length);
+		console.log(color);
+		document.getElementById("background").style.backgroundColor = color;
 	</script>
 </body>
 </html>
