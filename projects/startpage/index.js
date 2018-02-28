@@ -1,23 +1,23 @@
-var http = require("http");
-var fs = require("fs");
-var formidable = require("formidable");
-var path = require("path");
-var fetch = require("node-fetch");
-var https = require("https");
+const http = require("http");
+const fs = require("fs");
+const formidable = require("formidable");
+const path = require("path");
+const fetch = require("node-fetch");
+const https = require("https");
 
-var weatherHost = "https://api.darksky.net";
-var weatherPath = "/forecast/6ac07386f336de7ba7deba67ef905ffa/";
-var weatherParams = "?exclude=[minutely,daily,alerts,flags]"
+const weatherHost = "https://api.darksky.net";
+const weatherPath = "/forecast/6ac07386f336de7ba7deba67ef905ffa/";
+const weatherParams = "?exclude=[minutely,daily,alerts,flags]"
 
-var newsHost = "https://newsapi.org";
-var newsPath = "/v2/top-headlines";
-var newsParams = "?sources=google-news&lang=en&apiKey=60be92f788ba466791fce6580770f180";
+const newsHost = "https://newsapi.org";
+const newsPath = "/v2/top-headlines";
+const newsParams = "?sources=google-news&lang=en&apiKey=60be92f788ba466791fce6580770f180";
 
 const agent = new https.Agent({
 	rejectUnauthorized: false
 });
 
-var server = http.createServer(function(req, res) {
+const server = http.createServer(function(req, res) {
 	if (req.method.toLowerCase() == "get") {
 		respondPage(req, res);
 	} else {
@@ -26,13 +26,13 @@ var server = http.createServer(function(req, res) {
 });
 
 function respondPage(req, res) {
-	var filePath = req.url;
+	let filePath = req.url;
 	if (filePath == "/") {
 		filePath = "/index.html";
 	}
 	filePath = __dirname + filePath;
-	var extname = path.extname(filePath);
-	var contentType = "text/html";
+	const extname = path.extname(filePath);
+	let contentType = "text/html";
 	switch (extname) {
 		case '.js':
 			contentType = 'text/javascript';
@@ -113,7 +113,7 @@ function returnFavorites(req, res) {
 }
 
 function updateFavorites(req, res) {
-	var form = new formidable.IncomingForm();
+	const form = new formidable.IncomingForm();
 	form.parse(req, function(err, fields, files) {
 		let links = JSON.parse(fields.linkJSON);
 		fs.writeFile("./favorites.json", JSON.stringify(links, null, '	'), "utf8", callback => {return;});
