@@ -208,9 +208,10 @@ let activeAngle = 0;
 let start = new Date().getTime();
 let fallIncrement =  700; //ms
 
-let fallenColor = '#00cc99';
+let fallenColor;
 
 let gameOver = false;
+let pause = false;
 
 let score = 0;
 let nextLevel = 1000;
@@ -229,10 +230,17 @@ document.addEventListener('keydown', ev => {
 		case 40:
 			moveActiveDown();
 			break;
+		case 80:
+			togglePause();
+			break;
 		default:
 			break;
 	}
 });
+
+function togglePause() {
+	pause = !pause;
+}
 
 function randomColor() {
 	let result = "rgb(";
@@ -377,10 +385,11 @@ function checkClear() {
 	}
 	score += scoreAdd;
 	scoreDisplay.innerHTML = score;
-	if (score === nextLevel) {
+	if (score >= nextLevel) {
 		fallIncrement *= 0.85;
-		nextLevel *= 1.15;
+		nextLevel *= 1.40;
 		fallenColor = randomColor();
+		console.log(fallenColor);
 	}
 }
 
@@ -391,20 +400,21 @@ function checkGameOver() {
 }
 
 function render() {
-	if (new Date().getTime() - start > fallIncrement) {
-		moveActiveDown();
-		start = new Date().getTime();
+	if (!gameOver && !pause) {
+		if (new Date().getTime() - start > fallIncrement) {
+			moveActiveDown();
+			start = new Date().getTime();
+		}
+		renderFallen();
+		renderFalling();
+		checkClear();
+		checkGameOver();
 	}
-	renderFallen();
-	renderFalling();
-	checkClear();
-	checkGameOver();
-	if (!gameOver) {
-		setTimeout(render,5);
-	}
+	setTimeout(render,5);
 };
 
 function startGame() {
+	fallenColor = randomColor();
 	newActive();
 	render();
 }
