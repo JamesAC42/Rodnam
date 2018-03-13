@@ -1,6 +1,13 @@
 const c = document.getElementById("canvas");
 const ctx = c.getContext("2d");
 
+const nextPieceCanvas = document.getElementById("next-piece");
+const nextPieceCTX = nextPieceCanvas.getContext("2d");
+
+const nextPieceLabel = document.getElementById("next-piece-label");
+const nextPieceContainer = document.getElementById("next-piece-outer");
+const nextPieceInner = document.getElementById("next-piece-inner");
+
 const scoreDisplay = document.getElementById("score");
 
 const params = {
@@ -11,6 +18,12 @@ const params = {
 
 const winHeight = params.blockHeight * params.blockSize;
 const winWidth = params.blockWidth * params.blockSize;
+
+nextPieceLabel.style.width = params.blockSize * 5 + "px";
+nextPieceContainer.style.height = params.blockSize * 5 + "px";
+nextPieceContainer.style.width = params.blockSize * 5 + "px";
+nextPieceInner.style.width = params.blockSize * 5 + "px";
+nextPieceInner.style.height = params.blockSize * 5 + "px";
 
 c.height = winHeight;
 c.width = winWidth;
@@ -203,6 +216,7 @@ const tetrominoes = {
 
 let activePoint;
 let activePiece;
+let nextPiece = tetrominoNames[Math.floor(Math.random() * tetrominoNames.length)]; ;
 let activeAngle = 0;
 
 let start = new Date().getTime();
@@ -291,9 +305,31 @@ function renderFallen() {
 	}
 }
 
+function renderNextPiece() {
+	let piece = tetrominoes[nextPiece]["angles"][0];
+	let height = piece.length * params.blockSize;
+	let width = piece[0].length * params.blockSize;
+	nextPieceCanvas.height = height;
+	nextPieceCanvas.width = width;
+	for (let row = 0; row < piece.length; row++) {
+		for (let col = 0; col < piece[row].length; col++) {
+			if (piece[row][col]) {
+				nextPieceCTX.strokeStyle = "#ffffff";
+				nextPieceCTX.beginPath();
+				nextPieceCTX.rect(col * params.blockSize, row * params.blockSize, params.blockSize, params.blockSize);
+				nextPieceCTX.stroke();
+				nextPieceCTX.fillStyle = tetrominoes[nextPiece]["color"];
+				nextPieceCTX.fillRect(col * params.blockSize, row * params.blockSize, params.blockSize, params.blockSize);
+			}
+		}
+	}
+}
+
 function newActive() {
 	activePoint = new Point(Math.floor(params.blockWidth / 2), -1);
-	activePiece = tetrominoNames[Math.floor(Math.random()*tetrominoNames.length)]; 
+	activePiece = nextPiece;
+	nextPiece = tetrominoNames[Math.floor(Math.random() * tetrominoNames.length)]; 
+	renderNextPiece();
 }
 
 function placePiece(piece, x, y) {
@@ -317,10 +353,12 @@ function moveActiveDown() {
 			if (boardRow === params.blockHeight) {
 				newActive();
 				placePiece(piece, x, y);
+				return;
 			} else {
 				if (board[boardRow][boardCol] && piece[row][col]) {
 					newActive();
 					placePiece(piece, x, y);
+					return
 				}
 			}
 		}
@@ -389,7 +427,6 @@ function checkClear() {
 		fallIncrement *= 0.85;
 		nextLevel *= 1.40;
 		fallenColor = randomColor();
-		console.log(fallenColor);
 	}
 }
 
