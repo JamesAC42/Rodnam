@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> 
     <link rel="stylesheet" href="index.css">
     <title>Music Player</title>
 </head>
 <body>
+    <audio id="audio-src" src=""></audio>
     <div class="content">
         <div class="content-inner">
             <div class="sidebar">
@@ -34,109 +34,168 @@
                 <div class="sidebar-content-outer">
                     <div id="sidebar-tracks" class="sidebar-content sidebar-content-active">
                         <div class="sidebar-header">
-                            Tracks
+                            <span>Tracks</span>
                         </div>
                         <div class="sidebar-list">
-                            <ul>
-                                <li>Track 1</li>
-                                <li>Track 2</li>
-                                <li>Track 3</li>
-                                <li>Track 4</li>
-                                <li>Track 5</li>
-                                <li>Track 6</li>
-                                <li>Track 7</li>
-                                <li>Track 8</li>
-                                <li>Track 9</li>
-                                <li>Track 10</li>
-                                <li>Track 11</li>
-                                <li>Track 12</li>
-                                <li>Track 13</li>
-                                <li>Track 14</li>
-                                <li>Track 15</li>
-                                <li>Track 16</li>
-                                <li>Track 17</li>
-                                <li>Track 18</li>
-                                <li>Track 19</li>
-                                <li>Track 20</li>
+                            <ul id="track-list">
+                                
                             </ul>
                         </div>
                     </div>
                     <div id="sidebar-albums" class="sidebar-content">
                         <div class="sidebar-header">
-                            Albums
+                            <span>Albums</span>
                         </div>
                         <div class="sidebar-list">
-                            <ul>
-                                <li>Album 1</li>
-                                <li>Album 2</li>
-                                <li>Album 3</li>
-                                <li>Album 4</li>
-                                <li>Album 5</li>
+                            <ul id="album-list">
+                                
                             </ul>
                         </div>
                     </div>
                     <div id="sidebar-artists" class="sidebar-content">
                         <div class="sidebar-header">
-                            Artists
+                            <span>Artists</span>
                         </div>
                         <div class="sidebar-list">
-                            <ul>
-                                <li>Artist 1</li>
-                                <li>Artist 2</li>
-                                <li>Artist 3</li>
+                            <ul id="artist-list">
+                                
                             </ul>
                         </div>
                     </div>
                     <div id="sidebar-playlists" class="sidebar-content">
                         <div class="sidebar-header">
-                            Playlists
+                            <span>Playlists</span>
                         </div>
                         <div class="sidebar-list">
-                            <ul>
-                                <li>Playlist 1</li>
-                                <li>Playlist 2</li>
-                                <li>Playlist 3</li>
-                                <li>Playlist 4</li>
+                            <ul id="playlist-list">
+                                
                             </ul>
                         </div>
                     </div>
                     <div id="sidebar-genres" class="sidebar-content">
                         <div class="sidebar-header">
-                            Genres
+                            <span>Genres</span>
                         </div>
                         <div class="sidebar-list">
-                            <ul>
-                                <li>Genre 1</li>
-                                <li>Genre 2</li>
-                                <li>Genre 3</li>
-                                <li>Genre 4</li>
-                                <li>Genre 5</li>
-                                <li>Genre 6</li>
-                                <li>Genre 7</li>
+                            <ul id="genre-list">
+                                
                             </ul>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="view-outer">
+                <div class="view-background"></div>
                 <div class="view-inner">
                     <div class="panel">
-    
+                        <div class="panel-title">
+                            
+                        </div>
+                        <div class="panel-controls">
+                            <div class="panel-control">
+                                DELETE
+                            </div>
+                            <div class="panel-control">
+                                RENAME
+                            </div>
+                            <div class="panel-control">
+                                ADD SONGS
+                            </div>
+                            <div class="panel-control">
+                                <span class="panel-play">
+                                    PLAY
+                                </span>
+                            </div>
+                        </div>
                     </div>
                     <div class="music-list">
-    
+                        <!--
+                        <div class="music-item">
+                            <div class="music-item-info info-padding"></div>
+                            <div class="music-item-info music-item-title">
+                                Song Name
+                            </div>
+                            <div class="music-item-info music-item-artist">
+                                Song Artist
+                            </div>
+                            <div class="music-item-info music-item-album">
+                                Song Album
+                            </div>
+                            <div class="music-item-options">
+                                <img src="./icons/icons8-more-filled-50.png" alt="">
+                            </div>
+                        </div>
+                    -->
                     </div>
+                </div>
+                <div class="view-nothing-selected">
+                    Select something from the sidebar.
                 </div>
             </div>
         </div>
     </div>
     <div class="now-playing">
-    
+        <div class="now-playing-inner">
+            <div class="song-info">
+                <div class="song-album-cover">
+                    <img src="" alt="No Cover">
+                </div>
+                <div class="song-info">
+                    <div class="song-title">
+                        
+                    </div>
+                    <div class="song-artist">
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="media-controls">
+                <div class="media-controls-inner">
+                    <div class="control-buttons">
+                        <div class="skip-back">
+                            <img src="./icons/icons8-skip-to-start-50.png" alt="">
+                        </div>
+                        <div class="toggle-play">
+                            <img src="./icons/icons8-circled-play-filled-50.png" alt="">
+                        </div>
+                        <div class="skip-forward">
+                            <img src="./icons/icons8-end-50.png" alt="">
+                        </div>
+                    </div>
+                    <div class="seek-outer">
+                        <div class="current-time">
+                            0:00
+                        </div>
+                        <div class="seek-bar">
+                            <div class="seek-bar-inner"></div>
+                        </div>
+                        <div class="song-time">
+                            0:00
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="media-options">
+                <div class="queue">
+                    <img src="./icons/icons8-menu-50.png">
+                </div>
+                <div class="shuffle">
+                    <img src="./icons/icons8-shuffle-50.png" alt="">
+                </div>
+                <div class="loop">
+                    <img src="./icons/icons8-repeat-50.png" alt="">
+                </div>
+                <div class="volume">
+                    <img class="volume-icon" src="./icons/icons8-audio-50.png" alt="">
+                    <div class="volume-bar">
+                        <div class="volume-bar-inner"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     <script
-    src="https://code.jquery.com/jquery-3.3.1.min.js"
-    integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-    crossorigin="anonymous"></script>
+    src="./jquery-3.0.0.min.js"></script>
     <script src="index.js"></script>
 </body>
 </html>
