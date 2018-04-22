@@ -1,0 +1,140 @@
+{
+  "songs": {
+    "music": [
+        {
+            "path":"C:\\Users\\james\\Documents\\Github\\Rodnam\\projects\\music_player\\music\\Birdland - Maynard Ferguson.mp3",
+            "title":"Birdland",
+            "artist":"Maynard Ferguson",
+            "album":"This is Jazz",
+            "genre":"Jazz"
+        }
+    ],
+    "temp1": [
+        {
+            "path":"C:\\Users\\james\\Documents\\Github\\Rodnam\\projects\\music_player\\music\\temp1\\MacArthur Park - Maynard Ferguson.mp3",
+            "title":"MacArthur Park",
+            "artist":"Maynard Ferguson",
+            "album":"This is Jazz",
+            "genre":"Jazz"
+        },
+        {
+            "path":"C:\\Users\\james\\Documents\\Github\\Rodnam\\projects\\music_player\\music\\temp1\\Chameleon - Maynard Ferguson.mp3",
+            "title":"Chameleon",
+            "artist":"Maynard Ferguson",
+            "album":"This is Jazz",
+            "genre":"Jazz"
+        }
+    ],
+    "temp2": [
+        {
+            "path":"C:\\Users\\james\\Documents\\Github\\Rodnam\\projects\\music_player\\music\\temp1\\temp2\\MacArthur Park - Maynard Ferguson.mp3",
+            "title":"MacArthur Park",
+            "artist":"Maynard Ferguson",
+            "album":"This is Jazz",
+            "genre":"Jazz"
+        },
+        {
+            "path":"C:\\Users\\james\\Documents\\Github\\Rodnam\\projects\\music_player\\music\\temp1\\temp2\\Chameleon - Maynard Ferguson.mp3",
+            "title":"Chameleon",
+            "artist":"Maynard Ferguson",
+            "album":"This is Jazz",
+            "genre":"Jazz"
+        },
+        {
+            "path":"C:\\Users\\james\\Documents\\Github\\Rodnam\\projects\\music_player\\music\\temp1\\temp2\\Birdland - Maynard Ferguson.mp3",
+            "title":"Birdland",
+            "artist":"Maynard Ferguson",
+            "album":"This is Jazz",
+            "genre":"Jazz"
+        },
+        {
+            "path":"C:\\Users\\james\\Documents\\Github\\Rodnam\\projects\\music_player\\music\\temp1\\temp2\\MacArthur Park - Maynard Ferguson.mp3",
+            "title":"MacArthur Park",
+            "artist":"Maynard Ferguson",
+            "album":"This is Jazz",
+            "genre":"Jazz"
+        },
+        {
+            "path":"C:\\Users\\james\\Documents\\Github\\Rodnam\\projects\\music_player\\music\\temp1\\temp2\\Chameleon - Maynard Ferguson.mp3",
+            "title":"Chameleon",
+            "artist":"Maynard Ferguson",
+            "album":"This is Jazz",
+            "genre":"Jazz"
+        },
+        {
+            "path":"C:\\Users\\james\\Documents\\Github\\Rodnam\\projects\\music_player\\music\\temp1\\temp2\\Birdland - Maynard Ferguson.mp3",
+            "title":"Birdland",
+            "artist":"Maynard Ferguson",
+            "album":"This is Jazz",
+            "genre":"Jazz"
+        },
+        {
+            "path":"C:\\Users\\james\\Documents\\Github\\Rodnam\\projects\\music_player\\music\\temp1\\temp2\\MacArthur Park - Maynard Ferguson.mp3",
+            "title":"MacArthur Park",
+            "artist":"Maynard Ferguson",
+            "album":"This is Jazz",
+            "genre":"Jazz"
+        },
+        {
+            "path":"C:\\Users\\james\\Documents\\Github\\Rodnam\\projects\\music_player\\music\\temp1\\temp2\\Chameleon - Maynard Ferguson.mp3",
+            "title":"Chameleon",
+            "artist":"Maynard Ferguson",
+            "album":"This is Jazz",
+            "genre":"Jazz"
+        },
+        {
+            "path":"C:\\Users\\james\\Documents\\Github\\Rodnam\\projects\\music_player\\music\\temp1\\temp2\\Birdland - Maynard Ferguson.mp3",
+            "title":"Birdland",
+            "artist":"Maynard Ferguson",
+            "album":"This is Jazz",
+            "genre":"Jazz"
+        },
+        {
+            "path":"C:\\Users\\james\\Documents\\Github\\Rodnam\\projects\\music_player\\music\\temp1\\temp2\\MacArthur Park - Maynard Ferguson.mp3",
+            "title":"MacArthur Park",
+            "artist":"Maynard Ferguson",
+            "album":"This is Jazz",
+            "genre":"Jazz"
+        },
+        {
+            "path":"C:\\Users\\james\\Documents\\Github\\Rodnam\\projects\\music_player\\music\\temp1\\temp2\\Chameleon - Maynard Ferguson.mp3",
+            "title":"Chameleon",
+            "artist":"Maynard Ferguson",
+            "album":"This is Jazz",
+            "genre":"Jazz"
+        },
+        {
+            "path":"C:\\Users\\james\\Documents\\Github\\Rodnam\\projects\\music_player\\music\\temp1\\temp2\\Birdland - Maynard Ferguson.mp3",
+            "title":"Birdland",
+            "artist":"Maynard Ferguson",
+            "album":"This is Jazz",
+            "genre":"Jazz"
+        },
+        {
+            "path":"C:\\Users\\james\\Documents\\Github\\Rodnam\\projects\\music_player\\music\\temp1\\temp2\\MacArthur Park - Maynard Ferguson.mp3",
+            "title":"MacArthur Park",
+            "artist":"Maynard Ferguson",
+            "album":"This is Jazz",
+            "genre":"Jazz"
+        },
+        {
+            "path":"C:\\Users\\james\\Documents\\Github\\Rodnam\\projects\\music_player\\music\\temp1\\temp2\\Chameleon - Maynard Ferguson.mp3",
+            "title":"Chameleon",
+            "artist":"Maynard Ferguson",
+            "album":"This is Jazz",
+            "genre":"Jazz"
+        },
+        {
+            "path":"C:\\Users\\james\\Documents\\Github\\Rodnam\\projects\\music_player\\music\\temp1\\temp2\\Birdland - Maynard Ferguson.mp3",
+            "title":"Birdland",
+            "artist":"Maynard Ferguson",
+            "album":"This is Jazz",
+            "genre":"Jazz"
+        }
+    ]
+  },
+  "playlist": [],
+  "artists": [],
+  "albums": [],
+  "genres": []
+}
