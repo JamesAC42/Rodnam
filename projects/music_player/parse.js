@@ -47,18 +47,25 @@ let walk = (dir, done) => {
 
                                 let tags = metadata.common;
                                 let entry = {};
-
+                                
                                 let fileName = path.basename(
                                     file, path.extname(file));
-
+                                    
                                 if(tags.title === undefined) {
                                     entry.title = fileName;
                                 } else {
                                     entry.title = tags.title;
                                 }
 
-                                entry.path = path.relative(process.cwd(), file);
-                                
+                                let newname = fileName.replace(/\s+/g,'-');
+                                newname = fileName.replace(/[^a-zA-Z0-9\-.]/g,'-') + ext;
+                                //newname = newname.replace('-mkv', '.mkv');
+                                fs.rename(file, dir + "/" + newname, function(err){
+                                    if(err) throw err;
+                                });
+
+                                entry.path = path.relative(process.cwd(), dir + "/" + newname);
+                                    
                                 entry.artist = (tags.artist === undefined) ? 
                                     "None" : tags.artist;
                                 entry.album = (tags.album === undefined) ? 
@@ -84,13 +91,6 @@ let walk = (dir, done) => {
                                     results["genres"][entry.genre[genre]]
                                         .push(entry);
                                 }
-
-                                let newname = fileName.replace(/\s+/g,'-');
-                                newname = fileName.replace(/[^a-zA-Z0-9\-.]/g,'-') + ext;
-                                //newname = newname.replace('-mkv', '.mkv');
-                                fs.rename(file, dir + "/" + newname, function(err){
-                                    if(err) throw err;
-                                });
 
                                 if (!--pending) done(null, results);
                             })
