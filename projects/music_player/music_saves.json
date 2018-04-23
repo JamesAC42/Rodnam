@@ -1,140 +1,667 @@
 {
   "songs": {
-    "music": [
-        {
-            "path":"C:\\Users\\james\\Documents\\Github\\Rodnam\\projects\\music_player\\music\\Birdland - Maynard Ferguson.mp3",
-            "title":"Birdland",
-            "artist":"Maynard Ferguson",
-            "album":"This is Jazz",
-            "genre":"Jazz"
-        }
-    ],
-    "temp1": [
-        {
-            "path":"C:\\Users\\james\\Documents\\Github\\Rodnam\\projects\\music_player\\music\\temp1\\MacArthur Park - Maynard Ferguson.mp3",
-            "title":"MacArthur Park",
-            "artist":"Maynard Ferguson",
-            "album":"This is Jazz",
-            "genre":"Jazz"
-        },
-        {
-            "path":"C:\\Users\\james\\Documents\\Github\\Rodnam\\projects\\music_player\\music\\temp1\\Chameleon - Maynard Ferguson.mp3",
-            "title":"Chameleon",
-            "artist":"Maynard Ferguson",
-            "album":"This is Jazz",
-            "genre":"Jazz"
-        }
-    ],
-    "temp2": [
-        {
-            "path":"C:\\Users\\james\\Documents\\Github\\Rodnam\\projects\\music_player\\music\\temp1\\temp2\\MacArthur Park - Maynard Ferguson.mp3",
-            "title":"MacArthur Park",
-            "artist":"Maynard Ferguson",
-            "album":"This is Jazz",
-            "genre":"Jazz"
-        },
-        {
-            "path":"C:\\Users\\james\\Documents\\Github\\Rodnam\\projects\\music_player\\music\\temp1\\temp2\\Chameleon - Maynard Ferguson.mp3",
-            "title":"Chameleon",
-            "artist":"Maynard Ferguson",
-            "album":"This is Jazz",
-            "genre":"Jazz"
-        },
-        {
-            "path":"C:\\Users\\james\\Documents\\Github\\Rodnam\\projects\\music_player\\music\\temp1\\temp2\\Birdland - Maynard Ferguson.mp3",
-            "title":"Birdland",
-            "artist":"Maynard Ferguson",
-            "album":"This is Jazz",
-            "genre":"Jazz"
-        },
-        {
-            "path":"C:\\Users\\james\\Documents\\Github\\Rodnam\\projects\\music_player\\music\\temp1\\temp2\\MacArthur Park - Maynard Ferguson.mp3",
-            "title":"MacArthur Park",
-            "artist":"Maynard Ferguson",
-            "album":"This is Jazz",
-            "genre":"Jazz"
-        },
-        {
-            "path":"C:\\Users\\james\\Documents\\Github\\Rodnam\\projects\\music_player\\music\\temp1\\temp2\\Chameleon - Maynard Ferguson.mp3",
-            "title":"Chameleon",
-            "artist":"Maynard Ferguson",
-            "album":"This is Jazz",
-            "genre":"Jazz"
-        },
-        {
-            "path":"C:\\Users\\james\\Documents\\Github\\Rodnam\\projects\\music_player\\music\\temp1\\temp2\\Birdland - Maynard Ferguson.mp3",
-            "title":"Birdland",
-            "artist":"Maynard Ferguson",
-            "album":"This is Jazz",
-            "genre":"Jazz"
-        },
-        {
-            "path":"C:\\Users\\james\\Documents\\Github\\Rodnam\\projects\\music_player\\music\\temp1\\temp2\\MacArthur Park - Maynard Ferguson.mp3",
-            "title":"MacArthur Park",
-            "artist":"Maynard Ferguson",
-            "album":"This is Jazz",
-            "genre":"Jazz"
-        },
-        {
-            "path":"C:\\Users\\james\\Documents\\Github\\Rodnam\\projects\\music_player\\music\\temp1\\temp2\\Chameleon - Maynard Ferguson.mp3",
-            "title":"Chameleon",
-            "artist":"Maynard Ferguson",
-            "album":"This is Jazz",
-            "genre":"Jazz"
-        },
-        {
-            "path":"C:\\Users\\james\\Documents\\Github\\Rodnam\\projects\\music_player\\music\\temp1\\temp2\\Birdland - Maynard Ferguson.mp3",
-            "title":"Birdland",
-            "artist":"Maynard Ferguson",
-            "album":"This is Jazz",
-            "genre":"Jazz"
-        },
-        {
-            "path":"C:\\Users\\james\\Documents\\Github\\Rodnam\\projects\\music_player\\music\\temp1\\temp2\\MacArthur Park - Maynard Ferguson.mp3",
-            "title":"MacArthur Park",
-            "artist":"Maynard Ferguson",
-            "album":"This is Jazz",
-            "genre":"Jazz"
-        },
-        {
-            "path":"C:\\Users\\james\\Documents\\Github\\Rodnam\\projects\\music_player\\music\\temp1\\temp2\\Chameleon - Maynard Ferguson.mp3",
-            "title":"Chameleon",
-            "artist":"Maynard Ferguson",
-            "album":"This is Jazz",
-            "genre":"Jazz"
-        },
-        {
-            "path":"C:\\Users\\james\\Documents\\Github\\Rodnam\\projects\\music_player\\music\\temp1\\temp2\\Birdland - Maynard Ferguson.mp3",
-            "title":"Birdland",
-            "artist":"Maynard Ferguson",
-            "album":"This is Jazz",
-            "genre":"Jazz"
-        },
-        {
-            "path":"C:\\Users\\james\\Documents\\Github\\Rodnam\\projects\\music_player\\music\\temp1\\temp2\\MacArthur Park - Maynard Ferguson.mp3",
-            "title":"MacArthur Park",
-            "artist":"Maynard Ferguson",
-            "album":"This is Jazz",
-            "genre":"Jazz"
-        },
-        {
-            "path":"C:\\Users\\james\\Documents\\Github\\Rodnam\\projects\\music_player\\music\\temp1\\temp2\\Chameleon - Maynard Ferguson.mp3",
-            "title":"Chameleon",
-            "artist":"Maynard Ferguson",
-            "album":"This is Jazz",
-            "genre":"Jazz"
-        },
-        {
-            "path":"C:\\Users\\james\\Documents\\Github\\Rodnam\\projects\\music_player\\music\\temp1\\temp2\\Birdland - Maynard Ferguson.mp3",
-            "title":"Birdland",
-            "artist":"Maynard Ferguson",
-            "album":"This is Jazz",
-            "genre":"Jazz"
-        }
+    "hall+and+oates": [
+      {
+        "title": "Family Man",
+        "path": "music\\hall+and+oates\\04---Family-Man.mp3",
+        "artist": "Daryl Hall & John Oates",
+        "album": "Timeless Classics",
+        "genre": [
+          "Pop/Rock"
+        ]
+      },
+      {
+        "title": "You Make My Dreams",
+        "path": "music\\hall+and+oates\\01---You-Make-My-Dreams.mp3",
+        "artist": "Daryl Hall & John Oates",
+        "album": "Timeless Classics",
+        "genre": [
+          "Pop/Rock"
+        ]
+      },
+      {
+        "title": "She's Gone",
+        "path": "music\\hall+and+oates\\03---She-s-Gone.mp3",
+        "artist": "Daryl Hall & John Oates",
+        "album": "Timeless Classics",
+        "genre": [
+          "Pop/Rock"
+        ]
+      },
+      {
+        "title": "I Can't Go For That (No Can Do)",
+        "path": "music\\hall+and+oates\\02---I-Can-t-Go-For-That--No-Can-Do-.mp3",
+        "artist": "Daryl Hall & John Oates",
+        "album": "Timeless Classics",
+        "genre": [
+          "Pop/Rock"
+        ]
+      },
+      {
+        "title": "Out Of Touch",
+        "path": "music\\hall+and+oates\\05---Out-Of-Touch.mp3",
+        "artist": "Daryl Hall & John Oates",
+        "album": "Timeless Classics",
+        "genre": [
+          "Pop/Rock"
+        ]
+      },
+      {
+        "title": "Method Of Modern Love",
+        "path": "music\\hall+and+oates\\06---Method-Of-Modern-Love.mp3",
+        "artist": "Daryl Hall & John Oates",
+        "album": "Timeless Classics",
+        "genre": [
+          "Pop/Rock"
+        ]
+      },
+      {
+        "title": "Private Eyes",
+        "path": "music\\hall+and+oates\\07---Private-Eyes.mp3",
+        "artist": "Daryl Hall & John Oates",
+        "album": "Timeless Classics",
+        "genre": [
+          "Pop/Rock"
+        ]
+      },
+      {
+        "title": "Sara Smile",
+        "path": "music\\hall+and+oates\\08---Sara-Smile.mp3",
+        "artist": "Daryl Hall & John Oates",
+        "album": "Timeless Classics",
+        "genre": [
+          "Pop/Rock"
+        ]
+      },
+      {
+        "title": "Wait For Me",
+        "path": "music\\hall+and+oates\\09---Wait-For-Me.mp3",
+        "artist": "Daryl Hall & John Oates",
+        "album": "Timeless Classics",
+        "genre": [
+          "Pop/Rock"
+        ]
+      },
+      {
+        "title": "Kiss On My List",
+        "path": "music\\hall+and+oates\\11---Kiss-On-My-List.mp3",
+        "artist": "Daryl Hall & John Oates",
+        "album": "Timeless Classics",
+        "genre": [
+          "Pop/Rock"
+        ]
+      },
+      {
+        "title": "You've Lost That Lovin Feeling",
+        "path": "music\\hall+and+oates\\10---You-ve-Lost-That-Lovin-Feeling.mp3",
+        "artist": "Daryl Hall & John Oates",
+        "album": "Timeless Classics",
+        "genre": [
+          "Pop/Rock"
+        ]
+      },
+      {
+        "title": "Maneater",
+        "path": "music\\hall+and+oates\\12---Maneater.mp3",
+        "artist": "Daryl Hall & John Oates",
+        "album": "Timeless Classics",
+        "genre": [
+          "Pop/Rock"
+        ]
+      },
+      {
+        "title": "One On One",
+        "path": "music\\hall+and+oates\\13---One-On-One.mp3",
+        "artist": "Daryl Hall & John Oates",
+        "album": "Timeless Classics",
+        "genre": [
+          "Pop/Rock"
+        ]
+      },
+      {
+        "title": "Say It Isn't So",
+        "path": "music\\hall+and+oates\\14---Say-It-Isn-t-So.mp3",
+        "artist": "Daryl Hall & John Oates",
+        "album": "Timeless Classics",
+        "genre": [
+          "Pop/Rock"
+        ]
+      },
+      {
+        "title": "Everytime You Go Away (Live)",
+        "path": "music\\hall+and+oates\\16---Everytime-You-Go-Away--Live-.mp3",
+        "artist": "Daryl Hall & John Oates",
+        "album": "Timeless Classics",
+        "genre": [
+          "Pop/Rock"
+        ]
+      },
+      {
+        "title": "Adult Education",
+        "path": "music\\hall+and+oates\\15---Adult-Education.mp3",
+        "artist": "Daryl Hall & John Oates",
+        "album": "Timeless Classics",
+        "genre": [
+          "Pop/Rock"
+        ]
+      },
+      {
+        "title": "Everything Your Heart Desires (Video Mix)",
+        "path": "music\\hall+and+oates\\17---Everything-Your-Heart-Desires--Video-Mix-.mp3",
+        "artist": "Daryl Hall & John Oates",
+        "album": "Timeless Classics",
+        "genre": [
+          "Pop/Rock"
+        ]
+      },
+      {
+        "title": "Rich Girl",
+        "path": "music\\hall+and+oates\\18---Rich-Girl.mp3",
+        "artist": "Daryl Hall & John Oates",
+        "album": "Timeless Classics",
+        "genre": [
+          "Pop/Rock"
+        ]
+      }
     ]
   },
-  "playlist": [],
-  "artists": [],
-  "albums": [],
-  "genres": []
+  "albums": {
+    "Timeless Classics": [
+      {
+        "title": "Family Man",
+        "path": "music\\hall+and+oates\\04---Family-Man.mp3",
+        "artist": "Daryl Hall & John Oates",
+        "album": "Timeless Classics",
+        "genre": [
+          "Pop/Rock"
+        ]
+      },
+      {
+        "title": "You Make My Dreams",
+        "path": "music\\hall+and+oates\\01---You-Make-My-Dreams.mp3",
+        "artist": "Daryl Hall & John Oates",
+        "album": "Timeless Classics",
+        "genre": [
+          "Pop/Rock"
+        ]
+      },
+      {
+        "title": "She's Gone",
+        "path": "music\\hall+and+oates\\03---She-s-Gone.mp3",
+        "artist": "Daryl Hall & John Oates",
+        "album": "Timeless Classics",
+        "genre": [
+          "Pop/Rock"
+        ]
+      },
+      {
+        "title": "I Can't Go For That (No Can Do)",
+        "path": "music\\hall+and+oates\\02---I-Can-t-Go-For-That--No-Can-Do-.mp3",
+        "artist": "Daryl Hall & John Oates",
+        "album": "Timeless Classics",
+        "genre": [
+          "Pop/Rock"
+        ]
+      },
+      {
+        "title": "Out Of Touch",
+        "path": "music\\hall+and+oates\\05---Out-Of-Touch.mp3",
+        "artist": "Daryl Hall & John Oates",
+        "album": "Timeless Classics",
+        "genre": [
+          "Pop/Rock"
+        ]
+      },
+      {
+        "title": "Method Of Modern Love",
+        "path": "music\\hall+and+oates\\06---Method-Of-Modern-Love.mp3",
+        "artist": "Daryl Hall & John Oates",
+        "album": "Timeless Classics",
+        "genre": [
+          "Pop/Rock"
+        ]
+      },
+      {
+        "title": "Private Eyes",
+        "path": "music\\hall+and+oates\\07---Private-Eyes.mp3",
+        "artist": "Daryl Hall & John Oates",
+        "album": "Timeless Classics",
+        "genre": [
+          "Pop/Rock"
+        ]
+      },
+      {
+        "title": "Sara Smile",
+        "path": "music\\hall+and+oates\\08---Sara-Smile.mp3",
+        "artist": "Daryl Hall & John Oates",
+        "album": "Timeless Classics",
+        "genre": [
+          "Pop/Rock"
+        ]
+      },
+      {
+        "title": "Wait For Me",
+        "path": "music\\hall+and+oates\\09---Wait-For-Me.mp3",
+        "artist": "Daryl Hall & John Oates",
+        "album": "Timeless Classics",
+        "genre": [
+          "Pop/Rock"
+        ]
+      },
+      {
+        "title": "Kiss On My List",
+        "path": "music\\hall+and+oates\\11---Kiss-On-My-List.mp3",
+        "artist": "Daryl Hall & John Oates",
+        "album": "Timeless Classics",
+        "genre": [
+          "Pop/Rock"
+        ]
+      },
+      {
+        "title": "You've Lost That Lovin Feeling",
+        "path": "music\\hall+and+oates\\10---You-ve-Lost-That-Lovin-Feeling.mp3",
+        "artist": "Daryl Hall & John Oates",
+        "album": "Timeless Classics",
+        "genre": [
+          "Pop/Rock"
+        ]
+      },
+      {
+        "title": "Maneater",
+        "path": "music\\hall+and+oates\\12---Maneater.mp3",
+        "artist": "Daryl Hall & John Oates",
+        "album": "Timeless Classics",
+        "genre": [
+          "Pop/Rock"
+        ]
+      },
+      {
+        "title": "One On One",
+        "path": "music\\hall+and+oates\\13---One-On-One.mp3",
+        "artist": "Daryl Hall & John Oates",
+        "album": "Timeless Classics",
+        "genre": [
+          "Pop/Rock"
+        ]
+      },
+      {
+        "title": "Say It Isn't So",
+        "path": "music\\hall+and+oates\\14---Say-It-Isn-t-So.mp3",
+        "artist": "Daryl Hall & John Oates",
+        "album": "Timeless Classics",
+        "genre": [
+          "Pop/Rock"
+        ]
+      },
+      {
+        "title": "Everytime You Go Away (Live)",
+        "path": "music\\hall+and+oates\\16---Everytime-You-Go-Away--Live-.mp3",
+        "artist": "Daryl Hall & John Oates",
+        "album": "Timeless Classics",
+        "genre": [
+          "Pop/Rock"
+        ]
+      },
+      {
+        "title": "Adult Education",
+        "path": "music\\hall+and+oates\\15---Adult-Education.mp3",
+        "artist": "Daryl Hall & John Oates",
+        "album": "Timeless Classics",
+        "genre": [
+          "Pop/Rock"
+        ]
+      },
+      {
+        "title": "Everything Your Heart Desires (Video Mix)",
+        "path": "music\\hall+and+oates\\17---Everything-Your-Heart-Desires--Video-Mix-.mp3",
+        "artist": "Daryl Hall & John Oates",
+        "album": "Timeless Classics",
+        "genre": [
+          "Pop/Rock"
+        ]
+      },
+      {
+        "title": "Rich Girl",
+        "path": "music\\hall+and+oates\\18---Rich-Girl.mp3",
+        "artist": "Daryl Hall & John Oates",
+        "album": "Timeless Classics",
+        "genre": [
+          "Pop/Rock"
+        ]
+      }
+    ]
+  },
+  "artists": {
+    "Daryl Hall & John Oates": [
+      {
+        "title": "Family Man",
+        "path": "music\\hall+and+oates\\04---Family-Man.mp3",
+        "artist": "Daryl Hall & John Oates",
+        "album": "Timeless Classics",
+        "genre": [
+          "Pop/Rock"
+        ]
+      },
+      {
+        "title": "You Make My Dreams",
+        "path": "music\\hall+and+oates\\01---You-Make-My-Dreams.mp3",
+        "artist": "Daryl Hall & John Oates",
+        "album": "Timeless Classics",
+        "genre": [
+          "Pop/Rock"
+        ]
+      },
+      {
+        "title": "She's Gone",
+        "path": "music\\hall+and+oates\\03---She-s-Gone.mp3",
+        "artist": "Daryl Hall & John Oates",
+        "album": "Timeless Classics",
+        "genre": [
+          "Pop/Rock"
+        ]
+      },
+      {
+        "title": "I Can't Go For That (No Can Do)",
+        "path": "music\\hall+and+oates\\02---I-Can-t-Go-For-That--No-Can-Do-.mp3",
+        "artist": "Daryl Hall & John Oates",
+        "album": "Timeless Classics",
+        "genre": [
+          "Pop/Rock"
+        ]
+      },
+      {
+        "title": "Out Of Touch",
+        "path": "music\\hall+and+oates\\05---Out-Of-Touch.mp3",
+        "artist": "Daryl Hall & John Oates",
+        "album": "Timeless Classics",
+        "genre": [
+          "Pop/Rock"
+        ]
+      },
+      {
+        "title": "Method Of Modern Love",
+        "path": "music\\hall+and+oates\\06---Method-Of-Modern-Love.mp3",
+        "artist": "Daryl Hall & John Oates",
+        "album": "Timeless Classics",
+        "genre": [
+          "Pop/Rock"
+        ]
+      },
+      {
+        "title": "Private Eyes",
+        "path": "music\\hall+and+oates\\07---Private-Eyes.mp3",
+        "artist": "Daryl Hall & John Oates",
+        "album": "Timeless Classics",
+        "genre": [
+          "Pop/Rock"
+        ]
+      },
+      {
+        "title": "Sara Smile",
+        "path": "music\\hall+and+oates\\08---Sara-Smile.mp3",
+        "artist": "Daryl Hall & John Oates",
+        "album": "Timeless Classics",
+        "genre": [
+          "Pop/Rock"
+        ]
+      },
+      {
+        "title": "Wait For Me",
+        "path": "music\\hall+and+oates\\09---Wait-For-Me.mp3",
+        "artist": "Daryl Hall & John Oates",
+        "album": "Timeless Classics",
+        "genre": [
+          "Pop/Rock"
+        ]
+      },
+      {
+        "title": "Kiss On My List",
+        "path": "music\\hall+and+oates\\11---Kiss-On-My-List.mp3",
+        "artist": "Daryl Hall & John Oates",
+        "album": "Timeless Classics",
+        "genre": [
+          "Pop/Rock"
+        ]
+      },
+      {
+        "title": "You've Lost That Lovin Feeling",
+        "path": "music\\hall+and+oates\\10---You-ve-Lost-That-Lovin-Feeling.mp3",
+        "artist": "Daryl Hall & John Oates",
+        "album": "Timeless Classics",
+        "genre": [
+          "Pop/Rock"
+        ]
+      },
+      {
+        "title": "Maneater",
+        "path": "music\\hall+and+oates\\12---Maneater.mp3",
+        "artist": "Daryl Hall & John Oates",
+        "album": "Timeless Classics",
+        "genre": [
+          "Pop/Rock"
+        ]
+      },
+      {
+        "title": "One On One",
+        "path": "music\\hall+and+oates\\13---One-On-One.mp3",
+        "artist": "Daryl Hall & John Oates",
+        "album": "Timeless Classics",
+        "genre": [
+          "Pop/Rock"
+        ]
+      },
+      {
+        "title": "Say It Isn't So",
+        "path": "music\\hall+and+oates\\14---Say-It-Isn-t-So.mp3",
+        "artist": "Daryl Hall & John Oates",
+        "album": "Timeless Classics",
+        "genre": [
+          "Pop/Rock"
+        ]
+      },
+      {
+        "title": "Everytime You Go Away (Live)",
+        "path": "music\\hall+and+oates\\16---Everytime-You-Go-Away--Live-.mp3",
+        "artist": "Daryl Hall & John Oates",
+        "album": "Timeless Classics",
+        "genre": [
+          "Pop/Rock"
+        ]
+      },
+      {
+        "title": "Adult Education",
+        "path": "music\\hall+and+oates\\15---Adult-Education.mp3",
+        "artist": "Daryl Hall & John Oates",
+        "album": "Timeless Classics",
+        "genre": [
+          "Pop/Rock"
+        ]
+      },
+      {
+        "title": "Everything Your Heart Desires (Video Mix)",
+        "path": "music\\hall+and+oates\\17---Everything-Your-Heart-Desires--Video-Mix-.mp3",
+        "artist": "Daryl Hall & John Oates",
+        "album": "Timeless Classics",
+        "genre": [
+          "Pop/Rock"
+        ]
+      },
+      {
+        "title": "Rich Girl",
+        "path": "music\\hall+and+oates\\18---Rich-Girl.mp3",
+        "artist": "Daryl Hall & John Oates",
+        "album": "Timeless Classics",
+        "genre": [
+          "Pop/Rock"
+        ]
+      }
+    ]
+  },
+  "playlists": {},
+  "genres": {
+    "Pop/Rock": [
+      {
+        "title": "Family Man",
+        "path": "music\\hall+and+oates\\04---Family-Man.mp3",
+        "artist": "Daryl Hall & John Oates",
+        "album": "Timeless Classics",
+        "genre": [
+          "Pop/Rock"
+        ]
+      },
+      {
+        "title": "You Make My Dreams",
+        "path": "music\\hall+and+oates\\01---You-Make-My-Dreams.mp3",
+        "artist": "Daryl Hall & John Oates",
+        "album": "Timeless Classics",
+        "genre": [
+          "Pop/Rock"
+        ]
+      },
+      {
+        "title": "She's Gone",
+        "path": "music\\hall+and+oates\\03---She-s-Gone.mp3",
+        "artist": "Daryl Hall & John Oates",
+        "album": "Timeless Classics",
+        "genre": [
+          "Pop/Rock"
+        ]
+      },
+      {
+        "title": "I Can't Go For That (No Can Do)",
+        "path": "music\\hall+and+oates\\02---I-Can-t-Go-For-That--No-Can-Do-.mp3",
+        "artist": "Daryl Hall & John Oates",
+        "album": "Timeless Classics",
+        "genre": [
+          "Pop/Rock"
+        ]
+      },
+      {
+        "title": "Out Of Touch",
+        "path": "music\\hall+and+oates\\05---Out-Of-Touch.mp3",
+        "artist": "Daryl Hall & John Oates",
+        "album": "Timeless Classics",
+        "genre": [
+          "Pop/Rock"
+        ]
+      },
+      {
+        "title": "Method Of Modern Love",
+        "path": "music\\hall+and+oates\\06---Method-Of-Modern-Love.mp3",
+        "artist": "Daryl Hall & John Oates",
+        "album": "Timeless Classics",
+        "genre": [
+          "Pop/Rock"
+        ]
+      },
+      {
+        "title": "Private Eyes",
+        "path": "music\\hall+and+oates\\07---Private-Eyes.mp3",
+        "artist": "Daryl Hall & John Oates",
+        "album": "Timeless Classics",
+        "genre": [
+          "Pop/Rock"
+        ]
+      },
+      {
+        "title": "Sara Smile",
+        "path": "music\\hall+and+oates\\08---Sara-Smile.mp3",
+        "artist": "Daryl Hall & John Oates",
+        "album": "Timeless Classics",
+        "genre": [
+          "Pop/Rock"
+        ]
+      },
+      {
+        "title": "Wait For Me",
+        "path": "music\\hall+and+oates\\09---Wait-For-Me.mp3",
+        "artist": "Daryl Hall & John Oates",
+        "album": "Timeless Classics",
+        "genre": [
+          "Pop/Rock"
+        ]
+      },
+      {
+        "title": "Kiss On My List",
+        "path": "music\\hall+and+oates\\11---Kiss-On-My-List.mp3",
+        "artist": "Daryl Hall & John Oates",
+        "album": "Timeless Classics",
+        "genre": [
+          "Pop/Rock"
+        ]
+      },
+      {
+        "title": "You've Lost That Lovin Feeling",
+        "path": "music\\hall+and+oates\\10---You-ve-Lost-That-Lovin-Feeling.mp3",
+        "artist": "Daryl Hall & John Oates",
+        "album": "Timeless Classics",
+        "genre": [
+          "Pop/Rock"
+        ]
+      },
+      {
+        "title": "Maneater",
+        "path": "music\\hall+and+oates\\12---Maneater.mp3",
+        "artist": "Daryl Hall & John Oates",
+        "album": "Timeless Classics",
+        "genre": [
+          "Pop/Rock"
+        ]
+      },
+      {
+        "title": "One On One",
+        "path": "music\\hall+and+oates\\13---One-On-One.mp3",
+        "artist": "Daryl Hall & John Oates",
+        "album": "Timeless Classics",
+        "genre": [
+          "Pop/Rock"
+        ]
+      },
+      {
+        "title": "Say It Isn't So",
+        "path": "music\\hall+and+oates\\14---Say-It-Isn-t-So.mp3",
+        "artist": "Daryl Hall & John Oates",
+        "album": "Timeless Classics",
+        "genre": [
+          "Pop/Rock"
+        ]
+      },
+      {
+        "title": "Everytime You Go Away (Live)",
+        "path": "music\\hall+and+oates\\16---Everytime-You-Go-Away--Live-.mp3",
+        "artist": "Daryl Hall & John Oates",
+        "album": "Timeless Classics",
+        "genre": [
+          "Pop/Rock"
+        ]
+      },
+      {
+        "title": "Adult Education",
+        "path": "music\\hall+and+oates\\15---Adult-Education.mp3",
+        "artist": "Daryl Hall & John Oates",
+        "album": "Timeless Classics",
+        "genre": [
+          "Pop/Rock"
+        ]
+      },
+      {
+        "title": "Everything Your Heart Desires (Video Mix)",
+        "path": "music\\hall+and+oates\\17---Everything-Your-Heart-Desires--Video-Mix-.mp3",
+        "artist": "Daryl Hall & John Oates",
+        "album": "Timeless Classics",
+        "genre": [
+          "Pop/Rock"
+        ]
+      },
+      {
+        "title": "Rich Girl",
+        "path": "music\\hall+and+oates\\18---Rich-Girl.mp3",
+        "artist": "Daryl Hall & John Oates",
+        "album": "Timeless Classics",
+        "genre": [
+          "Pop/Rock"
+        ]
+      }
+    ]
+  }
 }
