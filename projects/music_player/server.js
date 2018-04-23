@@ -13,7 +13,7 @@ const handler = (req, res) => {
             case '/getSongs':
                 getSongs(req, res);
             default:
-                error(res, 500);
+                res_error(res, 500);
         }
     }
 }
@@ -24,9 +24,11 @@ const fileTypes = {
     '.html':'text/html',
     '.js':'text/javascript',
     '.css':'text/css',
+    '.flac':'audio/flac',
     '.mp3':'audio/mpeg',
     '.jpg':'image/jpg',
     '.png':'image/png',
+    '.ico':'image/x-icon',
     '.ttf':'application/octet-stream'
 }
 
@@ -40,20 +42,20 @@ const displayPage = (req, res) => {
         contentType = fileTypes[extname];
     } else {
         console.info("Invalid filetype: " + extname);
-        error(res, 500);
+        res_error(res, 500);
     } 
     fs.exists(filePath, function(exists) {
         if (exists) {
             fs.readFile(filePath, (error, content) => {
                 if (error) {
-                    error(res, 500);
+                    res_error(res, 500);
                 } else {                   
                     res.writeHead(200, { 'Content-Type': contentType });
                     res.end(content, 'utf-8');                  
                 }
             });
         } else {
-            error(res, 404);
+            res_error(res, 404);
         }
     });
 }
@@ -64,7 +66,7 @@ const getSongs = (req, res) => {
     res.end(JSON.stringify(dataMap));
 }
 
-const error = (res, e) => {
+const res_error = (res, e) => {
     res.writeHead(e);
     res.end();
 }
