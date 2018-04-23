@@ -1,11 +1,18 @@
 const fs = require("fs");
 const path = require("path");
-const load = require("audio-loader");
-const AudioMetaData = require("audio-metadata");
 
-var walk = function(dir, done) {
-    var results = {};
-    fs.readdir(dir, function(err, list) {
+const mm = require("music-metadata");
+const util = require("util");
+
+let walk = (dir, done) => {
+    let results = {
+        "songs":{},
+        "albums":{},
+        "artists":{},
+        "playlists":{},
+        "genres":{}
+    };
+    fs.readdir(dir, (err, list) => {
         if (err) return done(err);
         var pending = list.length;
         if (!pending) return done(null, results);
@@ -13,32 +20,93 @@ var walk = function(dir, done) {
             file = path.resolve(dir, file);
             fs.stat(file, function(err, stat) {
                 if (stat && stat.isDirectory()) {
-                    walk(file, function(err, res) {
-                        for(let parent in res) {
-                            if(!results[parent]) {
-                                results[parent]= [];
+                    /*let dirName = file.split(path.sep).pop();
+                    let newDir = dirName.replace(/\s+/g,'+');
+                    newDir = newDir.replace(/[^a-zA-Z0-9\-.]/g,'+');
+                    //newname = newname.replace('-mkv', '.mkv');
+                    fs.rename(file, dir + "/" + newDir, function(err){
+                        if(err) throw err;
+                    });
+                    */
+                    walk(file, (err, res) => {
+                        for(let cat in res) {
+                            for(let index in res[cat]) {
+                                if(results[cat][index] === undefined)
+                                    results[cat][index] = [];
+                                results[cat][index] = results[cat][index].concat(res[cat][index]);
                             }
-                            results[parent].push(res[parent]);
                         }
                         if (!--pending) done(null, results);
                     });
                 } else {
                     let parent = path.dirname(file).split(path.sep).pop()
-                    if(!results[parent]) {
-                        results[parent]= [];
+                    let ext = path.extname(file);
+                    if(ext === ".mp3" || ext === ".flac") {
+                        mm.parseFile(file, {native: true})
+                            .then(function (metadata) {
+
+                                let tags = metadata.common;
+                                let entry = {};
+
+                                let fileName = path.basename(
+                                    file, path.extname(file));
+
+                                if(tags.title === undefined) {
+                                    entry.title = fileName;
+                                } else {
+                                    entry.title = tags.title;
+                                }
+
+                                entry.path = path.relative(process.cwd(), file);
+                                
+                                entry.artist = (tags.artist === undefined) ? 
+                                    "None" : tags.artist;
+                                entry.album = (tags.album === undefined) ? 
+                                    "None" : tags.album;
+                                entry.genre = (tags.genre === undefined) ?
+                                    [] : tags.genre;
+
+                                if(results["songs"][parent] === undefined)
+                                    results["songs"][parent] = [];
+                                if(results["artists"][entry.artist] === undefined)
+                                    results["artists"][entry.artist] = [];
+                                if(results["albums"][entry.album] === undefined)
+                                    results["albums"][entry.album] = [];
+
+                                results["songs"][parent].push(entry);
+                                results["artists"][entry.artist].push(entry);
+                                results["albums"][entry.album].push(entry);
+                                
+                                for(let genre in entry.genre) {
+                                    if(results["genres"][entry.genre[genre]]
+                                        === undefined)
+                                        results["genres"][entry.genre[genre]] = [];
+                                    results["genres"][entry.genre[genre]]
+                                        .push(entry);
+                                }
+
+                                let newname = fileName.replace(/\s+/g,'-');
+                                newname = fileName.replace(/[^a-zA-Z0-9\-.]/g,'-') + ext;
+                                //newname = newname.replace('-mkv', '.mkv');
+                                fs.rename(file, dir + "/" + newname, function(err){
+                                    if(err) throw err;
+                                });
+
+                                if (!--pending) done(null, results);
+                            })
+                            .catch(function (err) {
+                                console.error(err);
+                            });
+                    } else {
+                        if (!--pending) done(null, results);
                     }
-                    results[parent].push(file);
-                    if (!--pending) done(null, results);
                 }
             });
         });
     });
-};
+}
 
-walk("music/", (err, songs) => {
-    console.info(songs);
-    if (err) throw err;
-    let dataMap = require("./music_saves.json");
-    dataMap.songs = songs;
-    fs.writeFile("music_saves.json", JSON.stringify(dataMap, null, '  '), "utf8", callback=>{return});
+walk("music/", (err, result) => {
+    if(err) throw err;
+    fs.writeFile("music_saves.json", JSON.stringify(result, null, '  '), "utf8", callback=>{return});
 });
