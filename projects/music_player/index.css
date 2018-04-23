@@ -343,12 +343,23 @@ body {
     background:rgba(199, 212, 255, 0.438);
 }
 
+.music-item-key {
+    position:relative;
+    height:50px;
+    width:60vw;
+    margin:0;
+    padding:20px 0 0 0;
+    color:rgba(255, 255, 255, 0.452);
+    border-bottom:1px solid rgba(255, 255, 255, 0.356);
+    float:left;
+}
+
 .music-list {
     position:relative;
     width:60vw;
     float:left;
-    margin:20px 0 0 0;
-    padding:0;
+    margin:0;
+    padding:10px 0 0 0;
 }
 
 .music-item {
