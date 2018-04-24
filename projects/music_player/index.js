@@ -41,6 +41,9 @@ jQuery(function($){
             $(".panel-play").on("click", this.playIndex.bind(this));
             $(".volume-bar").on("click", this.adjustVolume.bind(this));
             $(".seek-bar").on("click", this.seek.bind(this));
+            $(".loop").on("click", this.toggleLoop.bind(this));
+            $(".skip-back").on("click", this.previous.bind(this));
+            $(".skip-forward").on("click", this.next.bind(this));
         },
         renderIndex: function(e) {
             let indexName = $(e.target).text();
@@ -104,12 +107,15 @@ jQuery(function($){
                 if(index[s].title == song) {
                     this.audio.src = index[s].path;
                     this.audio.load();
-                    this.play();
                     $(".song-title").text(song);
                     $(".song-artist").text(index[s].artist);
                     if(this.shuffle) {
-                        queue = index.shuffle();
+                        queue = index; //.shuffle();
+                    } else {
+                        queue = index;
                     }
+                    activeSong = s;
+                    this.play();
                     return;
                 }
             }
@@ -133,8 +139,16 @@ jQuery(function($){
                 this.play();
             }
         },
-        toggleLoop: function() {
-
+        toggleLoop: function(e) {
+            if(this.loop) {
+                $(e.target).addClass("loop-disabled");
+                this.loop = false;
+                this.audio.loop = false;
+            } else {
+                $(e.target).removeClass("loop-disabled");
+                this.loop = true;
+                this.audio.loop = true;
+            }
         },
         playIndex: function() {
             if(activeIndex !== "") {
@@ -150,10 +164,44 @@ jQuery(function($){
             }
         },
         next: function() {
-
+            let title;
+            let artist;
+            if(activeSong == queue.length - 1) {
+                activeSong = undefined;
+                this.pause();
+                this.resetSeek();
+                title = "";
+                artist = "";
+            } else {
+                activeSong++;
+                let song = queue[activeSong];
+                this.audio.src = song.path;
+                this.audio.load();
+                this.play();
+                title = song.title;
+                artist = song.artist;
+            }
+            $(".song-title").text(title);
+            $(".song-artist").text(artist);
+            return;
         },
         previous: function() {
-
+            let title;
+            let artist;
+            if(this.audio.currentTime < 2 && activeSong >= 0) {
+                activeSong--;
+                let song = queue[activeSong];
+                this.audio.src = song.path;
+                this.audio.load();
+                this.play();
+                title = song.title;
+                artist = song.artist;
+            } else {
+                this.seekTo(0);
+            }
+            $(".song-title").text(title);
+            $(".song-artist").text(artist);
+            return;
         },
         seek: function(e) {
             let x = e.pageX - $(e.target).offset().left;
@@ -161,7 +209,12 @@ jQuery(function($){
             let percent = x / width;
             let duration = this.audio.duration;
             let seekTime = duration * percent;
-            this.audio.currentTime = seekTime;
+            this.seekTo(seekTime);
+        },
+        seekTo: function(time) {
+            let duration = this.audio.duration;
+            let percent = time / duration;
+            this.audio.currentTime = time;
             let targetWidth = Math.floor(percent * 100);
             $(".seek-bar-inner").css("width", targetWidth + "%");
         },
@@ -200,7 +253,7 @@ jQuery(function($){
         },
         endCondition: function() {
             if(this.audio.ended) {
-                this.nextSong();
+                this.next();
             }
         },
         renderControls: function() {
@@ -209,6 +262,10 @@ jQuery(function($){
             } else {
                 $(".control-buttons div").removeClass("control-disabled");
             }
+        },
+        resetSeek: function() {
+            $(".current-time, .song-time").text("00:00");
+            $(".seek-bar-inner").css("width","0%");
         }
     }
     App.start();

@@ -547,6 +547,10 @@ body {
     padding:0;
 }
 
+.control-disabled {
+    opacity:0.5;
+}
+
 .skip-back, .toggle-play, .skip-forward {
     position:relative;
     height:7vh;
@@ -637,6 +641,10 @@ body {
     float:right;
     margin:0;
     padding:0;
+}
+
+.loop-disabled {
+    opacity:0.5;
 }
 
 .queue img, .shuffle img, .loop img {
