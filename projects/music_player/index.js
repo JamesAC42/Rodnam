@@ -1,13 +1,22 @@
 jQuery(function($){
     let activeCat = "songs";
     let activeIndex = "";
+    let queue = [];
+    let activeSong;
     let App = {
         start: function() {
             this.data = {};
             this.audio = document.getElementById("audio-src");
             this.playing = false;
+            this.shuffle = false;
+            this.loop = false;
+            this.currentTime;
             this.getMusicData();
             this.bind();
+            setInterval(() => {
+                this.updateTime();
+                this.endCondition();
+            }, 100);
         },
         bind: function() {
             $(".sidebar-icon").on("mouseover", function() {
@@ -29,6 +38,9 @@ jQuery(function($){
                 $("#" + content).addClass("sidebar-content-active");
             });
             $(".toggle-play img").on("click", this.togglePlay.bind(this));
+            $(".panel-play").on("click", this.playIndex.bind(this));
+            $(".volume-bar").on("click", this.adjustVolume.bind(this));
+            $(".seek-bar").on("click", this.seek.bind(this));
         },
         renderIndex: function(e) {
             let indexName = $(e.target).text();
@@ -58,6 +70,11 @@ jQuery(function($){
                     '   </div>' +
                     '</div>';
                 $(".music-list").append(musicItem);
+            }
+            if(activeCat === "playlists") {
+                $(".panel-option").removeClass("panel-control-hidden");
+            } else {
+                $(".panel-option").addClass("panel-control-hidden");
             }
             $(".music-item").on("click", this.changeSong.bind(this));
         },
@@ -90,16 +107,21 @@ jQuery(function($){
                     this.play();
                     $(".song-title").text(song);
                     $(".song-artist").text(index[s].artist);
+                    if(this.shuffle) {
+                        queue = index.shuffle();
+                    }
                     return;
                 }
             }
         },
         pause: function() {
+            if(!activeSong) return false;
             this.audio.pause();
             this.playing = false;
             $(".toggle-play img").attr("src", "./icons/icons8-circled-play-filled-50.png");
         },
         play: function() {
+            if(!activeSong) return false;
             this.audio.play();
             this.playing = true;
             $(".toggle-play img").attr("src", "./icons/icons8-pause-button-filled-50.png");
@@ -111,17 +133,82 @@ jQuery(function($){
                 this.play();
             }
         },
+        toggleLoop: function() {
+
+        },
+        playIndex: function() {
+            if(activeIndex !== "") {
+                let song = data[activeCat][activeIndex][0];
+                this.audio.src = song.path;
+                this.audio.load();
+                this.play();
+                $(".song-title").text(song.title);
+                $(".song-artist").text(song.artist);
+                return;
+            } else {
+                return false;
+            }
+        },
         next: function() {
 
         },
         previous: function() {
 
         },
-        seek: function() {
-
+        seek: function(e) {
+            let x = e.pageX - $(e.target).offset().left;
+            let width = $(e.target).width();
+            let percent = x / width;
+            let duration = this.audio.duration;
+            let seekTime = duration * percent;
+            this.audio.currentTime = seekTime;
+            let targetWidth = Math.floor(percent * 100);
+            $(".seek-bar-inner").css("width", targetWidth + "%");
         },
-        adjustVolume: function() {
-
+        adjustVolume: function(e) {
+            let x = e.pageX - $(e.target).offset().left;
+            let width = $(e.target).width();
+            let percent = x / width;
+            this.audio.volume = percent;
+            let targetWidth = Math.floor(percent * 100);
+            $(".volume-bar-inner").css("width", targetWidth + "%");
+        },
+        updateTime: function() {
+            if(this.playing) {
+                let current_minutes = Math.floor(this.audio.currentTime / 60);
+                if (current_minutes < 10) current_minutes = "0" + current_minutes;
+                let current_seconds = Math.floor(this.audio.currentTime % 60);
+                if (current_seconds < 10) current_seconds = "0" + current_seconds;
+                let current_time = current_minutes + ":" + current_seconds;
+                $(".current-time").text(current_time);
+                
+                let total_time
+                if(!Number.isNaN(this.audio.duration)) {
+                    let total_minutes = Math.floor(this.audio.duration / 60);
+                    if (total_minutes < 10) total_minutes = "0" + total_minutes;
+                    let total_seconds = Math.floor(this.audio.duration % 60);
+                    if (total_seconds < 10) total_seconds = "0" + total_seconds;
+                    total_time = total_minutes + ":" + total_seconds;
+                } else {
+                    total_time = "00:00";
+                }    
+                $(".song-time").text(total_time);
+                let percent = Math.round((this.audio.currentTime / this.audio.duration) * 100, 3);
+                $(".seek-bar-inner").css("width", percent + "%");
+            }
+            this.renderControls();
+        },
+        endCondition: function() {
+            if(this.audio.ended) {
+                this.nextSong();
+            }
+        },
+        renderControls: function() {
+            if(!activeSong) {
+                $(".control-buttons div").addClass("control-disabled");
+            } else {
+                $(".control-buttons div").removeClass("control-disabled");
+            }
         }
     }
     App.start();

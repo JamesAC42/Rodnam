@@ -305,6 +305,10 @@ body {
     padding:0;
 }
 
+.panel-control-hidden {
+    display:none;
+}
+
 .panel-control {
     position:relative;
     float:right;
@@ -618,6 +622,7 @@ body {
     border-radius: 2px;
     margin:0;
     padding:0;
+    transition:width 0.05s linear;
 }
 
 .media-options {
@@ -684,10 +689,11 @@ body {
     position:relative;
     float:left;
     height:5px;
-    width:0%;
+    width:100%;
     border-radius: 2px;
     background:rgb(112, 255, 172);
     margin:0;
+    transition:width 0.05s linear;
 }
 
 
