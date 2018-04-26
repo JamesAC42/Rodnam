@@ -3,6 +3,20 @@ jQuery(function($){
     let activeIndex = "";
     let queue = [];
     let activeSong;
+
+    const shuffle = (array) => {
+        let newArray = array;
+        let j = 0;
+        let temp = null;
+        for(let i = newArray.length - 1; i > 0; i--) {
+            j = Math.floor(Math.random() * (i + 1));
+            temp = newArray[i];
+            array[i] = newArray[j];
+            array[j] = temp;
+        }
+        return newArray;
+    }
+
     let App = {
         start: function() {
             this.data = {};
@@ -10,7 +24,9 @@ jQuery(function($){
             this.playing = false;
             this.shuffle = false;
             this.loop = false;
+            this.queueVisible = false;
             this.currentTime;
+            this.volumeSave = 1;
             this.getMusicData();
             this.bind();
             setInterval(() => {
@@ -41,16 +57,19 @@ jQuery(function($){
             $(".panel-play").on("click", this.playIndex.bind(this));
             $(".volume-bar").on("click", this.adjustVolume.bind(this));
             $(".seek-bar").on("click", this.seek.bind(this));
-            $(".loop").on("click", this.toggleLoop.bind(this));
+            $(".loop img").on("click", this.toggleLoop.bind(this));
             $(".skip-back").on("click", this.previous.bind(this));
             $(".skip-forward").on("click", this.next.bind(this));
+            $(".volume-icon").on("click", this.toggleMute.bind(this));
+            $(".queue img").on("click", this.toggleQueue.bind(this));
+            $(".shuffle img").on("click", this.toggleShuffle.bind(this));
         },
         renderIndex: function(e) {
             let indexName = $(e.target).text();
             activeIndex = indexName;
-            $(".panel-title").text(indexName);
+            $("#index-name").text(indexName);
             this.activeIndex = indexName;
-            $(".music-list").empty();
+            $("#index-music-list").empty();
             let index = data[activeCat][indexName];
             for(let item in index) {
                 let music = index[item];
@@ -69,10 +88,19 @@ jQuery(function($){
                             music.album +
                     '   </div>' +
                     '   <div class="music-item-options">' +
-                    '      <img src="./icons/icons8-more-filled-50.png" alt="">' +
+                    '       <div class="options-container">' +
+                    '           <div class="options-container-inner"> ' +
+                    '               <div class="tail"></div>' +
+                    '               <div class="options-list">' +
+                    '                   <div>Add to Playlist</div>' +
+                    '                   <div>Add to Queue</div>' +
+                    '               </div>' +
+                    '           </div>' +
+                    '       </div>' + 
+                    '       <img src="./icons/icons8-more-filled-50.png" alt="">' +
                     '   </div>' +
                     '</div>';
-                $(".music-list").append(musicItem);
+                $("#index-music-list").append(musicItem);
             }
             if(activeCat === "playlists") {
                 $(".panel-option").removeClass("panel-control-hidden");
@@ -80,6 +108,64 @@ jQuery(function($){
                 $(".panel-option").addClass("panel-control-hidden");
             }
             $(".music-item").on("click", this.changeSong.bind(this));
+            $(".music-item-options").on("mouseenter", function() {
+                $(this).children().addClass("options-container-visible");
+            }).on("mouseleave", function() {
+                $(this).children().removeClass("options-container-visible");
+            });
+        },
+        renderQueue: function() {
+            $("#queue-music-list").empty();
+            for(let item in queue) {
+                let music = queue[item];   
+                let musicItem = 
+                    '<div class="music-item ';
+                if (music.title === queue[activeSong]) musicItem += "music-item-active";
+                musicItem += 
+                    '">' +
+                    '   <div class="music-item-info info-padding"></div>' +
+                    '   <div class="music-item-info music-item-title">' +
+                            music.title +
+                    '</div>' +
+                    '   <div class="music-item-info info-padding"></div>' +
+                    '   <div class="music-item-info music-item-artist">' +
+                            music.artist +
+                    '   </div>' +
+                    '   <div class="music-item-info info-padding"></div>' +
+                    '   <div class="music-item-info music-item-album">' +
+                            music.album +
+                    '   </div>' +
+                    '   <div class="music-item-options">' +
+                    '       <div class="options-container">' +
+                    '           <div class="options-container-inner"> ' +
+                    '               <div class="tail"></div>' +
+                    '               <div class="options-list">' +
+                    '                   <div>Add to Playlist</div>' +
+                    '                   <div>Add to Queue</div>' +
+                    '               </div>' +
+                    '           </div>' +
+                    '       </div>' + 
+                    '       <img src="./icons/icons8-more-filled-50.png" alt="">' +
+                    '   </div>' +
+                    '</div>';
+                $("#queue-music-list").append(musicItem);
+            }
+        },
+        setQueue: function() {
+            let index = data[activeCat][activeIndex];
+            if(this.shuffle) {
+                let song = index[activeSong];
+                queue = shuffle(index);
+                for(let item in queue) {
+                    if(queue[item] = song) {
+                        queue.splice(item, 1);
+                    }
+                }
+                queue.splice(0, 0, song);
+                activeSong = 0;
+            }  else {
+                queue = index;
+            }
         },
         getMusicData: function() {
             let getData = new Promise((resolve, reject) => {
@@ -109,25 +195,21 @@ jQuery(function($){
                     this.audio.load();
                     $(".song-title").text(song);
                     $(".song-artist").text(index[s].artist);
-                    if(this.shuffle) {
-                        queue = index; //.shuffle();
-                    } else {
-                        queue = index;
-                    }
                     activeSong = s;
                     this.play();
-                    return;
                 }
             }
+            this.setQueue();
+            this.renderQueue();
         },
         pause: function() {
-            if(!activeSong) return false;
+            if(activeSong === undefined) return false;
             this.audio.pause();
             this.playing = false;
             $(".toggle-play img").attr("src", "./icons/icons8-circled-play-filled-50.png");
         },
         play: function() {
-            if(!activeSong) return false;
+            if(activeSong === undefined) return false;
             this.audio.play();
             this.playing = true;
             $(".toggle-play img").attr("src", "./icons/icons8-pause-button-filled-50.png");
@@ -141,18 +223,31 @@ jQuery(function($){
         },
         toggleLoop: function(e) {
             if(this.loop) {
-                $(e.target).addClass("loop-disabled");
-                this.loop = false;
-                this.audio.loop = false;
+                $(e.target).addClass("disabled");
             } else {
-                $(e.target).removeClass("loop-disabled");
-                this.loop = true;
-                this.audio.loop = true;
+                $(e.target).removeClass("disabled");
             }
+            this.loop = !this.loop;
+            this.audio.loop = this.loop;
+        },
+        toggleShuffle: function(e) {
+            if(this.shuffle) {
+                $(e.target).addClass("disabled");
+            } else {
+                $(e.target).removeClass("disabled");
+            }
+            this.shuffle = !this.shuffle;
         },
         playIndex: function() {
             if(activeIndex !== "") {
-                let song = data[activeCat][activeIndex][0];
+                if(this.shuffle) {
+                    activeSong = Math.floor(Math.random(data[activeCat][activeIndex].length));
+                } else {
+                    activeSong = 0;
+                }
+                this.setQueue();
+                this.renderQueue();
+                let song = data[activeCat][activeIndex][activeSong];
                 this.audio.src = song.path;
                 this.audio.load();
                 this.play();
@@ -160,7 +255,7 @@ jQuery(function($){
                 $(".song-artist").text(song.artist);
                 return;
             } else {
-                return false;
+                return;
             }
         },
         next: function() {
@@ -168,7 +263,6 @@ jQuery(function($){
             let artist;
             if(activeSong == queue.length - 1) {
                 activeSong = undefined;
-                this.pause();
                 this.resetSeek();
                 title = "";
                 artist = "";
@@ -203,6 +297,18 @@ jQuery(function($){
             $(".song-artist").text(artist);
             return;
         },
+        toggleQueue: function(e) {
+            if(this.queueVisible) {
+                $(e.target).addClass("disabled");
+                $(".view-inner").removeClass("view-inner-hidden");
+                $(".queue-container").removeClass("queue-container-visible");
+            } else {
+                $(e.target).removeClass("disabled");
+                $(".view-inner").addClass("view-inner-hidden");
+                $(".queue-container").addClass("queue-container-visible");
+            }
+            this.queueVisible = !this.queueVisible;
+        },
         seek: function(e) {
             let x = e.pageX - $(e.target).offset().left;
             let width = $(e.target).width();
@@ -223,8 +329,26 @@ jQuery(function($){
             let width = $(e.target).width();
             let percent = x / width;
             this.audio.volume = percent;
-            let targetWidth = Math.floor(percent * 100);
-            $(".volume-bar-inner").css("width", targetWidth + "%");
+            this.renderVolume(percent);
+        },
+        renderVolume: function(volume) {
+            if(volume === 0) {
+                $(".volume-icon").attr("src", "./icons/icons8-mute-50.png");
+            } else if(volume < 0.5) {
+                $(".volume-icon").attr("src", "./icons/icons8-low-volume-50.png");
+            } else {
+                $(".volume-icon").attr("src", "./icons/icons8-audio-50.png");
+            }
+            $(".volume-bar-inner").css("width", Math.floor(100 * volume) + "%");
+        },
+        toggleMute: function(e) {
+            if(this.audio.volume == 0) {
+                this.audio.volume = this.volumeSave;
+            } else {
+                this.volumeSave = this.audio.volume;
+                this.audio.volume = 0;
+            }
+            this.renderVolume(this.audio.volume);
         },
         updateTime: function() {
             if(this.playing) {
@@ -257,13 +381,15 @@ jQuery(function($){
             }
         },
         renderControls: function() {
-            if(!activeSong) {
+            if(activeSong === undefined) {
                 $(".control-buttons div").addClass("control-disabled");
             } else {
                 $(".control-buttons div").removeClass("control-disabled");
             }
         },
         resetSeek: function() {
+            this.audio.src = "";
+            this.audio.load();
             $(".current-time, .song-time").text("00:00");
             $(".seek-bar-inner").css("width","0%");
         }

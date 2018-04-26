@@ -250,6 +250,23 @@ body {
     z-index:10;
 }
 
+.view-inner-hidden {
+    left:300vw;
+}
+
+.queue-container {
+    position:absolute;
+    top:0;
+    left:300vw;
+    transform:translate(-50%,0);
+    width:60vw;
+    z-index:1000;
+}
+
+.queue-container-visible {
+    left:50%;
+}
+
 .view-nothing-selected {
     position:absolute;
     top:0;
@@ -391,6 +408,10 @@ body {
     overflow-x:hidden;
 }
 
+.music-item-active {
+    background:rgba(210, 228, 255, 0.432);
+}
+
 .music-item:hover, .music-item-active {
     background:rgba(210, 228, 255, 0.432);
 }
@@ -420,11 +441,79 @@ body {
     padding:0;
 }
 
+.options-container {
+    display:none;
+    position:absolute;
+    height:100px;
+    width:150px;
+    bottom:45px;
+    left:50%;
+    transform:translate(-50%, -10px);
+    margin:0;
+    padding:0;
+    background:rgba(62, 61, 107);
+    border-radius:5px;
+    -webkit-box-shadow: 0px 10px 37px -4px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 10px 37px -4px rgba(0,0,0,0.75);
+    box-shadow: 0px 10px 37px -4px rgba(0,0,0,0.75);
+}
+
+.options-container-visible {
+    display:block;
+}
+
+.options-container-inner {
+    position:relative;
+    height:100px;
+    width:150px;
+    margin:0;
+    padding:0;
+}
+
+.tail {
+    position:absolute;
+    bottom:0;
+    left:50%;
+    height:28px;
+    width:28px;
+    border-radius:1px;
+    transform:translate(-50%,15px) rotate(45deg);
+    background:rgba(62, 61, 107);
+}
+
+.options-list {
+    position:absolute;
+    height:80px;
+    width:150px;
+    top:50%;
+    left:0;
+    transform:translate(0,-50%);
+    margin:0;
+    padding:0;
+}
+
+.options-list div {
+    position:relative;
+    height:40px;
+    width:150px;
+    line-height:40px;
+    text-align:center;
+    font-size:16px;
+    color:rgb(192, 185, 255);
+    margin:0;
+    padding:0;
+    cursor:pointer;
+}
+
+.options-list div:hover {
+    color:rgb(70, 79, 129);
+}
+
 .music-item-options img {
     display:none;
     position:absolute;
     top:50%;
-    right:0;
+    left:50%;
     transform:translate(-50%,-50%);
     margin:0;
     height:25px;
@@ -643,7 +732,7 @@ body {
     padding:0;
 }
 
-.loop-disabled {
+.disabled {
     opacity:0.5;
 }
 
@@ -656,10 +745,6 @@ body {
     width:20px;
     margin:0;
     cursor:pointer;
-}
-
-.queue img:hover, .shuffle img:hover, .loop img:hover {
-    opacity:0.5
 }
 
 .volume {
@@ -679,10 +764,6 @@ body {
     flex-grow:1;
     margin:0 5px;
     cursor:pointer;
-}
-
-.volume-icon:hover {
-    opacity:0.5;
 }
 
 .volume-bar {

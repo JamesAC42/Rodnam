@@ -88,7 +88,7 @@
                 <div class="view-background"></div>
                 <div class="view-inner">
                     <div class="panel">
-                        <div class="panel-title">
+                        <div id="index-name" class="panel-title">
                             
                         </div>
                         <div class="panel-controls">
@@ -122,24 +122,32 @@
                             Album
                         </div>
                     </div>
-                    <div class="music-list">
-                        <!--
-                        <div class="music-item">
-                            <div class="music-item-info info-padding"></div>
-                            <div class="music-item-info music-item-title">
-                                Song Name
-                            </div>
-                            <div class="music-item-info music-item-artist">
-                                Song Artist
-                            </div>
-                            <div class="music-item-info music-item-album">
-                                Song Album
-                            </div>
-                            <div class="music-item-options">
-                                <img src="./icons/icons8-more-filled-50.png" alt="">
-                            </div>
+                    <div id="index-music-list" class="music-list">
+                        
+                    </div>
+                </div>
+                <div class="queue-container">
+                    <div class="panel">
+                        <div class="panel-title">
+                            Play Queue
                         </div>
-                    -->
+                    </div>
+                    <div class="music-item-key">
+                        <div class="music-item-info info-padding"></div>
+                        <div class="music-item-info music-item-title">
+                            Title
+                        </div>
+                        <div class="music-item-info info-padding"></div>
+                        <div class="music-item-info music-item-artist">
+                            Artist
+                        </div>
+                        <div class="music-item-info info-padding"></div>                        
+                        <div class="music-item-info music-item-album">
+                            Album
+                        </div>
+                    </div>
+                    <div id="queue-music-list" class="music-list">
+                        
                     </div>
                 </div>
                 <div class="view-nothing-selected">
@@ -191,13 +199,13 @@
             </div>
             <div class="media-options">
                 <div class="queue">
-                    <img src="./icons/icons8-menu-50.png">
+                    <img class="disabled" src="./icons/icons8-menu-50.png">
                 </div>
                 <div class="shuffle">
-                    <img src="./icons/icons8-shuffle-50.png" alt="">
+                    <img class="disabled" src="./icons/icons8-shuffle-50.png" alt="">
                 </div>
-                <div class="loop loop-disabled">
-                    <img src="./icons/icons8-repeat-50.png" alt="">
+                <div class="loop">
+                    <img class="disabled" src="./icons/icons8-repeat-50.png" alt="">
                 </div>
                 <div class="volume">
                     <img class="volume-icon" src="./icons/icons8-audio-50.png" alt="">
