@@ -236,7 +236,7 @@ body {
     width:100vw;
     height:100vh;
     background-image: url("background/bg4.jpg");
-    background-size:contain;
+    background-size:100% auto;
     filter:blur(6px) brightness(100%);
     z-index:1;
 }
@@ -444,7 +444,7 @@ body {
 .options-container {
     display:none;
     position:absolute;
-    height:100px;
+    height:140px;
     width:150px;
     bottom:45px;
     left:50%;
@@ -464,7 +464,7 @@ body {
 
 .options-container-inner {
     position:relative;
-    height:100px;
+    height:140px;
     width:150px;
     margin:0;
     padding:0;
@@ -483,7 +483,7 @@ body {
 
 .options-list {
     position:absolute;
-    height:80px;
+    height:120px;
     width:150px;
     top:50%;
     left:0;
@@ -499,14 +499,14 @@ body {
     line-height:40px;
     text-align:center;
     font-size:16px;
-    color:rgb(192, 185, 255);
+    color:rgb(225, 221, 255);
     margin:0;
     padding:0;
     cursor:pointer;
 }
 
 .options-list div:hover {
-    color:rgb(70, 79, 129);
+    color:rgb(134, 151, 247);
 }
 
 .music-item-options img {

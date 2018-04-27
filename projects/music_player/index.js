@@ -5,16 +5,14 @@ jQuery(function($){
     let activeSong;
 
     const shuffle = (array) => {
-        let newArray = array;
         let j = 0;
         let temp = null;
-        for(let i = newArray.length - 1; i > 0; i--) {
+        for(let i = array.length - 1; i > 0; i-=1) {
             j = Math.floor(Math.random() * (i + 1));
-            temp = newArray[i];
-            array[i] = newArray[j];
+            temp = array[i];
+            array[i] = array[j];
             array[j] = temp;
         }
-        return newArray;
     }
 
     let App = {
@@ -29,6 +27,7 @@ jQuery(function($){
             this.volumeSave = 1;
             this.getMusicData();
             this.bind();
+            //this.setBackground();
             setInterval(() => {
                 this.updateTime();
                 this.endCondition();
@@ -64,6 +63,11 @@ jQuery(function($){
             $(".queue img").on("click", this.toggleQueue.bind(this));
             $(".shuffle img").on("click", this.toggleShuffle.bind(this));
         },
+        setBackground: function() {
+            let bgNumber = Math.floor(Math.random() * 13);
+            let bg = "url('background/bg" + bgNumber + ".jpg')";
+            $(".view-background").css("background-image", bg);
+        },
         renderIndex: function(e) {
             let indexName = $(e.target).text();
             activeIndex = indexName;
@@ -94,6 +98,7 @@ jQuery(function($){
                     '               <div class="options-list">' +
                     '                   <div>Add to Playlist</div>' +
                     '                   <div>Add to Queue</div>' +
+                    '                   <div>Play Next</div>' +
                     '               </div>' +
                     '           </div>' +
                     '       </div>' + 
@@ -107,6 +112,15 @@ jQuery(function($){
             } else {
                 $(".panel-option").addClass("panel-control-hidden");
             }
+            this.bindOptions();
+            if(this.queueVisible) {
+                $(".queue img").addClass("disabled");
+                $(".view-inner").removeClass("view-inner-hidden");
+                $(".queue-container").removeClass("queue-container-visible");
+                this.queueVisible = false;
+            }
+        },
+        bindOptions: function() {
             $(".music-item").on("click", this.changeSong.bind(this));
             $(".music-item-options").on("mouseenter", function() {
                 $(this).children().addClass("options-container-visible");
@@ -118,9 +132,10 @@ jQuery(function($){
             $("#queue-music-list").empty();
             for(let item in queue) {
                 let music = queue[item];   
-                let musicItem = 
-                    '<div class="music-item ';
-                if (music.title === queue[activeSong]) musicItem += "music-item-active";
+                let musicItem = '<div class="music-item ';
+                if (music.title === queue[activeSong].title) {
+                    musicItem += "music-item-active";
+                }
                 musicItem += 
                     '">' +
                     '   <div class="music-item-info info-padding"></div>' +
@@ -142,6 +157,7 @@ jQuery(function($){
                     '               <div class="options-list">' +
                     '                   <div>Add to Playlist</div>' +
                     '                   <div>Add to Queue</div>' +
+                    '                   <div>Play Next</div>' +
                     '               </div>' +
                     '           </div>' +
                     '       </div>' + 
@@ -150,14 +166,17 @@ jQuery(function($){
                     '</div>';
                 $("#queue-music-list").append(musicItem);
             }
+            this.bindOptions();
         },
         setQueue: function() {
             let index = data[activeCat][activeIndex];
             if(this.shuffle) {
                 let song = index[activeSong];
-                queue = shuffle(index);
+                let songName = song.title;
+                shuffle(index);
+                queue = index;
                 for(let item in queue) {
-                    if(queue[item] = song) {
+                    if(queue[item].title == songName) {
                         queue.splice(item, 1);
                     }
                 }
@@ -231,11 +250,7 @@ jQuery(function($){
             this.audio.loop = this.loop;
         },
         toggleShuffle: function(e) {
-            if(this.shuffle) {
-                $(e.target).addClass("disabled");
-            } else {
-                $(e.target).removeClass("disabled");
-            }
+            $(e.target).toggleClass("disabled");
             this.shuffle = !this.shuffle;
         },
         playIndex: function() {
@@ -277,7 +292,8 @@ jQuery(function($){
             }
             $(".song-title").text(title);
             $(".song-artist").text(artist);
-            return;
+            this.renderQueue();
+            this.renderControls();
         },
         previous: function() {
             let title;
@@ -295,7 +311,8 @@ jQuery(function($){
             }
             $(".song-title").text(title);
             $(".song-artist").text(artist);
-            return;
+            this.renderQueue();
+            this.renderControls();
         },
         toggleQueue: function(e) {
             if(this.queueVisible) {
