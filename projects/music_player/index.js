@@ -5,14 +5,16 @@ jQuery(function($){
     let activeSong;
 
     const shuffle = (array) => {
+        let newArray = array.slice(0);
         let j = 0;
         let temp = null;
-        for(let i = array.length - 1; i > 0; i-=1) {
+        for(let i = newArray.length - 1; i > 0; i-=1) {
             j = Math.floor(Math.random() * (i + 1));
-            temp = array[i];
-            array[i] = array[j];
-            array[j] = temp;
+            temp = newArray[i];
+            newArray[i] = newArray[j];
+            newArray[j] = temp;
         }
+        return newArray;
     }
 
     let App = {
@@ -62,6 +64,7 @@ jQuery(function($){
             $(".volume-icon").on("click", this.toggleMute.bind(this));
             $(".queue img").on("click", this.toggleQueue.bind(this));
             $(".shuffle img").on("click", this.toggleShuffle.bind(this));
+            $(".new-playlist-submit").on("click", this.addPlaylist.bind(this));
         },
         setBackground: function() {
             let bgNumber = Math.floor(Math.random() * 13);
@@ -95,10 +98,10 @@ jQuery(function($){
                     '       <div class="options-container">' +
                     '           <div class="options-container-inner"> ' +
                     '               <div class="tail"></div>' +
-                    '               <div class="options-list">' +
-                    '                   <div>Add to Playlist</div>' +
-                    '                   <div>Add to Queue</div>' +
-                    '                   <div>Play Next</div>' +
+                    '               <div class="options-list" name="' + item + '">' +
+                    '                   <div class="add-to-playlist">Add to Playlist</div>' +
+                    '                   <div class="add-to-queue">Add to Queue</div>' +
+                    '                   <div class="play-next">Play Next</div>' +
                     '               </div>' +
                     '           </div>' +
                     '       </div>' + 
@@ -121,19 +124,22 @@ jQuery(function($){
             }
         },
         bindOptions: function() {
-            $(".music-item").on("click", this.changeSong.bind(this));
+            $(".music-item-title").on("click", this.changeSong.bind(this));
             $(".music-item-options").on("mouseenter", function() {
                 $(this).children().addClass("options-container-visible");
             }).on("mouseleave", function() {
                 $(this).children().removeClass("options-container-visible");
             });
+            $(".add-to-playlist").on("click", this.addToPlaylist.bind(this));
+            $(".add-to-queue").on("click", this.addToQueue.bind(this));
+            $(".play-next").on("click", this.playNext.bind(this));
         },
         renderQueue: function() {
             $("#queue-music-list").empty();
             for(let item in queue) {
                 let music = queue[item];   
                 let musicItem = '<div class="music-item ';
-                if (music.title === queue[activeSong].title) {
+                if (item == activeSong) {
                     musicItem += "music-item-active";
                 }
                 musicItem += 
@@ -154,10 +160,10 @@ jQuery(function($){
                     '       <div class="options-container">' +
                     '           <div class="options-container-inner"> ' +
                     '               <div class="tail"></div>' +
-                    '               <div class="options-list">' +
-                    '                   <div>Add to Playlist</div>' +
-                    '                   <div>Add to Queue</div>' +
-                    '                   <div>Play Next</div>' +
+                    '               <div class="options-list" name="' + item + '">' + 
+                    '                   <div class="add-to-playlist">Add to Playlist</div>' +
+                    '                   <div class="add-to-queue">Add to Queue</div>' +
+                    '                   <div class="play-next">Play Next</div>' +
                     '               </div>' +
                     '           </div>' +
                     '       </div>' + 
@@ -173,8 +179,7 @@ jQuery(function($){
             if(this.shuffle) {
                 let song = index[activeSong];
                 let songName = song.title;
-                shuffle(index);
-                queue = index;
+                queue = shuffle(index);
                 for(let item in queue) {
                     if(queue[item].title == songName) {
                         queue.splice(item, 1);
@@ -276,8 +281,9 @@ jQuery(function($){
         next: function() {
             let title;
             let artist;
-            if(activeSong == queue.length - 1) {
+            if(activeSong == queue.length - 1 || activeSong == undefined) {
                 activeSong = undefined;
+                queue = [];
                 this.resetSeek();
                 title = "";
                 artist = "";
@@ -367,6 +373,33 @@ jQuery(function($){
             }
             this.renderVolume(this.audio.volume);
         },
+        addToPlaylist: function(e) {
+            return;
+        },
+        addToQueue: function(e) {
+            let number = $(e.target).parent().attr("name");
+            let index;
+            if(this.queueVisible) {
+                index = queue;
+            } else {
+                index = data[activeCat][activeIndex];
+            }
+            let song = index[number];
+            queue.push(song);
+            this.renderQueue();
+        },
+        playNext: function(e) {
+            let number = $(e.target).parent().attr("name");
+            let index;
+            if(this.queueVisible) {
+                index = queue;
+            } else {
+                index = data[activeCat][activeIndex];
+            }
+            let song = index[number];
+            queue.splice(activeSong + 1, 0, song);
+            this.renderQueue();
+        },
         updateTime: function() {
             if(this.playing) {
                 let current_minutes = Math.floor(this.audio.currentTime / 60);
@@ -409,6 +442,27 @@ jQuery(function($){
             this.audio.load();
             $(".current-time, .song-time").text("00:00");
             $(".seek-bar-inner").css("width","0%");
+        },
+        addPlaylist: function() {
+            let playlistName = $(".new-playlist-name").val();
+            if(playlistName == "") {
+                return;
+            }
+            console.log(playlistName);
+            $.post("/addPlaylist", {playlistName}, callback => {
+                console.log("hello");
+                $("#playlist-list").append("<li>" + playlistName + "</li>");
+                data["playlists"][playlistName] = [];
+            });
+        },
+        removePlaylist: function() {
+
+        },
+        editPlaylistName: function() {
+
+        },
+        removeFromPlaylist: function() {
+
         }
     }
     App.start();
