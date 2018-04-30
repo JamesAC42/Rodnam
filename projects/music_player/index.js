@@ -81,7 +81,7 @@ jQuery(function($){
             for(let item in index) {
                 let music = index[item];
                 let musicItem = 
-                    '<div class="music-item">' +
+                    '<div class="music-item music-item-index">' +
                     '   <div class="music-item-info info-padding"></div>' +
                     '   <div class="music-item-info music-item-title">' +
                             music.title +
@@ -98,7 +98,7 @@ jQuery(function($){
                     '       <div class="options-container">' +
                     '           <div class="options-container-inner"> ' +
                     '               <div class="tail"></div>' +
-                    '               <div class="options-list" name="' + item + '">' +
+                    '               <div class="options-list options-list-index" name="' + item + '">' +
                     '                   <div class="add-to-playlist">Add to Playlist</div>' +
                     '                   <div class="add-to-queue">Add to Queue</div>' +
                     '                   <div class="play-next">Play Next</div>' +
@@ -115,7 +115,7 @@ jQuery(function($){
             } else {
                 $(".panel-option").addClass("panel-control-hidden");
             }
-            this.bindOptions();
+            this.bindOptionsIndex();
             if(this.queueVisible) {
                 $(".queue img").addClass("disabled");
                 $(".view-inner").removeClass("view-inner-hidden");
@@ -123,23 +123,24 @@ jQuery(function($){
                 this.queueVisible = false;
             }
         },
-        bindOptions: function() {
-            $(".music-item-title").on("click", this.changeSong.bind(this));
-            $(".music-item-options").on("mouseenter", function() {
+        bindOptionsIndex: function() {
+            $(".music-item-index .music-item-title").on("click", this.changeSong.bind(this));
+            $(".music-item-index .music-item-options").on("mouseenter", function() {
                 $(this).children().addClass("options-container-visible");
             }).on("mouseleave", function() {
                 $(this).children().removeClass("options-container-visible");
             });
-            $(".add-to-playlist").on("click", this.addToPlaylist.bind(this));
-            $(".add-to-queue").on("click", this.addToQueue.bind(this));
-            $(".play-next").on("click", this.playNext.bind(this));
+            $(".options-list-index .add-to-playlist").on("click", this.addToPlaylist.bind(this));
+            $(".options-list-index .add-to-queue").on("click", this.addToQueue.bind(this));
+            $(".options-list-index .play-next").on("click", this.playNext.bind(this));
         },
         renderQueue: function() {
             $("#queue-music-list").empty();
             for(let item in queue) {
                 let music = queue[item];   
-                let musicItem = '<div class="music-item ';
+                let musicItem = '<div class="music-item music-item-queue ';
                 if (item == activeSong) {
+                    console.log(item, activeSong);
                     musicItem += "music-item-active";
                 }
                 musicItem += 
@@ -160,7 +161,7 @@ jQuery(function($){
                     '       <div class="options-container">' +
                     '           <div class="options-container-inner"> ' +
                     '               <div class="tail"></div>' +
-                    '               <div class="options-list" name="' + item + '">' + 
+                    '               <div class="options-list options-list-queue" name="' + item + '">' + 
                     '                   <div class="add-to-playlist">Add to Playlist</div>' +
                     '                   <div class="add-to-queue">Add to Queue</div>' +
                     '                   <div class="play-next">Play Next</div>' +
@@ -172,7 +173,18 @@ jQuery(function($){
                     '</div>';
                 $("#queue-music-list").append(musicItem);
             }
-            this.bindOptions();
+            this.bindOptionsQueue();
+        },
+        bindOptionsQueue: function() {
+            $(".music-item-queue .music-item-title").on("click", this.changeSong.bind(this));
+            $(".music-item-queue .music-item-options").on("mouseenter", function() {
+                $(this).children().addClass("options-container-visible");
+            }).on("mouseleave", function() {
+                $(this).children().removeClass("options-container-visible");
+            });
+            $(".options-list-queue .add-to-playlist").on("click", this.addToPlaylist.bind(this));
+            $(".options-list-queue .add-to-queue").on("click", this.addToQueue.bind(this));
+            $(".options-list-queue .play-next").on("click", this.playNext.bind(this));
         },
         setQueue: function() {
             let index = data[activeCat][activeIndex];
@@ -387,6 +399,11 @@ jQuery(function($){
             let song = index[number];
             queue.push(song);
             this.renderQueue();
+            $(".success-message")
+                .text("Song added to queue.")
+                .addClass("success-message-visible")
+                .delay(1500)
+                .removeClass("success-message-visible");
         },
         playNext: function(e) {
             let number = $(e.target).parent().attr("name");
@@ -399,6 +416,11 @@ jQuery(function($){
             let song = index[number];
             queue.splice(activeSong + 1, 0, song);
             this.renderQueue();
+            $(".success-message")
+                .text("Song will play next.")
+                .addClass("success-message-visible")
+                .delay(1500)
+                .removeClass("success-message-visible");
         },
         updateTime: function() {
             if(this.playing) {
@@ -448,9 +470,7 @@ jQuery(function($){
             if(playlistName == "") {
                 return;
             }
-            console.log(playlistName);
             $.post("/addPlaylist", {playlistName}, callback => {
-                console.log("hello");
                 $("#playlist-list").append("<li>" + playlistName + "</li>");
                 data["playlists"][playlistName] = [];
             });
