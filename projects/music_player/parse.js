@@ -6,12 +6,12 @@ const util = require("util");
 
 let walk = (dir, done) => {
     let results = {
-        "all":{},
         "songs":{},
         "albums":{},
         "artists":{},
         "playlists":{},
-        "genres":{}
+        "genres":{},
+        "all":{}
     };
     fs.readdir(dir, (err, list) => {
         if (err) return done(err);

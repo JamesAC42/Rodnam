@@ -196,21 +196,15 @@ body {
 }
 
 .new-playlist-form {
+    display:none;
     position:relative;
     float:left;
-    height:0vh;
+    height:10vh;
     width:100%;
     margin:0;
     padding:0;
     border-bottom:1px solid rgba(255, 255, 255, 0.486);
-}
-
-.new-playlist-form-visible {
-    height:10vh;
-}
-
-.sidebar-list-short {
-    height:70vh;
+    transition:display .1s ease-in-out;
 }
 
 .new-playlist-name {
@@ -259,6 +253,15 @@ body {
     padding:0;
     padding-right:50px;
     overflow-y:scroll;
+    transition:height .1s ease-in-out;
+}
+
+.new-playlist-form-visible {
+    display:block;
+}
+
+.sidebar-list-short {
+    height:70vh;
 }
 
 .sidebar-list ul {
