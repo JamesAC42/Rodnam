@@ -21,14 +21,6 @@ let walk = (dir, done) => {
             file = path.resolve(dir, file);
             fs.stat(file, function(err, stat) {
                 if (stat && stat.isDirectory()) {
-                    /*let dirName = file.split(path.sep).pop();
-                    let newDir = dirName.replace(/\s+/g,'+');
-                    newDir = newDir.replace(/[^a-zA-Z0-9\-.]/g,'+');
-                    //newname = newname.replace('-mkv', '.mkv');
-                    fs.rename(file, dir + "/" + newDir, function(err){
-                        if(err) throw err;
-                    });
-                    */
                     walk(file, (err, res) => {
                         for(let cat in res) {
                             if(cat !== "all") {
@@ -53,6 +45,7 @@ let walk = (dir, done) => {
                             .then(function (metadata) {
 
                                 let tags = metadata.common;
+
                                 let entry = {};
                                 
                                 let fileName = path.basename(

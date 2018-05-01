@@ -16,6 +16,9 @@ const handler = (req, res) => {
             case '/addPlaylist':
                 addPlaylist(req, res);
                 break;
+            case '/removeFromPlaylist':
+                removeFromPlaylist(req, res);
+                break;
             default:
                 res_error(res, 500);
         }
@@ -78,6 +81,19 @@ const addPlaylist = (req, res) => {
         dataMap["playlists"][name] = [];
         fs.writeFile("music_saves.json", JSON.stringify(dataMap, null, '  '), "utf8", callback=>{return});
         res.write(name);
+        res.end();
+    });
+}
+
+const removeFromPlaylist = (req, res) => {
+    let form = new formidable.IncomingForm();
+    form.parse(req, (err, fields) => {
+        let playlist = fields.activeIndex;
+        let song = fields.name;
+        dataMap = require("./music_saves.json");
+        dataMap["playlists"][playlist].splice(song, 1);
+        fs.writeFile("music_saves.json", JSON.stringify(dataMap, null, '  '), "utf8", callback=>{return});
+        res.write(song);
         res.end();
     });
 }

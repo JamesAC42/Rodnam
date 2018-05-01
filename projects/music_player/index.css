@@ -434,8 +434,8 @@ body {
 }
 
 .panel-play:hover {
-    color:#fff;
-    background:rgba(199, 212, 255, 0.438);
+    background:#fff;
+    color:rgb(100, 111, 172);
 }
 
 .music-item-key {
@@ -464,6 +464,37 @@ body {
     margin:0;
     padding:0;
     float:left;
+    overflow:visible;
+}
+
+.music-item-delete {
+    display:none;
+    opacity:0.5;
+    position:absolute;
+    height:25px;
+    width:40px;
+    left:0;
+    top:50%;
+    transform:translate(-40px, -50%);
+    margin:0;
+    padding:0;
+    cursor:pointer;
+}
+
+.music-item-delete img {
+    position:relative;
+    float:left;
+    width:25px;
+    height:25px;
+    margin:0;
+}
+
+.music-item-delete:hover {
+    opacity:1;
+}
+
+.music-item:hover .music-item-delete {
+    display:block;
 }
 
 .music-item-info {
@@ -901,7 +932,7 @@ body {
     position:absolute;
     top:50%;
     left:0%;
-    transform:translate(15px,-50%);
+    transform:translate(30px,-50%);
     margin:0;
 }
 
@@ -917,3 +948,71 @@ body {
     font-size:18px;
     color:#fff;
 }
+
+.playlist-select {
+    position:absolute;
+    top:-200vh;
+    left:50%;
+    transform:translate(-50%,-50%);
+    height:320px;
+    width:400px;
+    background-image: linear-gradient( 135deg, rgb(110, 139, 255) 10%, #0b2366 100%);
+    border-radius:10px;
+    overflow:hidden;
+    margin:0;
+    padding:0;
+    z-index:1000;
+    -webkit-box-shadow: 0px 0px 59px -8px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 0px 59px -8px rgba(0,0,0,0.75);
+    box-shadow: 0px 0px 59px -8px rgba(0,0,0,0.75);
+}
+
+.playlist-select-visible {
+    top:-50%;
+}
+
+.playlist-select-header {
+    position:relative;
+    float:left;
+    height:80px;
+    width:400px;
+    line-height:80px;
+    text-align:center;
+    font-size:22px;
+    color:#fff;
+    border-bottom:1px solid rgba(255, 255, 255, 0.486);
+    margin:0;
+    padding:0;
+}
+
+.playlist-select-list {
+    position:relative;
+    float:left;
+    height:220px;
+    width:420px;
+    overflow-y:scroll;
+    overflow-x:hidden;
+    margin:0;
+    padding:0;
+}
+
+.playlist-select-list ul {
+    list-style:none;
+    padding-left:0;
+    list-style-type:none
+}
+
+.playlist-select-list ul li {
+    font-size:18px;
+    height:50px;
+    line-height:50px;
+    text-align:center;
+    color:#fff;
+    cursor:pointer;
+}
+
+.playlist-select-list ul li:hover {
+    opacity:0.5;
+}
+
+
