@@ -31,10 +31,16 @@ let walk = (dir, done) => {
                     */
                     walk(file, (err, res) => {
                         for(let cat in res) {
-                            for(let index in res[cat]) {
-                                if(results[cat][index] === undefined)
-                                    results[cat][index] = [];
-                                results[cat][index] = results[cat][index].concat(res[cat][index]);
+                            if(cat !== "all") {
+                                for(let index in res[cat]) {
+                                    if(results[cat][index] === undefined)
+                                        results[cat][index] = [];
+                                    results[cat][index] = results[cat][index].concat(res[cat][index]);
+                                }
+                            } else {
+                                for(let song in res[cat]) {
+                                    results[cat][song] = res[cat][song];
+                                }
                             }
                         }
                         if (!--pending) done(null, results);
