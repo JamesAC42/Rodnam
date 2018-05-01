@@ -6,6 +6,7 @@ const util = require("util");
 
 let walk = (dir, done) => {
     let results = {
+        "all":{},
         "songs":{},
         "albums":{},
         "artists":{},
@@ -73,6 +74,9 @@ let walk = (dir, done) => {
                                 entry.genre = (tags.genre === undefined) ?
                                     [] : tags.genre;
 
+                                let id = Math.random().toString(36).substring(2, 10) + Math.random().toString(36).substring(2, 10);
+                                results["all"][id] = entry;
+
                                 if(results["songs"][parent] === undefined)
                                     results["songs"][parent] = [];
                                 if(results["artists"][entry.artist] === undefined)
@@ -80,16 +84,16 @@ let walk = (dir, done) => {
                                 if(results["albums"][entry.album] === undefined)
                                     results["albums"][entry.album] = [];
 
-                                results["songs"][parent].push(entry);
-                                results["artists"][entry.artist].push(entry);
-                                results["albums"][entry.album].push(entry);
+                                results["songs"][parent].push(id);
+                                results["artists"][entry.artist].push(id);
+                                results["albums"][entry.album].push(id);
                                 
                                 for(let genre in entry.genre) {
                                     if(results["genres"][entry.genre[genre]]
                                         === undefined)
                                         results["genres"][entry.genre[genre]] = [];
                                     results["genres"][entry.genre[genre]]
-                                        .push(entry);
+                                        .push(id);
                                 }
 
                                 if (!--pending) done(null, results);
