@@ -140,7 +140,6 @@ jQuery(function($){
                 let music = queue[item];   
                 let musicItem = '<div class="music-item music-item-queue ';
                 if (item == activeSong) {
-                    console.log(item, activeSong);
                     musicItem += "music-item-active";
                 }
                 musicItem += 
@@ -210,8 +209,10 @@ jQuery(function($){
                     let i = 0;
                     for(let category in data) {
                         for(let item in data[category]) {
-                            let entry = "<li>" + item + "</li>";
-                            $(".sidebar-list ul").eq(i).append(entry); 
+                            if(item){
+                                let entry = "<li>" + item + "</li>";
+                                $(".sidebar-list ul").eq(i).append(entry); 
+                            }
                         }
                         i++
                     }
@@ -473,6 +474,7 @@ jQuery(function($){
             $.post("/addPlaylist", {playlistName}, callback => {
                 $("#playlist-list").append("<li>" + playlistName + "</li>");
                 data["playlists"][playlistName] = [];
+                $(".new-playlist-name").val("");
             });
         },
         removePlaylist: function() {

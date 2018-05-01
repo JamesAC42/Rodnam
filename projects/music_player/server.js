@@ -12,8 +12,10 @@ const handler = (req, res) => {
         switch(dest) {
             case '/getSongs':
                 getSongs(req, res);
+                break;
             case '/addPlaylist':
                 addPlaylist(req, res);
+                break;
             default:
                 res_error(res, 500);
         }
@@ -69,14 +71,13 @@ const getSongs = (req, res) => {
 }
 
 const addPlaylist = (req, res) => {
-    console.log("hello");
     let form = new formidable.IncomingForm();
     form.parse(req, (err, fields) => {
         let name = fields.playlistName;
-        console.log(name);
         let dataMap = require("./music_saves.json");
         dataMap["playlists"][name] = [];
-        
+        fs.writeFile("music_saves.json", JSON.stringify(dataMap, null, '  '), "utf8", callback=>{return});
+        res.write(name);
         res.end();
     });
 }
