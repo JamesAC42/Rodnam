@@ -198,11 +198,19 @@ body {
 .new-playlist-form {
     position:relative;
     float:left;
-    height:10vh;
+    height:0vh;
     width:100%;
     margin:0;
     padding:0;
     border-bottom:1px solid rgba(255, 255, 255, 0.486);
+}
+
+.new-playlist-form-visible {
+    height:10vh;
+}
+
+.sidebar-list-short {
+    height:70vh;
 }
 
 .new-playlist-name {
@@ -245,7 +253,7 @@ body {
 .sidebar-list {
     position:relative;
     float:left;
-    height:70vh;
+    height:80vh;
     width:100%;
     margin:0;
     padding:0;
