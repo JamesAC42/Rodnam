@@ -951,9 +951,9 @@ body {
 
 .playlist-select {
     position:absolute;
-    top:-200vh;
+    top:50%;
     left:50%;
-    transform:translate(-50%,-50%);
+    transform:translate(-50%,-200vw);
     height:320px;
     width:400px;
     background-image: linear-gradient( 135deg, rgb(110, 139, 255) 10%, #0b2366 100%);
@@ -965,10 +965,11 @@ body {
     -webkit-box-shadow: 0px 0px 59px -8px rgba(0,0,0,0.75);
     -moz-box-shadow: 0px 0px 59px -8px rgba(0,0,0,0.75);
     box-shadow: 0px 0px 59px -8px rgba(0,0,0,0.75);
+    transition:all .3s ease-in-out;
 }
 
 .playlist-select-visible {
-    top:-50%;
+    transform:translate(-50%,-50%);
 }
 
 .playlist-select-header {
@@ -1015,4 +1016,17 @@ body {
     opacity:0.5;
 }
 
+.exit-button {
+    position:absolute;
+    top:10px;
+    right:10px;
+    height:26px;
+    width:26px;
+    margin:0;
+    padding:0;
+    cursor:pointer;
+}
 
+.exit-button:hover {
+    opacity:0.5;
+}
