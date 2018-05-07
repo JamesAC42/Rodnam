@@ -281,7 +281,7 @@ div.window {
 
 	border:none;
 
-	background:rgba(255,255,255,0.4);
+	background:rgba(255,255,255,0.6);
 
 }
 
@@ -612,7 +612,7 @@ div.news-list-container {
 	position:absolute;
 	top:0;
 	left:0;
-	transform: translate(-60vw, -13vh);
+	transform: translate(-61vw, -13vh);
 
 }
 
@@ -715,7 +715,7 @@ div.date-sect {
 	position:absolute;
 	top:0;
 	left:0;
-	transform: translate(-62vw, -35vh);
+	transform: translate(-61vw, -33vh);
 
 }
 
