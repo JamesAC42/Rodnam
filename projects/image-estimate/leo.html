@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>image estimate</title>
+</head>
+<body>
+
+  <style>
+    body {
+      color:#fff;
+      background:#14284A;
+      margin: 0;
+      padding: 0;
+    }
+    canvas {
+      float: left;
+    }
+  </style>
+
+  <input type="file" id="file-input"><br><br>
+  <button id="start">Start</button>
+  <button id="pause">Pause</button>
+  <button id="download">Download</button>
+  <br/>
+  <canvas id="original" width="200" height="200"></canvas>
+  <canvas id="imitation" width="200" height="200"></canvas>
+  <script>
+    const domOriginal = document.getElementById('original');
+    const domImitation = document.getElementById('imitation');
+    const ctxOriginal = domOriginal.getContext('2d');
+    const ctxImitation = domImitation.getContext('2d');
+    let activeImitater = null;
+    
+    // Brush generation
+    const brushes = [];
+    for (let size = 5; size <= 20; size++) {
+      const middle = (size - 1) / 2;
+      const halfSquared = Math.pow(size / 2, 2);
+      const brush = [];
+      for (let y = 0; y < size; y++) {
+        const line = [];
+        for (let x = 0; x < size; x++) {
+          if (Math.pow(x - middle, 2) + Math.pow(y - middle, 2) < halfSquared) {
+            line.push(x);
+          }
+        }
+        brush.push(line);
+      }
+      brushes.push(brush);
+    }
+
+    const colorDiff = (r1, g1, b1, r2, g2, b2) => Math.pow(
+      Math.pow(r1 - r2, 2)
+        + Math.pow(g1 - g2, 2)
+        + Math.pow(b1 - b2, 2),
+      0.5
+    );
+
+    class Imitater {
+      constructor(target, current, width, height, brushes) {
+        this.current = current.data;
+        this.imageData = current;
+        this.target = target.data;
+        this.width = width;
+        this.height = height;
+        this.brushes = brushes;
+      }
+      getTargetRAt(x, y) {
+        return this.target[(y * this.width + x) * 4];
+      }
+      getTargetGAt(x, y) {
+        return this.target[(y * this.width + x) * 4 + 1];
+      }
+      getTargetBAt(x, y) {
+        return this.target[(y * this.width + x) * 4 + 2];
+      }
+      getRAt(x, y) {
+        return this.current[(y * this.width + x) * 4];
+      }
+      getGAt(x, y) {
+        return this.current[(y * this.width + x) * 4 + 1];
+      }
+      getBAt(x, y) {
+        return this.current[(y * this.width + x) * 4 + 2];
+      }
+      setRAt(x, y, v) {
+        this.current[(y * this.width + x) * 4] = v;
+      }
+      setGAt(x, y, v) {
+        this.current[(y * this.width + x) * 4 + 1] = v;
+      }
+      setBAt(x, y, v) {
+        this.current[(y * this.width + x) * 4 + 2] = v;
+      }
+      nextStep() {
+        const brushId = Math.floor(Math.random() * this.brushes.length);
+        const brush = this.brushes[brushId];
+        const brushRadius = Math.floor((brushId + 1) / 2);
+        const r = Math.floor(Math.random() * 255);
+        const g = Math.floor(Math.random() * 255);
+        const b = Math.floor(Math.random() * 255);
+        const width = this.width;
+        const height = this.height;
+        const centerX = Math.floor(Math.random() * width);
+        const centerY = Math.floor(Math.random() * height);
+        const brushX = centerX - brushRadius;
+        const brushY = centerY - brushRadius;
+        let oldDist = 0;
+        let newDist = 0;
+        for (let dy = 0; dy < brush.length; dy++) {
+          const y = brushY + dy;
+          if (y < 0 || y > height - 1) {
+            continue;
+          }
+          const brushLine = brush[dy];
+          for (let dx of brushLine) {
+            const x = brushX + dx;
+            if (x < 0 || x > width - 1) {
+              continue;
+            }
+            const tr = this.getTargetRAt(x, y);
+            const tg = this.getTargetGAt(x, y);
+            const tb = this.getTargetBAt(x, y);
+            oldDist += colorDiff(
+              this.getRAt(x, y),
+              this.getGAt(x, y),
+              this.getBAt(x, y),
+              tr, tg, tb,
+            );
+            newDist += colorDiff(r, g, b, tr, tg, tb);
+          }
+        }
+        if (newDist < oldDist) {
+          for (let dy = 0; dy < brush.length; dy++) {
+            const y = brushY + dy;
+            if (y < 0 || y > height - 1) {
+              continue;
+            }
+            const brushLine = brush[dy];
+            for (let dx of brushLine) {
+              const x = brushX + dx;
+              if (x < 0 || x > width - 1) {
+                continue;
+              }
+              this.setRAt(x, y, r);
+              this.setGAt(x, y, g);
+              this.setBAt(x, y, b);
+            }
+          }
+        }
+      }
+    }
+    function reset(image) {
+      domOriginal.width = domImitation.width = image.width;
+      domOriginal.height = domImitation.height = image.height;
+      ctxOriginal.fillStyle = ctxImitation.fillStyle = 'black';
+      ctxOriginal.fillRect(0, 0, image.width, image.height);
+      ctxImitation.fillRect(0, 0, image.width, image.height);
+      ctxOriginal.drawImage(image, 0, 0);
+
+      window.a = activeImitater = new Imitater(ctxOriginal.getImageData(
+        0, 0, image.width, image.height,
+      ), ctxImitation.getImageData(
+        0, 0, image.width, image.height,
+      ), image.width, image.height, brushes);
+    }
+    document.getElementById("file-input").addEventListener('change', event => {
+      if (event.target.files[0]) {
+        const file = event.target.files[0];
+        const reader = new FileReader();
+        reader.onload = event => {
+          const image = new Image();
+          image.src = event.target.result;
+          image.onload = () => {
+            reset(image);
+          }
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+  
+    let run = false;
+
+    const runner = () => {
+      const startTime = new Date().getTime();
+      while (run && activeImitater && new Date().getTime() - startTime < 1000 / 30) {
+        activeImitater.nextStep();
+      }
+      if (activeImitater) {
+        ctxImitation.putImageData(activeImitater.imageData, 0, 0);
+      }
+      setTimeout(runner, 0);
+    };
+
+    runner();
+
+    document.getElementById('start').addEventListener('click', () => run = true);
+    document.getElementById('pause').addEventListener('click', () => run = false);
+
+    document.getElementById("download").addEventListener('click', event => {
+			const dataUrl = domImitation.toDataURL();
+			let link = document.createElement("a");
+			link.download = "export.png";
+			link.href = dataUrl;
+			document.body.appendChild(link);
+			link.click();
+			document.body.removeChild(link);
+			delete link;
+		});
+
+  </script>
+
+</body>
+</html>

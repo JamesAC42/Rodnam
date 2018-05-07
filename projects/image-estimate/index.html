@@ -23,8 +23,9 @@
 	<input type="file" id="image-ipt"><br><br>
 	<button id="render">Render</button>
 	<button id="stop">Stop</button>
+	<button id="download">Download</button>
+	<input id="randomColor" type="checkbox" checked><label>Image colors only</label>
 	<canvas id="canvas"></canvas>
-	<p id="percent"></p>
 	<script src="lodash.core.js"></script>
 	<script>
 
@@ -37,8 +38,7 @@
 		canvas.height = c_height;
 		canvas.width = c_width * 2;
 
-		let colors = [];
-		let sim_min = 0.9;
+		let randomColors = false;
 		let radius = 30;
 
 		let imageData_og;
@@ -46,12 +46,40 @@
 		let imageData_new;
 		
 		let ready = false;
-		let margin = 0;
 
 		function renderOriginal(image) {
-			ctx.clearRect(0,0,c_height,c_width);
+			ctx.fillStyle = "#000000";
+			ctx.fillRect(0,0,c_height,c_width);
 			ctx.drawImage(image, 0,0);
-			ctx.clearRect(c_width,0,c_width,c_height);
+			
+			ctx.fillStyle = "#ffffff";
+			ctx.fillRect(c_width,0,c_width, c_height);
+		}
+
+		const rc = () => {
+			return Math.floor(Math.random() * 255);
+		}
+
+		function compare(old_data, new_data) {
+			let total = 0;
+			let amt_same = 0;
+			for (let i = 0;i < old_data.length;i += 4) {
+				total += 1;
+				let og_r = old_data[i];
+				let og_g = old_data[i + 1];
+				let og_b = old_data[i + 2];
+
+				let new_r = new_data[i];
+				let new_g = new_data[i + 1];
+				let new_b = new_data[i + 2];
+				/*
+				if (og_r == new_r && og_g == new_g && og_b == new_b) {
+					amt_same += 1;
+				}
+				*/
+				amt_same += 1 - Math.pow(Math.pow((new_r - og_r), 2) + Math.pow((new_g - og_g), 2) + Math.pow((new_b - og_b), 2), 1/3)/441.672955930063709849498817084; 
+			}
+			return amt_same / total;
 		}
 
 		function nextFrame() {
@@ -60,53 +88,43 @@
 
 			while (new Date().getTime() - startTime < 1000 / 30) {
 
-				let colorIndex = Math.floor(Math.random() * (imageData_og.data.length / 4)) * 4;
-				let color = [imageData_og.data[colorIndex], imageData_og.data[colorIndex + 1], imageData_og.data[colorIndex + 2]];
+				let color;
+				if (randomColors) {
+					color = [rc(),rc(),rc()];
+				} else {
+					colorIndex = Math.floor(Math.random() * (imageData_og.data.length / 4)) * 4;
+					color = [imageData_og.data[colorIndex], imageData_og.data[colorIndex + 1], imageData_og.data[colorIndex + 2]];
+				}
 
-				const radius = Math.random() * 30;
+				const radius = Math.random() * 30 + 10;
 
-				let blotchX = c_width + radius + Math.floor(Math.random() * c_width);
-				let blotchY = Math.floor(Math.random() * c_height);
+				const blotchX = radius + Math.floor(Math.random() * c_width);
+				const blotchY = Math.floor(Math.random() * c_height);
+
+				const sx = blotchX - radius;
+				const sy = blotchY - (canvas.width * radius);
+
+				const snip_og = ctx.getImageData(sx, sy, radius * 2, radius * 2)
+				const snip_old = ctx.getImageData(c_width + sx, sy, radius * 2, radius * 2);
+
+				const old_margin = compare(snip_og, snip_old);
+
+				const color_s = "rgb(" + color.join(',') + ")";
+				ctx.fillStyle = color_s;
 
 				ctx.beginPath();
-				ctx.arc(blotchX, blotchY, radius, 0, 2 * Math.PI);
-
-				let color_s = "rgb(" + color.join(',') + ")";
-
-				ctx.fillStyle = color_s;
+				ctx.arc(c_width + blotchX, blotchY, radius, 0, 2 * Math.PI);
 				ctx.fill();
 
 				imageData_new = ctx.getImageData(c_width, 0, c_width, c_height);
 
-				let total = 0;
-				let amt_same = 0;
-				
-				for (let i = 0;i<imageData_new.data.length;i+=4) {
+				const snip_new = ctx.getImageData(c_width + sx, sy, radius * 2, radius * 2);
 
-					total += 1;
-					let og_r = imageData_og.data[i];
-					let og_g = imageData_og.data[i + 1];
-					let og_b = imageData_og.data[i + 2];
+				const new_margin = compare(snip_og, snip_new);
 
-					let new_r = imageData_new.data[i];
-					let new_g = imageData_new.data[i + 1];
-					let new_b = imageData_new.data[i + 2];
-
-					amt_same += 1 - Math.pow(Math.pow((new_r - og_r), 2) + Math.pow((new_g - og_g), 2) + Math.pow((new_b - og_b), 2), 1/3)/441.672955930063709849498817084; 
-					
+				if (new_margin < old_margin || new_margin < 0.9) {
+					ctx.putImageData(snip_old, c_width + sx, sy);
 				}
-				
-
-				let new_margin = amt_same / total;
-
-				if (new_margin > margin) {
-					margin = new_margin;
-					const p = document.getElementById("percent");
-					p.innerText = margin * 100 + "%";
-					imageData_old = imageData_new;
-				}
-				ctx.putImageData(imageData_old, c_width, 0);
-
 			}
 			if (ready) requestAnimationFrame(nextFrame);
 		}
@@ -129,6 +147,7 @@
 						imageData_og = ctx.getImageData(0,0,c_height,c_width);
 					}
 				};
+				
 				reader.readAsDataURL(file);
 				ready = true;
 			}
@@ -145,11 +164,26 @@
 			if (!ready) return;
 
 			imageData_old = ctx.getImageData(c_width, 0, c_width, c_height);
-			ctx.fillStyle = "#000000";
-			ctx.fillRect(c_width,0,c_width, c_height);
 			render();
 			return;
 			
+		});
+
+		const download_btn = document.getElementById("download");
+		download_btn.addEventListener('click', event => {
+			const dataUrl = canvas.toDataURL();
+			let link = document.createElement("a");
+			link.download = "export.png";
+			link.href = dataUrl;
+			document.body.appendChild(link);
+			link.click();
+			document.body.removeChild(link);
+			delete link;
+		});
+
+		const random_btn = document.getElementById("randomColor");
+		random_btn.addEventListener('click', event => {
+			randomColors = !random_btn.checked;
 		});
 
 	</script>
