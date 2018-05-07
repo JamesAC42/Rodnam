@@ -75,7 +75,7 @@ let walk = (dir, done) => {
                                     coverName = coverName.replace(/\s+/g,'-');
                                     coverName = coverName.replace(/[^a-zA-Z0-9\-.]/g,'-');
                                     let coverExt = tags.picture[0].format;
-                                    let coverPath = "./covers/" + coverName + "." + coverExt;
+                                    let coverPath = "covers\\" + coverName + "." + coverExt;
                                     fs.writeFile(
                                         coverPath, 
                                         binaryData, 
