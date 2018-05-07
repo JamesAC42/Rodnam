@@ -1,0 +1,30 @@
+{
+  "name": "music_player",
+  "version": "1.0.0",
+  "description": "In browser music player for local files",
+  "main": "server.js",
+  "dependencies": {
+    "audio-loader": "^1.0.3",
+    "audio-metadata": "^0.3.0",
+    "formidable": "^1.2.1",
+    "fs": "0.0.1-security",
+    "music-metadata": "^0.10.3",
+    "path": "^0.12.7",
+    "util": "^0.10.3"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "node server.js",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JamesAC42/music_player.git"
+  },
+  "author": "jamesac42",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JamesAC42/music_player/issues"
+  },
+  "homepage": "https://github.com/JamesAC42/music_player#readme"
+}
