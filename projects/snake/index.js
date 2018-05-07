@@ -32,8 +32,14 @@ function displayPage (req, res) {
 	}
 	if (oldPath.pathname == '/snake'){
 		fs.readFile("./snake/snake.html", (err, data) => {
-			if (err) errorRespond();
+			if (err) errorRespond(res);
 			res.writeHead(200, {'Content-Type': 'text/html'}); 
+			res.end(data, 'utf8');
+		});
+	} else if (oldPath.pathname == '/stop'){
+		fs.readFile("./stop/stop.html", (err, data) => {
+			if (err) errorRespond(res);
+			res.writeHead(200, {'Content-Type': 'text/html'});
 			res.end(data, 'utf8');
 		});
 	} else {
@@ -63,11 +69,11 @@ function postResponse(req, res) {
 function snake_getHighScores(req, res) {
 	var sql_con = sqlConnect("snake");
 	sql_con.connect((err) => {
-		if (err) errorRespond();
+		if (err) errorRespond(res);
 	});
 	var query = "SELECT name, score FROM scores";
 	sql_con.query(query, (err, result, fields) => {
-		if (err) errorRespond();
+		if (err) errorRespond(res);
 		var scores = result;
 		scores.sort((a, b) => {
 			return b.score - a.score;
@@ -85,45 +91,56 @@ function snake_getHighScores(req, res) {
 		sql_con.end();
 		res.writeHead(200, {'Content-Type':'text/plain'});
 		res.write(JSON.stringify(scores));
-		res.end(scoreString);
+		res.end();
 	});
 }
 
 function snake_submitScore(req, res) {
 	var sql_con = sqlConnect("snake");
 	sql_con.connect((err) => {
-		if (err) errorRespond();
+		if (err) errorRespond(res);
 	});
 	var form = new formidable.IncomingForm();
 	form.parse(req, (err, fields, files) => {
-		if (err) errorRespond();
+		if (err) errorRespond(res);
 		res.writeHead(200, {'Content-Type':'text/plain'});
 		var userName = fields.name;
 		var score = fields.score;
-		var datetime = new Date().toISOString().slice(0,19).replace('T', ' ');
-		var query = "INSERT INTO scores (name, score, date) values (" 
-					+ "'" + userName + "'," 
-					+ score + ","
-					+ "'" + datetime + "')";
-		sql_con.query(query, (err, result) => {
-			if (err) errorRespond();
+		if(typeof userName == "string" && !isNaN(score)){
+			if(userName.length != 3 || score > 2000){
+				sql_con.end();
+				res.write("rodnam.nfshost.com/stop");
+				res.end();
+			}
+			var datetime = new Date().toISOString().slice(0,19).replace('T', ' ');
+			var query = "INSERT INTO scores (name, score, date) values (" 
+						+ "'" + userName + "'," 
+						+ score + ","
+						+ "'" + datetime + "')";
+			sql_con.query(query, (err, result) => {
+				if (err) errorRespond();
+				sql_con.end();
+				snake_getHighScores(req, res);
+			});
+		} else {
 			sql_con.end();
-			snake_getHighScores(req, res);
-		});
+			res.write("rodnam.nfshost.com/stop");
+			res.end();
+		}
 	});
 }
 
 function sqlConnect(db) {
 	let sql_con = mysql.createConnection({
-		"host": "",
-		"user": "",
+		"host": "rodnam.db",
+		"user": "jcrovo",
 		"password": "",
 		"database": db
 	});
 	return sql_con;
 }
 
-function errorRespond(){
+function errorRespond(res){
 	res.writeHead(500);
 	res.end();
 }

@@ -156,22 +156,26 @@ document.onkeydown = function(e) {
     e = e || window.event;
     buffer = params.direction;
     switch(e.which || e.keyCode) {
+	//case 65:
     	case 37:
     		if (params.direction != "right"){
     			params.direction = "left";
     		}
     		break;
+	//case 87:
     	case 38:
     		if (params.direction != "down"){
     			params.direction = "up";
     		}
     		break;
-    	case 39:
+	//case 68:
+	case 39:
     		if (params.direction != "left"){
     			params.direction = "right";
     		}
     		break;
-    	case 40:
+	//case 83:
+	case 40:
     		if (params.direction != "up"){
     			params.direction = "down";
     		}
@@ -185,14 +189,16 @@ document.onkeydown = function(e) {
 }
 
 function toggleShowScore(state){
-	console.log(state, typeof(state));
 	if(state==2){
-		console.log('J');
 		$(".scores-container").toggleClass("scores-container-visible");
-		paused = !paused;
+		if ($(".scores-container").hasClass("scores-container-visible")) {
+			getScores();
+			paused = true;
+		}
 	}else if(state==1){
 		$(".scores-container").addClass("scores-container-visible");
 		paused = true;
+		getScores();
 	}else{
 		$(".scores-container").removeClass("scores-container-visible");
 		paused = false;
@@ -225,15 +231,23 @@ function hideInfo(){
 	toggleShowScore(0);
 }
 
+var submitEnabled = true;
+
 function submitScore(){
-	var name = $("#score-input").val();
-	if (name.length < 3) return;
-	var score = segments.length;
-	$.post("/snake/submitScore",{name, score},success=>{
-		renderScores(success);
-		hideInfo();
+	if(submitEnabled){
+		submitEnabled = false;
+		var name = $("#score-input").val();
+		if(name.length < 3)return;
+		var score = segments.length;
+		$.post("/snake/submitScore",{name, score},success=>{
+			renderScores(success);
+			hideInfo();
+			submitEnabled = true;
+			return;
+		});
+	} else {
 		return;
-	});
+	}
 }
 
 function renderScores(data){
@@ -249,12 +263,14 @@ function renderScores(data){
 	});
 }
 
-$(document).ready(function(){
+function getScores(){
 	$.post("/snake/getHighScores",{},success=>{
 		renderScores(success);
 		return;
 	});
-});
+}
+
+$(document).ready(getScores());
 
 setInterval(function(){
 	if(!loseCondition && !paused){
