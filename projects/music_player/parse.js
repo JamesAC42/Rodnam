@@ -4,6 +4,8 @@ const path = require("path");
 const mm = require("music-metadata");
 const util = require("util");
 
+let albums = [];
+
 let walk = (dir, done) => {
     let results = {
         "songs":{},
@@ -65,6 +67,26 @@ let walk = (dir, done) => {
                                 fs.rename(file, dir + "/" + newname, function(err){
                                     if(err) throw err;
                                 });
+
+                                if(tags.picture) {
+                                    let binaryData = new Buffer(tags.picture[0].data, 'base64').toString('binary');
+                                    let coverName = (tags.album) ?
+                                        tags.album : entry.title;
+                                    coverName = coverName.replace(/\s+/g,'-');
+                                    coverName = coverName.replace(/[^a-zA-Z0-9\-.]/g,'-');
+                                    let coverExt = tags.picture[0].format;
+                                    let coverPath = "./covers/" + coverName + "." + coverExt;
+                                    fs.writeFile(
+                                        coverPath, 
+                                        binaryData, 
+                                        "binary", 
+                                        function(err){
+                                            console.log("No album art");
+                                        });
+                                    entry.cover = coverPath;
+                                } else {
+                                    entry.cover = "";
+                                }
 
                                 entry.path = path.relative(process.cwd(), dir + "/" + newname);
                                     

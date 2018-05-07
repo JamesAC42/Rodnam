@@ -263,6 +263,7 @@ jQuery(function($){
             this.audio.load();
             $(".song-title").text(song.title);
             $(".song-artist").text(song.artist);
+            $(".song-album-cover img").attr("src", song.cover);
             activeSong = parseInt(number);
             this.play();
             this.setQueue();
@@ -276,6 +277,7 @@ jQuery(function($){
             this.audio.load();
             $(".song-title").text(song.title);
             $(".song-artist").text(song.artist);
+            $(".song-album-cover img").attr("src", song.cover);
             activeSong = parseInt(number);
             this.play();
             this.renderQueue();
@@ -327,6 +329,7 @@ jQuery(function($){
                 this.play();
                 $(".song-title").text(song.title);
                 $(".song-artist").text(song.artist);
+                $(".song-album-cover img").attr("src", song.cover);
                 return;
             } else {
                 return;
@@ -335,12 +338,14 @@ jQuery(function($){
         next: function() {
             let title;
             let artist;
+            let cover;
             if(activeSong == queue.length - 1 || activeSong == undefined) {
                 activeSong = undefined;
                 queue = [];
                 this.resetSeek();
                 title = "";
                 artist = "";
+                cover = "";
             } else {
                 activeSong++;
                 let song = data["all"][queue[activeSong]];
@@ -349,15 +354,18 @@ jQuery(function($){
                 this.play();
                 title = song.title;
                 artist = song.artist;
+                cover = song.cover;
             }
             $(".song-title").text(title);
             $(".song-artist").text(artist);
+            $(".song-album-cover img").attr("src", cover);
             this.renderQueue();
             this.renderControls();
         },
         previous: function() {
             let title;
             let artist;
+            let cover;
             if(this.audio.currentTime < 2 && activeSong >= 0) {
                 activeSong--;
                 let song = data["all"][queue[activeSong]];
@@ -366,11 +374,13 @@ jQuery(function($){
                 this.play();
                 title = song.title;
                 artist = song.artist;
+                cover = song.cover;
             } else {
                 this.seekTo(0);
             }
             $(".song-title").text(title);
             $(".song-artist").text(artist);
+            $(".song-album-cover img").attr("src", cover);
             this.renderQueue();
             this.renderControls();
         },
