@@ -634,7 +634,7 @@ jQuery(function($){
                 $.post("/deletePlaylist", {playlist:activeIndex}, result => {
                     delete data["playlists"][activeIndex];
                     $("#index-name").text("");
-                    activeIndex = undefined;
+                    activeIndex = "";
                     $("#index-music-list").empty();
                     $("#playlist-list").empty();
                     $(".playlist-select-list ul").empty();
@@ -644,6 +644,7 @@ jQuery(function($){
                     }
                     $(".playlist-select-list ul li").on("click", this.addToPlaylist.bind(this));
                     $("#playlist-list li").on("click", this.renderIndexEvent.bind(this));
+                    $(".playlist-option").addClass("panel-control-hidden");
                 });
             }
         },
