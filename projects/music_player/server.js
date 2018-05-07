@@ -25,6 +25,9 @@ const handler = (req, res) => {
             case '/deletePlaylist':
                 deletePlaylist(req, res);
                 break;
+            case '/editPlaylistName':
+                editPlaylistName(req, res);
+                break;
             default:
                 res_error(res, 500);
         }
@@ -127,6 +130,21 @@ const deletePlaylist = (req, res) => {
         res.write(playlist);
         res.end();
     });
+}
+
+const editPlaylistName = (req, res) => {
+    let form = new formidable.IncomingForm();
+    form.parse(req, (err, fields) => {
+        let oldName = fields.oldName;
+        let newName = fields.newName;
+        let dataMap = require("./music_saves.json");
+        let temp = dataMap["playlists"][oldName];
+        delete dataMap["playlists"][oldName];
+        dataMap["playlists"][newName] = temp;
+        fs.writeFile("music_saves.json", JSON.stringify(dataMap, null, '  '), "utf8", callback=>{return});
+        res.write(newName);
+        res.end();
+    })
 }
 
 const res_error = (res, e) => {

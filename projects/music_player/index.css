@@ -391,6 +391,65 @@ body {
     overflow-x:hidden;
     text-overflow:ellipsis;
     white-space: nowrap;
+    overflow:visible;
+}
+
+.panel-title-hidden {
+    display:none;
+}
+
+.panel-title-inner {
+    position:relative;
+    height:150px;
+    width:30vw;
+    margin:0;
+    padding:0;
+    overflow:visible;
+}
+
+#index-rename input {
+    position:absolute;
+    display:block;
+    left:0;
+    top:0;
+    height:150px;
+    width:20vw;
+    line-height:150px;
+    text-align:left;
+    margin:0;
+    padding:0;
+    font-size:32px;
+    font-family:'Roboto Condensed';
+    color:#fff;
+    background:none;
+    font-weight:bold;
+    border:none;
+    outline:none;
+}
+
+.index-rename-submit {
+    position:absolute;
+    top:50%;
+    left:0;
+    transform:translate(-60px,-50%);
+    height:35px;
+    width:35px;
+    cursor:pointer;
+    margin:0;
+    padding:0;
+}
+
+.index-rename-submit img {
+    position:relative;
+    float:left;
+    height:35px;
+    width:35px;
+    margin:0;
+    padding:0;
+}
+
+.index-rename-submit:hover {
+    opacity:0.6;
 }
 
 .panel-controls {

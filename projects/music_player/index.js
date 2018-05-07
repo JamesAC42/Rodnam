@@ -78,6 +78,8 @@ jQuery(function($){
             $(".block").on("click", this.hidePlaylistSelect.bind(this));
             $("#panel-addtoqueue").on("click", this.addToQueueBulk.bind(this));
             $("#panel-playnext").on("click", this.playNextBulk.bind(this));
+            $("#panel-rename").on("click", this.toggleEditPlaylistName.bind(this));
+            $(".index-rename-submit").on("click", this.editPlaylistName.bind(this));
         },
         setBackground: function() {
             let bgNumber = Math.floor(Math.random() * 13);
@@ -88,24 +90,14 @@ jQuery(function($){
             let indexName = $(e.target).text();
             activeCat = visibleCat;
             activeIndex = indexName;
-            $("#index-name").text(indexName);
             this.renderIndex(activeCat, indexName);
         },
         renderIndex: function(catName, indexName) {
             $("#index-music-list").empty();
-            let index;
-            if(indexName == "All Songs") {
-                index = data["all"]
-            } else {
-                index = data[catName][indexName];
-            }
+            $("#index-name").text(indexName);
+            let index = data[catName][indexName];
             for(let id in index) {
-                let music;
-                if(indexName == "All Songs") {
-                    music = data["all"][id];
-                } else {
-                    music = data["all"][index[id]];
-                }
+                let music = data["all"][index[id]];
                 let musicItem = 
                     '<div class="music-item music-item-index" name="' + id + '">';
 
@@ -244,9 +236,6 @@ jQuery(function($){
                     data = JSON.parse(result);
                     let i = 0;
                     for(let category in data) {
-                        if(category == "songs") {
-                            $(".sidebar-list ul").eq(i).append("<li>All Songs</li>");
-                        }
                         for(let item in data[category]) {
                             if(item){
                                 let entry = "<li>" + item + "</li>";
@@ -671,8 +660,33 @@ jQuery(function($){
                 });
             }
         },
+        toggleEditPlaylistName: function() {
+            if($("#index-rename").hasClass("panel-title-hidden")) {   
+                console.log("hello");
+                $("#index-rename-input").val(activeIndex);
+                $("#index-rename-input").focus();
+            }
+            $("#index-name, #index-rename").toggleClass("panel-title-hidden");
+        },
         editPlaylistName: function() {
-
+            let oldName = activeIndex;
+            let newName = $("#index-rename-input").val();
+            if(newName == "") return;
+            $.post("/editPlaylistName", {oldName, newName}, result => {
+                let temp = data[activeCat][activeIndex];
+                delete data[activeCat][activeIndex];
+                data[activeCat][newName] = temp;
+                activeIndex = newName;
+                this.renderIndex(activeCat, newName);
+                $("#playlist-list").empty();
+                $(".playlist-select-list ul").empty();
+                for(let playlist in data["playlists"]) {
+                    $("#playlist-list, .playlist-select-list ul").append("<li>" + playlist + "</li>");
+                }
+                $("#playlist-list li").on("click", this.renderIndexEvent.bind(this));    
+                $(".playlist-select-list ul li").on("click",this.addToPlaylist.bind(this));
+                this.toggleEditPlaylistName();
+            });
         },
         removeFromPlaylist: function(e) {
             let number = $(e.target).parent().parent().attr("name");

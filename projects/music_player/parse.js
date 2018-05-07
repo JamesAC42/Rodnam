@@ -4,8 +4,6 @@ const path = require("path");
 const mm = require("music-metadata");
 const util = require("util");
 
-let albums = [];
-
 let walk = (dir, done) => {
     let results = {
         "songs":{},
@@ -133,22 +131,17 @@ let walk = (dir, done) => {
     });
 }
 
-walk("music/", (err, result) => {
-    if(err) throw err;
-    let data;
-    try {
-        data = require("./music_saves.json");
-    } catch (err) {
-        data = {
-            "songs":{},
-            "albums":{},
-            "artists":{},
-            "playlists":{},
-            "genres":{},
-            "all":{}
-        }
+if (fs.existsSync("./music")){
+    if (!fs.existsSync("./covers")){
+        fs.mkdirSync("./covers");
     }
-    playlists = data["playlists"];
-    result["playlists"] = playlists;
-    fs.writeFile("music_saves.json", JSON.stringify(result, null, '  '), "utf8", callback=>{return});
-});
+    walk("music/", (err, result) => {
+        if(err) throw err;
+        fs.writeFile("music_saves.json", JSON.stringify(result, null, '  '), "utf8", callback=>{return});
+    });
+    console.log("Finished.");
+} else {
+    console.log("No music found. Place music in ./music/")
+}
+
+
