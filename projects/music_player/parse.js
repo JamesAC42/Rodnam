@@ -24,10 +24,12 @@ let walk = (dir, done) => {
                     walk(file, (err, res) => {
                         for(let cat in res) {
                             if(cat !== "all") {
-                                for(let index in res[cat]) {
-                                    if(results[cat][index] === undefined)
-                                        results[cat][index] = [];
-                                    results[cat][index] = results[cat][index].concat(res[cat][index]);
+                                if(cat !== "playlists") {
+                                    for(let index in res[cat]) {
+                                        if(results[cat][index] === undefined)
+                                            results[cat][index] = [];
+                                        results[cat][index] = results[cat][index].concat(res[cat][index]);
+                                    }
                                 }
                             } else {
                                 for(let song in res[cat]) {
@@ -111,5 +113,8 @@ let walk = (dir, done) => {
 
 walk("music/", (err, result) => {
     if(err) throw err;
+    let data = require("./music_saves.json");
+    let playlists = data["playlists"];
+    result["playlists"] = playlists;
     fs.writeFile("music_saves.json", JSON.stringify(result, null, '  '), "utf8", callback=>{return});
 });

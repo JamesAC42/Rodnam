@@ -1,5 +1,6 @@
 jQuery(function($){
-    let activeCat = "songs";
+    let visibleCat = "songs";
+    let activeCat = "";
     let activeIndex = "";
     let queue = [];
     let activeSong;
@@ -29,6 +30,7 @@ jQuery(function($){
             this.volumeSave = 1;
             this.newPlaylist = false;
             this.pendingSong = undefined;
+            this.addBulk = false;
             this.getMusicData();
             this.bind();
             //this.setBackground();
@@ -52,7 +54,7 @@ jQuery(function($){
 
                 $(".sidebar-content").removeClass("sidebar-content-active");
                 let name = $(this).attr("name");
-                activeCat = name;
+                visibleCat = name;
                 let content = "sidebar-" + name;
                 $("#" + content).addClass("sidebar-content-active");
             });
@@ -60,6 +62,8 @@ jQuery(function($){
             $(".panel-play").on("click", this.playIndex.bind(this));
             $(".volume-bar").on("click", this.adjustVolume.bind(this));
             $(".seek-bar").on("click", this.seek.bind(this));
+            $(".seek-bar").on("mouseenter mousemove", this.showSeekHover.bind(this));
+            $(".seek-bar").on("mouseleave", this.hideSeekHover.bind(this));
             $(".loop img").on("click", this.toggleLoop.bind(this));
             $(".skip-back").on("click", this.previous.bind(this));
             $(".skip-forward").on("click", this.next.bind(this));
@@ -67,8 +71,13 @@ jQuery(function($){
             $(".queue img").on("click", this.toggleQueue.bind(this));
             $(".shuffle img").on("click", this.toggleShuffle.bind(this));
             $(".new-playlist-submit").on("click", this.addPlaylist.bind(this));
+            $("#panel-addtoplaylist").on("click", this.showPlaylistSelect.bind(this, [true]))
             $(".new-playlist-toggle").on("click", this.toggleNewPlaylist.bind(this));
             $(".exit-button").on("click", this.hidePlaylistSelect.bind(this));
+            $("#panel-delete").on("click", this.removePlaylist.bind(this));
+            $(".block").on("click", this.hidePlaylistSelect.bind(this));
+            $("#panel-addtoqueue").on("click", this.addToQueueBulk.bind(this));
+            $("#panel-playnext").on("click", this.playNextBulk.bind(this));
         },
         setBackground: function() {
             let bgNumber = Math.floor(Math.random() * 13);
@@ -77,6 +86,7 @@ jQuery(function($){
         },
         renderIndexEvent: function(e) {
             let indexName = $(e.target).text();
+            activeCat = visibleCat;
             activeIndex = indexName;
             $("#index-name").text(indexName);
             this.renderIndex(activeCat, indexName);
@@ -143,10 +153,10 @@ jQuery(function($){
             }).on("mouseleave", function() {
                 $(this).children().removeClass("options-container-visible");
             });
-            $(".options-list-index .add-to-playlist").on("click", this.showPlaylistSelect.bind(this));
+            $(".options-list-index .add-to-playlist").on("click", this.showPlaylistSelect.bind(this, [false]));
             $(".options-list-index .add-to-queue").on("click", this.addToQueue.bind(this));
             $(".options-list-index .play-next").on("click", this.playNext.bind(this));
-            $(".music-item-delete").on("click", this.removeFromPlaylist.bind(this));
+            $(".music-item-delete img").on("click", this.removeFromPlaylist.bind(this));
         },
         renderQueue: function() {
             $("#queue-music-list").empty();
@@ -158,6 +168,7 @@ jQuery(function($){
                 }
                 musicItem += 
                     '" name="' + item + '">' +
+                    '   <div class="queue-item-delete"><img src="./icons/icons8-cancel-50.png"></div>' +
                     '   <div class="music-item-info info-padding"></div>' +
                     '   <div class="music-item-info music-item-title">' +
                             music.title +
@@ -195,9 +206,10 @@ jQuery(function($){
             }).on("mouseleave", function() {
                 $(this).children().removeClass("options-container-visible");
             });
-            $(".options-list-queue .add-to-playlist").on("click", this.showPlaylistSelect.bind(this));
+            $(".options-list-queue .add-to-playlist").on("click", this.showPlaylistSelect.bind(this, [false]));
             $(".options-list-queue .add-to-queue").on("click", this.addToQueue.bind(this));
             $(".options-list-queue .play-next").on("click", this.playNext.bind(this));
+            $(".queue-item-delete img").on("click", this.removeFromQueue.bind(this));
         },
         setQueue: function() {
             let index = data[activeCat][activeIndex];
@@ -251,7 +263,7 @@ jQuery(function($){
             this.audio.load();
             $(".song-title").text(song.title);
             $(".song-artist").text(song.artist);
-            activeSong = number;
+            activeSong = parseInt(number);
             this.play();
             this.setQueue();
             this.renderQueue();
@@ -264,7 +276,7 @@ jQuery(function($){
             this.audio.load();
             $(".song-title").text(song.title);
             $(".song-artist").text(song.artist);
-            activeSong = number;
+            activeSong = parseInt(number);
             this.play();
             this.renderQueue();
         },
@@ -374,9 +386,35 @@ jQuery(function($){
             }
             this.queueVisible = !this.queueVisible;
         },
+        showSeekHover: function(e) {
+            if(activeSong == undefined) return;
+
+            let x = e.pageX - $(e.target).offset().left;
+            let width = $(".seek-bar").width();
+            let percent = x / width;
+            let duration = this.audio.duration;
+            let seekTime = duration * percent;
+            let minutes = Math.floor(seekTime / 60);
+            let seconds = Math.floor(seekTime % 60);
+
+            let transform = "translateX(" + (x + 10) + "px) translateY(-45px)";
+
+            $(".seek-hover").css("transform", transform);
+            $(".seek-hover").addClass("seek-hover-visible");
+
+            if(minutes < 10) minutes = "0" + minutes;
+            if(seconds < 10) seconds = "0" + seconds;
+            $(".seek-hover-time").text(minutes + ":" + seconds);
+
+            $(".seek-bar, .seek-bar-inner").addClass("seek-bar-grow");
+        },
+        hideSeekHover: function(e) {
+            $(".seek-hover").removeClass("seek-hover-visible");
+            $(".seek-bar, .seek-bar-inner").removeClass("seek-bar-grow");
+        },
         seek: function(e) {
             let x = e.pageX - $(e.target).offset().left;
-            let width = $(e.target).width();
+            let width = $(".seek-bar").width();
             let percent = x / width;
             let duration = this.audio.duration;
             let seekTime = duration * percent;
@@ -391,7 +429,7 @@ jQuery(function($){
         },
         adjustVolume: function(e) {
             let x = e.pageX - $(e.target).offset().left;
-            let width = $(e.target).width();
+            let width = $(".volume-bar").width();
             let percent = x / width;
             this.audio.volume = percent;
             this.renderVolume(percent);
@@ -417,15 +455,23 @@ jQuery(function($){
         },
         addToPlaylist: function(e) {
             let playlist = $(e.target).text();
-            let id;
-            if(this.queueVisible) {
-                id = queue[this.pendingSong];
+            let index = data[activeCat][activeIndex];
+            let songs = [];
+            if(!this.addBulk) {
+                if(this.queueVisible) {
+                    songs.push(queue[this.pendingSong]);
+                } else {
+                    songs.push(index[this.pendingSong]);
+                }
             } else {
-                id = data[activeCat][activeIndex][this.pendingSong];
+                if(this.shuffle) {
+                    songs = shuffle(index);
+                } else {
+                    songs = index;
+                }
             }
-            let d = JSON.stringify({playlist, id});
-            $.post("/addToPlaylist", {d}, results => {
-                data["playlists"][playlist].push(id);
+            $.post("/addToPlaylist", {playlist, "songs":JSON.stringify(songs)}, results => {
+                data["playlists"][playlist] = data["playlists"][playlist].concat(songs);
                 this.hidePlaylistSelect();
                 $("#success-message-text").text("Added to playlist.");
                 $(".success-message").addClass("success-message-visible")
@@ -436,6 +482,13 @@ jQuery(function($){
                     this.renderIndex(activeCat, activeIndex);
                 }
             });
+        },
+        successMessage: function(message) {
+            $("#success-message-text").text(message);
+            $(".success-message").addClass("success-message-visible")
+            setTimeout(() => {
+                $(".success-message").removeClass("success-message-visible");
+            }, 2000);
         },
         addToQueue: function(e) {
             let number = $(e.target).parent().attr("name");
@@ -448,11 +501,20 @@ jQuery(function($){
             let song = index[number];
             queue.push(song);
             this.renderQueue();
-            $("#success-message-text").text("Added to queue.");
-            $(".success-message").addClass("success-message-visible")
-            setTimeout(() => {
-                $(".success-message").removeClass("success-message-visible");
-            }, 2000);
+            this.successMessage("Added to queue.");
+        },
+        addToQueueBulk: function(e) {
+            if(activeIndex == "") return;
+            let index = data[activeCat][activeIndex];
+            let songs;
+            if(this.shuffle) {
+                songs = shuffle(index);
+            } else {
+                songs = index;
+            }
+            queue = queue.concat(songs);
+            this.renderQueue();
+            this.successMessage("Added to queue.");
         },
         playNext: function(e) {
             let number = $(e.target).parent().attr("name");
@@ -465,11 +527,23 @@ jQuery(function($){
             let song = index[number];
             queue.splice(activeSong + 1, 0, song);
             this.renderQueue();
-            $("#success-message-text").text("Song playing next.");
-            $(".success-message").addClass("success-message-visible")
-            setTimeout(() => {
-                $(".success-message").removeClass("success-message-visible");
-            }, 2000);
+            this.successMessage("Song playing next.");
+        },
+        playNextBulk: function(e) {
+            if(activeIndex == "") return;
+            let index = data[activeCat][activeIndex];
+            let songs;
+            if(this.shuffle) {
+                songs = shuffle(index);
+            } else {
+                songs = index;
+            }
+            for(let i = 0; i < songs.length; i++) {
+                let pos = activeSong + 1 + i;
+                queue.splice(pos, 0, songs[i]);
+            }
+            this.renderQueue();
+            this.successMessage("Songs playing next.");
         },
         updateTime: function() {
             if(this.playing) {
@@ -518,17 +592,28 @@ jQuery(function($){
             $(".new-playlist-form").toggleClass("new-playlist-form-visible");
             $("#playlist-list-outer").toggleClass("sidebar-list-short");
         },
-        showPlaylistSelect: function(e) {
-            let number = $(e.target).parent().attr("name");
-            this.pendingSong = number;
+        showPlaylistSelect: function(args, e) {
+            if(activeIndex == "") return;
+            this.addBulk = args[0];
+            if(!this.addBulk) {
+                let number = $(e.target).parent().attr("name");
+                this.pendingSong = number;
+            }
             $(".playlist-select").addClass("playlist-select-visible");
+            $(".block").addClass("block-visible");
         },
         hidePlaylistSelect: function() {
             $(".playlist-select").removeClass("playlist-select-visible");
+            $(".block").removeClass("block-visible");
         },
         addPlaylist: function() {
             let playlistName = $(".new-playlist-name").val();
             if(playlistName == "") {
+                return;
+            }
+            if(data["playlists"][playlistName] !== undefined) {
+                alert("Playlist with that name already exists");
+                $(".new-playlist-name").val("");
                 return;
             }
             $.post("/addPlaylist", {playlistName}, callback => {
@@ -545,27 +630,43 @@ jQuery(function($){
             });
         },
         removePlaylist: function() {
-            if(activeCat == "playlists" && data[activeCat].indexof(activeIndex) != -1) {
-                if(confirm("Delete this playlist?")) {
-                    $.post("/deletePlaylist", {playlist:activeIndex}, result => {
-                        delete data[activeCat][activeIndex];
-                        this.renderIndex(activeCat, activeIndex);
-                    });
-                }
+            if(confirm("Delete this playlist?")) {
+                $.post("/deletePlaylist", {playlist:activeIndex}, result => {
+                    delete data["playlists"][activeIndex];
+                    $("#index-name").text("");
+                    activeIndex = undefined;
+                    $("#index-music-list").empty();
+                    $("#playlist-list").empty();
+                    $(".playlist-select-list ul").empty();
+                    for(let playlist in data["playlists"]) {
+                        $(".playlist-select-list ul").append("<li>" + playlist + "</li>")
+                        $("#playlist-list").append("<li>" + playlist + "</li>");
+                    }
+                    $(".playlist-select-list ul li").on("click", this.addToPlaylist.bind(this));
+                    $("#playlist-list li").on("click", this.renderIndexEvent.bind(this));
+                });
             }
         },
         editPlaylistName: function() {
 
         },
         removeFromPlaylist: function(e) {
-            let number = $(e.target).parent().attr("name");
+            let number = $(e.target).parent().parent().attr("name");
             $.post("/removeFromPlaylist", {activeIndex, number}, results => {
-                console.log(data[activeCat][activeIndex]);
-                console.log(results);
-                data[activeCat][activeIndex].splice(number, 1);
-                console.log(data[activeCat][activeIndex]);
-                this.renderIndex(activeCat, activeIndex);
+                data["playlists"][activeIndex].splice(number, 1);
+                this.renderIndex("playlists", activeIndex);
             });
+        },
+        removeFromQueue: function(e) {
+            let number = $(e.target).parent().parent().attr("name");
+            if(activeSong == number) {
+                this.next();
+            }
+            if(activeSong > number) {
+                activeSong--;
+            }
+            queue.splice(number, 1);
+            this.renderQueue();
         }
     }
     App.start();

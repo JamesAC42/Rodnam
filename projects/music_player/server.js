@@ -22,6 +22,9 @@ const handler = (req, res) => {
             case '/addToPlaylist':
                 addToPlaylist(req, res);
                 break;
+            case '/deletePlaylist':
+                deletePlaylist(req, res);
+                break;
             default:
                 res_error(res, 500);
         }
@@ -91,11 +94,10 @@ const addPlaylist = (req, res) => {
 const addToPlaylist = (req, res) => {
     let form = new formidable.IncomingForm();
     form.parse(req, (err, fields) => {
-        let data = JSON.parse(fields.d);
-        let playlist = data.playlist;
-        let id = data.id;
-        dataMap = require("./music_saves.json");
-        dataMap["playlists"][playlist].push(id);
+        let playlist = fields.playlist;
+        let songs = JSON.parse(fields.songs);
+        let dataMap = require("./music_saves.json");
+        dataMap["playlists"][playlist] = dataMap["playlists"][playlist].concat(songs);
         fs.writeFile("music_saves.json", JSON.stringify(dataMap, null, '  '), "utf8", callback=>{return});
         res.write(playlist);
         res.end();
@@ -107,8 +109,20 @@ const removeFromPlaylist = (req, res) => {
     form.parse(req, (err, fields) => {
         let playlist = fields.activeIndex;
         let number = fields.number;
-        dataMap = require("./music_saves.json");
+        let dataMap = require("./music_saves.json");
         dataMap["playlists"][playlist].splice(number, 1);
+        fs.writeFile("music_saves.json", JSON.stringify(dataMap, null, '  '), "utf8", callback=>{return});
+        res.write(playlist);
+        res.end();
+    });
+}
+
+const deletePlaylist = (req, res) => {
+    let form = new formidable.IncomingForm();
+    form.parse(req, (err, fields) => {
+        let playlist = fields.playlist;
+        let dataMap = require("./music_saves.json");
+        delete dataMap["playlists"][playlist];
         fs.writeFile("music_saves.json", JSON.stringify(dataMap, null, '  '), "utf8", callback=>{return});
         res.write(playlist);
         res.end();

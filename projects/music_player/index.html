@@ -94,71 +94,82 @@
             <div class="view-outer">
                 <div class="view-background"></div>
                 <div class="view-inner">
-                    <div class="panel">
-                        <div id="index-name" class="panel-title">
-                            
-                        </div>
-                        <div class="panel-controls">
-                            <div id="panel-delete" class="panel-control panel-option playlist-option panel-control-hidden">
-                                DELETE
+                    <div class="index-outer">
+                        <div class="index-inner">
+                            <div class="panel">
+                                <div id="index-name" class="panel-title">
+                                    
+                                </div>
+                                <div class="panel-controls">
+                                    <div id="panel-delete" class="panel-control panel-option playlist-option panel-control-hidden">
+                                        DELETE
+                                    </div>
+                                    <div id="panel-rename" class="panel-control panel-option playlist-option panel-control-hidden">
+                                        RENAME
+                                    </div>
+                                    <div id="panel-addtoplaylist" class="panel-control panel-option">
+                                        ADD TO PLAYLIST
+                                    </div>
+                                    <div id="panel-addtoqueue" class="panel-control panel-option">
+                                        ADD TO QUEUE
+                                    </div>
+                                    <div id="panel-playnext" class="panel-control panel-option">
+                                        PLAY NEXT
+                                    </div>
+                                    <div class="panel-control">
+                                        <span class="panel-play">
+                                            PLAY
+                                        </span>
+                                    </div>
+                                </div>
                             </div>
-                            <div id="panel-rename" class="panel-control panel-option playlist-option panel-control-hidden">
-                                RENAME
+                            <div class="music-item-key">
+                                <div class="music-item-info info-padding"></div>
+                                <div class="music-item-info music-item-title">
+                                    Title
+                                </div>
+                                <div class="music-item-info info-padding"></div>
+                                <div class="music-item-info music-item-artist">
+                                    Artist
+                                </div>
+                                <div class="music-item-info info-padding"></div>                        
+                                <div class="music-item-info music-item-album">
+                                    Album
+                                </div>
                             </div>
-                            <div id="panel-addtoplaylist" class="panel-control panel-option">
-                                ADD TO PLAYLIST
-                            </div>
-                            <div class="panel-control">
-                                <span class="panel-play">
-                                    PLAY
-                                </span>
+                            <div id="index-music-list" class="music-list">
+                                
                             </div>
                         </div>
-                    </div>
-                    <div class="music-item-key">
-                        <div class="music-item-info info-padding"></div>
-                        <div class="music-item-info music-item-title">
-                            Title
-                        </div>
-                        <div class="music-item-info info-padding"></div>
-                        <div class="music-item-info music-item-artist">
-                            Artist
-                        </div>
-                        <div class="music-item-info info-padding"></div>                        
-                        <div class="music-item-info music-item-album">
-                            Album
-                        </div>
-                    </div>
-                    <div id="index-music-list" class="music-list">
-                        
                     </div>
                 </div>
                 <div class="queue-container">
-                    <div class="panel">
-                        <div class="panel-title">
-                            Play Queue
+                    <div class="index-outer">
+                        <div class="index-inner">
+                            <div class="panel">
+                                <div class="panel-title">
+                                    Play Queue
+                                </div>
+                            </div>
+                            <div class="music-item-key">
+                                <div class="music-item-info info-padding"></div>
+                                <div class="music-item-info music-item-title">
+                                    Title
+                                </div>
+                                <div class="music-item-info info-padding"></div>
+                                <div class="music-item-info music-item-artist">
+                                    Artist
+                                </div>
+                                <div class="music-item-info info-padding"></div>                        
+                                <div class="music-item-info music-item-album">
+                                    Album
+                                </div>
+                            </div>
+                            <div id="queue-music-list" class="music-list">
+                                
+                            </div>
                         </div>
                     </div>
-                    <div class="music-item-key">
-                        <div class="music-item-info info-padding"></div>
-                        <div class="music-item-info music-item-title">
-                            Title
-                        </div>
-                        <div class="music-item-info info-padding"></div>
-                        <div class="music-item-info music-item-artist">
-                            Artist
-                        </div>
-                        <div class="music-item-info info-padding"></div>                        
-                        <div class="music-item-info music-item-album">
-                            Album
-                        </div>
-                    </div>
-                    <div id="queue-music-list" class="music-list">
-                        
-                    </div>
-                </div>
-                <div class="view-nothing-selected">
-                    Select something from the sidebar.
                 </div>
             </div>
         </div>
@@ -197,6 +208,14 @@
                         </div>
                         <div class="seek-bar">
                             <div class="seek-bar-inner"></div>
+                            <div class="seek-hover">
+                                <div class="seek-hover-inner">
+                                    <div class="seek-hover-tail"></div>
+                                    <div class="seek-hover-time">
+                                        2:34
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <div class="song-time">
                             00:00
@@ -229,6 +248,7 @@
             <span id="success-message-text">Added to playlist.</span>
         </div>
     </div>
+    <div class="block"></div>
     <div class="playlist-select">
         <div class="playlist-select-header">
             Select playlist.
