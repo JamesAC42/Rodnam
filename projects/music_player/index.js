@@ -93,9 +93,19 @@ jQuery(function($){
         },
         renderIndex: function(catName, indexName) {
             $("#index-music-list").empty();
-            let index = data[catName][indexName];
+            let index;
+            if(indexName == "All Songs") {
+                index = data["all"]
+            } else {
+                index = data[catName][indexName];
+            }
             for(let id in index) {
-                let music = data["all"][index[id]];
+                let music;
+                if(indexName == "All Songs") {
+                    music = data["all"][id];
+                } else {
+                    music = data["all"][index[id]];
+                }
                 let musicItem = 
                     '<div class="music-item music-item-index" name="' + id + '">';
 
@@ -234,6 +244,9 @@ jQuery(function($){
                     data = JSON.parse(result);
                     let i = 0;
                     for(let category in data) {
+                        if(category == "songs") {
+                            $(".sidebar-list ul").eq(i).append("<li>All Songs</li>");
+                        }
                         for(let item in data[category]) {
                             if(item){
                                 let entry = "<li>" + item + "</li>";
