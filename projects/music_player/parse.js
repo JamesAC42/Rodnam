@@ -113,8 +113,20 @@ let walk = (dir, done) => {
 
 walk("music/", (err, result) => {
     if(err) throw err;
-    let data = require("./music_saves.json");
-    let playlists = data["playlists"];
+    let data;
+    try {
+        data = require("./music_saves.json");
+    } catch (err) {
+        data = {
+            "songs":{},
+            "albums":{},
+            "artists":{},
+            "playlists":{},
+            "genres":{},
+            "all":{}
+        }
+    }
+    playlists = data["playlists"];
     result["playlists"] = playlists;
     fs.writeFile("music_saves.json", JSON.stringify(result, null, '  '), "utf8", callback=>{return});
 });
