@@ -20,7 +20,6 @@ const weatherIcons = {
 let active = "school";
 
 let time;
-let bgAmt = 72;
 
 function loadLinks(cat) {
 	$("div.title-bar").css("background",linkData[cat]["color"]);
@@ -157,6 +156,19 @@ function loadWeather(data) {
 
 	});
 
+}
+
+function setBackground() {
+	$.post('/getBackgroundAmount', {}, amount => {
+		if(amount) {
+			
+			let bgAmt = JSON.parse(amount);
+			let bgNum = Math.floor((Math.random() * (bgAmt + 1)));
+			$("body").css("background-image", "url('/backgrounds/bg-" + bgNum + ".jpg')");
+			$("div.window-bg-img").css("background-image", 'url("./backgrounds/bg-' + bgNum + '.jpg")');
+
+		}
+	})
 }
 
 
@@ -311,13 +323,10 @@ $(document).ready(function(){
 
 	});
 	
-	let bgNum = Math.floor((Math.random() * (bgAmt + 1)));
-	$("body").css("background-image", "url('/backgrounds/bg-" + bgNum + ".jpg')");
-	$("div.window-bg-inner img").attr("src", '/backgrounds/bg-' + bgNum + '.jpg');
-
 	getWeather();
 	getFavorites();
 	getNews();
+	setBackground();
 
 	$("#search-input").focus();
 

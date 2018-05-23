@@ -56,14 +56,26 @@ function respondPage(req, res) {
 }
 
 function postData(req, res) {
-	if (req.url == "/getWeather") {
-		returnWeather(req, res);
-	} else if (req.url == "/getFavorites") {
-		returnFavorites(req, res);
-	} else if (req.url == "/updateFavorites") {
-		updateFavorites(req, res);
-	} else if (req.url == "/getNews") {
-		returnNews(req, res);
+
+	switch(req.url) {
+		case "/getWeather":
+			returnWeather(req, res);
+			break;
+		case "/getFavorites":
+			returnFavorites(req, res);
+			break;
+		case "/updateFavorites":
+			updateFavorites(req, res);
+			break;
+		case "/getNews":
+			returnNews(req, res);
+			break;
+		case "/getBackgroundAmount":
+			returnBackgroundAmount(req, res);
+			break;
+		default:
+			res.writeHead(500);
+			res.end();
 	}
 }
 
@@ -118,6 +130,17 @@ function updateFavorites(req, res) {
 		let links = JSON.parse(fields.linkJSON);
 		fs.writeFile("./favorites.json", JSON.stringify(links, null, '	'), "utf8", callback => {return;});
 		res.end();
+	});
+}
+
+function returnBackgroundAmount(req, res) {
+	fs.readdir('./backgrounds', (err, files) => {
+		if(err) {
+			res.writeHead(500);
+			res.end();
+		}
+		res.writeHead(200, {'Content-Type': 'text/plain'});
+		res.end(JSON.stringify(files.length));
 	});
 }
 

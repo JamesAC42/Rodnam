@@ -299,14 +299,25 @@ div.window-bg {
 
 }
 
+div.window-bg-img {
+
+	position:absolute;
+	top:0;
+	left:0;
+	height:100vh;
+	width:100vw;
+
+	background-size:100% auto;
+	background-repeat:no-repeat;
+
+}
+
 div.window-inner, div.window-bg-inner {
 
 	position:relative;
 
 	margin:0;
 	padding:0;
-
-	overflow:hidden;
 
 }
 
@@ -386,12 +397,12 @@ div.window-content {
 }
 
 #links-bg {
-	
-	height:35vh;
-	width:40vw;
 
 	top:0;
 	left:0;
+
+	height:35vh;
+	width:40vw;
 
 	transform:translateY(0);
 
@@ -404,11 +415,8 @@ div.window-content {
 
 }
 
-#links-bg img {
+#links-bg .window-bg-img {
 
-	position:absolute;
-	top:0;
-	left:0;
 	transform: translate(-18vw, -12vh);
 
 }
@@ -510,11 +518,8 @@ div.links-list-container ul li:hover a{
 
 }
 
-#news-bg img {
+#news-bg div.window-bg-img {
 
-	position:absolute;
-	top:0;
-	left:0;
 	transform: translate(-18vw, -55vh);
 
 }
@@ -608,11 +613,8 @@ div.news-list-container {
 
 }
 
-#time-bg img {
+#time-bg div.window-bg-img {
 
-	position:absolute;
-	top:0;
-	left:0;
 	transform: translate(-61vw, -13vh);
 
 }
@@ -711,11 +713,8 @@ div.date-sect {
 
 }
 
-#weather-bg img {
+#weather-bg div.window-bg-img {
 
-	position:absolute;
-	top:0;
-	left:0;
 	transform: translate(-61vw, -33vh);
 
 }
