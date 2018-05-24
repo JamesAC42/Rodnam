@@ -317,9 +317,10 @@ $(document).ready(function(){
 	});
 
 	$("div.exit-button").click(function() {	
-	      	      
-		const el = $(this).parent().parent();
-		el.remove();
+								
+		const name = $(this).parent().parent().attr("id");
+		$("#" + name).remove();
+		$("#" + name + "-bg").remove();
 
 	});
 	
