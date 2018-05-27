@@ -140,7 +140,7 @@ function returnBackgroundAmount(req, res) {
 			res.end();
 		}
 		res.writeHead(200, {'Content-Type': 'text/plain'});
-		res.end(JSON.stringify(files.length));
+		res.end(JSON.stringify(files));
 	});
 }
 

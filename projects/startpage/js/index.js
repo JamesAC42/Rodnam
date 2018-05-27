@@ -159,13 +159,14 @@ function loadWeather(data) {
 }
 
 function setBackground() {
-	$.post('/getBackgroundAmount', {}, amount => {
-		if(amount) {
+	$.post('/getBackgroundAmount', {}, response => {
+		if(response) {
 			
-			let bgAmt = JSON.parse(amount);
-			let bgNum = Math.floor((Math.random() * (bgAmt + 1)));
-			$("body").css("background-image", "url('/backgrounds/bg-" + bgNum + ".jpg')");
-			$("div.window-bg-img").css("background-image", 'url("./backgrounds/bg-' + bgNum + '.jpg")');
+			let files = JSON.parse(response);
+			let bgNum = Math.floor((Math.random() * (files.length + 1)));
+			let fileName = files[bgNum];
+			$("body").css("background-image", "url('./backgrounds/" + fileName + "')");
+			$("div.window-bg-img").css("background-image", "url('./backgrounds/" + fileName + "')");
 
 		}
 	})
