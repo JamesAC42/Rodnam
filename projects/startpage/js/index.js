@@ -325,6 +325,40 @@ $(document).ready(function(){
 
 	});
 	
+	const containerOffset = $(".windows-container").offset();
+
+	$('.window').each(function(index){
+		let bg = "#" + $(this).attr("id") + "-bg";
+		let top = $(this).offset().top;
+		let left = $(this).offset().left;
+		let translate = "translate(calc(-" + containerOffset.left + "px + " + left + "px), calc(-" + containerOffset.top + "px + " + top + "px))";
+		$(bg).css({
+			"top":0,
+			"left":0,
+			"transform": translate
+		});
+		$(bg + " .window-bg-img").css({
+			"transform": "translate(-"  + left + "px, -" + top + "px)"	
+		});
+	});
+
+	$(".window").draggable({
+		drag: function( event, ui ) {
+			let top = ui.offset.top;
+			let left = ui.offset.left;
+			let bg = "#" + $(event.target).attr("id") + "-bg";
+			let translate = "translate(calc(-" + containerOffset.left + "px + " + left + "px), calc(-" + containerOffset.top + "px + " + top + "px))";
+			$(bg).css({
+				"top":0,
+				"left":0,
+				"transform": translate
+			});
+			$(bg + " .window-bg-img").css({
+				"transform": "translate(-"  + left + "px, -" + top + "px)"	
+			});
+		}
+	  });
+	
 	getWeather();
 	getFavorites();
 	getNews();

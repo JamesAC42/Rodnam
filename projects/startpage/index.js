@@ -11,7 +11,7 @@ const weatherParams = "?exclude=[minutely,daily,alerts,flags]"
 
 const newsHost = "https://newsapi.org";
 const newsPath = "/v2/top-headlines";
-const newsParams = "?sources=google-news&lang=en&apiKey=60be92f788ba466791fce6580770f180";
+const newsParams = "?sources=hacker-news&lang=en&apiKey=60be92f788ba466791fce6580770f180";
 
 const agent = new https.Agent({
 	rejectUnauthorized: false
