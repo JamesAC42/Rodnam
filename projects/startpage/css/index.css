@@ -295,7 +295,7 @@ div.window-bg {
 
 	overflow:hidden;
 
-	filter:blur(8px);
+	filter:blur(10px);
 
 }
 
@@ -340,6 +340,8 @@ div.title-bar {
 
 	margin:0;
 	padding:0;
+
+	cursor:pointer;
 
 }
 
